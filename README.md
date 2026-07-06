@@ -1,5 +1,9 @@
 # ET4361 - Hệ thống nhúng và giao tiếp nhúng
 
+<p align="center">
+  <img src="assets/official/minh-hoa.png" alt="Minh họa giao diện ôn tập ET4361" width="900">
+</p>
+
 Ứng dụng web tĩnh phục vụ ôn tập học phần **ET4361 Hệ thống nhúng và giao tiếp nhúng** của **Đại học Bách Khoa Hà Nội**.
 
 Project này được xây dựng như một bộ study kit nhỏ gọn: mở trực tiếp bằng trình duyệt, học theo chương, làm quiz theo bộ nhỏ, ôn câu sai theo cơ chế lặp lại, và luyện đề mô phỏng có đáp án giải thích.
