@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --bg: #f4f7fb;
   --surface: #ffffff;
   --surface-2: #eef4f7;
@@ -14,8 +15,62 @@
   --red-2: #fde8e4;
   --green: #247248;
   --green-2: #e4f3e9;
+  --primary-text: #ffffff;
+  --topbar-bg: rgba(246, 247, 242, 0.94);
+  --disabled: #9aa19e;
+  --progress-bg: #dfe6e1;
+  --teal-border: #b8d6cf;
+  --amber-border: #ead195;
+  --green-border: #a9cfb7;
+  --success-border: #8dc49f;
+  --danger-border: #e3a59c;
+  --selected-bg: #eef2fb;
+  --explain-line: rgba(23, 33, 31, 0.12);
+  --explain-bg: rgba(255, 255, 255, 0.7);
+  --empty-bg: rgba(255, 255, 255, 0.6);
+  --input-bg: #ffffff;
+  --focus-ring: #b8d6cf;
+  --slide-bg: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --figure-bg: #ffffff;
   --shadow: 0 12px 30px rgba(23, 33, 31, 0.08);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1418;
+  --surface: #171d23;
+  --surface-2: #202a32;
+  --ink: #edf4f1;
+  --muted: #a6b3ad;
+  --line: #33414a;
+  --teal: #5dd0ba;
+  --teal-2: #183a34;
+  --indigo: #9fb3ee;
+  --amber: #f2c56c;
+  --amber-2: #3a2b13;
+  --red: #ff9a90;
+  --red-2: #3c2220;
+  --green: #8bd7a5;
+  --green-2: #193626;
+  --primary-text: #081411;
+  --topbar-bg: rgba(15, 20, 24, 0.94);
+  --disabled: #6f7b78;
+  --progress-bg: #26313a;
+  --teal-border: #2f6f63;
+  --amber-border: #765820;
+  --green-border: #356f4d;
+  --success-border: #3f8758;
+  --danger-border: #7d433e;
+  --selected-bg: #26344c;
+  --explain-line: rgba(237, 244, 241, 0.12);
+  --explain-bg: rgba(255, 255, 255, 0.04);
+  --empty-bg: rgba(255, 255, 255, 0.05);
+  --input-bg: #11171d;
+  --focus-ring: #3f9585;
+  --slide-bg: linear-gradient(180deg, #182028 0%, #111820 100%);
+  --figure-bg: #f8fafc;
+  --shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
 }
 
 * {
@@ -26,6 +81,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
+  transition: background 0.18s ease, color 0.18s ease;
 }
 
 button,
@@ -46,7 +102,7 @@ button {
   top: 0;
   z-index: 20;
   border-bottom: 1px solid var(--line);
-  background: rgba(246, 247, 242, 0.94);
+  background: var(--topbar-bg);
   backdrop-filter: blur(12px);
 }
 
@@ -81,8 +137,72 @@ button {
 .section-tabs {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
+  flex: 1 1 auto;
   overflow-x: auto;
+}
+
+.theme-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 38px);
+  gap: 4px;
+  flex: 0 0 auto;
+  height: 42px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.theme-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-option:hover {
+  transform: translateY(-1px);
+  color: var(--ink);
+}
+
+.theme-option.active {
+  background: var(--surface);
+  color: var(--teal);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.theme-option:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .tab-button,
@@ -112,7 +232,7 @@ button {
 }
 
 .tab-button:disabled {
-  color: #9aa19e;
+  color: var(--disabled);
   cursor: default;
 }
 
@@ -173,7 +293,7 @@ button {
   width: 100%;
   height: 8px;
   border-radius: 999px;
-  background: #dfe6e1;
+  background: var(--progress-bg);
 }
 
 .progress > span {
@@ -260,13 +380,13 @@ button {
 }
 
 .pill.teal {
-  border-color: #b8d6cf;
+  border-color: var(--teal-border);
   background: var(--teal-2);
   color: var(--teal);
 }
 
 .pill.amber {
-  border-color: #ead195;
+  border-color: var(--amber-border);
   background: var(--amber-2);
   color: var(--amber);
 }
@@ -292,7 +412,7 @@ button {
 
 .primary-button {
   background: var(--teal);
-  color: white;
+  color: var(--primary-text);
 }
 
 .ghost-button {
@@ -361,7 +481,7 @@ button {
 }
 
 .set-button.done {
-  border-color: #a9cfb7;
+  border-color: var(--green-border);
   background: var(--green-2);
 }
 
@@ -444,16 +564,16 @@ button {
 
 .choice-button.selected {
   border-color: var(--indigo);
-  background: #eef2fb;
+  background: var(--selected-bg);
 }
 
 .choice-button.correct {
-  border-color: #8dc49f;
+  border-color: var(--success-border);
   background: var(--green-2);
 }
 
 .choice-button.wrong {
-  border-color: #e3a59c;
+  border-color: var(--danger-border);
   background: var(--red-2);
 }
 
@@ -491,12 +611,12 @@ button {
 }
 
 .feedback.good {
-  border-color: #9ac9a9;
+  border-color: var(--success-border);
   background: var(--green-2);
 }
 
 .feedback.bad {
-  border-color: #e3a59c;
+  border-color: var(--danger-border);
   background: var(--red-2);
 }
 
@@ -512,9 +632,9 @@ button {
 }
 
 .explain-item {
-  border: 1px solid rgba(23, 33, 31, 0.12);
+  border: 1px solid var(--explain-line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--explain-bg);
   padding: 10px;
 }
 
@@ -528,7 +648,7 @@ button {
   border-radius: 8px;
   padding: 20px;
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--empty-bg);
 }
 
 .finish-panel {
@@ -660,13 +780,13 @@ button {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 12px;
-  background: #fff;
+  background: var(--input-bg);
   color: var(--ink);
   line-height: 1.5;
 }
 
 .essay-textarea:focus {
-  outline: 2px solid #b8d6cf;
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -778,7 +898,7 @@ button {
   min-height: 420px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: var(--slide-bg);
   overflow: hidden;
 }
 
@@ -812,7 +932,7 @@ button {
   border: 1px solid var(--line);
   border-radius: 8px;
   object-fit: contain;
-  background: #fff;
+  background: var(--figure-bg);
 }
 
 .official-figure figcaption {
@@ -901,6 +1021,11 @@ button {
   .topbar-inner {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .section-tabs {
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .summary-band,

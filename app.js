@@ -3,6 +3,7 @@
   const EXAM_DATA = window.EXAM_QUIZ_DATA || null;
   const STORAGE_KEY = "embedded-quiz-progress-v1";
   const ACTIVE_SECTION_KEY = "embedded-quiz-active-section";
+  const THEME_KEY = "embedded-quiz-theme";
   const APP_NOTICE = "Lưu ý : Bộ câu hỏi này chỉ mang tính chất tham khảo, ôn tập, không phải đề đã thi hay chính thức";
   const app = document.querySelector("#app");
   const letters = ["A", "B", "C", "D"];
@@ -14,8 +15,11 @@
 
   let progress = loadProgress();
   let activeSectionId = localStorage.getItem(ACTIVE_SECTION_KEY) || DATASETS[0].section.id;
+  let activeTheme = loadTheme();
   let route = { name: "chapters" };
   let session = null;
+
+  applyTheme(activeTheme);
 
   if (!datasetById(activeSectionId) && !isExamSection(activeSectionId)) activeSectionId = DATASETS[0].section.id;
 
@@ -52,6 +56,21 @@
 
   function saveProgress() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  }
+
+  function loadTheme() {
+    return localStorage.getItem(THEME_KEY) === "dark" ? "dark" : "light";
+  }
+
+  function applyTheme(theme) {
+    activeTheme = theme === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = activeTheme;
+  }
+
+  function setTheme(theme) {
+    applyTheme(theme);
+    localStorage.setItem(THEME_KEY, activeTheme);
+    render();
   }
 
   function pct(value, total) {
@@ -154,6 +173,18 @@
         </button>
       `
       : `<button class="tab-button" disabled>Đề thi</button>`;
+    const themeToggle = `
+      <div class="theme-switch" role="group" aria-label="Chọn giao diện sáng hoặc tối">
+        <button class="theme-option ${activeTheme === "light" ? "active" : ""}" data-theme-choice="light" aria-pressed="${activeTheme === "light"}" title="Giao diện sáng">
+          ${themeIcon("sun")}
+          <span class="sr-only">Giao diện sáng</span>
+        </button>
+        <button class="theme-option ${activeTheme === "dark" ? "active" : ""}" data-theme-choice="dark" aria-pressed="${activeTheme === "dark"}" title="Giao diện tối">
+          ${themeIcon("moon")}
+          <span class="sr-only">Giao diện tối</span>
+        </button>
+      </div>
+    `;
 
     app.innerHTML = `
       <div class="app-shell">
@@ -167,6 +198,7 @@
               ${tabs}
               ${examTab}
             </nav>
+            ${themeToggle}
           </div>
         </header>
         <main class="main">${content}</main>
@@ -176,6 +208,33 @@
     app.querySelectorAll("[data-section]").forEach((button) => {
       button.addEventListener("click", () => switchSection(button.dataset.section));
     });
+
+    app.querySelectorAll("[data-theme-choice]").forEach((button) => {
+      button.addEventListener("click", () => setTheme(button.dataset.themeChoice));
+    });
+  }
+
+  function themeIcon(type) {
+    if (type === "sun") {
+      return `
+        <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+      `;
+    }
+    return `
+      <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.99 12.36A8.5 8.5 0 1 1 11.64 3.01a6.5 6.5 0 0 0 9.35 9.35Z"></path>
+      </svg>
+    `;
   }
 
   function progressBar(percent) {

@@ -19,6 +19,7 @@ Nội dung trong repo không có mục đích dự đoán chính xác đề thi,
 - **Lặp lại câu sai**: câu trả lời sai có thể xuất hiện lại sau đó để củng cố trí nhớ.
 - **Giải thích đáp án**: mỗi lựa chọn có giải thích vì sao đúng hoặc không phù hợp.
 - **Tiến độ cá nhân**: tiến độ được lưu trên trình duyệt của từng người bằng `localStorage`.
+- **Light/Dark theme**: có công tắc chuyển giao diện sáng/tối ở thanh trên cùng.
 - **Không cần backend**: chỉ cần các file HTML, CSS và JavaScript tĩnh.
 
 ## Cách Sử Dụng
