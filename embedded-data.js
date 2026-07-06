@@ -1197,11 +1197,170 @@
 
   const sourceLabel = (chapter) => chapter.title;
 
-  const answerStatement = (stem, answer) =>
-    `Với câu hỏi "${scrubStem(stem)}", đáp án "${scrubText(answer)}" là phù hợp.`;
+  const stripFinalPunctuation = (value) => String(value).trim().replace(/[.!?]+$/g, "");
+  const lowerFirst = (value) => {
+    const text = String(value).trim();
+    if (/^(IoT|UART|I2C|SPI|ADC|DAC|GPIO|TVS|MOSFET|BJT|LDO|ESD|SAR|CPU|MCU|FPGA|ASIC|DSP)\b/.test(text)) return text;
+    return text ? text.charAt(0).toLowerCase() + text.slice(1) : text;
+  };
+  const upperFirst = (value) => {
+    const text = String(value).trim();
+    return text ? text.charAt(0).toUpperCase() + text.slice(1) : text;
+  };
+  const finishSentence = (value) => {
+    const text = upperFirst(String(value).replace(/\s+/g, " ").trim());
+    return /[.!?]$/.test(text) ? text : `${text}.`;
+  };
+  const startsWithSubject = (answer, subject) => {
+    const head = stripFinalPunctuation(subject).split(/\s+/).find((word) => !/^(các|nhóm|một|trong|khi)$/i.test(word));
+    return head ? answer.toLowerCase().startsWith(head.toLowerCase()) : false;
+  };
+  const contextualRoleClaim = (context, subject, answer) => {
+    const cleanAnswer = stripFinalPunctuation(scrubText(answer));
+    if (startsWithSubject(cleanAnswer, subject)) {
+      return finishSentence(`Trong ${context}, ${lowerFirst(cleanAnswer)}`);
+    }
+    return finishSentence(`Trong ${context}, ${subject} có vai trò: ${cleanAnswer}`);
+  };
+  const answerBody = (answer) => stripFinalPunctuation(scrubText(answer)).replace(/^vì\s+/i, "");
+  const needsTopicContext = (answer) =>
+    /^(là|chỉ|không|ngoài|cần|dùng|làm|tạo|đặt|phụ thuộc|bắt đầu|số|hai|ba|bốn|năm|nhóm|universal|idle|vq|2\^|\d+\^)(?:[\s,]|$)/i.test(answer)
+    || answer.split(/\s+/).length <= 4;
+  const normalizeClaimSubject = (subject) => {
+    if (/^vai trò\s+/i.test(subject)) return subject.replace(/^vai trò\s+/i, "");
+    if (/^phân loại\s+/i.test(subject)) return `các tiêu chí ${subject}`;
+    return subject;
+  };
+  const fallbackClaim = (answer, topic) => {
+    const cleanAnswer = stripFinalPunctuation(scrubText(answer));
+    const subject = topic ? normalizeClaimSubject(stripFinalPunctuation(topicLabel(topic))) : "";
+    if (!subject || startsWithSubject(cleanAnswer, subject) || !needsTopicContext(cleanAnswer)) {
+      return finishSentence(cleanAnswer);
+    }
+    if (/^(là|không|chỉ|ngoài|cần|dùng|làm|tạo|đặt|phụ thuộc|bắt đầu)(?:\s|$)/i.test(cleanAnswer)) {
+      return finishSentence(`${subject} ${lowerFirst(cleanAnswer)}`);
+    }
+    if (/^(universal|một chuẩn)\b/i.test(cleanAnswer)) {
+      const predicate = /^universal\b/i.test(cleanAnswer) ? cleanAnswer : lowerFirst(cleanAnswer);
+      return finishSentence(`${subject} là ${predicate}`);
+    }
+    if (/^(vq|2\^|2n|\d+\^)/i.test(cleanAnswer)) {
+      return finishSentence(`${subject} là ${cleanAnswer}`);
+    }
+    if (/^idle\b/i.test(cleanAnswer)) {
+      return finishSentence(`${subject} gồm ${cleanAnswer}`);
+    }
+    if (/^số(?:\s|$)/i.test(cleanAnswer) || (cleanAnswer.includes(",") && cleanAnswer.split(/\s+/).length < 14)) {
+      return finishSentence(`${subject} gồm ${lowerFirst(cleanAnswer)}`);
+    }
+    return finishSentence(`${subject}: ${lowerFirst(cleanAnswer)}`);
+  };
+  const claimFromAnswer = (stem, answer, topic = "") => {
+    const cleanStem = stripFinalPunctuation(scrubStem(stem));
+    const cleanAnswer = answerBody(answer);
+    const lowerAnswer = lowerFirst(cleanAnswer);
+    let match;
+
+    if ((match = cleanStem.match(/^Trong (.+?), (.+?) có vai trò gì$/i))) {
+      return contextualRoleClaim(match[1], match[2], cleanAnswer);
+    }
+    if ((match = cleanStem.match(/^Khi (.+?), (.+?) thường cần thêm các khối hỗ trợ nào$/i))) {
+      return finishSentence(`Khi ${match[1]}, ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^Khi phân loại (.+?), tiêu chí chính là gì$/i))) {
+      return finishSentence(`Khi phân loại ${match[1]}, tiêu chí chính là ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) thuộc nhóm chức năng nào/i))) {
+      return finishSentence(`${match[1]} thuộc ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) phù hợp nhất với nhiệm vụ nào$/i))) {
+      return finishSentence(`${match[1]} phù hợp với nhiệm vụ: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) có thể là nhóm phần tử nào$/i))) {
+      if (startsWithSubject(cleanAnswer, match[1])) return finishSentence(cleanAnswer);
+      return finishSentence(`${match[1]} có thể là: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) được hiểu như thế nào$/i))) {
+      if (/^là\s+/i.test(cleanAnswer)) return finishSentence(`${match[1]} ${lowerAnswer}`);
+      if (/^(không|chỉ)(?:\s|$)/i.test(cleanAnswer)) return finishSentence(`${match[1]} ${lowerAnswer}`);
+      return finishSentence(`${match[1]}: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^Ai .*? là (.+)$/i))) {
+      const role = match[1].replace(/\s+vào năm\s+\d{4}$/i, "");
+      const yearMatch = cleanAnswer.match(/^(.+?)\s+vào năm\s+(\d{4})$/i);
+      if (yearMatch) return finishSentence(`${yearMatch[1]} là ${role} vào năm ${yearMatch[2]}`);
+      return finishSentence(`${cleanAnswer} là ${match[1]}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) có bao nhiêu .+$/i))) {
+      return finishSentence(`${match[1]} có ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) gồm (?:những |các )?(?:gì|khối nào|nhóm nào)$/i))) {
+      if (startsWithSubject(cleanAnswer, match[1])) return finishSentence(cleanAnswer);
+      if (/^chỉ gồm(?:\s|$)/i.test(cleanAnswer)) return finishSentence(`${match[1]} ${lowerAnswer}`);
+      return finishSentence(`${match[1]} gồm: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) gồm .* nào$/i))) {
+      return finishSentence(`${match[1]} gồm ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) thường có .* nào$/i))) {
+      return finishSentence(`${match[1]} thường có: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) tạo (.+?) kiểu gì$/i))) {
+      if (/^(không|chỉ|tạo)(?:\s|$)/i.test(cleanAnswer)) return finishSentence(`${match[1]} ${lowerAnswer}`);
+      return finishSentence(`${match[1]} tạo ${match[2]}: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) cần điều kiện gì/i))) {
+      if (/^(không|chỉ)(?:\s|$)/i.test(cleanAnswer)) return finishSentence(`${match[1]} ${lowerAnswer}`);
+      return finishSentence(`${match[1]} cần điều kiện: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) (?:gây hậu quả|gây rủi ro|giải quyết vấn đề) gì$/i))) {
+      return finishSentence(`${match[1]}: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) có phải .+ không$/i))) {
+      return finishSentence(`${match[1]}: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) có (?:đặc điểm|nhiệm vụ|tác dụng|vai trò) gì$/i))) {
+      if (/^(không|chỉ|là|tạo)(?:\s|$)/i.test(cleanAnswer)) return finishSentence(`${match[1]} ${lowerAnswer}`);
+      return finishSentence(`${match[1]} có ${cleanStem.match(/có (đặc điểm|nhiệm vụ|tác dụng|vai trò) gì$/i)[1]}: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) dùng để làm gì$/i))) {
+      return finishSentence(`${match[1]} dùng để ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) dùng khi nào$/i))) {
+      return finishSentence(`${match[1]} dùng khi ${lowerAnswer.replace(/^khi\s+/i, "")}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) hữu ích khi nào$/i))) {
+      return finishSentence(`${match[1]} dùng trong trường hợp ${lowerAnswer.replace(/^khi\s+/i, "")}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) (?:thường )?được chọn .* khi nào$/i))) {
+      return finishSentence(`${match[1]} được chọn khi ${lowerAnswer.replace(/^khi\s+/i, "")}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) có thể giúp gì/i))) {
+      return finishSentence(`${match[1]} ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) nói lên điều gì$/i))) {
+      return finishSentence(`${match[1]} thể hiện: ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) cần (?:thống nhất|chú ý|xem thêm|đảm bảo) gì/i))) {
+      return finishSentence(`${match[1]} cần ${cleanAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(?:Vì sao|Tại sao) (.+)$/i))) {
+      return finishSentence(`${match[1]} vì ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^Khi (.+?), điều gì xảy ra$/i))) {
+      return finishSentence(`Khi ${match[1]}, ${lowerAnswer}`);
+    }
+    if ((match = cleanStem.match(/^(.+?) (?:là|nghĩa là) gì(?: .*)?$/i))) {
+      if (/^(Khác biệt|Thứ tự)/i.test(cleanStem)) return finishSentence(cleanAnswer);
+      if (startsWithSubject(cleanAnswer, match[1])) return finishSentence(cleanAnswer);
+      const predicate = /^universal\b/i.test(cleanAnswer) ? cleanAnswer : lowerAnswer;
+      return finishSentence(`${match[1]} là ${predicate}`);
+    }
+    return fallbackClaim(cleanAnswer, topic);
+  };
 
   const trueChoiceFrom = (fact) => ({
-    text: answerStatement(fact.stem, fact.correct),
+    text: claimFromAnswer(fact.stem, fact.correct, fact.topic),
     correct: false,
     reason: scrubText(`Phát biểu này đúng vì: ${fact.why}`)
   });
@@ -1242,7 +1401,7 @@
       topic: fact.topic,
       stem: `Trong chủ đề "${chapter.title}", phát biểu nào SAI hoặc dễ gây nhầm lẫn?`,
       choices: normalizeChoices([
-        { text: answerStatement(fact.stem, falseItem.text), correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
+        { text: claimFromAnswer(fact.stem, falseItem.text, fact.topic), correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
         ...trueFacts.map(trueChoiceFrom)
       ].map(scrubChoice), index * 3 + chapter.id.length)
     };
