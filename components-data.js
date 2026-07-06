@@ -538,12 +538,115 @@
   };
 
   const scrubText = (value) => String(value)
+    .replace(/Source nối mass nên điện áp cổng so với source gần bằng mức GPIO, dễ đạt điều kiện mở\./g, "Cực S của N-MOSFET nối mass, nên điện áp giữa cực G và cực S gần bằng mức GPIO; vì vậy GPIO dễ tạo đủ điện áp để mở MOSFET.")
+    .replace(/Low-side N-MOSFET là cấu hình đơn giản cho tải DC khi cho phép tải nối lên nguồn\./g, "Cấu hình N-MOSFET kéo xuống mass phù hợp với tải DC khi tải có thể mắc lên nguồn dương.")
+    .replace(/Vì source luôn bay theo điện áp nguồn cao\./g, "Vì ở cấu hình MOSFET đóng cắt phía nguồn dương, cực S có thể nâng theo điện áp nguồn; đó là khó khăn của N-MOSFET đóng cắt phía nguồn dương, không phải cấu hình kéo xuống mass.")
+    .replace(/Đó là khó khăn của high-side N-MOSFET\./g, "Đó là khó khăn của cấu hình N-MOSFET đóng cắt phía nguồn dương.")
+    .replace(/High-side có thể dùng P-MOSFET, N-MOSFET kèm driver hoặc IC high-side chuyên dụng\./g, "Đóng cắt phía nguồn dương có thể dùng P-MOSFET, N-MOSFET kèm driver hoặc IC chuyên dụng.")
+    .replace(/GPIO có dòng yếu; gate lớn hoặc chuyển mạch nhanh cần driver\./g, "GPIO có dòng yếu; cực G lớn hoặc yêu cầu chuyển mạch nhanh thường cần driver cổng MOSFET.")
+    .replace(/High-side nằm phía nguồn\./g, "Cấu hình đóng cắt phía nguồn dương đặt công tắc ở phía nguồn cấp của tải.")
+    .replace(/High-side current sensing khó hơn vì sao\?/g, "Đo dòng phía nguồn dương khó hơn vì sao?")
+    .replace(/Mạch đo phải xử lý điện áp common-mode cao gần nguồn tải\./g, "Mạch đo phải xử lý điện áp chế độ chung cao, gần mức nguồn của tải.")
+    .replace(/High-side shunt nằm phía nguồn\./g, "Điện trở shunt trong cách đo phía nguồn dương nằm ở phía nguồn cấp của tải.")
+    .replace(/Đổi lại high-side giữ mass tải gần mass hệ thống\./g, "Đổi lại, đo dòng phía nguồn dương giữ mass của tải gần mass hệ thống.")
+    .replace(/kéo xuống mass thường dễ đo hơn high-side\./g, "Đo dòng phía mass thường dễ đo hơn đo dòng phía nguồn dương.")
+    .replace(/GPIO và source cần mốc chung\./g, "GPIO và cực S của MOSFET cần cùng mốc tham chiếu để điện áp giữa cực G và cực S được xác định đúng.")
+    .replace(/Emitter nối nguồn dương trong mọi low-side NPN\./g, "Trong mạch NPN kéo xuống mass, cực E không nối nguồn dương; cực E thường nối mass và tải nằm phía cực C.")
+    .replace(/Low-side NPN thường emitter về mass\./g, "Mạch NPN kéo xuống mass thường nối cực E về mass.")
+    .replace(/Tải mắc giữa nguồn dương và collector, emitter nối mass, transistor kéo đầu dưới tải xuống mass\./g, "Trong mạch NPN kéo xuống mass, tải mắc giữa nguồn dương và cực C; cực E nối mass, transistor kéo đầu dưới tải xuống mass khi dẫn.")
+    .replace(/Cần đủ dòng base qua điện trở để transistor vào bão hòa theo dòng tải mong muốn\./g, "Cần cấp đủ dòng vào cực B qua điện trở hạn dòng để transistor vào bão hòa theo dòng tải mong muốn.")
+    .replace(/Tích hợp sẵn điện trở base và điện trở kéo, giúp giảm linh kiện ngoài khi điều khiển từ GPIO\./g, "RET tích hợp sẵn điện trở ở cực B và điện trở kéo, nên giảm số linh kiện ngoài khi điều khiển từ GPIO.")
+    .replace(/MOSFET chủ yếu được điều khiển bằng điện áp cổng, nhưng cổng có điện dung nên cần dòng nạp\/xả khi chuyển mạch\./g, "MOSFET chủ yếu được điều khiển bằng điện áp ở cực G, nhưng cực G có điện dung nên vẫn cần dòng nạp/xả khi chuyển mạch.")
+    .replace(/Nạp\/xả cổng nhanh, tạo mức điều khiển phù hợp và giảm tổn hao chuyển mạch trong tải lớn hoặc tần số cao\./g, "Driver cổng MOSFET giúp nạp/xả cực G nhanh, tạo mức điều khiển phù hợp và giảm tổn hao chuyển mạch khi tải lớn hoặc tần số cao.")
+    .replace(/Vì motor có dòng khởi động\/kẹt lớn, sinh nhiễu và thường cần điều khiển chiều, tốc độ, bảo vệ dòng\/nhiệt\./g, "Motor DC có dòng khởi động hoặc dòng kẹt lớn, dễ sinh nhiễu và thường cần điều khiển chiều, tốc độ, bảo vệ dòng hoặc nhiệt.")
+    .replace(/ferrite bead/gi, "hạt ferrite")
+    .replace(/series resistor/gi, "điện trở nối tiếp")
+    .replace(/open-drain/gi, "ngõ ra cực máng hở")
+    .replace(/pull-up và pull-down/gi, "điện trở kéo lên và kéo xuống")
+    .replace(/floating input/gi, "đầu vào bị treo mức")
+    .replace(/debounce/gi, "chống dội phím")
+    .replace(/anti-alias/gi, "chống chồng phổ")
+    .replace(/High-side switch/g, "Công tắc đóng cắt phía nguồn dương")
+    .replace(/high-side switch/gi, "công tắc đóng cắt phía nguồn dương")
+    .replace(/high-side sensing/gi, "đo dòng phía nguồn dương")
+    .replace(/high-side current sensing/gi, "đo dòng phía nguồn dương")
+    .replace(/low-side sensing/gi, "đo dòng phía mass")
+    .replace(/N-MOSFET low-side/gi, "N-MOSFET kéo xuống mass")
+    .replace(/low-side MOSFET/gi, "MOSFET kéo xuống mass")
+    .replace(/low-side/gi, "kéo xuống mass")
+    .replace(/NPN low-side/gi, "NPN kéo xuống mass")
+    .replace(/gate driver/gi, "driver cổng MOSFET")
+    .replace(/level shifting/gi, "chuyển mức logic")
+    .replace(/input protection/gi, "bảo vệ đầu vào")
+    .replace(/decoupling placement/gi, "vị trí đặt tụ decoupling")
+    .replace(/junction temperature/gi, "nhiệt độ mối nối")
+    .replace(/thermal/gi, "nhiệt")
+    .replace(/reference/gi, "nguồn tham chiếu")
+    .replace(/buffer/gi, "mạch đệm")
+    .replace(/dropout/gi, "điện áp dropout")
+    .replace(/buck noise/gi, "nhiễu của nguồn buck")
+    .replace(/buck converter/gi, "nguồn buck")
+    .replace(/power-good/gi, "tín hiệu báo nguồn ổn định")
+    .replace(/relay solenoid/gi, "relay hoặc cuộn dây solenoid")
+    .replace(/motor DC/gi, "động cơ DC")
+    .replace(/current shunt/gi, "điện trở shunt đo dòng")
+    .replace(/common-mode/gi, "chế độ chung")
+    .replace(/high-side/gi, "phía nguồn dương")
+    .replace(/ratiometric/gi, "đo theo tỷ lệ nguồn tham chiếu")
+    .replace(/comparator/gi, "bộ so sánh")
+    .replace(/op-amp/gi, "khuếch đại thuật toán")
+    .replace(/package/gi, "vỏ linh kiện")
+    .replace(/diode flyback/gi, "diode hồi tiếp cho tải cảm")
+    .replace(/\bflyback\b/gi, "hồi tiếp cho tải cảm")
+    .replace(/\bfreewheel\b/gi, "hồi tiếp dòng")
+    .replace(/\bclamp\b/gi, "kẹp áp")
+    .replace(/\bdatasheet\b/gi, "tài liệu dữ liệu linh kiện")
+    .replace(/\blayout\b/gi, "bố trí mạch in")
+    .replace(/\beFuse\b/g, "cầu chì điện tử")
+    .replace(/\bfuse\b/gi, "cầu chì")
+    .replace(/\bresistor\b/gi, "điện trở")
+    .replace(/\bbuffer\b/gi, "mạch đệm")
+    .replace(/\bsource\b/gi, "cực S")
+    .replace(/\bgate\b/gi, "cực G")
+    .replace(/\bdrain\b/gi, "cực D")
+    .replace(/\bemitter\b/gi, "cực E")
+    .replace(/\bcollector\b/gi, "cực C")
+    .replace(/\bbase\b/gi, "cực B")
+    .replace(/base-emitter/gi, "mối nối B-E")
+    .replace(/base resistor/gi, "điện trở cực B")
+    .replace(/\bdrive\b/gi, "dòng điều khiển")
+    .replace(/\bdriver\b/gi, "mạch điều khiển")
+    .replace(/\binput\b/gi, "đầu vào")
+    .replace(/\boutput\b/gi, "đầu ra")
+    .replace(/\bsink\b/gi, "hút dòng")
+    .replace(/push-pull/gi, "đẩy-kéo")
+    .replace(/open-collector/gi, "ngõ ra cực góp hở")
+    .replace(/rise time/gi, "thời gian cạnh lên")
+    .replace(/fan-out/gi, "khả năng kéo nhiều đầu vào")
+    .replace(/rail nguồn/gi, "đường nguồn")
+    .replace(/\brail\b/gi, "đường nguồn")
+    .replace(/\bsurge\b/gi, "xung quá áp năng lượng lớn")
+    .replace(/switching/gi, "chuyển mạch")
+    .replace(/local decoupling/gi, "tụ decoupling đặt cục bộ")
+    .replace(/\blocal\b/gi, "cục bộ")
+    .replace(/\bbulk\b/gi, "tụ dung lượng lớn")
+    .replace(/optocoupler/gi, "bộ ghép quang")
+    .replace(/digital isolator/gi, "bộ cách ly số")
+    .replace(/\bhardware\b/gi, "phần cứng")
+    .replace(/\bsoftware\b/gi, "phần mềm")
+    .replace(/\bfirmware\b/gi, "phần mềm nhúng")
+    .replace(/driver cổng MOSFET/gi, "mạch điều khiển cổng MOSFET")
     .replace(/Tài liệu cấu kiện,?\s*/gi, "")
+    .replace(/mạch điều khiển cổng MOSFET MOSFET/gi, "mạch điều khiển cổng MOSFET")
+    .replace(/driver cổng MOSFET MOSFET/gi, "mạch điều khiển cổng MOSFET")
+    .replace(/cực B-cực E/gi, "mối nối B-E")
+    .replace(/cực B điện trở/gi, "điện trở cực B")
     .replace(/trong tài liệu cấu kiện/gi, "trong mạch nhúng")
     .replace(/tài liệu nhấn mạnh/gi, "điểm cần nhớ là")
     .replace(/\bTI LDO material\s+(nhấn mạnh|mô tả)\s+/gi, "")
     .replace(/\b(Microchip AN246|TI|Analog Devices|onsemi|STMicroelectronics|ST|NXP)\s+(giải thích|mô tả|nhấn mạnh|gợi ý|ghi|nêu)\s+/gi, "")
     .replace(/Lời giải này bám đúng mệnh đề và nguồn tham khảo\./g, "Lời giải này giải thích đúng nguyên nhân kỹ thuật của nhận định.")
+    .replace(/^mạch điều khiển/g, "Mạch điều khiển")
     .replace(/\s{2,}/g, " ")
     .trim();
 
@@ -553,10 +656,15 @@
     reason: scrubText(choice.reason)
   });
 
+  const topicLabel = (topic) => scrubText(topic);
+
   const sourceLabel = (chapter) => chapter.title;
 
+  const answerStatement = (stem, answer) =>
+    `Với câu hỏi "${scrubText(stem)}", đáp án "${scrubText(answer)}" là phù hợp.`;
+
   const trueChoiceFrom = (fact) => ({
-    text: scrubText(fact.correct),
+    text: answerStatement(fact.stem, fact.correct),
     correct: false,
     reason: scrubText(`Phát biểu này đúng vì: ${fact.why}`)
   });
@@ -597,7 +705,7 @@
       topic: fact.topic,
       stem: `Trong chủ đề "${chapter.title}", phát biểu nào SAI hoặc dễ gây nhầm lẫn?`,
       choices: normalizeChoices([
-        { text: falseItem.text, correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
+        { text: answerStatement(fact.stem, falseItem.text), correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
         ...trueFacts.map(trueChoiceFrom)
       ].map(scrubChoice), index * 3 + chapter.id.length)
     };
@@ -608,7 +716,7 @@
     type: "Áp dụng",
     source: sourceLabel(chapter),
     topic: fact.topic,
-    stem: `Khi gặp mạch liên quan đến ${fact.topic}, cách xử lý nào đúng nhất?`,
+    stem: scrubText(`Khi gặp mạch liên quan đến ${topicLabel(fact.topic)}, cách xử lý nào đúng nhất?`),
     choices: normalizeChoices([
       { text: fact.correct, correct: true, reason: fact.why },
       ...fact.wrong.slice().reverse().map((item) => ({ text: item.text, correct: false, reason: item.reason }))

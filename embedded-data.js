@@ -1012,6 +1012,133 @@
   };
 
   const scrubText = (value) => String(value)
+    .replace(/Nhóm 'Data collection\s*\/\s*Storage\s*\/\s*Representation'/gi, "Nhóm chức năng thu thập, lưu trữ và biểu diễn dữ liệu")
+    .replace(/data collection\s*\/\s*storage\s*\/\s*representation/gi, "thu thập, lưu trữ và biểu diễn dữ liệu")
+    .replace(/Data communication, tức truyền thông dữ liệu\./g, "Nhóm truyền thông dữ liệu: nhận, xử lý và chuyển tiếp dữ liệu giữa các thiết bị hoặc mạng.")
+    .replace(/Application specific user interface\./g, "Nhóm giao diện người dùng chuyên dụng cho một ứng dụng cụ thể.")
+    .replace(/Monitoring y tế\./g, "Nhóm giám sát y tế, ví dụ thiết bị theo dõi sinh hiệu.")
+    .replace(/Data storage thuần túy\./g, "Nhóm chỉ lưu trữ dữ liệu thuần túy, không nhấn mạnh truyền nhận dữ liệu.")
+    .replace(/System core, memory, embedded firmware, input ports\/sensors, output ports\/actuators, communication interface và các IC\/hệ con hỗ trợ\./g, "Cấu trúc gồm lõi xử lý, bộ nhớ, firmware nhúng, cổng vào hoặc cảm biến, cổng ra hoặc cơ cấu chấp hành, khối giao tiếp truyền thông và các IC/hệ con hỗ trợ.")
+    .replace(/Hardware Layer là lớp bắt buộc; System Software Layer và Application Software Layer có thể tùy chọn\./g, "Lớp phần cứng là bắt buộc; lớp phần mềm hệ thống và lớp phần mềm ứng dụng có thể có hoặc không tùy độ phức tạp của hệ nhúng.")
+    .replace(/Application Software Layer luôn bắt buộc trong mọi hệ nhúng\./g, "Lớp phần mềm ứng dụng không phải lúc nào cũng bắt buộc trong mọi hệ nhúng.")
+    .replace(/System Software Layer luôn bắt buộc như hardware\./g, "Lớp phần mềm hệ thống không phải lúc nào cũng bắt buộc như lớp phần cứng.")
+    .replace(/Microprocessor, microcontroller, DSP, FPGA, ASIC hoặc SoC tùy bài toán\./g, "Lõi xử lý có thể là bộ vi xử lý, vi điều khiển, DSP, FPGA, ASIC hoặc SoC tùy yêu cầu bài toán.")
+    .replace(/FPGA, ASIC, DSP, SoC, microprocessor hoặc microcontroller tùy yêu cầu ứng dụng\./g, "Lõi xử lý có thể là FPGA, ASIC, DSP, SoC, bộ vi xử lý hoặc vi điều khiển tùy yêu cầu ứng dụng.")
+    .replace(/Phần mềm nhúng được lưu trong bộ nhớ và chạy trên system core để điều phối cảm biến, xử lý, actuator, truyền thông và IC hỗ trợ\./g, "Phần mềm nhúng được lưu trong bộ nhớ và chạy trên lõi xử lý để điều phối cảm biến, xử lý dữ liệu, điều khiển cơ cấu chấp hành, truyền thông và các IC hỗ trợ.")
+    .replace(/Pre-processor, compiler, assembler, linker\/loader, kèm header files, object files và library files\./g, "Chuỗi dịch gồm bộ tiền xử lý, trình biên dịch, trình hợp dịch, trình liên kết/công cụ nạp; các tệp khai báo, tệp đối tượng và tệp thư viện tham gia vào các bước tương ứng.")
+    .replace(/Linker gom object file và thư viện thành file cuối; loader hoặc công cụ nạp đưa chương trình vào bộ nhớ thực thi\/Flash\./g, "Trình liên kết gom tệp đối tượng và thư viện thành tệp cuối; công cụ nạp đưa chương trình vào bộ nhớ thực thi hoặc Flash.")
+    .replace(/requirement specification/gi, "đặc tả yêu cầu")
+    .replace(/system design/gi, "thiết kế hệ thống")
+    .replace(/Hardware and firmware integration/gi, "tích hợp phần cứng và phần mềm nhúng")
+    .replace(/total system testing/gi, "kiểm thử toàn hệ thống")
+    .replace(/Power management/gi, "quản lý nguồn")
+    .replace(/Application xuống Physical/gi, "lớp ứng dụng xuống lớp vật lý")
+    .replace(/Application layer/gi, "lớp ứng dụng")
+    .replace(/Physical layer/gi, "lớp vật lý")
+    .replace(/\bHeader\b/g, "Phần đầu gói")
+    .replace(/\bheader\b/g, "phần đầu gói")
+    .replace(/Device driver/gi, "Trình điều khiển thiết bị")
+    .replace(/Generic driver/gi, "Trình điều khiển dùng chung")
+    .replace(/điều khiển\/driver/gi, "điều khiển công suất")
+    .replace(/driver nằm gần/gi, "driver nằm gần")
+    .replace(/Board thực tế/gi, "Bo mạch thực tế")
+    .replace(/\bboard\b/gi, "bo mạch")
+    .replace(/\bclock\b/gi, "xung nhịp")
+    .replace(/\breset\b/gi, "tín hiệu đặt lại")
+    .replace(/\bdisplay\b/gi, "khối hiển thị")
+    .replace(/\bcodec\b/gi, "khối mã hóa/giải mã âm thanh")
+    .replace(/Trade-off/gi, "Đánh đổi thiết kế")
+    .replace(/built-in I\/O/gi, "ngõ vào/ra tích hợp sẵn")
+    .replace(/low-power features/gi, "tính năng tiết kiệm năng lượng")
+    .replace(/single shared bus/gi, "một bus dùng chung")
+    .replace(/separate buses/gi, "các bus tách riêng")
+    .replace(/\binstruction\b/gi, "lệnh")
+    .replace(/load\/store/gi, "nạp/lưu")
+    .replace(/\bpipeline\b/gi, "đường ống lệnh")
+    .replace(/On-chip/gi, "Bộ nhớ tích hợp trên chip")
+    .replace(/on-chip/gi, "tích hợp trên chip")
+    .replace(/\bpackage\b/gi, "vỏ linh kiện")
+    .replace(/address decoder/gi, "bộ giải mã địa chỉ")
+    .replace(/memory cell/gi, "ô nhớ")
+    .replace(/3-state output buffers/gi, "bộ đệm đầu ra ba trạng thái")
+    .replace(/3-state/gi, "ba trạng thái")
+    .replace(/high-impedance/gi, "trở kháng cao")
+    .replace(/floating gate/gi, "cổng nổi")
+    .replace(/block\/page/gi, "khối/trang nhớ")
+    .replace(/common-anode/gi, "cực dương chung")
+    .replace(/common-cathode/gi, "cực âm chung")
+    .replace(/active high\/active low/gi, "kích hoạt mức cao/kích hoạt mức thấp")
+    .replace(/source\/sink/gi, "cấp dòng/hút dòng")
+    .replace(/sink\/source/gi, "hút dòng/cấp dòng")
+    .replace(/\bI\/O\b/g, "ngõ vào/ra")
+    .replace(/\binput\b/gi, "đầu vào")
+    .replace(/\boutput\b/gi, "đầu ra")
+    .replace(/\bbidirectional\b/gi, "hai chiều")
+    .replace(/\bfloating\b/gi, "bị treo mức")
+    .replace(/pull-up/g, "điện trở kéo lên")
+    .replace(/pull-down/g, "điện trở kéo xuống")
+    .replace(/High-Z/gi, "trở kháng cao")
+    .replace(/output CMOS/gi, "ngõ ra CMOS")
+    .replace(/push-pull\/CMOS output/gi, "ngõ ra đẩy-kéo/CMOS")
+    .replace(/open-drain\/open-collector/gi, "ngõ ra cực máng hở/cực góp hở")
+    .replace(/open-drain/gi, "ngõ ra cực máng hở")
+    .replace(/open-collector/gi, "ngõ ra cực góp hở")
+    .replace(/wired-AND/gi, "kiểu AND nối dây")
+    .replace(/opto-?coupler/gi, "bộ ghép quang")
+    .replace(/digital isolator/gi, "bộ cách ly số")
+    .replace(/debug\/release/gi, "gỡ lỗi/phát hành")
+    .replace(/\bdebug\b/gi, "gỡ lỗi")
+    .replace(/\brelease\b/gi, "phát hành")
+    .replace(/\bdriver\b/gi, "trình điều khiển")
+    .replace(/\bhardware\b/gi, "phần cứng")
+    .replace(/\bsoftware\b/gi, "phần mềm")
+    .replace(/\bmechanical\b/gi, "cơ khí")
+    .replace(/\bfirmware nhúng\b/gi, "phần mềm nhúng")
+    .replace(/\bfirmware\b/gi, "phần mềm nhúng")
+    .replace(/Hardware Layer/g, "lớp phần cứng")
+    .replace(/System Software Layer/g, "lớp phần mềm hệ thống")
+    .replace(/Application Software Layer/g, "lớp phần mềm ứng dụng")
+    .replace(/\bSystem core\b/g, "Lõi xử lý")
+    .replace(/\bsystem core\b/g, "lõi xử lý")
+    .replace(/\bembedded firmware\b/gi, "firmware nhúng")
+    .replace(/\binput ports\/sensors\b/gi, "cổng vào hoặc cảm biến")
+    .replace(/\boutput ports\/actuators\b/gi, "cổng ra hoặc cơ cấu chấp hành")
+    .replace(/\bcommunication interface\b/gi, "khối giao tiếp truyền thông")
+    .replace(/\bactuators?\b/gi, "cơ cấu chấp hành")
+    .replace(/\bmicroprocessor\b/gi, "bộ vi xử lý")
+    .replace(/\bmicrocontroller\b/gi, "vi điều khiển")
+    .replace(/\bsource code\b/gi, "mã nguồn")
+    .replace(/\bobject files?\b/gi, "tệp đối tượng")
+    .replace(/\blibrary files?\b/gi, "tệp thư viện")
+    .replace(/\bheader files?\b/gi, "tệp khai báo")
+    .replace(/\bPre-processor\b/gi, "bộ tiền xử lý")
+    .replace(/\bpreprocessor\b/gi, "bộ tiền xử lý")
+    .replace(/\bcompiler\b/gi, "trình biên dịch")
+    .replace(/\bassembler\b/gi, "trình hợp dịch")
+    .replace(/\blinkers?\b/gi, "trình liên kết")
+    .replace(/\bloader\b/gi, "công cụ nạp")
+    .replace(/\bExecutable File\b/gi, "tệp thực thi")
+    .replace(/\bfirmware\/hardware\/cơ khí\b/gi, "firmware, phần cứng và cơ khí")
+    .replace(/\bhardware\/software partitioning\b/gi, "phân chia chức năng giữa phần cứng và phần mềm")
+    .replace(/\bdata communication\b/gi, "truyền thông dữ liệu")
+    .replace(/\bdata collection\b/gi, "thu thập dữ liệu")
+    .replace(/\bdata storage\b/gi, "lưu trữ dữ liệu")
+    .replace(/\bmonitoring\b/gi, "giám sát")
+    .replace(/\bapplication specific user interface\b/gi, "giao diện người dùng chuyên dụng")
+    .replace(/\bcontrol system\b/gi, "hệ điều khiển")
+    .replace(/\bdigital signal processing\b/gi, "xử lý tín hiệu số")
+    .replace(/\binter-system và intra-system\b/gi, "giao tiếp giữa các thiết bị và giao tiếp nội bộ trong cùng hệ thống")
+    .replace(/\binter-system\b/gi, "giao tiếp giữa các thiết bị")
+    .replace(/\bintra-system\b/gi, "giao tiếp nội bộ trong cùng hệ thống")
+    .replace(/\bsingle-ended và differential\b/gi, "tín hiệu một đầu và tín hiệu vi sai")
+    .replace(/\bsingle-ended\b/gi, "tín hiệu một đầu")
+    .replace(/\bdifferential\b/gi, "tín hiệu vi sai")
+    .replace(/\bbalanced line\/signal\b/gi, "đường truyền cân bằng")
+    .replace(/\bbalanced wiring\b/gi, "đấu dây cân bằng")
+    .replace(/\bcommon-mode\b/gi, "chế độ chung")
+    .replace(/\bprotocol\b/gi, "giao thức")
+    .replace(/\bstandard\b/gi, "chuẩn")
+    .replace(/\bmemory\b/gi, "bộ nhớ")
     .replace(/Slide\s+\d+(?:\s*[-–]\s*\d+)?(?:\s*,\s*\d+)*/g, "Bài học")
     .replace(/\b[Ss]lide\b/g, "bài học")
     .replace(/tài liệu markdown/gi, "kiến thức đã học")
@@ -1031,6 +1158,9 @@
     .replace(/được nhắc\s*\./gi, "là ví dụ quan trọng.")
     .replace(/đưa bonus về/gi, "")
     .replace(/gạch chéo PC\/laptop\/server để nhấn mạnh/gi, "phân biệt PC/laptop/server để nhấn mạnh")
+    .replace(/Embedded phần mềm nhúng trong cấu trúc hệ nhúng và chỉ vào vùng bộ nhớ\/core\./g, "Phần mềm nhúng nằm trong cấu trúc hệ nhúng và liên hệ trực tiếp với bộ nhớ/lõi xử lý.")
+    .replace(/Embedded phần mềm nhúng/g, "Phần mềm nhúng")
+    .replace(/^trình điều khiển/g, "Trình điều khiển")
     .replace(/\s{2,}/g, " ")
     .trim();
 
@@ -1063,10 +1193,15 @@
     reason: scrubText(choice.reason)
   });
 
+  const topicLabel = (topic) => scrubText(topic);
+
   const sourceLabel = (chapter) => chapter.title;
 
+  const answerStatement = (stem, answer) =>
+    `Với câu hỏi "${scrubStem(stem)}", đáp án "${scrubText(answer)}" là phù hợp.`;
+
   const trueChoiceFrom = (fact) => ({
-    text: scrubText(fact.correct),
+    text: answerStatement(fact.stem, fact.correct),
     correct: false,
     reason: scrubText(`Phát biểu này đúng vì: ${fact.why}`)
   });
@@ -1107,7 +1242,7 @@
       topic: fact.topic,
       stem: `Trong chủ đề "${chapter.title}", phát biểu nào SAI hoặc dễ gây nhầm lẫn?`,
       choices: normalizeChoices([
-        { text: falseItem.text, correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
+        { text: answerStatement(fact.stem, falseItem.text), correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
         ...trueFacts.map(trueChoiceFrom)
       ].map(scrubChoice), index * 3 + chapter.id.length)
     };
@@ -1118,7 +1253,7 @@
     type: "Áp dụng",
     source: sourceLabel(chapter),
     topic: fact.topic,
-    stem: `Khi gặp tình huống liên quan đến ${fact.topic}, cách hiểu hoặc xử lý nào phù hợp nhất?`,
+    stem: scrubStem(`Khi gặp tình huống liên quan đến ${topicLabel(fact.topic)}, cách hiểu hoặc xử lý nào phù hợp nhất?`),
     choices: normalizeChoices([
       { text: fact.correct, correct: true, reason: fact.why },
       ...fact.wrong.slice().reverse().map((item) => ({ text: item.text, correct: false, reason: item.reason }))
@@ -1130,7 +1265,7 @@
     type: "Tổng hợp",
     source: sourceLabel(chapter),
     topic: fact.topic,
-    stem: `Nhận định nào đúng nhất về ${fact.topic}?`,
+    stem: scrubStem(`Nhận định nào đúng nhất về ${topicLabel(fact.topic)}?`),
     choices: normalizeChoices([
       { text: fact.correct, correct: true, reason: fact.why },
       ...fact.wrong.map((item) => ({ text: item.text, correct: false, reason: item.reason }))
