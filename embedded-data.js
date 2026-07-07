@@ -1399,6 +1399,108 @@
     reason: scrubText(`Phát biểu này đúng vì: ${fact.why}`)
   });
 
+  const cleanListItem = (value) => stripFinalPunctuation(value)
+    .replace(/^Ngoài .+? còn cần\s+/i, "")
+    .replace(/^Cần kiểm tra\s+/i, "")
+    .replace(/^Không thể tối ưu đồng thời\s+/i, "")
+    .replace(/^Bắt đầu từ\s+/i, "")
+    .replace(/^Nó kết hợp nhiều (?:khối|miền) chức năng như\s+/i, "")
+    .replace(/^Lõi xử lý có thể là\s+/i, "")
+    .replace(/^Cấu trúc gồm\s+/i, "")
+    .replace(/^Không cần\s+/i, "bỏ ")
+    .replace(/^Chỉ cần\s+/i, "chỉ ")
+    .replace(/^Chỉ\s+/i, "")
+    .replace(/^Vì\s+/i, "")
+    .replace(/^Công suất (.+?) không bao giờ đáng quan tâm$/i, "bỏ qua công suất $1")
+    .replace(/^Không ảnh hưởng\s+/i, "bỏ qua ảnh hưởng ")
+    .trim();
+
+  const listItemsFrom = (value) => {
+    const clean = stripFinalPunctuation(scrubText(value))
+      .replace(/\s+và\s+/g, ", ")
+      .replace(/\s+hoặc\s+/g, ", ");
+    const items = clean
+      .split(/\s*[,;]\s*/)
+      .map(cleanListItem)
+      .filter((item) => item.length >= 4 && item.length <= 90 && !/^vì\s/i.test(item));
+    return items.length >= 3 && items.length <= 8 ? [...new Set(items)] : [];
+  };
+
+  const distractorFragments = (fact, facts) => {
+    const correctItems = new Set(listItemsFrom(fact.correct).map((item) => item.toLowerCase()));
+    const fromWrong = fact.wrong.flatMap((item) => {
+        const wrongItems = listItemsFrom(item.text);
+        return wrongItems.length ? wrongItems : [cleanListItem(scrubText(item.text))];
+      });
+    const defaults = [
+      "một chi tiết không đúng ngữ cảnh",
+      "một thành phần không thuộc bộ đúng",
+      "một lựa chọn thiếu cơ sở kỹ thuật"
+    ];
+    return (fromWrong.length >= 3 ? fromWrong : fromWrong.concat(defaults))
+      .map((item) => item.trim())
+      .filter((item, index, array) =>
+        item.length >= 4 &&
+        item.length <= 80 &&
+        item.split(/\s+/).length >= 2 &&
+        !correctItems.has(item.toLowerCase()) &&
+        array.findIndex((candidate) => candidate.toLowerCase() === item.toLowerCase()) === index
+      );
+  };
+
+  const mixedList = (items, fragments, seed) => {
+    const copy = [...items];
+    const fragment = fragments[seed % Math.max(1, fragments.length)] || "một thành phần không thuộc bộ đúng";
+    copy[seed % copy.length] = fragment;
+    return copy;
+  };
+
+  const listText = (items) => `Gồm ${items.join(", ")}.`;
+
+  const falseStem = (chapter, fact, index) => {
+    const topic = topicLabel(fact.topic);
+    const templates = [
+      `Phát biểu nào KHÔNG đúng về ${topic}?`,
+      `Điểm nào là bẫy khi nói về ${topic}?`,
+      `Nhận định nào cần bác bỏ khi học ${topic}?`,
+      `Cách hiểu nào dễ gây sai về ${topic}?`,
+      `Phương án nào trái với kiến thức về ${topic}?`
+    ];
+    return scrubStem(templates[index % templates.length]);
+  };
+
+  const claimForPrompt = (fact, answer) => {
+    const claim = stripFinalPunctuation(claimFromAnswer(fact.stem, answer, fact.topic));
+    if (/^(Khi|Để|Vì|Bằng|Chỉ|Ngoài)\b/i.test(claim) || claim.split(/\s+/).length < 6) {
+      return finishSentence(`${topicLabel(fact.topic)}: ${lowerFirst(claim)}`);
+    }
+    return finishSentence(claim);
+  };
+
+  const correctionStem = (fact, falseItem, index) => {
+    const topic = topicLabel(fact.topic);
+    const claim = claimForPrompt(fact, falseItem.text);
+    const templates = [
+      `Với ${topic}, cần sửa cách hiểu sau thế nào: "${claim}"?`,
+      `Một nhận định gây nhầm lẫn về ${topic} là: "${claim}" Phiên bản đúng là gì?`,
+      `Nếu gặp phát biểu "${claim}", nên chọn cách hiểu nào để sửa lại?`,
+      `Cách hiểu nào thay thế tốt nhất cho nhận định sai sau: "${claim}"?`
+    ];
+    return scrubStem(templates[index % templates.length]);
+  };
+
+  const whyWrongStem = (fact, falseItem, index) => {
+    const topic = topicLabel(fact.topic);
+    const claim = claimForPrompt(fact, falseItem.text);
+    const templates = [
+      `Lỗi chính trong lựa chọn sau về ${topic} là gì: "${claim}"?`,
+      `Vì sao cách hiểu này không ổn về ${topic}: "${claim}"?`,
+      `Điểm sai cần nhận ra trong phát biểu "${claim}" là gì?`,
+      `Khi phân tích ${topic}, vì sao không nên chọn nhận định "${claim}"?`
+    ];
+    return scrubStem(templates[index % templates.length]);
+  };
+
   const pickTrueFacts = (facts, index) => {
     const picked = [];
     const seen = new Set();
@@ -1418,7 +1520,7 @@
     type: "Nhận biết",
     source: sourceLabel(chapter),
     topic: fact.topic,
-    stem: scrubStem(fact.stem),
+    stem: capitalizeVisibleText(scrubStem(fact.stem)),
     choices: normalizeChoices([
       { text: fact.correct, correct: true, reason: fact.why },
       ...fact.wrong.map((item) => ({ text: item.text, correct: false, reason: item.reason }))
@@ -1433,11 +1535,46 @@
       type: "Chọn phát biểu sai",
       source: sourceLabel(chapter),
       topic: fact.topic,
-      stem: `Trong chủ đề "${chapter.title}", phát biểu nào SAI hoặc dễ gây nhầm lẫn?`,
+      stem: falseStem(chapter, fact, index),
       choices: normalizeChoices([
         { text: claimFromAnswer(fact.stem, falseItem.text, fact.topic), correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
         ...trueFacts.map(trueChoiceFrom)
       ].map(scrubChoice), index * 3 + chapter.id.length)
+    };
+  };
+
+  const correctionQuestion = (chapter, fact, index) => {
+    const falseItem = fact.wrong[index % fact.wrong.length];
+    return {
+      id: `${chapter.id}-c-${index + 1}`,
+      type: "Sửa hiểu nhầm",
+      source: sourceLabel(chapter),
+      topic: fact.topic,
+      stem: correctionStem(fact, falseItem, index),
+      choices: normalizeChoices([
+        { text: claimFromAnswer(fact.stem, fact.correct, fact.topic), correct: true, reason: fact.why },
+        ...fact.wrong.map((item) => ({ text: claimFromAnswer(fact.stem, item.text, fact.topic), correct: false, reason: item.reason }))
+      ].map(scrubChoice), index * 11 + chapter.id.length)
+    };
+  };
+
+  const whyWrongQuestion = (chapter, fact, index) => {
+    const falseItem = fact.wrong[index % fact.wrong.length];
+    const otherReasons = fact.wrong
+      .filter((item) => item !== falseItem)
+      .map((item) => item.reason)
+      .slice(0, 2);
+    return {
+      id: `${chapter.id}-w-${index + 1}`,
+      type: "Bẫy khái niệm",
+      source: sourceLabel(chapter),
+      topic: fact.topic,
+      stem: whyWrongStem(fact, falseItem, index),
+      choices: normalizeChoices([
+        { text: falseItem.reason, correct: true, reason: "Lý do này bác bỏ trực tiếp nhận định sai trong câu hỏi." },
+        { text: fact.why, correct: false, reason: "Đây là lý do cho nhận định đúng, không phải lỗi của nhận định sai đang xét." },
+        ...otherReasons.map((reason) => ({ text: reason, correct: false, reason: "Lý do này có thể bác bỏ một phương án sai khác, nhưng không khớp nhất với nhận định trong câu hỏi." }))
+      ].map(scrubChoice), index * 13 + chapter.id.length)
     };
   };
 
@@ -1452,6 +1589,44 @@
       ...fact.wrong.slice().reverse().map((item) => ({ text: claimFromAnswer(fact.stem, item.text, fact.topic), correct: false, reason: item.reason }))
     ].map(scrubChoice), index * 5 + chapter.id.length)
   });
+
+  const listQuestion = (chapter, fact, facts, index) => {
+    const items = listItemsFrom(fact.correct);
+    if (items.length < 3) return correctionQuestion(chapter, fact, index);
+    const fragments = distractorFragments(fact, facts);
+    return {
+      id: `${chapter.id}-l-${index + 1}`,
+      type: "Chọn tổ hợp",
+      source: sourceLabel(chapter),
+      topic: fact.topic,
+      stem: scrubStem(`Tổ hợp nào đúng và đủ nhất về ${topicLabel(fact.topic)}?`),
+      choices: normalizeChoices([
+        { text: listText(items), correct: true, reason: `Bộ này khớp với kiến thức cần nhớ về ${topicLabel(fact.topic)}.` },
+        { text: listText(mixedList(items, fragments, index + 1)), correct: false, reason: "Phương án này giữ cấu trúc giống đáp án đúng nhưng đã thay sai ít nhất một thành phần." },
+        { text: listText(mixedList(items, fragments, index + 3)), correct: false, reason: "Phương án này có số lượng gần giống nhưng thành phần không đúng hoàn toàn." },
+        { text: listText(mixedList(items, fragments, index + 5)), correct: false, reason: "Phương án này lẫn một khái niệm ngoài bộ thành phần đúng." }
+      ].map(scrubChoice), index * 17 + chapter.id.length)
+    };
+  };
+
+  const countListQuestion = (chapter, fact, facts, index) => {
+    const items = listItemsFrom(fact.correct);
+    if (items.length < 3) return whyWrongQuestion(chapter, fact, index);
+    const fragments = distractorFragments(fact, facts);
+    return {
+      id: `${chapter.id}-q-${index + 1}`,
+      type: "Số lượng & thành phần",
+      source: sourceLabel(chapter),
+      topic: fact.topic,
+      stem: scrubStem(`Về ${topicLabel(fact.topic)}, phương án nào vừa đúng số lượng vừa đúng nội dung?`),
+      choices: normalizeChoices([
+        { text: `Có ${items.length} ý chính: ${items.join(", ")}.`, correct: true, reason: `Số lượng và nội dung đều khớp với kiến thức về ${topicLabel(fact.topic)}.` },
+        { text: `Có ${items.length} ý chính: ${mixedList(items, fragments, index + 7).join(", ")}.`, correct: false, reason: "Số lượng có vẻ đúng nhưng có thành phần bị thay sai." },
+        { text: `Có ${Math.max(1, items.length - 1)} ý chính: ${items.slice(0, -1).join(", ")}.`, correct: false, reason: "Phương án này thiếu một thành phần quan trọng." },
+        { text: `Có ${items.length + 1} ý chính: ${items.concat(fragments[index % Math.max(1, fragments.length)] || "một ý ngoài trọng tâm").join(", ")}.`, correct: false, reason: "Phương án này thêm một thành phần không thuộc bộ đúng." }
+      ].map(scrubChoice), index * 19 + chapter.id.length)
+    };
+  };
 
   const conceptQuestion = (chapter, fact, index) => ({
     id: `${chapter.id}-m-${index + 1}`,
@@ -1470,13 +1645,17 @@
       (fact, index) => directQuestion(chapter, fact, index),
       (fact, index) => falseStatementQuestion(chapter, fact, chapter.facts, index),
       (fact, index) => appliedQuestion(chapter, fact, index),
-      (fact, index) => conceptQuestion(chapter, fact, index)
+      (fact, index) => conceptQuestion(chapter, fact, index),
+      (fact, index) => correctionQuestion(chapter, fact, index),
+      (fact, index) => whyWrongQuestion(chapter, fact, index),
+      (fact, index) => listQuestion(chapter, fact, chapter.facts, index),
+      (fact, index) => countListQuestion(chapter, fact, chapter.facts, index)
     ];
     const questions = [];
     let index = 0;
     while (questions.length < 100) {
-      const variant = variants[Math.floor(index / chapter.facts.length) % variants.length];
-      const fact = chapter.facts[index % chapter.facts.length];
+      const variant = variants[index % variants.length];
+      const fact = chapter.facts[(index * 7 + Math.floor(index / chapter.facts.length)) % chapter.facts.length];
       questions.push(variant(fact, index));
       index += 1;
     }
