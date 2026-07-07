@@ -1224,7 +1224,7 @@
   };
   const answerBody = (answer) => stripFinalPunctuation(scrubText(answer)).replace(/^vì\s+/i, "");
   const needsTopicContext = (answer) =>
-    /^(là|chỉ|không|ngoài|cần|dùng|làm|tạo|đặt|phụ thuộc|bắt đầu|số|hai|ba|bốn|năm|nhóm|universal|idle|vq|2\^|\d+\^)(?:[\s,]|$)/i.test(answer)
+    /^(là|chỉ|không|ngoài|cần|dùng|làm|tạo|đặt|phụ thuộc|bắt đầu|giúp|số|hai|ba|bốn|năm|nhóm|universal|idle|vq|2\^|\d+\^)(?:[\s,]|$)/i.test(answer)
     || answer.split(/\s+/).length <= 4;
   const normalizeClaimSubject = (subject) => {
     if (/^vai trò\s+/i.test(subject)) return subject.replace(/^vai trò\s+/i, "");
@@ -1237,7 +1237,7 @@
     if (!subject || startsWithSubject(cleanAnswer, subject) || !needsTopicContext(cleanAnswer)) {
       return finishSentence(cleanAnswer);
     }
-    if (/^(là|không|chỉ|ngoài|cần|dùng|làm|tạo|đặt|phụ thuộc|bắt đầu)(?:\s|$)/i.test(cleanAnswer)) {
+    if (/^(là|không|chỉ|ngoài|cần|dùng|làm|tạo|đặt|phụ thuộc|bắt đầu|giúp)(?:\s|$)/i.test(cleanAnswer)) {
       return finishSentence(`${subject} ${lowerFirst(cleanAnswer)}`);
     }
     if (/^(universal|một chuẩn)\b/i.test(cleanAnswer)) {
