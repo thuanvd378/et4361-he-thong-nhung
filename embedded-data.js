@@ -1139,6 +1139,9 @@
     .replace(/\bprotocol\b/gi, "giao thức")
     .replace(/\bstandard\b/gi, "chuẩn")
     .replace(/\bmemory\b/gi, "bộ nhớ")
+    .replace(/^N mức\.?$/g, "N mức rời rạc")
+    .replace(/^2\^N mức\.?$/g, "2^N mức rời rạc")
+    .replace(/^2N mức\.?$/g, "2N mức rời rạc")
     .replace(/Slide\s+\d+(?:\s*[-–]\s*\d+)?(?:\s*,\s*\d+)*/g, "Bài học")
     .replace(/\b[Ss]lide\b/g, "bài học")
     .replace(/tài liệu markdown/gi, "kiến thức đã học")
@@ -1201,6 +1204,7 @@
   const lowerFirst = (value) => {
     const text = String(value).trim();
     if (/^(IoT|UART|I2C|SPI|ADC|DAC|GPIO|TVS|MOSFET|BJT|LDO|ESD|SAR|CPU|MCU|FPGA|ASIC|DSP)\b/.test(text)) return text;
+    if (/^N\s/.test(text)) return text;
     return text ? text.charAt(0).toLowerCase() + text.slice(1) : text;
   };
   const upperFirst = (value) => {
@@ -1244,7 +1248,7 @@
       const predicate = /^universal\b/i.test(cleanAnswer) ? cleanAnswer : lowerFirst(cleanAnswer);
       return finishSentence(`${subject} là ${predicate}`);
     }
-    if (/^(vq|2\^|2n|\d+\^)/i.test(cleanAnswer)) {
+    if (/^(vq|n mức|2\^|2n|\d+\^)/i.test(cleanAnswer)) {
       return finishSentence(`${subject} là ${cleanAnswer}`);
     }
     if (/^idle\b/i.test(cleanAnswer)) {
@@ -1414,8 +1418,8 @@
     topic: fact.topic,
     stem: scrubStem(`Khi gặp tình huống liên quan đến ${topicLabel(fact.topic)}, cách hiểu hoặc xử lý nào phù hợp nhất?`),
     choices: normalizeChoices([
-      { text: fact.correct, correct: true, reason: fact.why },
-      ...fact.wrong.slice().reverse().map((item) => ({ text: item.text, correct: false, reason: item.reason }))
+      { text: claimFromAnswer(fact.stem, fact.correct, fact.topic), correct: true, reason: fact.why },
+      ...fact.wrong.slice().reverse().map((item) => ({ text: claimFromAnswer(fact.stem, item.text, fact.topic), correct: false, reason: item.reason }))
     ].map(scrubChoice), index * 5 + chapter.id.length)
   });
 
@@ -1426,8 +1430,8 @@
     topic: fact.topic,
     stem: scrubStem(`Nhận định nào đúng nhất về ${topicLabel(fact.topic)}?`),
     choices: normalizeChoices([
-      { text: fact.correct, correct: true, reason: fact.why },
-      ...fact.wrong.map((item) => ({ text: item.text, correct: false, reason: item.reason }))
+      { text: claimFromAnswer(fact.stem, fact.correct, fact.topic), correct: true, reason: fact.why },
+      ...fact.wrong.map((item) => ({ text: claimFromAnswer(fact.stem, item.text, fact.topic), correct: false, reason: item.reason }))
     ].map(scrubChoice), index * 7 + chapter.id.length)
   });
 
