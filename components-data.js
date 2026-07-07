@@ -654,13 +654,21 @@
     .replace(/^điện áp dropout/g, "Điện áp dropout")
     .replace(/^Vị trí đặt tụ decoupling đặt tụ/gi, "Tụ decoupling nên đặt")
     .replace(/^Vị trí đặt tụ decoupling chỉ cần/gi, "Khi đặt tụ decoupling, chỉ cần")
+    .replace(/xung xung quá áp/gi, "xung quá áp")
+    .replace(/xung xung nhịp/gi, "xung nhịp")
     .replace(/\s{2,}/g, " ")
     .trim();
 
+  const capitalizeVisibleText = (value) => {
+    const text = String(value).trim();
+    if (!text || /^(eFuse|iOS|iPhone|nRF|pH|uP|uC)\b/.test(text)) return text;
+    return text.charAt(0).toLocaleUpperCase("vi-VN") + text.slice(1);
+  };
+
   const scrubChoice = (choice) => ({
     ...choice,
-    text: scrubText(choice.text),
-    reason: scrubText(choice.reason)
+    text: capitalizeVisibleText(scrubText(choice.text)),
+    reason: capitalizeVisibleText(scrubText(choice.reason))
   });
 
   const topicLabel = (topic) => scrubText(topic);
@@ -670,7 +678,8 @@
   const stripFinalPunctuation = (value) => String(value).trim().replace(/[.!?]+$/g, "");
   const lowerFirst = (value) => {
     const text = String(value).trim();
-    if (/^(IoT|UART|I2C|SPI|ADC|DAC|GPIO|TVS|MOSFET|BJT|LDO|ESD|SAR|CPU|MCU|FPGA|ASIC|DSP)\b/.test(text)) return text;
+    if (/^(IoT|UART|I2C|SPI|ADC|DAC|GPIO|TVS|MOSFET|BJT|LDO|ESD|SAR|CPU|MCU|FPGA|ASIC|DSP|RF|MUX|PGA|SCLK|PWM|BSP|OS|RTOS|DMA|LED|LCD|USB|CAN|LIN|JTAG|SWD|RS-\d+|ENOB|VQ|Vref|VRef|Vin|Ain|Dout)\b/.test(text)) return text;
+    if (/^[A-Z0-9]{2,}\b/.test(text)) return text;
     if (/^N\s/.test(text)) return text;
     return text ? text.charAt(0).toLowerCase() + text.slice(1) : text;
   };
@@ -798,6 +807,7 @@
       return finishSentence(`${match[1]} có ${cleanStem.match(/có (đặc điểm|nhiệm vụ|tác dụng|vai trò) gì$/i)[1]}: ${cleanAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) dùng để làm gì$/i))) {
+      if (startsWithSubject(cleanAnswer, match[1])) return finishSentence(cleanAnswer);
       return finishSentence(`${match[1]} dùng để ${lowerAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) dùng khi nào$/i))) {

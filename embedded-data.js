@@ -1019,9 +1019,20 @@
     .replace(/Monitoring y tế\./g, "Nhóm giám sát y tế, ví dụ thiết bị theo dõi sinh hiệu.")
     .replace(/Data storage thuần túy\./g, "Nhóm chỉ lưu trữ dữ liệu thuần túy, không nhấn mạnh truyền nhận dữ liệu.")
     .replace(/System core, memory, embedded firmware, input ports\/sensors, output ports\/actuators, communication interface và các IC\/hệ con hỗ trợ\./g, "Cấu trúc gồm lõi xử lý, bộ nhớ, firmware nhúng, cổng vào hoặc cảm biến, cổng ra hoặc cơ cấu chấp hành, khối giao tiếp truyền thông và các IC/hệ con hỗ trợ.")
+    .replace(/Nó kết hợp nhiều miền chức năng như analog baseband, RF, ARM control, DSP, giao diện, nguồn và quản lý năng lượng\./g, "Nó kết hợp nhiều khối chức năng như băng gốc tương tự, khối RF, khối điều khiển dùng lõi ARM, khối xử lý tín hiệu số DSP, giao diện, nguồn và quản lý năng lượng.")
+    .replace(/Điện thoại có nhiều khối như RF, DSP, ARM, nguồn, codec, display\./g, "Điện thoại có nhiều khối như RF, DSP, ARM, nguồn, khối âm thanh và khối hiển thị.")
+    .replace(/Power management là một phần quan trọng của điện thoại và nhiều hệ nhúng phức tạp\./g, "Quản lý nguồn là một phần quan trọng của điện thoại và nhiều hệ nhúng phức tạp.")
+    .replace(/RF và baseband luôn nằm ngoài mọi hệ nhúng\./g, "Khối RF và khối băng gốc luôn nằm ngoài mọi hệ nhúng.")
+    .replace(/Chúng là các miền chức năng trong ví dụ điện thoại\./g, "RF và băng gốc là các khối chức năng trong ví dụ điện thoại.")
     .replace(/Hardware Layer là lớp bắt buộc; System Software Layer và Application Software Layer có thể tùy chọn\./g, "Lớp phần cứng là bắt buộc; lớp phần mềm hệ thống và lớp phần mềm ứng dụng có thể có hoặc không tùy độ phức tạp của hệ nhúng.")
-    .replace(/Application Software Layer luôn bắt buộc trong mọi hệ nhúng\./g, "Lớp phần mềm ứng dụng không phải lúc nào cũng bắt buộc trong mọi hệ nhúng.")
-    .replace(/System Software Layer luôn bắt buộc như hardware\./g, "Lớp phần mềm hệ thống không phải lúc nào cũng bắt buộc như lớp phần cứng.")
+    .replace(/Application Software Layer luôn bắt buộc trong mọi hệ nhúng\./g, "Lớp phần mềm ứng dụng luôn bắt buộc trong mọi hệ nhúng.")
+    .replace(/System Software Layer luôn bắt buộc như hardware\./g, "Lớp phần mềm hệ thống luôn bắt buộc như lớp phần cứng.")
+    .replace(/Slide ghi Application Software Layer là tùy chọn\./g, "Lớp phần mềm ứng dụng là tùy chọn.")
+    .replace(/Slide ghi System Software Layer là tùy chọn\./g, "Lớp phần mềm hệ thống là tùy chọn.")
+    .replace(/Slide 20 ghi rõ Hardware Layer \(Required\), hai lớp phần mềm là Optional\./g, "Lớp phần cứng là bắt buộc; hai lớp phần mềm là tùy chọn.")
+    .replace(/Slide 117 đặt Application Software Layer ở trên System Software và Hardware\./g, "Lớp phần mềm ứng dụng nằm trên lớp phần mềm hệ thống và lớp phần cứng.")
+    .replace(/Ứng dụng thường dựa vào system software, OS, middleware và driver\./g, "Ứng dụng thường dựa vào lớp phần mềm hệ thống, hệ điều hành, phần mềm trung gian và trình điều khiển.")
+    .replace(/Ứng dụng nằm dưới hardware layer\./g, "Phần mềm ứng dụng nằm dưới lớp phần cứng.")
     .replace(/Microprocessor, microcontroller, DSP, FPGA, ASIC hoặc SoC tùy bài toán\./g, "Lõi xử lý có thể là bộ vi xử lý, vi điều khiển, DSP, FPGA, ASIC hoặc SoC tùy yêu cầu bài toán.")
     .replace(/FPGA, ASIC, DSP, SoC, microprocessor hoặc microcontroller tùy yêu cầu ứng dụng\./g, "Lõi xử lý có thể là FPGA, ASIC, DSP, SoC, bộ vi xử lý hoặc vi điều khiển tùy yêu cầu ứng dụng.")
     .replace(/Phần mềm nhúng được lưu trong bộ nhớ và chạy trên system core để điều phối cảm biến, xử lý, actuator, truyền thông và IC hỗ trợ\./g, "Phần mềm nhúng được lưu trong bộ nhớ và chạy trên lõi xử lý để điều phối cảm biến, xử lý dữ liệu, điều khiển cơ cấu chấp hành, truyền thông và các IC hỗ trợ.")
@@ -1098,6 +1109,10 @@
     .replace(/Hardware Layer/g, "lớp phần cứng")
     .replace(/System Software Layer/g, "lớp phần mềm hệ thống")
     .replace(/Application Software Layer/g, "lớp phần mềm ứng dụng")
+    .replace(/Application phần mềm Layer/g, "lớp phần mềm ứng dụng")
+    .replace(/System phần mềm Layer/g, "lớp phần mềm hệ thống")
+    .replace(/System phần mềm/g, "lớp phần mềm hệ thống")
+    .replace(/phần cứng layer/gi, "lớp phần cứng")
     .replace(/\bSystem core\b/g, "Lõi xử lý")
     .replace(/\bsystem core\b/g, "lõi xử lý")
     .replace(/\bembedded firmware\b/gi, "firmware nhúng")
@@ -1133,6 +1148,7 @@
     .replace(/\bsingle-ended và differential\b/gi, "tín hiệu một đầu và tín hiệu vi sai")
     .replace(/\bsingle-ended\b/gi, "tín hiệu một đầu")
     .replace(/\bdifferential\b/gi, "tín hiệu vi sai")
+    .replace(/programmable gain amplifier/gi, "bộ khuếch đại có hệ số khuếch đại lập trình được")
     .replace(/\bbalanced line\/signal\b/gi, "đường truyền cân bằng")
     .replace(/\bbalanced wiring\b/gi, "đấu dây cân bằng")
     .replace(/\bcommon-mode\b/gi, "chế độ chung")
@@ -1163,6 +1179,10 @@
     .replace(/gạch chéo PC\/laptop\/server để nhấn mạnh/gi, "phân biệt PC/laptop/server để nhấn mạnh")
     .replace(/Embedded phần mềm nhúng trong cấu trúc hệ nhúng và chỉ vào vùng bộ nhớ\/core\./g, "Phần mềm nhúng nằm trong cấu trúc hệ nhúng và liên hệ trực tiếp với bộ nhớ/lõi xử lý.")
     .replace(/Embedded phần mềm nhúng/g, "Phần mềm nhúng")
+    .replace(/tiêu chuẩn trải qua phần cứng, system phần mềm và application/gi, "tiêu chuẩn có thể liên quan đến phần cứng, phần mềm hệ thống và phần mềm ứng dụng")
+    .replace(/system phần mềm và application/gi, "phần mềm hệ thống và phần mềm ứng dụng")
+    .replace(/xung xung nhịp/gi, "xung nhịp")
+    .replace(/xung xung quá áp/gi, "xung quá áp")
     .replace(/^trình điều khiển/g, "Trình điều khiển")
     .replace(/\s{2,}/g, " ")
     .trim();
@@ -1188,12 +1208,20 @@
     .replace("Mức logic RS-232 trong bài học được mô tả như thế nào?", "Mức logic RS-232 thường được mô tả như thế nào?")
     .replace("Các kỹ thuật bảo vệ mã nguồn/firmware trong bài học gồm gì?", "Các kỹ thuật bảo vệ mã nguồn/firmware gồm gì?")
     .replace("Mô hình OSI trong bài giúp hiểu vấn đề nào?", "Mô hình OSI giúp hiểu vấn đề nào?")
-    .replace("Định nghĩa IoT trong bài nhấn mạnh điều gì?", "Định nghĩa IoT nhấn mạnh điều gì?");
+    .replace("Định nghĩa IoT trong bài nhấn mạnh điều gì?", "Định nghĩa IoT nhấn mạnh điều gì?")
+    .replace(/xung xung nhịp/gi, "xung nhịp")
+    .replace(/xung xung quá áp/gi, "xung quá áp");
+
+  const capitalizeVisibleText = (value) => {
+    const text = String(value).trim();
+    if (!text || /^(eFuse|iOS|iPhone|nRF|pH|uP|uC)\b/.test(text)) return text;
+    return text.charAt(0).toLocaleUpperCase("vi-VN") + text.slice(1);
+  };
 
   const scrubChoice = (choice) => ({
     ...choice,
-    text: scrubText(choice.text),
-    reason: scrubText(choice.reason)
+    text: capitalizeVisibleText(scrubText(choice.text)),
+    reason: capitalizeVisibleText(scrubText(choice.reason))
   });
 
   const topicLabel = (topic) => scrubText(topic);
@@ -1203,7 +1231,8 @@
   const stripFinalPunctuation = (value) => String(value).trim().replace(/[.!?]+$/g, "");
   const lowerFirst = (value) => {
     const text = String(value).trim();
-    if (/^(IoT|UART|I2C|SPI|ADC|DAC|GPIO|TVS|MOSFET|BJT|LDO|ESD|SAR|CPU|MCU|FPGA|ASIC|DSP)\b/.test(text)) return text;
+    if (/^(IoT|UART|I2C|SPI|ADC|DAC|GPIO|TVS|MOSFET|BJT|LDO|ESD|SAR|CPU|MCU|FPGA|ASIC|DSP|RF|MUX|PGA|SCLK|PWM|BSP|OS|RTOS|DMA|LED|LCD|USB|CAN|LIN|JTAG|SWD|RS-\d+|ENOB|VQ|Vref|VRef|Vin|Ain|Dout)\b/.test(text)) return text;
+    if (/^[A-Z0-9]{2,}\b/.test(text)) return text;
     if (/^N\s/.test(text)) return text;
     return text ? text.charAt(0).toLowerCase() + text.slice(1) : text;
   };
@@ -1328,6 +1357,7 @@
       return finishSentence(`${match[1]} có ${cleanStem.match(/có (đặc điểm|nhiệm vụ|tác dụng|vai trò) gì$/i)[1]}: ${cleanAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) dùng để làm gì$/i))) {
+      if (startsWithSubject(cleanAnswer, match[1])) return finishSentence(cleanAnswer);
       return finishSentence(`${match[1]} dùng để ${lowerAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) dùng khi nào$/i))) {
