@@ -485,6 +485,11 @@ button {
   background: var(--green-2);
 }
 
+.set-button.in-progress {
+  border-color: var(--teal-border);
+  background: var(--teal-2);
+}
+
 .set-title-row {
   display: flex;
   justify-content: space-between;
@@ -500,6 +505,12 @@ button {
   color: var(--muted);
   font-size: 13px;
   font-weight: 700;
+}
+
+.resume-note {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .quiz-shell {

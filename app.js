@@ -2,6 +2,7 @@
   const DATASETS = [window.EMBEDDED_QUIZ_DATA, window.COMPONENT_QUIZ_DATA].filter(Boolean);
   const EXAM_DATA = window.EXAM_QUIZ_DATA || null;
   const STORAGE_KEY = "embedded-quiz-progress-v1";
+  const STUDY_SESSION_KEY = "embedded-quiz-study-session-v1";
   const ACTIVE_SECTION_KEY = "embedded-quiz-active-section";
   const THEME_KEY = "embedded-quiz-theme";
   const APP_NOTICE = "Lưu ý : Bộ câu hỏi này chỉ mang tính chất tham khảo, ôn tập, không phải đề đã thi hay chính thức";
@@ -58,6 +59,10 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
   }
 
+  function datasetForChapter(chapterId) {
+    return DATASETS.find((data) => data.chapters.some((chapter) => chapter.id === chapterId));
+  }
+
   function loadTheme() {
     return localStorage.getItem(THEME_KEY) === "dark" ? "dark" : "light";
   }
@@ -88,6 +93,114 @@
 
   function questionById(chapter, id) {
     return chapter.questions.find((question) => question.id === id);
+  }
+
+  function normalizeStudySession(value) {
+    if (!value || !["set", "review"].includes(value.mode)) return null;
+    const data = datasetById(value.sectionId) || datasetForChapter(value.chapterId);
+    const chapter = data?.chapters.find((item) => item.id === value.chapterId);
+    if (!data || !chapter) return null;
+
+    const validIds = new Set(chapter.questions.map((question) => question.id));
+    const queue = Array.isArray(value.queue)
+      ? value.queue.filter((id) => validIds.has(id))
+      : [];
+    if (!queue.length) return null;
+
+    const pointerValue = Number(value.pointer);
+    const pointer = Math.min(Math.max(Number.isFinite(pointerValue) ? Math.trunc(pointerValue) : 0, 0), queue.length - 1);
+    const question = questionById(chapter, queue[pointer]);
+    if (!question) return null;
+
+    const selected = Number.isInteger(value.selected) && value.selected >= 0 && value.selected < question.choices.length
+      ? value.selected
+      : null;
+    const checked = Boolean(value.checked) && selected !== null;
+    const setIndexValue = Number(value.setIndex);
+    const setIndex = value.mode === "set"
+      ? Math.min(Math.max(Number.isFinite(setIndexValue) ? Math.trunc(setIndexValue) : 0, 0), 9)
+      : null;
+    const startedIds = Array.isArray(value.startedIds)
+      ? [...new Set(value.startedIds.filter((id) => validIds.has(id)))]
+      : [...new Set(queue)];
+
+    return {
+      mode: value.mode,
+      sectionId: data.section.id,
+      chapterId: chapter.id,
+      setIndex,
+      queue,
+      pointer,
+      selected,
+      checked,
+      lastResult: checked && typeof value.lastResult === "boolean" ? value.lastResult : null,
+      startedIds: startedIds.length ? startedIds : [...new Set(queue)],
+      autoResume: value.autoResume !== false,
+      savedAt: value.savedAt || new Date().toISOString()
+    };
+  }
+
+  function loadStudySession() {
+    try {
+      const raw = localStorage.getItem(STUDY_SESSION_KEY);
+      if (!raw) return null;
+      const normalized = normalizeStudySession(JSON.parse(raw));
+      if (!normalized) localStorage.removeItem(STUDY_SESSION_KEY);
+      return normalized;
+    } catch {
+      localStorage.removeItem(STUDY_SESSION_KEY);
+      return null;
+    }
+  }
+
+  function saveStudySession(autoResume = true) {
+    if (!session || !["set", "review"].includes(session.mode)) return;
+    const normalized = normalizeStudySession({
+      ...session,
+      sectionId: activeSectionId,
+      autoResume,
+      savedAt: new Date().toISOString()
+    });
+    if (!normalized) return;
+    localStorage.setItem(STUDY_SESSION_KEY, JSON.stringify(normalized));
+  }
+
+  function clearStudySession() {
+    localStorage.removeItem(STUDY_SESSION_KEY);
+  }
+
+  function savedStudySessionForChapter(chapterId) {
+    const saved = loadStudySession();
+    return saved?.chapterId === chapterId ? saved : null;
+  }
+
+  function savedStudySessionForSet(chapterId, setIndex) {
+    const saved = savedStudySessionForChapter(chapterId);
+    return saved?.mode === "set" && saved.setIndex === setIndex ? saved : null;
+  }
+
+  function resumeStudySession(saved = loadStudySession(), autoResume = true) {
+    const normalized = normalizeStudySession(saved);
+    if (!normalized) return false;
+    activeSectionId = normalized.sectionId;
+    localStorage.setItem(ACTIVE_SECTION_KEY, activeSectionId);
+    session = { ...normalized, autoResume };
+    if (session.mode === "set") {
+      progress.lastSet[session.chapterId] = session.setIndex;
+      saveProgress();
+    }
+    route = { name: "quiz" };
+    saveStudySession(autoResume);
+    render();
+    return true;
+  }
+
+  function restoreStudySessionOnLoad() {
+    const saved = loadStudySession();
+    if (!saved?.autoResume || saved.sectionId !== activeSectionId) return false;
+    session = saved;
+    route = { name: "quiz" };
+    return true;
   }
 
   function getAnswer(questionId) {
@@ -131,6 +244,7 @@
   }
 
   function switchSection(sectionId) {
+    if (session?.mode === "set" || session?.mode === "review") saveStudySession(false);
     if (isExamSection(sectionId)) {
       activeSectionId = sectionId;
       localStorage.setItem(ACTIVE_SECTION_KEY, activeSectionId);
@@ -157,6 +271,8 @@
     Object.keys(progress.lastSet).forEach((id) => {
       if (chapterIds.has(id)) delete progress.lastSet[id];
     });
+    const saved = loadStudySession();
+    if (saved && chapterIds.has(saved.chapterId)) clearStudySession();
     saveProgress();
   }
 
@@ -345,6 +461,7 @@
     }
 
     const stats = chapterStats(chapter);
+    const savedSession = savedStudySessionForChapter(chapter.id);
     const reviewIds = chapter.questions
       .filter((question) => getAnswer(question.id).wrongCount > 0)
       .map((question) => question.id);
@@ -353,17 +470,22 @@
       : "";
     const setButtons = Array.from({ length: 10 }, (_, setIndex) => {
       const set = setStats(chapter, setIndex);
+      const savedSet = savedSession?.mode === "set" && savedSession.setIndex === setIndex ? savedSession : null;
       return `
-        <button class="set-button ${set.percent === 100 ? "done" : ""}" data-start-set="${setIndex}">
+        <button class="set-button ${set.percent === 100 ? "done" : ""} ${savedSet ? "in-progress" : ""}" data-start-set="${setIndex}">
           <span class="set-title-row">
             <span class="set-title">Bộ ${setIndex + 1}</span>
             <span class="set-percent">${set.percent}%</span>
           </span>
           ${progressBar(set.percent)}
           <span class="metric-note">${set.correct}/${set.total} câu đã chắc</span>
+          ${savedSet ? `<span class="resume-note">Đang dở: lượt ${savedSet.pointer + 1}/${savedSet.queue.length}</span>` : ""}
         </button>
       `;
     }).join("");
+    const continueButton = savedSession
+      ? `<button class="primary-button" data-resume-study>Tiếp tục lượt ${savedSession.pointer + 1}/${savedSession.queue.length}</button>`
+      : `<button class="primary-button" data-start-set="${progress.lastSet[chapter.id] || 0}">Học tiếp</button>`;
 
     shell(`
       <section class="section-header">
@@ -385,7 +507,7 @@
           <div class="progress-wrap">${progressBar(stats.percent)}</div>
           <div class="toolbar-actions action-stack">
             ${lessonButton}
-            <button class="primary-button" data-start-set="${progress.lastSet[chapter.id] || 0}">Học tiếp</button>
+            ${continueButton}
             <button class="ghost-button" data-review ${reviewIds.length ? "" : "disabled"}>Ôn câu sai</button>
           </div>
         </aside>
@@ -401,6 +523,7 @@
     });
 
     app.querySelector("[data-open-lesson]")?.addEventListener("click", () => startLesson(chapter.id, 0));
+    app.querySelector("[data-resume-study]")?.addEventListener("click", () => resumeStudySession(savedSession));
 
     app.querySelectorAll("[data-start-set]").forEach((button) => {
       button.addEventListener("click", () => startSet(chapter.id, Number(button.dataset.startSet)));
@@ -496,9 +619,17 @@
     });
   }
 
-  function startSet(chapterId, setIndex) {
+  function startSet(chapterId, setIndex, options = {}) {
     const chapter = chapterById(chapterId);
+    if (!chapter) return;
     const safeSetIndex = Math.min(Math.max(setIndex, 0), 9);
+    if (!options.restart) {
+      const saved = savedStudySessionForSet(chapter.id, safeSetIndex);
+      if (saved) {
+        resumeStudySession(saved);
+        return;
+      }
+    }
     const queue = chapter.questions
       .filter((question) => question.setIndex === safeSetIndex)
       .map((question) => question.id);
@@ -516,11 +647,18 @@
       startedIds: [...queue]
     };
     route = { name: "quiz" };
+    saveStudySession(true);
     render();
   }
 
-  function startReview(chapterId, ids) {
+  function startReview(chapterId, ids, options = {}) {
+    const saved = savedStudySessionForChapter(chapterId);
+    if (!options.restart && saved?.mode === "review") {
+      resumeStudySession(saved);
+      return;
+    }
     const queue = ids.slice(0, 20);
+    if (!queue.length) return;
     session = {
       mode: "review",
       chapterId,
@@ -533,6 +671,7 @@
       startedIds: [...queue]
     };
     route = { name: "quiz" };
+    saveStudySession(true);
     render();
   }
 
@@ -544,7 +683,7 @@
 
   function currentQuestion() {
     const chapter = chapterById(session.chapterId);
-    return questionById(chapter, session.queue[session.pointer]);
+    return chapter ? questionById(chapter, session.queue[session.pointer]) : null;
   }
 
   function submitCurrent() {
@@ -555,12 +694,14 @@
     if (!isCorrect) scheduleAgain(question.id);
     session.checked = true;
     session.lastResult = isCorrect;
+    saveStudySession(true);
     render();
   }
 
   function nextQuestion() {
     if (session.pointer >= session.queue.length - 1) {
       route = { name: "finish" };
+      clearStudySession();
       render();
       return;
     }
@@ -568,12 +709,25 @@
     session.selected = null;
     session.checked = false;
     session.lastResult = null;
+    saveStudySession(true);
     render();
   }
 
   function renderQuiz() {
+    if (!session) {
+      route = { name: "chapters" };
+      render();
+      return;
+    }
     const chapter = chapterById(session.chapterId);
     const question = currentQuestion();
+    if (!chapter || !question) {
+      clearStudySession();
+      session = null;
+      route = { name: "chapters" };
+      render();
+      return;
+    }
     const progressInSession = pct(session.pointer + 1, session.queue.length);
     const choices = question.choices.map((choice, index) => {
       const selected = session.selected === index;
@@ -631,6 +785,7 @@
     app.querySelectorAll("[data-choice]").forEach((button) => {
       button.addEventListener("click", () => {
         session.selected = Number(button.dataset.choice);
+        saveStudySession(true);
         render();
       });
     });
@@ -638,6 +793,7 @@
     app.querySelector("[data-submit]")?.addEventListener("click", submitCurrent);
     app.querySelector("[data-skip]")?.addEventListener("click", nextQuestion);
     app.querySelector("[data-exit-quiz]")?.addEventListener("click", () => {
+      saveStudySession(false);
       route = { name: "chapter", chapterId: session.chapterId };
       session = null;
       render();
@@ -682,8 +838,8 @@
 
     app.querySelector("[data-next-set]")?.addEventListener("click", () => startSet(chapter.id, session.setIndex + 1));
     app.querySelector("[data-repeat]")?.addEventListener("click", () => {
-      if (session.mode === "set") startSet(chapter.id, session.setIndex);
-      else startReview(chapter.id, session.startedIds);
+      if (session.mode === "set") startSet(chapter.id, session.setIndex, { restart: true });
+      else startReview(chapter.id, session.startedIds, { restart: true });
     });
     app.querySelector("[data-back-chapter]")?.addEventListener("click", () => {
       route = { name: "chapter", chapterId: chapter.id };
@@ -1036,5 +1192,6 @@
     if (route.name === "finish") renderFinish();
   }
 
+  restoreStudySessionOnLoad();
   render();
 })();
