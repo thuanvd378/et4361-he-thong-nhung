@@ -120,6 +120,10 @@
     const setIndex = value.mode === "set"
       ? Math.min(Math.max(Number.isFinite(setIndexValue) ? Math.trunc(setIndexValue) : 0, 0), 9)
       : null;
+    if (value.mode === "set") {
+      const stats = setStats(chapter, setIndex);
+      if (stats.total > 0 && stats.correct >= stats.total) return null;
+    }
     const startedIds = Array.isArray(value.startedIds)
       ? [...new Set(value.startedIds.filter((id) => validIds.has(id)))]
       : [...new Set(queue)];
@@ -161,7 +165,10 @@
       autoResume,
       savedAt: new Date().toISOString()
     });
-    if (!normalized) return;
+    if (!normalized) {
+      clearStudySession();
+      return;
+    }
     localStorage.setItem(STUDY_SESSION_KEY, JSON.stringify(normalized));
   }
 
