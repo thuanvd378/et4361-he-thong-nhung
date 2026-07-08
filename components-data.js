@@ -255,7 +255,7 @@
     {
       id: "passive-components",
       title: "1. Linh kiện thụ động trong mạch nhúng",
-      subtitle: "Điện trở, tụ điện, cuộn cảm, ferrite bead, dây dẫn, công thức và các lỗi hay gặp.",
+      subtitle: "Điện trở, tụ điện, cuộn cảm, hạt ferrite, dây dẫn, công thức và các lỗi hay gặp.",
       sourceRange: "Mục 1-3 trong tài liệu cấu kiện",
       lessonSlides: [
         makeSlide(
@@ -289,32 +289,32 @@
           }
         ),
         makeSlide(
-          "Tụ decoupling: bình nước nhỏ đặt sát nơi cần dùng",
-          "Local decoupling cấp dòng xung nhanh cho IC, bulk decoupling cấp năng lượng chậm hơn cho cả vùng nguồn.",
+          "Tụ khử nhiễu nguồn: bình nước nhỏ đặt sát nơi cần dùng",
+          "Tụ đặt sát IC cấp dòng xung nhanh; tụ dung lượng lớn hơn cấp năng lượng chậm hơn cho cả vùng nguồn.",
           [
             "Khi mạch số chuyển trạng thái, dòng tức thời có thể tăng rất nhanh. Nếu dòng phải đi từ nguồn xa qua đường mạch dài, điện cảm đường mạch làm nguồn tại IC bị sụt hoặc nhiễu.",
             "Tụ nhỏ đặt sát chân nguồn và mass tạo đường dòng ngắn, điện cảm thấp. Tụ lớn hơn thường đặt gần đầu vào nguồn hoặc cụm tải."
           ],
           {
             image: OFFICIAL.decoupling,
-            imageAlt: "Trang minh họa tụ decoupling local và bulk của Texas Instruments",
-            keyPoints: ["Tụ local đặt sát chân nguồn của IC.", "Đường dòng càng ngắn càng tốt.", "Tụ bulk nạp lại năng lượng cho các tụ local."],
+            imageAlt: "Trang minh họa tụ khử nhiễu nguồn đặt gần IC và tụ dung lượng lớn của Texas Instruments",
+            keyPoints: ["Tụ nhỏ đặt sát chân nguồn của IC.", "Đường dòng càng ngắn càng tốt.", "Tụ lớn nạp lại năng lượng cho các tụ nhỏ đặt gần IC."],
             source: sources.tiDecoupling,
             sourceUrl: "https://www.ti.com/content/dam/videos/external-videos/de-de/9/3816841626001/6313253251112.mp4/subassets/notes-decoupling_capacitors.pdf",
             selfCheck: "Bố cục kiểm tra: hình chính thống rõ, chữ giải thích không đè lên hình."
           }
         ),
         makeSlide(
-          "Tụ thật, cuộn cảm và ferrite bead",
+          "Tụ thật, cuộn cảm và hạt ferrite",
           "Ở tần số cao, linh kiện không còn giống mô hình lý tưởng trong sách cơ bản.",
           [
             "Tụ thật có điện trở và điện cảm ký sinh. Vì vậy trở kháng tụ giảm đến một vùng rồi lại tăng ở tần số cao.",
-            "Cuộn cảm và ferrite bead dùng để xử lý dòng/nhiễu theo tần số, nhưng phải chọn theo dòng bão hòa, tổn hao và dải tần cần chặn."
+            "Cuộn cảm và hạt ferrite dùng để xử lý dòng hoặc nhiễu theo tần số, nhưng phải chọn theo dòng bão hòa, tổn hao và dải tần cần chặn."
           ],
           {
             image: OFFICIAL.practicalCap,
             imageAlt: "Trang minh họa mô hình tụ thực tế của Texas Instruments",
-            keyPoints: ["Tụ có ESR và ESL.", "Ferrite bead không phải linh kiện kỳ diệu chặn mọi nhiễu.", "Dây dẫn, trace và connector cũng có ký sinh."],
+            keyPoints: ["Tụ thật có điện trở và điện cảm ký sinh.", "Hạt ferrite không phải linh kiện kỳ diệu chặn mọi nhiễu.", "Dây dẫn, đường mạch PCB và đầu nối cũng có tham số ký sinh."],
             source: sources.tiDecoupling,
             sourceUrl: "https://www.ti.com/content/dam/videos/external-videos/de-de/9/3816841626001/6313253251112.mp4/subassets/notes-decoupling_capacitors.pdf",
             selfCheck: "Bố cục kiểm tra: hình official đặt bên trái/phía trên, các ý chính ngắn và không dùng quá nhiều ký hiệu."
@@ -322,8 +322,8 @@
         )
       ],
       facts: [
-        f("vai trò linh kiện thụ động", sources.adiPassive, "Trong mạch nhúng, điện trở, tụ và cuộn cảm thường được dùng để làm gì?", "Đặt mức tín hiệu, hạn dòng, lọc nhiễu, tích năng lượng và tạo điều kiện an toàn cho IC xử lý tín hiệu.", "Tài liệu cấu kiện mở đầu bằng vai trò đặt mức, giới hạn dòng, lọc/lưu năng lượng và điều hòa tín hiệu.", [
-          ["Chỉ dùng để trang trí tài liệu mạch.", "Các linh kiện này quyết định hành vi điện của tín hiệu và nguồn."],
+        f("vai trò linh kiện thụ động", sources.adiPassive, "Trong mạch nhúng, điện trở, tụ và cuộn cảm thường được dùng để làm gì?", "Đặt mức tín hiệu, hạn dòng, lọc nhiễu, tích năng lượng và tạo điều kiện an toàn cho IC xử lý tín hiệu.", "Các linh kiện thụ động quyết định cách tín hiệu được đặt mức, cách dòng bị giới hạn, cách nhiễu bị lọc và cách năng lượng được tích tạm thời.", [
+          ["Chỉ dùng để trang trí sơ đồ mạch.", "Các linh kiện này quyết định hành vi điện của tín hiệu và nguồn."],
           ["Chỉ xuất hiện trong mạch công suất lớn, không liên quan GPIO hay ADC.", "Chúng xuất hiện cả ở GPIO, ADC, nguồn, giao tiếp và bảo vệ."],
           ["Không ảnh hưởng kết quả đo hay độ ổn định hệ nhúng.", "Giá trị và vị trí linh kiện có thể làm ADC sai, nguồn nhiễu hoặc giao tiếp lỗi."]
         ]),
@@ -337,20 +337,20 @@
           ["Không cần điện trở vì GPIO tự giới hạn dòng vô hạn.", "GPIO không phải nguồn dòng lý tưởng."],
           ["Công suất điện trở không bao giờ đáng quan tâm.", "Điện trở quá công suất có thể nóng hoặc hỏng."]
         ]),
-        f("pull-up và pull-down", "Tài liệu cấu kiện, mục Pull-up và pull-down", "Điện trở kéo lên/kéo xuống dùng để làm gì?", "Tạo trạng thái mặc định cho tín hiệu khi không có phần tử nào chủ động kéo mức.", "Pull-up kéo về mức cao, pull-down kéo về mức thấp, tránh trạng thái thả nổi.", [
-          ["Để làm chân input trôi tự do cho nhạy hơn.", "Input thả nổi dễ đọc sai do nhiễu."],
-          ["Chỉ dùng trong mạch nguồn buck, không dùng ở GPIO.", "Pull-up/pull-down rất hay dùng ở GPIO, I2C, nút nhấn."],
+        f("pull-up và pull-down", "Tài liệu cấu kiện, mục Pull-up và pull-down", "Điện trở kéo lên/kéo xuống có vai trò gì và cần lưu ý gì khi chọn giá trị?", "Chúng tạo trạng thái mặc định cho tín hiệu khi không có phần tử nào chủ động kéo mức; giá trị điện trở ảnh hưởng đến nhiễu, tốc độ cạnh và dòng tiêu thụ.", "Điện trở kéo lên đưa tín hiệu về mức cao, điện trở kéo xuống đưa tín hiệu về mức thấp. R lớn làm cạnh chậm và nhạy nhiễu hơn; R nhỏ tốn dòng hơn.", [
+          ["Làm cho chân đầu vào trôi tự do để tăng độ nhạy.", "Đầu vào bị thả nổi dễ đọc sai do nhiễu."],
+          ["Chỉ dùng trong mạch nguồn buck, không dùng ở GPIO.", "Điện trở kéo lên/kéo xuống rất hay dùng ở GPIO, I2C và nút nhấn."],
           ["Giá trị điện trở không ảnh hưởng nhiễu hay tốc độ cạnh.", "R lớn làm cạnh chậm và nhạy nhiễu; R nhỏ tốn dòng."]
         ]),
-        f("tụ decoupling", sources.tiDecoupling, "Tụ decoupling local nên đặt ở đâu?", "Đặt sát chân nguồn và chân mass của IC để cung cấp dòng xung nhanh qua đường có điện cảm thấp.", "TI giải thích local decoupling cung cấp dòng tần số cao và cần đường nối thấp điện cảm.", [
+        f("tụ decoupling", sources.tiDecoupling, "Tụ khử nhiễu nguồn đặt gần IC nên đặt ở đâu?", "Đặt sát chân nguồn và chân mass của IC để cung cấp dòng xung nhanh qua đường có điện cảm thấp.", "Tụ đặt gần IC có hiệu quả cao với dòng tần số cao khi đường nối có điện cảm thấp.", [
           ["Đặt càng xa IC càng tốt để đường mạch dài hơn.", "Đường dài tăng điện cảm và giảm tác dụng ở xung nhanh."],
           ["Chỉ cần một tụ lớn ở đầu nguồn cho mọi IC.", "Tụ bulk và tụ local có vai trò khác nhau."],
-          ["Tụ decoupling chỉ dùng cho mạch analog, không dùng mạch số.", "Mạch số tạo dòng xung rất cần decoupling local."]
+          ["Tụ khử nhiễu nguồn chỉ dùng cho mạch analog, không dùng mạch số.", "Mạch số tạo dòng xung rất cần tụ khử nhiễu nguồn đặt gần IC."]
         ]),
         f("tụ thực tế", sources.tiDecoupling, "Vì sao tụ thật không phải lúc nào cũng tốt hơn khi tăng tần số?", "Vì tụ có điện trở và điện cảm ký sinh; sau vùng tự cộng hưởng, trở kháng có thể tăng như một cuộn cảm.", "TI mô tả tụ thực có vùng điện dung, vùng điện trở và vùng cảm kháng do ESR/ESL.", [
           ["Tụ thật luôn có trở kháng giảm mãi khi tần số tăng.", "Đó là mô hình tụ lý tưởng, không phải tụ thực."],
           ["ESR và ESL không tồn tại trong tụ thật.", "Tụ thật luôn có ký sinh."],
-          ["Tự cộng hưởng không liên quan thiết kế nguồn.", "Nó ảnh hưởng hiệu quả lọc/decoupling ở tần số cao."]
+          ["Tự cộng hưởng không liên quan thiết kế nguồn.", "Tự cộng hưởng ảnh hưởng hiệu quả lọc và decoupling ở tần số cao."]
         ]),
         f("lọc RC", "Tài liệu cấu kiện, mục tụ điện và lọc RC", "Tăng hằng số thời gian RC trong mạch lọc thông thấp thường gây đánh đổi gì?", "Giảm nhiễu cao tần tốt hơn nhưng làm tín hiệu đáp ứng chậm hơn.", "Mạch RC có hằng số thời gian càng lớn thì càng làm mượt nhưng càng trễ.", [
           ["Giảm nhiễu mà không bao giờ làm chậm tín hiệu.", "Lọc luôn có đánh đổi giữa băng thông và thời gian đáp ứng."],
@@ -359,15 +359,15 @@
         ]),
         f("cuộn cảm", "Tài liệu cấu kiện, mục cuộn cảm", "Khi ngắt dòng qua tải cảm như relay, điều gì xảy ra?", "Tải cảm tạo điện áp ngược để cố duy trì dòng; cần đường xả năng lượng an toàn.", "Năng lượng trong cuộn cảm không biến mất tức thời, vì vậy cần diode, TVS, snubber hoặc driver bảo vệ.", [
           ["Dòng qua cuộn cảm về 0 ngay lập tức mà không sinh điện áp.", "Cuộn cảm chống thay đổi dòng đột ngột."],
-          ["Điện áp ngược luôn vô hại với transistor.", "Spike có thể phá transistor hoặc MCU."],
+          ["Điện áp ngược luôn vô hại với transistor.", "Xung điện áp ngược có thể làm hỏng transistor hoặc MCU."],
           ["Không cần bảo vệ nếu relay nhỏ.", "Relay nhỏ vẫn là tải cảm và vẫn sinh điện áp ngược."]
         ]),
-        f("ferrite bead", "Tài liệu cấu kiện, mục ferrite bead", "Ferrite bead trong mạch nhúng thường dùng với mục đích gì?", "Tăng trở kháng với nhiễu cao tần trên đường nguồn hoặc tín hiệu, nhưng phải chọn theo dải tần và dòng.", "Ferrite bead không phải linh kiện lọc mọi nhiễu; đặc tính phụ thuộc tần số và dòng bão hòa.", [
-          ["Thay thế được mọi tụ decoupling.", "Ferrite bead thường dùng cùng tụ, không thay toàn bộ decoupling."],
-          ["Không cần quan tâm dòng chạy qua bead.", "Dòng lớn có thể làm bead bão hòa hoặc nóng."],
-          ["Chặn được cả tín hiệu mong muốn ở mọi tần số mà không ảnh hưởng.", "Nó có đặc tuyến theo tần số nên phải chọn đúng."]
+        f("ferrite bead", "Tài liệu cấu kiện, mục ferrite bead", "Hạt ferrite trong mạch nhúng thường dùng với mục đích gì?", "Tăng trở kháng với nhiễu cao tần trên đường nguồn hoặc tín hiệu, nhưng phải chọn theo dải tần và dòng.", "Hạt ferrite không phải linh kiện lọc mọi nhiễu; đặc tính phụ thuộc tần số và dòng bão hòa.", [
+          ["Thay thế được mọi tụ khử nhiễu nguồn.", "Hạt ferrite thường dùng cùng tụ, không thay toàn bộ tụ khử nhiễu nguồn."],
+          ["Không cần quan tâm dòng chạy qua hạt ferrite.", "Dòng lớn có thể làm hạt ferrite bão hòa hoặc nóng."],
+          ["Chặn được cả tín hiệu mong muốn ở mọi tần số mà không ảnh hưởng.", "Hạt ferrite có đặc tuyến theo tần số nên phải chọn đúng."]
         ]),
-        f("trace và connector", "Tài liệu cấu kiện, mục dây dẫn, trace và connector", "Vì sao trace PCB và connector cũng được xem như linh kiện trong thiết kế nhúng?", "Vì chúng có điện trở, điện cảm, điện dung ký sinh và có thể gây sụt áp, ringing, nhiễu hoặc méo tín hiệu.", "Tài liệu nhấn mạnh dây dẫn/trace/connector không lý tưởng, nhất là với dòng xung và tín hiệu nhanh.", [
+        f("đường mạch PCB và đầu nối", "Tài liệu cấu kiện, mục dây dẫn, đường mạch PCB và đầu nối", "Vì sao đường mạch PCB và đầu nối cũng cần được xem như thành phần điện trong thiết kế nhúng?", "Vì chúng có điện trở, điện cảm, điện dung ký sinh và có thể gây sụt áp, dao động cạnh, nhiễu hoặc méo tín hiệu.", "Dây dẫn, đường mạch PCB và đầu nối không lý tưởng; ảnh hưởng của chúng rõ hơn với dòng xung và tín hiệu nhanh.", [
           ["Vì chúng hoàn toàn lý tưởng nên không cần xét.", "Đường mạch thực có ký sinh."],
           ["Chỉ ảnh hưởng vẻ ngoài PCB.", "Chúng ảnh hưởng hành vi điện."],
           ["Chỉ quan trọng trong mạch không dùng điện.", "Mọi mạch điện thực đều chịu ảnh hưởng đường nối."]
@@ -388,32 +388,32 @@
           "Khi điện áp vượt ngưỡng, diode kẹp dẫn dòng để giữ nút tín hiệu trong vùng an toàn hơn. Năng lượng xung phải đi về mass hoặc nguồn theo đường ngắn.",
           "TVS nên đặt gần đầu nối. Nếu đặt xa, dòng xung vẫn đi sâu vào mạch trước khi bị kẹp."
         ], { visualHtml: visual.tvs, keyPoints: ["Zener không thay TVS trong xung năng lượng lớn.", "TVS có điện dung, ảnh hưởng đường tín hiệu nhanh.", "Đường mass của TVS phải ngắn và rộng."], source: sources.stEsd, sourceUrl: "https://www.st.com/resource/en/application_note/an5612-esd-protection-of-stm32-mcus-and-mpus-stmicroelectronics.pdf", selfCheck: "Mũi dòng xung đi xuống mass rõ, không chồng lên khối MCU." }),
-        makeSlide("Diode flyback: đường thoát năng lượng cho tải cảm", "Khi relay hoặc solenoid tắt, dòng cần một đường đi tiếp trong thời gian ngắn.", [
-          "Nếu không có đường hồi tiếp, cuộn dây tạo điện áp rất cao trên transistor. Diode flyback cho dòng đi vòng qua cuộn dây để điện áp không vọt quá lớn.",
-          "Diode flyback bảo vệ tốt nhưng làm relay nhả chậm hơn. Một số mạch dùng TVS hoặc clamp để nhả nhanh hơn."
-        ], { image: OFFICIAL.solenoid, imageAlt: "Trang TI minh họa low-side, high-side và diode freewheel cho solenoid", keyPoints: ["Tải cảm lưu năng lượng.", "Khi tắt cần đường dòng hồi tiếp.", "Tốc độ nhả phụ thuộc cách kẹp áp."], source: sources.tiSolenoid, sourceUrl: "https://www.ti.com/lit/slvae59", selfCheck: "Hình official có mũi dòng freewheel rõ, phần giải thích không phủ lên hình." }),
+        makeSlide("Diode hồi tiếp cho tải cảm: đường thoát năng lượng cho tải cảm", "Khi relay hoặc solenoid tắt, dòng cần một đường đi tiếp trong thời gian ngắn.", [
+          "Nếu không có đường hồi tiếp, cuộn dây tạo điện áp rất cao trên transistor. Diode hồi tiếp cho tải cảm cho dòng đi vòng qua cuộn dây để điện áp không vọt quá lớn.",
+          "Diode hồi tiếp cho tải cảm bảo vệ tốt nhưng làm relay nhả chậm hơn. Một số mạch dùng TVS hoặc phần tử kẹp áp để nhả nhanh hơn."
+        ], { image: OFFICIAL.solenoid, imageAlt: "Trang TI minh họa cấu hình kéo xuống mass, đóng cắt phía nguồn dương và diode hồi tiếp cho solenoid", keyPoints: ["Tải cảm lưu năng lượng.", "Khi tắt cần đường dòng hồi tiếp.", "Tốc độ nhả phụ thuộc cách kẹp áp."], source: sources.tiSolenoid, sourceUrl: "https://www.ti.com/lit/slvae59", selfCheck: "Hình chính thống có mũi dòng hồi tiếp rõ, phần giải thích không phủ lên hình." }),
         makeSlide("Bảo vệ chân IC là bảo vệ theo lớp", "Một linh kiện bảo vệ đơn lẻ hiếm khi đủ cho môi trường xấu.", [
-          "Một đường vào từ ngoài thường cần điện trở nối tiếp, phần tử kẹp xung, lọc nhỏ và bố trí layout đúng.",
-          "Điện trở series giới hạn dòng vào diode clamp. TVS kẹp xung lớn. Tụ nhỏ lọc nhiễu cao tần. Vị trí đặt quyết định hiệu quả."
+          "Một đường vào từ ngoài thường cần điện trở nối tiếp, phần tử kẹp xung, lọc nhỏ và bố trí mạch in đúng.",
+          "Điện trở nối tiếp giới hạn dòng vào diode kẹp áp. TVS kẹp xung lớn. Tụ nhỏ lọc nhiễu cao tần. Vị trí đặt quyết định hiệu quả."
         ], { visualHtml: visual.tvs, keyPoints: ["Bảo vệ phải đặt gần nơi xung đi vào.", "Luôn nghĩ đến đường dòng xung.", "Không đổ dòng lớn vào rail nguồn của MCU."], source: "ST AN5612 và tài liệu cấu kiện, mục bảo vệ GPIO", sourceUrl: "https://www.st.com/resource/en/application_note/an5612-esd-protection-of-stm32-mcus-and-mpus-stmicroelectronics.pdf", selfCheck: "Slide nhắc layout và đường dòng, tránh biến bảo vệ thành danh sách tên linh kiện." })
       ],
       facts: [
-        f("diode PN", "Tài liệu cấu kiện, mục diode PN", "Diode PN cơ bản thường được hiểu như thế nào trong mạch nhúng?", "Nó dẫn thuận theo một chiều và chặn chiều ngược trong giới hạn cho phép.", "Đây là cách hiểu nền tảng trước khi phân biệt Schottky, Zener, TVS và flyback.", [["Dẫn mạnh như dây nối ở mọi chiều.", "Diode có hướng dẫn ưu tiên và giới hạn điện áp/dòng."], ["Không có sụt áp khi dẫn.", "Diode thực có sụt áp thuận."], ["Không bao giờ nóng.", "Dòng và sụt áp tạo công suất nhiệt."]]),
-        f("Schottky", "TI Basics of Ideal Diodes", "Ưu điểm thường gặp của Schottky diode là gì?", "Sụt áp thuận thấp và chuyển mạch nhanh hơn diode PN thông thường.", "Schottky hay dùng trong bảo vệ ngược cực, ORing nguồn và một số mạch tốc độ cao.", [["Dòng rò luôn bằng 0 trong mọi nhiệt độ.", "Schottky thường có dòng rò ngược cao hơn PN."], ["Luôn chịu điện áp ngược cao nhất trong mọi loại diode.", "Phải kiểm tra điện áp ngược định mức."], ["Chỉ dùng làm tụ decoupling.", "Schottky là diode, không phải tụ."]]),
-        f("Zener", "onsemi Zener Theory", "Zener diode thường dùng để làm gì?", "Làm phần tử kẹp hoặc tạo mức tham chiếu đơn giản ở vùng đánh thủng ngược, cho năng lượng không quá lớn.", "Zener hoạt động có kiểm soát ở vùng ngược để giữ điện áp quanh một mức.", [["Thay thế mọi TVS trong xung sét lớn.", "Zener nhỏ không được thiết kế để hấp thụ xung năng lượng lớn như TVS chuyên dụng."], ["Dùng để khuếch đại dòng cho relay.", "Zener không phải transistor driver."], ["Chỉ dẫn thuận, không bao giờ dùng vùng ngược.", "Ứng dụng đặc trưng của Zener là vùng ngược."]]),
-        f("TVS", sources.stEsd, "TVS diode khác Zener nhỏ ở điểm nào trong bảo vệ mạch?", "TVS được thiết kế để kẹp xung quá áp nhanh và chịu năng lượng xung lớn hơn.", "ST AN5612 và TI surge diode đều dùng TVS cho ESD/surge trên đường vào.", [["TVS chỉ là điện trở kéo lên.", "TVS là diode bảo vệ quá áp."], ["TVS càng xa đầu nối càng tốt.", "TVS nên đặt gần nơi xung đi vào."], ["TVS không có điện dung nên không ảnh hưởng tín hiệu nhanh.", "Điện dung TVS là thông số cần kiểm tra."]]),
-        f("diode flyback", sources.tiSolenoid, "Diode flyback song song cuộn relay có nhiệm vụ gì?", "Tạo đường dòng hồi tiếp khi tắt cuộn dây để hạn chế điện áp ngược trên transistor.", "TI solenoid note mô tả dòng cuộn cảm phải freewheel qua diode hoặc đường clamp.", [["Làm relay đóng nhanh hơn trong mọi trường hợp.", "Diode flyback thường làm dòng giảm chậm hơn nên relay nhả chậm hơn."], ["Dùng để đặt mức logic I2C.", "Flyback diode dùng cho tải cảm."], ["Không cần nếu cuộn relay nhỏ.", "Tải cảm nhỏ vẫn sinh xung khi ngắt dòng."]]),
-        f("bảo vệ ngược cực", "TI Basics of Ideal Diodes", "Mạch bảo vệ ngược cực nguồn thường dùng linh kiện nào?", "Có thể dùng diode Schottky, MOSFET ideal diode hoặc IC bảo vệ nguồn tùy yêu cầu sụt áp và công suất.", "Diode đơn giản nhưng sụt áp tạo nhiệt; MOSFET giảm tổn hao hơn.", [["Dùng thẳng dây nối tắt không cần bảo vệ.", "Nối ngược cực có thể phá mạch."], ["Chỉ dùng tụ gốm là đủ.", "Tụ không chặn được cực tính ngược kéo dài."], ["Luôn dùng Zener nhỏ nối tiếp nguồn chính.", "Zener không phải giải pháp nối tiếp nguồn thông dụng cho ngược cực."]]),
-        f("clamp diode nội", "Tài liệu cấu kiện, mục clamp diode nội", "Khi dựa vào diode clamp nội của MCU, điều gì bắt buộc phải chú ý?", "Phải giới hạn dòng bằng điện trở hoặc mạch ngoài và tránh bơm dòng lớn vào rail nguồn.", "Diode clamp nội chỉ chịu dòng nhỏ, không thay thế TVS cho xung năng lượng lớn.", [["Có thể đổ dòng vô hạn vào chân MCU.", "Dòng clamp vượt giới hạn có thể làm hỏng chip hoặc gây latch-up."], ["Không cần quan tâm rail nguồn.", "Dòng clamp có thể đi vào VDD hoặc GND."], ["Diode nội là bảo vệ surge công nghiệp hoàn chỉnh.", "Nó chỉ là bảo vệ nội bộ mức nhỏ."]]),
-        f("ESD", sources.stEsd, "ESD khác quá áp kéo dài ở điểm nào?", "ESD là xung rất nhanh, điện áp cao nhưng thời gian ngắn; quá áp kéo dài có thể thấp hơn nhưng năng lượng lâu hơn.", "Thiết kế bảo vệ phải phân biệt xung nhanh và lỗi kéo dài.", [["ESD luôn là 5 V ổn định trong nhiều phút.", "ESD là xung nhanh."], ["Quá áp kéo dài và ESD luôn dùng cùng một linh kiện duy nhất.", "Có thể cần phối hợp TVS, resistor, fuse, clamp và layout."], ["ESD không liên quan đầu nối ngoài.", "Đầu nối là nơi ESD thường đi vào."]]),
-        f("chọn diode", "Tài liệu cấu kiện, mục chọn diode bảo vệ", "Khi chọn diode bảo vệ đường tín hiệu nhanh cần xem thêm thông số gì ngoài điện áp kẹp?", "Điện dung diode, dòng xung, điện áp làm việc, điện áp kẹp và vị trí layout.", "Điện dung lớn có thể làm méo tín hiệu nhanh, TVS phải đúng dải điện áp và đặt đúng chỗ.", [["Chỉ cần diode to nhất là đúng.", "Diode lớn có thể có điện dung lớn và không phù hợp tín hiệu nhanh."], ["Không cần điện áp làm việc.", "TVS phải không dẫn trong điều kiện tín hiệu bình thường."], ["Không cần dòng xung.", "Dòng xung quyết định khả năng chịu năng lượng."]]),
+        f("diode PN", "Tài liệu cấu kiện, mục diode PN", "Diode PN cơ bản thường được hiểu như thế nào trong mạch nhúng?", "Diode PN dẫn thuận theo một chiều, chặn chiều ngược trong giới hạn cho phép; khi dẫn vẫn có sụt áp và sinh nhiệt theo dòng.", "Đây là cách hiểu nền tảng trước khi phân biệt Schottky, Zener, TVS và hồi tiếp cho tải cảm.", [["Dẫn mạnh như dây nối ở mọi chiều.", "Diode có hướng dẫn ưu tiên và giới hạn điện áp/dòng."], ["Không có sụt áp khi dẫn.", "Diode thực có sụt áp thuận."], ["Không bao giờ nóng.", "Dòng và sụt áp tạo công suất nhiệt."]]),
+        f("Schottky", "TI Basics of Ideal Diodes", "Ưu điểm thường gặp của diode Schottky là gì?", "Sụt áp thuận thấp và chuyển mạch nhanh hơn diode PN thông thường.", "Diode Schottky dùng tiếp giáp kim loại-bán dẫn nên thường có điện áp thuận thấp và ít điện tích phục hồi khi chuyển mạch.", [["Dòng rò luôn bằng 0 trong mọi nhiệt độ.", "Schottky thường có dòng rò ngược cao hơn PN."], ["Luôn chịu điện áp ngược cao nhất trong mọi loại diode.", "Phải kiểm tra điện áp ngược định mức."], ["Chỉ dùng làm tụ decoupling.", "Schottky là diode, không phải tụ."]]),
+        f("Zener", "onsemi Zener Theory", "Diode Zener thường dùng để làm gì?", "Làm phần tử kẹp hoặc tạo mức tham chiếu đơn giản ở vùng đánh thủng ngược, cho năng lượng không quá lớn.", "Zener hoạt động có kiểm soát ở vùng ngược để giữ điện áp quanh một mức.", [["Thay thế mọi TVS trong xung sét lớn.", "Zener nhỏ không được thiết kế để hấp thụ xung năng lượng lớn như TVS chuyên dụng."], ["Dùng để khuếch đại dòng cho relay.", "Zener không phải transistor driver."], ["Chỉ dẫn thuận, không bao giờ dùng vùng ngược.", "Ứng dụng đặc trưng của Zener là vùng ngược."]]),
+        f("TVS", sources.stEsd, "Diode TVS khác Zener nhỏ ở điểm nào trong bảo vệ mạch?", "TVS được thiết kế để kẹp xung quá áp nhanh và chịu năng lượng xung lớn hơn; trên đường tín hiệu nhanh vẫn phải kiểm tra điện dung TVS.", "TVS có khả năng dẫn dòng xung ngắn để hạ điện áp về vùng an toàn hơn, còn Zener nhỏ thường phù hợp hơn với kẹp áp năng lượng thấp.", [["TVS chỉ là điện trở kéo lên.", "TVS là diode bảo vệ quá áp."], ["TVS càng xa đầu nối càng tốt.", "TVS nên đặt gần nơi xung đi vào."], ["TVS không có điện dung nên không ảnh hưởng tín hiệu nhanh.", "Điện dung TVS là thông số cần kiểm tra."]]),
+        f("diode flyback", sources.tiSolenoid, "Diode hồi tiếp song song cuộn relay có nhiệm vụ gì?", "Tạo đường dòng hồi tiếp khi tắt cuộn dây để hạn chế điện áp ngược trên transistor.", "Dòng trong cuộn cảm không mất ngay khi tắt transistor, nên cần diode hoặc đường kẹp áp để dòng hồi tiếp an toàn.", [["Làm relay đóng nhanh hơn trong mọi trường hợp.", "Diode hồi tiếp thường làm dòng giảm chậm hơn nên relay nhả chậm hơn."], ["Dùng để đặt mức logic I2C.", "Diode hồi tiếp dùng cho tải cảm."], ["Không cần nếu cuộn relay nhỏ.", "Tải cảm nhỏ vẫn sinh xung khi ngắt dòng."]]),
+        f("bảo vệ ngược cực", "TI Basics of Ideal Diodes", "Mạch bảo vệ ngược cực nguồn thường dùng linh kiện nào?", "Có thể dùng diode Schottky, MOSFET mắc kiểu diode lý tưởng hoặc IC bảo vệ nguồn tùy yêu cầu sụt áp và công suất.", "Diode đơn giản nhưng sụt áp tạo nhiệt; MOSFET giảm tổn hao hơn.", [["Dùng thẳng dây nối tắt không cần bảo vệ.", "Nối ngược cực có thể phá mạch."], ["Chỉ dùng tụ gốm là đủ.", "Tụ không chặn được cực tính ngược kéo dài."], ["Luôn dùng Zener nhỏ nối tiếp nguồn chính.", "Zener không phải giải pháp nối tiếp nguồn thông dụng cho ngược cực."]]),
+        f("clamp diode nội", "Tài liệu cấu kiện, mục clamp diode nội", "Khi dựa vào diode clamp nội của MCU, điều gì bắt buộc phải chú ý?", "Phải giới hạn dòng bằng điện trở hoặc mạch ngoài và tránh bơm dòng lớn vào rail nguồn.", "Diode clamp nội chỉ chịu dòng nhỏ, không thay thế TVS cho xung năng lượng lớn.", [["Có thể đổ dòng vô hạn vào chân MCU.", "Dòng clamp vượt giới hạn có thể làm hỏng chip hoặc gây latch-up."], ["Không cần quan tâm rail nguồn.", "Dòng clamp có thể đi vào VDD hoặc GND."], ["Diode nội là bảo vệ surge công nghiệp hoàn chỉnh.", "Diode kẹp áp nội chỉ là bảo vệ mức nhỏ bên trong IC."]]),
+        f("ESD", sources.stEsd, "ESD khác quá áp kéo dài ở điểm nào?", "ESD là xung rất nhanh, điện áp cao nhưng thời gian ngắn; quá áp kéo dài có thể thấp hơn nhưng năng lượng lâu hơn.", "Thiết kế bảo vệ phải phân biệt xung nhanh và lỗi kéo dài.", [["ESD luôn là 5 V ổn định trong nhiều phút.", "ESD là xung nhanh."], ["Quá áp kéo dài và ESD luôn dùng cùng một linh kiện duy nhất.", "Có thể cần phối hợp TVS, điện trở, cầu chì, kẹp áp và bố trí mạch in."], ["ESD không liên quan đầu nối ngoài.", "Đầu nối là nơi ESD thường đi vào."]]),
+        f("chọn diode", "Tài liệu cấu kiện, mục chọn diode bảo vệ", "Khi chọn diode bảo vệ đường tín hiệu nhanh cần xem thêm thông số gì ngoài điện áp kẹp?", "Cần kiểm tra điện dung diode, dòng xung, điện áp làm việc, điện áp kẹp và vị trí bố trí mạch in.", "Điện dung lớn có thể làm méo tín hiệu nhanh, TVS phải đúng dải điện áp và đặt đúng chỗ.", [["Chỉ cần diode to nhất là đúng.", "Diode lớn có thể có điện dung lớn và không phù hợp tín hiệu nhanh."], ["Không cần điện áp làm việc.", "TVS phải không dẫn trong điều kiện tín hiệu bình thường."], ["Không cần dòng xung.", "Dòng xung quyết định khả năng chịu năng lượng."]]),
         f("bảo vệ theo lớp", "Tài liệu cấu kiện, mục bảo vệ GPIO", "Vì sao bảo vệ đầu vào thường phối hợp nhiều linh kiện?", "Vì mỗi linh kiện xử lý một phần: hạn dòng, kẹp xung, lọc nhiễu, cách ly hoặc hy sinh trước IC chính.", "Mạch bảo vệ thực tế thường gồm series resistor, TVS/Zener, tụ, diode clamp, buffer hoặc cách ly.", [["Một tầng bảo vệ luôn đủ cho mọi môi trường công nghiệp.", "Môi trường xấu thường cần nhiều tầng."], ["Phối hợp linh kiện chỉ làm bản vẽ mạch đẹp hơn.", "Phối hợp giúp chia năng lượng và giảm rủi ro."], ["Không cần layout nếu đã có TVS.", "Layout quyết định đường dòng xung và hiệu quả bảo vệ."]])
       ]
     },
     {
       id: "transistors-loads",
       title: "3. Transistor và điều khiển tải",
-      subtitle: "BJT, transistor số, MOSFET, gate driver, relay, solenoid, motor và LED công suất.",
+      subtitle: "BJT, transistor số, MOSFET, mạch điều khiển cổng, rơ-le, cuộn hút, động cơ và LED công suất.",
       sourceRange: "Mục 5-7 trong tài liệu cấu kiện",
       lessonSlides: [
         makeSlide("Transistor là công tắc có điều khiển", "GPIO yếu, tải thật mạnh hơn nhiều; transistor đứng giữa hai thế giới đó.", [
@@ -427,57 +427,57 @@
         makeSlide("Low-side và high-side cho tải cảm", "Vị trí transistor quyết định dòng đi qua tải như thế nào.",
           ["Low-side đặt công tắc ở phía mass, dễ dùng với N-MOSFET. High-side đặt công tắc phía nguồn, hữu ích khi tải cần nối mass cố định.",
           "Với solenoid hoặc relay, khi tắt transistor cần đường dòng hồi tiếp. Nếu không, điện áp trên công tắc có thể vọt rất cao."],
-          { image: OFFICIAL.solenoid, imageAlt: "Trang TI minh họa cấu hình low-side, high-side và diode hồi tiếp", keyPoints: ["Low-side thường dễ điều khiển.", "High-side giữ mass tải ổn định hơn.", "Tải cảm luôn cần đường xả năng lượng."], source: sources.tiSolenoid, sourceUrl: "https://www.ti.com/lit/slvae59", selfCheck: "Hình official rõ dòng drive và freewheel, bố cục slide không che phần hình." }),
+          { image: OFFICIAL.solenoid, imageAlt: "Trang TI minh họa cấu hình kéo xuống mass, đóng cắt phía nguồn dương và diode hồi tiếp", keyPoints: ["Kéo xuống mass thường dễ điều khiển.", "Đóng cắt phía nguồn dương giữ mass tải ổn định hơn.", "Tải cảm luôn cần đường xả năng lượng."], source: sources.tiSolenoid, sourceUrl: "https://www.ti.com/lit/slvae59", selfCheck: "Hình chính thống thể hiện rõ dòng điều khiển và đường hồi tiếp dòng, bố cục slide không che phần hình." }),
         makeSlide("Motor và LED công suất không phải tải hiền", "Dòng khởi động, dòng kẹt và nhiệt là ba thứ dễ bị quên.", [
           "Motor có thể ăn dòng rất lớn lúc khởi động hoặc kẹt trục. Driver motor thường cần giới hạn dòng, bảo vệ quá nhiệt và điều khiển chiều.",
           "LED công suất cần điều khiển dòng, không chỉ đặt điện áp. Nếu nhiệt tăng, đặc tính LED đổi và có thể dẫn đến hỏng."
         ], { visualHtml: visual.thermal, keyPoints: ["Motor cần xét dòng kẹt.", "LED công suất cần điều khiển dòng.", "Công suất cuối cùng thành nhiệt."], source: "TI solenoid/motor driver notes và tài liệu cấu kiện", sourceUrl: "https://www.ti.com/lit/slvae59", selfCheck: "Slide tập trung vào nguy cơ thực tế, sơ đồ nhiệt không chồng chữ." })
       ],
       facts: [
-        f("BJT", sources.nexperiaBjt, "BJT khi dùng làm công tắc low-side cần điều kiện gì để tải được kéo tốt?", "Cần đủ dòng base qua điện trở để transistor vào bão hòa theo dòng tải mong muốn.", "BJT là linh kiện điều khiển bằng dòng; base resistor vừa cấp dòng vừa giới hạn dòng từ GPIO.", [["Chỉ cần nối base trực tiếp GPIO không cần điện trở.", "Base-emitter giống mối nối diode, cần hạn dòng."], ["Không cần xét dòng tải.", "Dòng base phải liên hệ với dòng collector."], ["BJT không có sụt áp khi bão hòa.", "BJT bão hòa vẫn có sụt áp và sinh nhiệt."]]),
-        f("NPN low-side", "Tài liệu cấu kiện, mục NPN low-side switch", "Trong mạch NPN low-side, tải thường được mắc ở đâu?", "Tải mắc giữa nguồn dương và collector, emitter nối mass, transistor kéo đầu dưới tải xuống mass.", "Đây là cấu hình phổ biến để GPIO điều khiển tải DC nhỏ/vừa.", [["Tải mắc giữa base và GPIO.", "Base chỉ là chân điều khiển."], ["Emitter nối nguồn dương trong mọi low-side NPN.", "Low-side NPN thường emitter về mass."], ["Không cần mass chung giữa GPIO và transistor.", "Tín hiệu base cần mốc tham chiếu."]]),
-        f("RET", "Nexperia RET devices whitepaper", "Transistor số hay RET tiện ở điểm nào?", "Tích hợp sẵn điện trở base và điện trở kéo, giúp giảm linh kiện ngoài khi điều khiển từ GPIO.", "RET/digital transistor phù hợp mạch đóng cắt đơn giản, nhưng vẫn phải kiểm tra dòng và công suất.", [["Tự động thay thế mọi MOSFET công suất lớn.", "RET thường dùng tải nhỏ/vừa."], ["Không cần đọc định mức dòng.", "Vẫn có giới hạn dòng/công suất."], ["Không liên quan GPIO.", "RET thường dùng để GPIO điều khiển tải hoặc tín hiệu."]]),
-        f("MOSFET", sources.onsemiMosfet, "MOSFET khác BJT ở cách điều khiển chính nào?", "MOSFET chủ yếu được điều khiển bằng điện áp cổng, nhưng cổng có điện dung nên cần dòng nạp/xả khi chuyển mạch.", "MOSFET không cần dòng DC vào cổng như BJT, nhưng cần xét điện tích cổng và tốc độ chuyển mạch.", [["MOSFET luôn cần dòng DC lớn liên tục vào cổng.", "Cổng MOSFET cách điện, dòng DC rất nhỏ."], ["Cổng MOSFET không có điện dung.", "Cổng có điện dung và điện tích cổng."], ["MOSFET không dùng làm công tắc tải.", "MOSFET là công tắc công suất rất phổ biến."]]),
-        f("VGS(th)", sources.onsemiMosfet, "VGS(th) của MOSFET có phải điện áp điều khiển đủ để chạy tải không?", "Không; đó chỉ là ngưỡng bắt đầu dẫn dòng nhỏ, phải xem điện trở khi dẫn tại điện áp cổng thực tế.", "Tài liệu cấu kiện nhấn mạnh không dùng VGS(th) để kết luận MOSFET đã mở tốt.", [["Có, cứ vượt VGS(th) là MOSFET chịu được mọi dòng.", "VGS(th) đo ở dòng rất nhỏ."], ["Không cần xem datasheet.", "Phải xem điều kiện đo điện trở khi dẫn."], ["Chỉ cần tên MOSFET có chữ logic là đủ.", "Vẫn phải kiểm tra thông số tại 2,5 V, 3,3 V hoặc 4,5 V."]]),
+        f("BJT", sources.nexperiaBjt, "BJT khi dùng làm công tắc low-side cần điều kiện gì để tải được kéo tốt?", "Đủ dòng vào base qua điện trở để transistor vào bão hòa theo dòng tải mong muốn.", "BJT là linh kiện điều khiển bằng dòng; điện trở ở cực B vừa cấp dòng vừa giới hạn dòng từ GPIO.", [["Chỉ cần nối base trực tiếp GPIO không cần điện trở.", "Mối nối B-E giống mối nối diode, cần hạn dòng."], ["Không cần xét dòng tải.", "Dòng base phải liên hệ với dòng collector."], ["BJT không có sụt áp khi bão hòa.", "BJT bão hòa vẫn có sụt áp và sinh nhiệt."]]),
+        f("NPN low-side", "Tài liệu cấu kiện, mục NPN low-side switch", "Trong mạch NPN low-side, tải thường được mắc ở đâu?", "Tải mắc từ nguồn dương đến collector, emitter nối mass; mạch GPIO dùng chung mốc mass với transistor để điều khiển base đúng.", "Đây là cấu hình phổ biến để GPIO điều khiển tải DC nhỏ/vừa, đồng thời giữ tín hiệu điều khiển base có mốc tham chiếu rõ.", [["Tải mắc giữa base và GPIO.", "Base chỉ là chân điều khiển."], ["Trong mạch NPN kéo xuống mass, emitter luôn nối nguồn dương.", "Low-side NPN thường emitter về mass."], ["Không cần mass chung giữa GPIO và transistor.", "Tín hiệu base cần mốc tham chiếu."]]),
+        f("RET", "Nexperia RET devices whitepaper", "Transistor số hay RET tiện ở điểm nào?", "Tích hợp sẵn điện trở base và điện trở kéo, giúp giảm linh kiện ngoài khi điều khiển từ GPIO.", "RET, tức transistor số có điện trở tích hợp, phù hợp mạch đóng cắt đơn giản nhưng vẫn phải kiểm tra dòng và công suất.", [["Tự động thay thế mọi MOSFET công suất lớn.", "RET thường dùng tải nhỏ/vừa."], ["Không cần đọc định mức dòng.", "Vẫn có giới hạn dòng/công suất."], ["RET không liên quan đến GPIO nên không dùng cho mạch điều khiển bằng vi điều khiển.", "RET thường dùng để GPIO điều khiển tải hoặc tín hiệu."]]),
+        f("MOSFET", sources.onsemiMosfet, "MOSFET khác BJT ở cách điều khiển chính nào?", "MOSFET có thể dùng làm công tắc tải; nó chủ yếu được điều khiển bằng điện áp cổng, nhưng cổng có điện dung nên cần dòng nạp/xả khi chuyển mạch.", "MOSFET không cần dòng DC vào cổng như BJT, nhưng cần xét điện tích cổng và tốc độ chuyển mạch.", [["MOSFET luôn cần dòng DC lớn liên tục vào cổng.", "Cổng MOSFET cách điện, dòng DC rất nhỏ."], ["Cổng MOSFET không có điện dung.", "Cổng có điện dung và điện tích cổng."], ["MOSFET không dùng làm công tắc tải.", "MOSFET là công tắc công suất rất phổ biến."]]),
+        f("VGS(th)", sources.onsemiMosfet, "VGS(th) của MOSFET có phải điện áp điều khiển đủ để chạy tải không?", "VGS(th) chỉ là ngưỡng bắt đầu dẫn dòng nhỏ; để chạy tải phải xem điện trở khi dẫn tại điện áp cổng thực tế.", "VGS(th) thường được đo ở dòng rất nhỏ, nên không bảo đảm MOSFET đã có điện trở khi dẫn đủ thấp cho dòng tải thực.", [["Có, cứ vượt VGS(th) là MOSFET chịu được mọi dòng.", "VGS(th) đo ở dòng rất nhỏ."], ["Không cần xem datasheet.", "Phải xem điều kiện đo điện trở khi dẫn."], ["Chỉ cần tên MOSFET có chữ logic là đủ.", "Vẫn phải kiểm tra thông số tại 2,5 V, 3,3 V hoặc 4,5 V."]]),
         f("tổn hao MOSFET", sources.onsemiMosfet, "Tổn hao dẫn của MOSFET khi bật phụ thuộc mạnh vào yếu tố nào?", "Dòng tải và điện trở khi dẫn; dòng tăng làm nhiệt tăng rất nhanh.", "Tổn hao dẫn xấp xỉ theo bình phương dòng nhân điện trở khi dẫn.", [["Chỉ phụ thuộc màu vỏ MOSFET.", "Nhiệt phụ thuộc dòng, điện trở, package và tản nhiệt."], ["Dòng tăng không làm nóng MOSFET.", "Dòng tải tạo công suất."], ["Điện trở khi dẫn không cần quan tâm.", "Đây là thông số chính khi MOSFET làm công tắc."]]),
-        f("low-side MOSFET", "Tài liệu cấu kiện, mục Low-side N-MOSFET", "Vì sao N-MOSFET low-side dễ điều khiển bằng GPIO?", "Source nối mass nên điện áp cổng so với source gần bằng mức GPIO, dễ đạt điều kiện mở.", "Low-side N-MOSFET là cấu hình đơn giản cho tải DC khi cho phép tải nối lên nguồn.", [["Vì source luôn bay theo điện áp nguồn cao.", "Đó là khó khăn của high-side N-MOSFET."], ["Vì không cần mass tham chiếu.", "GPIO và source cần mốc chung."], ["Vì MOSFET không có giới hạn dòng.", "Vẫn cần kiểm tra dòng, nhiệt và bảo vệ."]]),
-        f("high-side switch", "Tài liệu cấu kiện, mục High-side switch", "High-side switch hữu ích khi nào?", "Khi muốn đóng cắt phía nguồn dương để tải vẫn có mass cố định hoặc để bảo vệ phân phối nguồn.", "High-side có thể dùng P-MOSFET, N-MOSFET kèm driver hoặc IC high-side chuyên dụng.", [["Khi bắt buộc source nối mass như low-side.", "High-side nằm phía nguồn."], ["Khi không cần bảo vệ nguồn.", "High-side switch thường tích hợp bảo vệ."], ["Khi mọi tải đều phải floating mass.", "Một lợi ích là giữ mass tải cố định."]]),
+        f("low-side MOSFET", "Tài liệu cấu kiện, mục Low-side N-MOSFET", "Vì sao N-MOSFET low-side dễ điều khiển bằng GPIO?", "Cực S nối mass nên điện áp VGS gần bằng mức GPIO, dễ đạt điều kiện mở.", "Cấu hình N-MOSFET kéo xuống mass phù hợp với tải DC khi tải có thể mắc lên nguồn dương.", [["Vì cực S luôn nâng theo điện áp nguồn như cấu hình đóng cắt phía nguồn dương.", "Đó là khó khăn của N-MOSFET đóng cắt phía nguồn dương, không phải cấu hình kéo xuống mass."], ["Vì không cần mass tham chiếu.", "GPIO và source cần mốc chung."], ["Vì MOSFET không có giới hạn dòng.", "Vẫn cần kiểm tra dòng, nhiệt và bảo vệ."]]),
+        f("high-side switch", "Tài liệu cấu kiện, mục High-side switch", "High-side switch hữu ích khi nào?", "Khi muốn đóng cắt phía nguồn dương để tải vẫn có mass cố định hoặc để bảo vệ phân phối nguồn.", "High-side có thể dùng P-MOSFET, N-MOSFET kèm driver hoặc IC high-side chuyên dụng.", [["Khi bắt buộc source nối mass như low-side.", "High-side nằm phía nguồn."], ["Khi không cần bảo vệ nguồn.", "High-side switch thường tích hợp bảo vệ."], ["Khi tải không được giữ mass cố định.", "Một lợi ích là giữ mass tải cố định."]]),
         f("gate driver", "TI Gate Driver Fundamentals", "Gate driver MOSFET giúp gì?", "Nạp/xả cổng nhanh, tạo mức điều khiển phù hợp và giảm tổn hao chuyển mạch trong tải lớn hoặc tần số cao.", "GPIO có dòng yếu; gate lớn hoặc chuyển mạch nhanh cần driver.", [["Luôn làm MOSFET lạnh dù chọn sai linh kiện.", "Driver giúp chuyển mạch nhưng không thay thế chọn MOSFET đúng."], ["Chỉ dùng để đọc ADC.", "Gate driver điều khiển công tắc công suất."], ["Không liên quan điện tích cổng.", "Điện tích cổng là lý do chính cần driver."]]),
         f("relay solenoid", sources.tiSolenoid, "Tải relay/solenoid cần linh kiện bảo vệ nào khi đóng cắt bằng transistor?", "Cần diode flyback, TVS, clamp hoặc driver tích hợp để xử lý năng lượng cuộn dây.", "Tải cảm sinh điện áp ngược khi ngắt dòng.", [["Không cần gì vì cuộn dây là tải thuần trở.", "Cuộn dây là tải cảm."], ["Chỉ cần tăng GPIO drive.", "Vấn đề là năng lượng hồi tiếp khi tắt."], ["Chỉ cần điện trở pull-up I2C.", "Pull-up không xử lý năng lượng cuộn cảm."]]),
-        f("motor DC", "Tài liệu cấu kiện, mục DC motor", "Vì sao motor DC thường cần driver chuyên dụng hơn là GPIO kéo trực tiếp?", "Vì motor có dòng khởi động/kẹt lớn, sinh nhiễu và thường cần điều khiển chiều, tốc độ, bảo vệ dòng/nhiệt.", "Motor là tải động và cảm, không phải LED nhỏ.", [["GPIO có thể kéo trực tiếp mọi motor.", "GPIO không chịu được dòng motor."], ["Dòng kẹt motor luôn bằng 0.", "Dòng kẹt thường rất lớn."], ["Motor không sinh nhiễu.", "Chổi than và dòng xung gây nhiễu đáng kể."]]),
-        f("LED công suất", "Tài liệu cấu kiện, mục LED công suất", "LED công suất nên điều khiển theo đại lượng nào?", "Theo dòng điện, đồng thời phải quản lý nhiệt.", "Điện áp thuận LED thay đổi theo nhiệt độ; điều khiển điện áp đơn giản có thể làm dòng mất kiểm soát.", [["Theo điện áp cố định bất kể dòng.", "LED là linh kiện nhạy dòng."], ["Không cần tản nhiệt.", "LED công suất có nhiệt đáng kể."], ["Chỉ cần mắc trực tiếp vào GPIO.", "GPIO không cấp được dòng LED công suất."]])
+        f("motor DC", "Tài liệu cấu kiện, mục DC motor", "Vì sao motor DC thường cần driver chuyên dụng hơn là GPIO kéo trực tiếp?", "Vì động cơ DC có dòng khởi động hoặc dòng kẹt lớn, dễ sinh nhiễu và thường cần điều khiển chiều, tốc độ, bảo vệ dòng hoặc nhiệt.", "Động cơ là tải động và tải cảm, không phải LED nhỏ có thể kéo trực tiếp từ GPIO.", [["GPIO có thể kéo trực tiếp mọi động cơ.", "GPIO không chịu được dòng động cơ."], ["Dòng kẹt động cơ luôn bằng 0.", "Dòng kẹt thường rất lớn."], ["Động cơ không sinh nhiễu.", "Chổi than và dòng xung gây nhiễu đáng kể."]]),
+        f("LED công suất", "Tài liệu cấu kiện, mục LED công suất", "LED công suất nên điều khiển theo đại lượng nào?", "LED công suất nên được điều khiển theo dòng điện, đồng thời phải quản lý nhiệt.", "Điện áp thuận LED thay đổi theo nhiệt độ; điều khiển điện áp đơn giản có thể làm dòng mất kiểm soát.", [["Theo điện áp cố định bất kể dòng.", "LED là linh kiện nhạy dòng."], ["Không cần tản nhiệt.", "LED công suất có nhiệt đáng kể."], ["Chỉ cần mắc trực tiếp vào GPIO.", "GPIO không cấp được dòng LED công suất."]])
       ]
     },
     {
       id: "gpio-level-isolation",
       title: "4. GPIO, dịch mức và cách ly",
-      subtitle: "Pull-up, debounce, open-drain, I2C, level shifting, optocoupler và digital isolator.",
+      subtitle: "Điện trở kéo lên, chống dội phím, ngõ ra cực máng hở, I2C, chuyển mức logic và cách ly số.",
       sourceRange: "Mục 8-9 và 15 trong tài liệu cấu kiện",
       lessonSlides: [
-        makeSlide("GPIO cần trạng thái xác định", "Một chân đầu vào bỏ trống giống một cánh cửa không khóa trước nhiễu.", ["Pull-up hoặc pull-down tạo trạng thái mặc định. Với nút nhấn, cần thêm chống nảy để một lần nhấn không bị đọc thành nhiều lần.", "Điện trở series có thể giới hạn dòng lỗi, nhưng cũng làm cạnh tín hiệu chậm hơn nếu kết hợp với điện dung."], { visualHtml: visual.gpio, keyPoints: ["Không để input thả nổi.", "Nút nhấn cần chống nảy.", "Series resistor là bảo vệ đơn giản nhưng có đánh đổi."], source: "Tài liệu cấu kiện, mục GPIO", sourceUrl: "docs/cau-kien-dien-tu-ung-dung-he-thong-nhung.md", selfCheck: "Hình pull-up đọc nút nhấn có trạng thái hở/nhấn rõ, không lẫn với output." }),
+        makeSlide("GPIO cần trạng thái xác định", "Một chân đầu vào bỏ trống giống một cánh cửa không khóa trước nhiễu.", ["Điện trở kéo lên hoặc kéo xuống tạo trạng thái mặc định. Với nút nhấn, cần thêm chống nảy để một lần nhấn không bị đọc thành nhiều lần.", "Điện trở nối tiếp có thể giới hạn dòng lỗi, nhưng cũng làm cạnh tín hiệu chậm hơn nếu kết hợp với điện dung."], { visualHtml: visual.gpio, keyPoints: ["Không để đầu vào thả nổi.", "Nút nhấn cần chống nảy.", "Điện trở nối tiếp là bảo vệ đơn giản nhưng có đánh đổi."], source: "Tài liệu cấu kiện, mục GPIO", sourceUrl: "docs/cau-kien-dien-tu-ung-dung-he-thong-nhung.md", selfCheck: "Hình điện trở kéo lên đọc nút nhấn có trạng thái hở/nhấn rõ, không lẫn với đầu ra." }),
         makeSlide("Open-drain và I2C", "Thiết bị chỉ kéo xuống, còn mức cao do điện trở kéo lên tạo ra.", ["Cơ chế open-drain cho phép nhiều thiết bị cùng chia sẻ một đường. Nếu ai kéo xuống, đường ở mức thấp.", "Điện trở kéo lên quá lớn làm cạnh lên chậm. Quá nhỏ làm thiết bị phải hút dòng lớn khi kéo xuống."], { visualHtml: visual.i2c, keyPoints: ["I2C cần hai điện trở kéo lên.", "Điện dung bus làm cạnh lên chậm.", "Chọn R theo tốc độ, điện áp và dòng kéo xuống."], source: sources.nxpI2c, sourceUrl: "https://www.nxp.com/documents/user_manual/UM10204.pdf", selfCheck: "Sơ đồ hai dây và ba thiết bị rõ, chú thích không dùng ký hiệu phức tạp." }),
         makeSlide("Dịch mức không chỉ là chia áp", "Một số tín hiệu một chiều có thể dùng chia áp, nhưng bus hai chiều cần cách khác.", ["Nếu tín hiệu chỉ đi một chiều và tốc độ thấp, cầu phân áp có thể hạ mức áp. Nhưng với I2C, hai chiều và open-drain, thường dùng mạch MOSFET dịch mức hoặc IC chuyên dụng.", "Dịch mức sai có thể làm chân IC quá áp hoặc làm cạnh tín hiệu quá chậm."], { visualHtml: visual.i2c, keyPoints: ["Chia áp chỉ phù hợp một số tín hiệu một chiều.", "Bus hai chiều cần mạch phù hợp.", "Luôn kiểm tra ngưỡng logic hai phía."], source: "Tài liệu cấu kiện, mục level shifting", sourceUrl: "docs/cau-kien-dien-tu-ung-dung-he-thong-nhung.md", selfCheck: "Slide nhấn điều kiện dùng, tránh nói chia áp là lời giải cho mọi trường hợp." }),
         makeSlide("Cách ly: truyền thông tin nhưng không nối điện trực tiếp", "Optocoupler và digital isolator dùng khi hai miền mạch không nên nối mass trực tiếp.", ["Optocoupler truyền bằng ánh sáng, dễ hiểu và cách ly tốt nhưng thường chậm và phụ thuộc tỉ số truyền dòng.", "Digital isolator nhanh hơn, thường dùng điện dung, từ hoặc biến áp vi mô để truyền tín hiệu qua hàng rào cách ly."], { visualHtml: visual.roles, keyPoints: ["Cách ly giúp chống chênh lệch mass và điện áp nguy hiểm.", "Optocoupler cần xét dòng LED và tỉ số truyền.", "Digital isolator phù hợp tốc độ cao hơn."], source: "Vishay Optocoupler CTR và tài liệu cấu kiện", sourceUrl: "https://www.vishay.com/docs/83706/applicationnote45.pdf", selfCheck: "Slide giải thích nguyên lý bằng lời, không trộn quá nhiều thuật ngữ tiếng Anh." })
       ],
       facts: [
-        f("floating input", "Tài liệu cấu kiện, mục bảo vệ GPIO", "Vì sao không nên để input GPIO bị thả nổi?", "Vì chân có trở kháng cao nên dễ bị nhiễu kéo lên/xuống ngẫu nhiên, làm phần mềm đọc sai.", "Pull-up hoặc pull-down tạo trạng thái mặc định.", [["Vì floating luôn đọc chính xác hơn.", "Floating dễ sai."], ["Vì floating làm giảm nhiễu tuyệt đối.", "Trở kháng cao thường nhạy nhiễu."], ["Vì chỉ output mới cần mức logic.", "Input cũng cần mức xác định."]]),
-        f("series resistor", "Tài liệu cấu kiện, mục điện trở series trên GPIO", "Điện trở series trên GPIO có tác dụng chính nào?", "Giới hạn dòng lỗi và giảm ringing, nhưng có thể làm chậm cạnh tín hiệu.", "Series resistor phối hợp với điện dung tạo RC.", [["Tăng dòng lỗi vào MCU.", "Nó giới hạn dòng."], ["Không có bất kỳ đánh đổi nào.", "Nó có thể làm chậm cạnh."], ["Chỉ dùng để đặt địa chỉ I2C.", "Đó không phải tác dụng chính."]]),
-        f("debounce", "Tài liệu cấu kiện, mục debounce nút nhấn", "Chống nảy nút nhấn nhằm tránh lỗi gì?", "Một lần nhấn bị đọc thành nhiều lần do tiếp điểm cơ khí rung.", "Debounce có thể làm bằng RC, phần mềm hoặc Schmitt trigger.", [["Làm nút nhấn tăng điện áp nguồn.", "Debounce xử lý dao động tiếp điểm."], ["Tăng tốc độ I2C.", "Không liên quan I2C."], ["Thay thế mọi bảo vệ ESD.", "Debounce không chịu xung ESD."]]),
-        f("open-drain", "Tài liệu cấu kiện, mục open-drain", "Open-drain output khác push-pull thế nào?", "Open-drain chỉ kéo xuống thấp; mức cao cần điện trở kéo lên hoặc nguồn ngoài.", "Cơ chế này cho phép nhiều thiết bị chia sẻ đường bus.", [["Open-drain chủ động kéo cả cao và thấp.", "Đó là push-pull."], ["Không cần pull-up.", "Khi nhả bus cần pull-up tạo mức cao."], ["Không dùng trong I2C.", "I2C dùng open-drain/open-collector."]]),
-        f("I2C pull-up", sources.nxpI2c, "Điện trở kéo lên I2C quá lớn gây hậu quả gì?", "Cạnh lên chậm do điện dung bus, có thể vi phạm thời gian rise time.", "NXP UM10204 đưa yêu cầu thời gian lên và liên hệ với điện dung bus.", [["Cạnh lên nhanh vô hạn.", "R lớn làm RC lớn."], ["Dòng sink tăng quá mức khi bus thấp.", "Dòng sink lớn hơn là hậu quả R quá nhỏ."], ["Không ảnh hưởng truyền thông.", "Có thể gây lỗi thời gian bus."]]),
-        f("I2C pull-up nhỏ", sources.nxpI2c, "Điện trở kéo lên I2C quá nhỏ gây rủi ro gì?", "Khi bus ở mức thấp, thiết bị phải hút dòng lớn hơn, có thể vượt khả năng và tăng công suất.", "Chọn R phải cân bằng rise time và dòng mức thấp.", [["Cạnh lên luôn chậm hơn.", "R nhỏ làm cạnh lên nhanh hơn nhưng dòng thấp lớn."], ["Không có dòng khi kéo xuống.", "Có dòng từ nguồn qua R vào transistor kéo xuống."], ["Không cần kiểm tra VOL.", "VOL và dòng sink là thông số cần xem."]]),
-        f("level shifting", "Tài liệu cấu kiện, mục level shifting", "Cầu phân áp dịch mức phù hợp nhất với loại tín hiệu nào?", "Tín hiệu một chiều, tốc độ không quá cao, đi từ mức cao xuống mức thấp hơn.", "Cầu phân áp không phù hợp chung cho bus hai chiều hoặc tín hiệu cần cạnh rất nhanh.", [["Bus hai chiều tốc độ cao trong mọi trường hợp.", "Cần mạch dịch mức phù hợp hơn."], ["Đường nguồn công suất lớn.", "Cầu phân áp không cấp nguồn tải."], ["Mọi tín hiệu không cần xét trở kháng.", "Trở kháng phân áp ảnh hưởng tốc độ và tải."]]),
-        f("MOSFET level shifter", "Tài liệu cấu kiện, mục level shifting", "MOSFET dịch mức hai chiều thường gặp ở bus nào?", "Bus open-drain như I2C.", "Mạch MOSFET nhỏ cho phép hai phía điện áp khác nhau cùng kéo đường xuống.", [["RS-232 điện áp âm/dương trực tiếp.", "RS-232 cần transceiver chuyên dụng."], ["Nguồn motor công suất lớn.", "Dịch mức logic không phải driver motor."], ["Đường AC lưới.", "Không dùng mạch dịch mức logic cho lưới AC."]]),
-        f("optocoupler", "Vishay Optocoupler CTR", "Thông số CTR của optocoupler nói lên điều gì?", "Tỉ lệ giữa dòng transistor đầu ra và dòng LED đầu vào trong điều kiện xác định.", "CTR thay đổi theo dòng, nhiệt độ và tuổi thọ nên cần thiết kế dư.", [["Điện áp nguồn tối đa của MCU.", "CTR là tỉ số truyền dòng quang."], ["Tốc độ clock I2C.", "Không phải tốc độ bus."], ["Điện dung tụ decoupling.", "Không liên quan tụ."]]),
+        f("floating input", "Tài liệu cấu kiện, mục bảo vệ GPIO", "Vì sao không nên để GPIO đầu vào bị thả nổi?", "Vì chân có trở kháng cao nên dễ bị nhiễu kéo lên/xuống ngẫu nhiên, làm phần mềm đọc sai.", "Điện trở kéo lên hoặc kéo xuống tạo trạng thái mặc định.", [["Vì đầu vào thả nổi luôn đọc chính xác hơn.", "Đầu vào thả nổi dễ đọc sai."], ["Vì đầu vào thả nổi làm giảm nhiễu tuyệt đối.", "Trở kháng cao thường nhạy nhiễu."], ["Vì chỉ đầu ra mới cần mức logic.", "Đầu vào cũng cần mức xác định."]]),
+        f("series resistor", "Tài liệu cấu kiện, mục điện trở series trên GPIO", "Điện trở series trên GPIO có tác dụng chính nào?", "Điện trở nối tiếp giúp giới hạn dòng lỗi và giảm dao động cạnh, nhưng có thể làm chậm cạnh tín hiệu.", "Điện trở nối tiếp phối hợp với điện dung tạo mạch RC, nên có cả tác dụng bảo vệ lẫn đánh đổi về tốc độ cạnh.", [["Điện trở nối tiếp làm tăng dòng lỗi vào MCU.", "Điện trở nối tiếp giúp giới hạn dòng lỗi."], ["Điện trở nối tiếp không có bất kỳ đánh đổi nào.", "Điện trở nối tiếp có thể làm chậm cạnh tín hiệu."], ["Điện trở nối tiếp chỉ dùng để đặt địa chỉ I2C.", "Điện trở nối tiếp chủ yếu giới hạn dòng lỗi và giảm dao động cạnh, không dùng để đặt địa chỉ I2C."]]),
+        f("debounce", "Tài liệu cấu kiện, mục debounce nút nhấn", "Chống nảy nút nhấn nhằm tránh lỗi gì?", "Chống nảy nút nhấn giúp tránh việc một lần nhấn bị đọc thành nhiều lần do tiếp điểm cơ khí rung.", "Chống dội phím có thể làm bằng RC, phần mềm hoặc Schmitt trigger.", [["Chống nảy nút nhấn làm tăng điện áp nguồn.", "Chống dội phím xử lý dao động tiếp điểm."], ["Chống nảy nút nhấn làm tăng tốc độ I2C.", "Chống dội phím không liên quan I2C."], ["Chống nảy nút nhấn thay thế mọi bảo vệ ESD.", "Chống dội phím không chịu xung ESD."]]),
+        f("open-drain", "Tài liệu cấu kiện, mục open-drain", "Ngõ ra cực máng hở khác ngõ ra đẩy-kéo thế nào?", "Ngõ ra cực máng hở chỉ kéo xuống thấp; mức cao cần điện trở kéo lên hoặc nguồn ngoài.", "Cơ chế này cho phép nhiều thiết bị chia sẻ cùng một đường bus.", [["Ngõ ra cực máng hở chủ động kéo cả cao và thấp.", "Đó là cơ chế đẩy-kéo."], ["Không cần điện trở kéo lên.", "Khi nhả bus cần điện trở kéo lên tạo mức cao."], ["Không dùng trong I2C.", "I2C dùng cơ chế cực máng hở hoặc cực góp hở."]]),
+        f("I2C pull-up", sources.nxpI2c, "Điện trở kéo lên I2C quá lớn gây hậu quả gì?", "Cạnh lên chậm do điện dung bus, có thể vi phạm yêu cầu về thời gian cạnh lên.", "Điện dung bus và điện trở kéo lên tạo hằng số thời gian RC, nên điện trở quá lớn làm mức cao lên chậm.", [["Cạnh lên nhanh vô hạn.", "Điện trở kéo lên càng lớn thì hằng số thời gian RC càng lớn, vì vậy cạnh lên chậm hơn chứ không nhanh hơn."], ["Dòng hút tăng quá mức khi bus thấp.", "Dòng hút lớn hơn là hậu quả của điện trở kéo lên quá nhỏ."], ["Không ảnh hưởng truyền thông.", "Có thể gây lỗi thời gian bus."]]),
+        f("I2C pull-up nhỏ", sources.nxpI2c, "Điện trở kéo lên I2C quá nhỏ gây rủi ro gì?", "Khi bus ở mức thấp, thiết bị phải hút dòng lớn hơn, có thể vượt khả năng và tăng công suất.", "Chọn điện trở kéo lên phải cân bằng giữa thời gian cạnh lên và dòng khi bus ở mức thấp.", [["Cạnh lên luôn chậm hơn.", "R nhỏ làm cạnh lên nhanh hơn nhưng dòng mức thấp lớn."], ["Không có dòng khi kéo xuống.", "Có dòng từ nguồn qua điện trở kéo lên vào transistor kéo xuống."], ["Không cần kiểm tra điện áp mức thấp VOL.", "VOL và dòng hút là thông số cần xem."]]),
+        f("level shifting", "Tài liệu cấu kiện, mục level shifting", "Cầu phân áp dịch mức phù hợp nhất với loại tín hiệu nào?", "Cầu phân áp dịch mức phù hợp với tín hiệu một chiều, tốc độ không quá cao, đi từ mức cao xuống mức thấp hơn.", "Cầu phân áp không phù hợp chung cho bus hai chiều hoặc tín hiệu cần cạnh rất nhanh.", [["Cầu phân áp dịch mức phù hợp cho bus hai chiều tốc độ cao trong mọi trường hợp.", "Bus hai chiều thường cần mạch dịch mức phù hợp hơn."], ["Cầu phân áp dịch mức phù hợp để cấp nguồn cho tải công suất lớn.", "Cầu phân áp không cấp nguồn tải."], ["Cầu phân áp dịch mức phù hợp cho mọi tín hiệu mà không cần xét trở kháng.", "Trở kháng phân áp ảnh hưởng tốc độ và tải."]]),
+        f("mạch MOSFET dịch mức", "Tài liệu cấu kiện, mục level shifting", "MOSFET dịch mức hai chiều thường gặp ở bus nào?", "MOSFET dịch mức hai chiều thường gặp ở bus ngõ ra cực máng hở như I2C.", "Mạch MOSFET nhỏ cho phép hai phía điện áp khác nhau cùng kéo đường xuống.", [["MOSFET dịch mức hai chiều dùng trực tiếp cho RS-232 điện áp âm/dương.", "RS-232 cần bộ chuyển đổi giao tiếp chuyên dụng."], ["MOSFET dịch mức hai chiều dùng để cấp nguồn cho động cơ công suất lớn.", "Dịch mức logic không phải mạch điều khiển động cơ."], ["MOSFET dịch mức hai chiều dùng trực tiếp cho đường điện lưới AC.", "Không dùng mạch dịch mức logic cho lưới AC."]]),
+        f("optocoupler", "Vishay Optocoupler CTR", "Thông số CTR của optocoupler nói lên điều gì?", "Tỉ lệ giữa dòng transistor đầu ra và dòng LED đầu vào trong điều kiện xác định.", "CTR thay đổi theo dòng, nhiệt độ và tuổi thọ nên cần thiết kế dư.", [["Điện áp nguồn tối đa của MCU.", "CTR là tỉ số truyền dòng quang."], ["Tốc độ clock I2C.", "CTR không phải tốc độ bus."], ["Điện dung tụ decoupling.", "CTR không liên quan đến tụ."]]),
         f("digital isolator", "Tài liệu cấu kiện, mục digital isolator", "Digital isolator thường được chọn thay optocoupler khi nào?", "Khi cần cách ly nhưng tốc độ cao hơn, độ trễ nhỏ hơn hoặc đặc tính ổn định hơn.", "Digital isolator dùng cơ chế điện dung/từ/biến áp vi mô thay vì LED quang chậm.", [["Khi chỉ cần một diode flyback.", "Đó là bảo vệ tải cảm."], ["Khi muốn nối mass trực tiếp.", "Mục tiêu là cách ly."], ["Khi tốc độ thấp và giá rẻ là ưu tiên duy nhất.", "Optocoupler thường đơn giản/rẻ hơn cho tốc độ thấp."]]),
-        f("buffer", "Tài liệu cấu kiện, mục bảo vệ GPIO", "IC đệm có thể giúp gì cho tín hiệu số?", "Tăng fan-out, định dạng lại mức logic và đôi khi đóng vai trò phần tử hy sinh trước IC chính.", "Buffer không thay thế TVS cho xung năng lượng lớn.", [["Chịu mọi xung surge công nghiệp thay TVS.", "Tác dụng bảo vệ có giới hạn."], ["Luôn biến input thành analog.", "Buffer số giữ logic số."], ["Không ảnh hưởng khả năng tải.", "Fan-out là một lý do dùng buffer."]]),
-        f("cách ly mass", "Tài liệu cấu kiện, mục cách ly", "Khi nào cách ly tín hiệu đặc biệt có ích?", "Khi hai miền mạch có chênh lệch mass, nhiễu lớn hoặc điện áp nguy hiểm.", "Cách ly truyền thông tin mà không nối điện trực tiếp.", [["Khi hai mạch đã chung mass sạch và tốc độ rất thấp, luôn bắt buộc.", "Không phải lúc nào cũng cần cách ly."], ["Khi muốn tăng dòng tải motor.", "Cách ly không thay driver công suất."], ["Khi bỏ qua an toàn điện.", "Cách ly thường phục vụ an toàn và chống nhiễu."]])
+        f("buffer", "Tài liệu cấu kiện, mục bảo vệ GPIO", "IC đệm có thể giúp gì cho tín hiệu số?", "Tăng khả năng kéo nhiều đầu vào, định dạng lại mức logic và đôi khi đóng vai trò phần tử hy sinh trước IC chính.", "Mạch đệm không thay thế TVS cho xung năng lượng lớn.", [["Chịu mọi xung quá áp công nghiệp thay TVS.", "Tác dụng bảo vệ có giới hạn."], ["Luôn biến đầu vào thành tín hiệu tương tự.", "Mạch đệm số giữ logic số."], ["Không ảnh hưởng khả năng tải.", "Khả năng kéo nhiều đầu vào là một lý do dùng mạch đệm."]]),
+        f("cách ly mass", "Tài liệu cấu kiện, mục cách ly", "Khi nào cách ly tín hiệu đặc biệt có ích?", "Cách ly tín hiệu đặc biệt có ích khi hai miền mạch có chênh lệch mass, nhiễu lớn hoặc điện áp nguy hiểm.", "Cách ly truyền thông tin mà không nối điện trực tiếp.", [["Cách ly tín hiệu luôn bắt buộc khi hai mạch đã chung mass sạch và tốc độ rất thấp.", "Không phải lúc nào cũng cần cách ly."], ["Cách ly tín hiệu dùng để tăng dòng tải động cơ.", "Cách ly không thay mạch điều khiển công suất."], ["Cách ly tín hiệu dùng để bỏ qua an toàn điện.", "Cách ly thường phục vụ an toàn và chống nhiễu."]])
       ]
     },
     {
       id: "analog-adc-front-end",
-      title: "5. Analog front-end, comparator và ADC",
-      subtitle: "Op-amp, bộ lọc, comparator có trễ, SAR ADC, nguồn tham chiếu và đo dòng.",
+      title: "5. Mạch tiền xử lý tương tự, bộ so sánh và ADC",
+      subtitle: "Khuếch đại thuật toán, bộ lọc, bộ so sánh có trễ, SAR ADC, nguồn tham chiếu và đo dòng.",
       sourceRange: "Mục 10-13 trong tài liệu cấu kiện",
       lessonSlides: [
         makeSlide("Đường đo analog là một chuỗi", "Cảm biến không nên bị đưa thẳng vào ADC nếu tín hiệu yếu, nhiễu hoặc có trở nguồn cao.", ["Một chuỗi đo cơ bản gồm cảm biến, op-amp đệm hoặc khuếch đại, bộ lọc, ADC và nguồn tham chiếu.", "Mỗi khối làm một việc: đưa tín hiệu vào đúng dải, giảm nhiễu, giảm trở nguồn và giữ thước đo ổn định."], { visualHtml: visual.analogChain, keyPoints: ["Op-amp có thể đệm hoặc khuếch đại.", "Lọc analog chống aliasing.", "Nguồn tham chiếu quyết định thước đo."], source: sources.microchipSar, sourceUrl: "https://ww1.microchip.com/downloads/en/appnotes/00246a.pdf", selfCheck: "Sơ đồ chuỗi trái sang phải rõ, nội dung dành cho người mới học." }),
@@ -486,44 +486,44 @@
         makeSlide("Đo dòng bằng shunt", "Đo dòng thực chất là đo sụt áp nhỏ trên một điện trở đã biết.", ["Low-side đo dễ hơn vì gần mass, nhưng làm mass tải bị nâng lên một chút. High-side khó hơn nhưng giữ mass tải sạch hơn.", "Điện trở shunt phải có công suất đủ, sai số thấp và hệ số nhiệt phù hợp."], { visualHtml: visual.analogChain, keyPoints: ["Dòng tạo sụt áp trên shunt.", "Low-side dễ nhưng ảnh hưởng mass tải.", "High-side cần mạch đo chịu common-mode cao."], source: sources.tiCurrent, sourceUrl: "https://www.ti.com/lit/eb/slyy154a/slyy154a.pdf", selfCheck: "Slide diễn giải bằng lời, không lạm dụng ký hiệu." })
       ],
       facts: [
-        f("op-amp buffer", sources.microchipSar, "Vì sao thường đặt op-amp buffer trước ADC?", "Để giảm trở kháng nguồn, giúp tụ lấy mẫu ADC nạp nhanh và ổn định hơn.", "Microchip AN246 giải thích nguồn trở và tụ lấy mẫu ảnh hưởng sai số ADC.", [["Để làm ADC chậm hơn cố ý.", "Buffer thường giúp drive ADC tốt hơn."], ["Để thay thế nguồn tham chiếu.", "Buffer tín hiệu và reference là vấn đề khác nhau."], ["Vì ADC không có tụ lấy mẫu.", "SAR ADC có tụ lấy mẫu bên trong."]]),
-        f("op-amp thông số", "Tài liệu cấu kiện, mục thông số op-amp", "Khi chọn op-amp cho mạch đo ADC, cần xem những thông số nào?", "Dải điện áp vào, khả năng ra gần rail, băng thông, tốc độ thay đổi, offset, dòng bias, nhiễu và ổn định với tải.", "Op-amp sai thông số có thể bão hòa, chậm, lệch offset hoặc dao động.", [["Chỉ cần op-amp có đủ số chân.", "Thông số điện quyết định mạch đo."], ["Không cần quan tâm điện áp nguồn.", "Nguồn giới hạn dải vào/ra."], ["Offset không ảnh hưởng đo tín hiệu nhỏ.", "Offset có thể là sai số lớn với tín hiệu nhỏ."]]),
-        f("gain không đảo", "Tài liệu cấu kiện, mục mạch khuếch đại không đảo", "Mạch khuếch đại không đảo có đặc điểm hữu ích nào?", "Trở kháng vào cao và tín hiệu ra cùng pha với tín hiệu vào.", "Nó hay dùng để khuếch đại tín hiệu cảm biến nhỏ trước ADC.", [["Trở kháng vào luôn bằng 0.", "Không đảo có trở kháng vào cao."], ["Luôn đảo dấu tín hiệu.", "Không đảo giữ cùng pha."], ["Không thể dùng trước ADC.", "Rất thường dùng trước ADC."]]),
-        f("anti-alias", "Tài liệu cấu kiện, mục anti-alias filter", "Bộ lọc chống aliasing đặt ở đâu?", "Đặt trước ADC để giảm thành phần tần số cao trước khi lấy mẫu.", "Lọc số sau ADC không sửa được aliasing đã xảy ra.", [["Đặt sau ADC là đủ để sửa mọi aliasing.", "Aliasing phải ngăn trước khi lấy mẫu."], ["Đặt ở chân reset MCU.", "Bộ lọc nằm trên đường tín hiệu analog."], ["Không cần nếu tín hiệu có nhiễu cao tần.", "Nhiễu cao tần càng cần lọc trước ADC."]]),
-        f("SAR input", sources.microchipSar, "Điện trở nguồn lớn trước SAR ADC gây lỗi vì cơ chế nào?", "Điện trở nguồn cùng điện trở công tắc và tụ lấy mẫu tạo mạch RC nạp chậm.", "Nếu thời gian lấy mẫu không đủ, tụ chưa đạt mức tín hiệu thật.", [["Làm ADC có thêm nhiều bit hơn.", "Nó gây sai số, không tăng độ phân giải."], ["Không liên quan thời gian lấy mẫu.", "Thời gian lấy mẫu là yếu tố chính."], ["Chỉ ảnh hưởng giao tiếp UART.", "Đây là lỗi analog ADC."]]),
-        f("reference", "Tài liệu cấu kiện, mục Reference", "Nguồn tham chiếu ADC quan trọng vì sao?", "Nó là thước đo của ADC; nhiễu, sai số hoặc trôi nhiệt của tham chiếu làm kết quả đo sai.", "Cùng điện áp vào nhưng reference đổi thì mã ADC đổi.", [["Reference chỉ cấp sáng LED.", "Reference xác định dải đo ADC."], ["Càng nhiễu càng tăng độ chính xác.", "Reference cần sạch và ổn định."], ["Không cần nếu dùng ADC 12 bit.", "ADC nhiều bit càng nhạy với reference kém."]]),
-        f("ratiometric", "Tài liệu cấu kiện, mục ratiometric measurement", "Đo ratiometric có lợi gì?", "Nếu cảm biến và ADC dùng cùng nguồn tham chiếu, sai số tỷ lệ do nguồn có thể tự triệt một phần.", "Kỹ thuật này hữu ích với cầu đo, load cell, cảm biến điện trở.", [["Cảm biến và ADC phải dùng hai nguồn hoàn toàn không liên quan.", "Ratiometric thường dùng chung excitation/reference."], ["Chỉ dùng cho UART.", "Đây là kỹ thuật đo analog."], ["Luôn thay thế mọi hiệu chuẩn.", "Nó giảm một loại sai số nhưng không bỏ hết sai số."]]),
-        f("comparator", sources.tiHysteresis, "Comparator khác op-amp ở ứng dụng chính nào?", "Comparator dùng để quyết định tín hiệu cao hay thấp so với ngưỡng và tạo mức logic.", "Comparator tối ưu cho chuyển trạng thái, không phải khuếch đại tuyến tính liên tục.", [["Dùng comparator như op-amp tuyến tính chính xác trong mọi trường hợp.", "Comparator không được tối ưu cho phản hồi tuyến tính như op-amp."], ["Comparator không cần ngưỡng.", "So sánh luôn cần một mức tham chiếu."], ["Comparator chỉ dùng để lưu dữ liệu.", "Nó là mạch so sánh analog."]]),
-        f("hysteresis", sources.tiHysteresis, "Hysteresis trong comparator giải quyết vấn đề gì?", "Tránh output chuyển qua lại nhiều lần khi input nhiễu quanh ngưỡng.", "TI mô tả hysteresis tạo ngưỡng trên và ngưỡng dưới.", [["Làm output nhiễu hơn quanh ngưỡng.", "Mục tiêu là giảm chuyển trạng thái giả."], ["Bỏ luôn mọi ngưỡng so sánh.", "Hysteresis dùng hai ngưỡng."], ["Chỉ dùng cho buck converter.", "Comparator nhiều ứng dụng cần hysteresis."]]),
-        f("current shunt", sources.tiCurrent, "Đo dòng bằng shunt dựa trên nguyên lý nào?", "Dòng đi qua điện trở nhỏ tạo sụt áp nhỏ, đo sụt áp đó để suy ra dòng.", "Shunt cần giá trị thấp, công suất đủ và sai số phù hợp.", [["Shunt đo dòng bằng ánh sáng.", "Đó không phải nguyên lý shunt."], ["Shunt càng lớn càng luôn tốt.", "Shunt lớn gây sụt áp và nhiệt."], ["Không cần công suất shunt.", "Dòng qua shunt tạo nhiệt."]]),
-        f("low-side sensing", sources.tiCurrent, "Nhược điểm của low-side current sensing là gì?", "Nó đặt shunt ở đường mass nên có thể nâng mass của tải lên so với mass hệ thống.", "Low-side dễ đo nhưng ảnh hưởng ground của tải.", [["Không thể đo bằng mạch đơn giản.", "Low-side thường dễ đo hơn high-side."], ["Không gây sụt áp nào.", "Shunt luôn tạo sụt áp."], ["Luôn giữ mass tải tuyệt đối sạch.", "Mass tải bị nâng lên bởi sụt áp shunt."]]),
-        f("high-side sensing", sources.tiCurrent, "High-side current sensing khó hơn vì sao?", "Mạch đo phải xử lý điện áp common-mode cao gần nguồn tải.", "Đổi lại high-side giữ mass tải gần mass hệ thống.", [["Vì shunt nằm dưới mass.", "High-side shunt nằm phía nguồn."], ["Vì không có dòng qua shunt.", "Vẫn đo dòng qua shunt."], ["Vì chỉ dùng được cho tín hiệu số.", "Đây là đo analog."]])
+        f("mạch đệm khuếch đại thuật toán", sources.microchipSar, "Vì sao thường đặt op-amp buffer trước ADC?", "Giảm trở kháng nguồn, giúp tụ lấy mẫu ADC nạp nhanh và ổn định hơn.", "Trở kháng nguồn và tụ lấy mẫu ảnh hưởng trực tiếp đến sai số ADC.", [["Để làm ADC chậm hơn cố ý.", "Mạch đệm thường giúp điều khiển đầu vào ADC tốt hơn."], ["Để thay thế nguồn tham chiếu.", "Mạch đệm tín hiệu và nguồn tham chiếu là hai vấn đề khác nhau."], ["Vì ADC không có tụ lấy mẫu.", "SAR ADC có tụ lấy mẫu bên trong."]]),
+        f("thông số khuếch đại thuật toán", "Tài liệu cấu kiện, mục thông số op-amp", "Khi chọn op-amp cho mạch đo ADC, cần xem những thông số nào?", "Cần xem dải điện áp vào, khả năng ra gần đường nguồn, băng thông, tốc độ thay đổi, độ lệch đầu vào, dòng phân cực đầu vào, nhiễu và ổn định với tải.", "Khuếch đại thuật toán sai thông số có thể bão hòa, chậm, lệch điểm đo hoặc dao động.", [["Chỉ cần khuếch đại thuật toán có đủ số chân.", "Thông số điện quyết định mạch đo."], ["Không cần quan tâm điện áp nguồn.", "Nguồn giới hạn dải vào/ra."], ["Độ lệch đầu vào không ảnh hưởng đo tín hiệu nhỏ.", "Độ lệch đầu vào có thể là sai số lớn với tín hiệu nhỏ."]]),
+        f("mạch khuếch đại không đảo", "Tài liệu cấu kiện, mục mạch khuếch đại không đảo", "Mạch khuếch đại không đảo có đặc điểm hữu ích nào?", "Mạch khuếch đại không đảo có trở kháng vào cao và tín hiệu ra cùng pha với tín hiệu vào.", "Mạch khuếch đại không đảo hay dùng để khuếch đại tín hiệu cảm biến nhỏ trước ADC.", [["Mạch khuếch đại không đảo có trở kháng vào luôn bằng 0.", "Không đảo có trở kháng vào cao."], ["Mạch khuếch đại không đảo luôn đảo dấu tín hiệu.", "Không đảo giữ cùng pha."], ["Mạch khuếch đại không đảo không thể dùng trước ADC.", "Rất thường dùng trước ADC."]]),
+        f("chống chồng phổ", "Tài liệu cấu kiện, mục anti-alias filter", "Bộ lọc chống chồng phổ đặt ở đâu?", "Bộ lọc chống chồng phổ đặt trước ADC để giảm thành phần tần số cao trước khi lấy mẫu.", "Lọc số sau ADC không sửa được hiện tượng chồng phổ đã xảy ra.", [["Bộ lọc chống chồng phổ đặt sau ADC là đủ để sửa mọi chồng phổ.", "Chồng phổ phải được ngăn trước khi lấy mẫu."], ["Bộ lọc chống chồng phổ đặt ở chân reset MCU.", "Bộ lọc nằm trên đường tín hiệu analog."], ["Không cần bộ lọc chống chồng phổ nếu tín hiệu có nhiễu cao tần.", "Nhiễu cao tần càng cần lọc trước ADC."]]),
+        f("SAR input", sources.microchipSar, "Điện trở nguồn lớn trước SAR ADC gây lỗi vì cơ chế nào?", "Điện trở nguồn cùng điện trở công tắc và tụ lấy mẫu tạo mạch RC nạp chậm.", "Nếu thời gian lấy mẫu không đủ, tụ chưa đạt mức tín hiệu thật.", [["Làm ADC có thêm nhiều bit hơn.", "Điện trở nguồn lớn gây sai số, không tăng độ phân giải."], ["Không liên quan thời gian lấy mẫu.", "Thời gian lấy mẫu là yếu tố chính."], ["Chỉ ảnh hưởng giao tiếp UART.", "Đây là lỗi analog ADC."]]),
+        f("nguồn tham chiếu", "Tài liệu cấu kiện, mục Reference", "Nguồn tham chiếu ADC quan trọng vì sao?", "Nguồn tham chiếu là thước đo của ADC; nhiễu, sai số hoặc trôi nhiệt của tham chiếu làm kết quả đo sai.", "Cùng điện áp vào nhưng nguồn tham chiếu đổi thì mã ADC đổi.", [["Nguồn tham chiếu chỉ cấp sáng LED.", "Nguồn tham chiếu xác định dải đo ADC."], ["Nguồn tham chiếu càng nhiễu càng tăng độ chính xác.", "Nguồn tham chiếu cần sạch và ổn định."], ["Không cần nguồn tham chiếu ổn định nếu dùng ADC 12 bit.", "ADC nhiều bit càng nhạy với nguồn tham chiếu kém."]]),
+        f("đo theo tỷ lệ nguồn tham chiếu", "Tài liệu cấu kiện, mục ratiometric measurement", "Phép đo theo tỷ lệ nguồn tham chiếu có lợi gì?", "Nếu cảm biến và ADC dùng cùng nguồn tham chiếu, sai số tỷ lệ do nguồn có thể tự triệt một phần.", "Kỹ thuật này hữu ích với cầu đo, cảm biến lực dạng cầu và cảm biến điện trở.", [["Cảm biến và ADC phải dùng hai nguồn hoàn toàn không liên quan.", "Đo theo tỷ lệ nguồn tham chiếu thường dùng chung nguồn kích thích và nguồn tham chiếu."], ["Đo theo tỷ lệ nguồn tham chiếu chỉ dùng cho UART.", "Đây là kỹ thuật đo analog."], ["Đo theo tỷ lệ nguồn tham chiếu luôn thay thế mọi hiệu chuẩn.", "Kỹ thuật này giảm một loại sai số nhưng không loại bỏ hết sai số."]]),
+        f("comparator", sources.tiHysteresis, "Comparator khác op-amp ở ứng dụng chính nào?", "Comparator dùng để quyết định tín hiệu cao hay thấp so với ngưỡng và tạo mức logic.", "Comparator tối ưu cho chuyển trạng thái, không phải khuếch đại tuyến tính liên tục.", [["Comparator hoạt động như op-amp tuyến tính chính xác trong mọi trường hợp.", "Bộ so sánh không được tối ưu cho phản hồi tuyến tính như op-amp."], ["Comparator không cần ngưỡng.", "So sánh luôn cần một mức tham chiếu."], ["Comparator chỉ dùng để lưu dữ liệu.", "Comparator là mạch so sánh analog."]]),
+        f("hysteresis", sources.tiHysteresis, "Hysteresis trong comparator giải quyết vấn đề gì?", "Tránh output chuyển qua lại nhiều lần khi input nhiễu quanh ngưỡng.", "Vùng trễ hysteresis tạo ngưỡng trên và ngưỡng dưới.", [["Làm output nhiễu hơn quanh ngưỡng.", "Mục tiêu là giảm chuyển trạng thái giả."], ["Bỏ luôn mọi ngưỡng so sánh.", "Hysteresis dùng hai ngưỡng."], ["Chỉ dùng cho buck converter.", "Comparator nhiều ứng dụng cần hysteresis."]]),
+        f("điện trở shunt đo dòng", sources.tiCurrent, "Đo dòng bằng shunt dựa trên nguyên lý nào?", "Dòng đi qua điện trở shunt nhỏ tạo sụt áp nhỏ để suy ra dòng; điện trở shunt vẫn phải đủ công suất và sai số phù hợp.", "Điện trở shunt cần giá trị thấp, công suất đủ và sai số phù hợp vì dòng qua shunt tạo sụt áp và nhiệt.", [["Điện trở shunt đo dòng bằng ánh sáng.", "Đó không phải nguyên lý shunt."], ["Điện trở shunt càng lớn càng luôn tốt.", "Shunt lớn gây sụt áp và nhiệt."], ["Điện trở shunt không cần kiểm tra công suất.", "Dòng qua shunt tạo nhiệt."]]),
+        f("đo dòng phía mass", sources.tiCurrent, "Nhược điểm của đo dòng phía mass là gì?", "Cách đo này đặt shunt ở đường mass nên có thể nâng mass của tải lên so với mass hệ thống.", "Đo dòng phía mass dễ thực hiện nhưng ảnh hưởng mốc mass của tải.", [["Đo dòng phía mass không thể đo bằng mạch đơn giản.", "Đo dòng phía mass thường dễ đo hơn đo dòng phía nguồn dương."], ["Đo dòng phía mass không gây sụt áp nào.", "Điện trở shunt luôn tạo sụt áp."], ["Đo dòng phía mass luôn giữ mass tải tuyệt đối sạch.", "Mass tải bị nâng lên bởi sụt áp trên điện trở shunt."]]),
+        f("đo dòng phía nguồn dương", sources.tiCurrent, "Đo dòng phía nguồn dương khó hơn vì sao?", "Mạch đo phải xử lý điện áp chế độ chung cao, gần mức nguồn của tải.", "Mạch đo phía nguồn dương phải chịu điện áp chế độ chung lớn nên cần mạch khuếch đại hoặc IC đo dòng phù hợp.", [["Vì shunt nằm dưới mass.", "Shunt trong cách đo phía nguồn dương nằm ở phía nguồn cấp của tải."], ["Vì không có dòng qua shunt.", "Vẫn đo dòng qua điện trở shunt."], ["Vì chỉ dùng được cho tín hiệu số.", "Đo dòng qua điện trở shunt là phép đo tín hiệu tương tự, không phải chỉ dành cho tín hiệu số."]])
       ]
     },
     {
       id: "power-esd-thermal",
-      title: "6. Nguồn, ESD, surge, nhiệt và package",
-      subtitle: "LDO, buck converter, decoupling, power-good, bảo vệ nguồn, ESD/surge và quản lý nhiệt.",
+      title: "6. Nguồn, ESD, xung quá áp, nhiệt và vỏ linh kiện",
+      subtitle: "LDO, bộ hạ áp buck, tụ khử nhiễu nguồn, tín hiệu báo nguồn tốt, bảo vệ nguồn, ESD/xung quá áp và quản lý nhiệt.",
       sourceRange: "Mục 14, 16, 17 trong tài liệu cấu kiện",
       lessonSlides: [
         makeSlide("Nguồn trong hệ nhúng phải ổn định và đúng thời điểm", "MCU có thể reset sai hoặc đọc ADC sai nếu nguồn nhiễu, tụ đặt sai hoặc power-good không đúng.", ["LDO đơn giản và ít nhiễu nhưng tổn hao thành nhiệt khi chênh áp lớn. Buck hiệu suất cao hơn nhưng tạo nhiễu chuyển mạch cần layout tốt.", "Reset và power-good giúp MCU chỉ chạy khi nguồn đã đủ tin cậy."], { visualHtml: visual.power, keyPoints: ["LDO êm nhưng nóng.", "Buck hiệu suất cao nhưng nhiễu hơn.", "Power-good/reset bảo vệ trạng thái khởi động."], source: sources.tiLdo, sourceUrl: "https://www.ti.com/lit/ml/slyb232/slyb232.pdf", selfCheck: "Ba khối LDO/Buck/Bảo vệ rõ, không dùng quá nhiều chữ." }),
-        makeSlide("Decoupling là một phần của thiết kế nguồn", "Tụ đặt sai vị trí có thể gần như mất tác dụng ở xung nhanh.", ["Tụ local phải tạo vòng dòng ngắn giữa chân nguồn và mass của IC. Tụ bulk cấp năng lượng chậm hơn cho cả cụm mạch.", "Đường mạch dài làm tăng điện cảm, khiến tụ không còn đáp ứng tốt với xung nhanh."], { image: OFFICIAL.decoupling, imageAlt: "Trang TI minh họa mạng decoupling local và bulk", keyPoints: ["Đặt tụ gần chân IC.", "Giảm vòng dòng.", "Tách vai trò local và bulk."], source: sources.tiDecoupling, sourceUrl: "https://www.ti.com/content/dam/videos/external-videos/de-de/9/3816841626001/6313253251112.mp4/subassets/notes-decoupling_capacitors.pdf", selfCheck: "Hình official đọc được, ý giải thích nằm riêng." }),
+        makeSlide("Tụ khử nhiễu là một phần của thiết kế nguồn", "Tụ đặt sai vị trí có thể gần như mất tác dụng ở xung nhanh.", ["Tụ đặt gần IC phải tạo vòng dòng ngắn giữa chân nguồn và mass của IC. Tụ dung lượng lớn cấp năng lượng chậm hơn cho cả cụm mạch.", "Đường mạch dài làm tăng điện cảm, khiến tụ không còn đáp ứng tốt với xung nhanh."], { image: OFFICIAL.decoupling, imageAlt: "Trang TI minh họa mạng tụ khử nhiễu đặt gần IC và tụ dung lượng lớn", keyPoints: ["Đặt tụ gần chân IC.", "Giảm vòng dòng.", "Tách vai trò tụ đặt gần IC và tụ dung lượng lớn."], source: sources.tiDecoupling, sourceUrl: "https://www.ti.com/content/dam/videos/external-videos/de-de/9/3816841626001/6313253251112.mp4/subassets/notes-decoupling_capacitors.pdf", selfCheck: "Hình chính thống đọc được, ý giải thích nằm riêng." }),
         makeSlide("ESD, EFT và surge không giống nhau", "Các xung ngoài đời khác nhau về thời gian, năng lượng và đường đi.", ["ESD rất nhanh và thường đi vào qua thao tác con người hoặc đầu nối. Surge có năng lượng lớn hơn, liên quan sét lan truyền hoặc nguồn ngoài.", "Chọn bảo vệ cần biết tín hiệu bình thường, điện áp xung, điện dung cho phép và đường dòng về mass."], { visualHtml: visual.tvs, keyPoints: ["ESD nhanh.", "Surge năng lượng lớn hơn.", "TVS phải đặt đúng vị trí và đúng loại."], source: sources.stEsd, sourceUrl: "https://www.st.com/resource/en/application_note/an5612-esd-protection-of-stm32-mcus-and-mpus-stmicroelectronics.pdf", selfCheck: "Slide phân biệt bằng lời dễ hiểu, không liệt kê tiêu chuẩn rối mắt." }),
         makeSlide("Nhiệt và package quyết định mạch có sống lâu không", "Một linh kiện đúng chức năng vẫn có thể chết vì nóng.", ["Công suất tiêu tán đi từ chip ra vỏ, ra mạch in rồi ra không khí. Package nhỏ có thể không thoát nhiệt đủ cho dòng lớn.", "Khi thiết kế, phải tính công suất, nhiệt độ môi trường, điện trở nhiệt và vùng đồng tản nhiệt."], { visualHtml: visual.thermal, keyPoints: ["Công suất biến thành nhiệt.", "Package ảnh hưởng khả năng thoát nhiệt.", "Nhiệt độ môi trường cao làm biên an toàn giảm."], source: "onsemi MOSFET Basic và tài liệu cấu kiện, mục nhiệt/package", sourceUrl: "https://www.onsemi.com/download/application-notes/pdf/an-9010.pdf", selfCheck: "Đường thoát nhiệt rõ từ chip xuống PCB, không có ký hiệu khó hiểu." })
       ],
       facts: [
-        f("LDO", sources.tiLdo, "LDO có ưu điểm và nhược điểm chính nào?", "Đơn giản, nhiễu thấp, nhưng phần chênh áp nhân dòng tải biến thành nhiệt.", "Khi dùng LDO cần xét dropout, dòng tĩnh, độ ổn định với tụ ngoài và công suất nhiệt.", [["Luôn hiệu suất cao như buck ở mọi chênh áp.", "LDO là tuyến tính nên tổn hao lớn khi chênh áp lớn."], ["Không bao giờ cần tụ đầu ra.", "LDO cần tụ theo khuyến nghị để ổn định."], ["Không có dropout voltage.", "Dropout là thông số quan trọng của LDO."]]),
-        f("dropout", sources.tiLdo, "Dropout voltage của LDO là gì?", "Mức chênh tối thiểu giữa đầu vào và đầu ra để LDO còn giữ được điện áp ra ổn định.", "Khi Vin quá gần Vout, LDO vào dropout và output sụt.", [["Dòng rò của tụ decoupling.", "Dropout liên quan chênh áp LDO."], ["Điện áp xung ESD.", "Không phải ESD."], ["Tần số clock I2C.", "Không liên quan I2C."]]),
-        f("buck", "Tài liệu cấu kiện, mục Buck converter", "Buck converter thường được chọn thay LDO khi nào?", "Khi cần hạ áp với dòng lớn hoặc chênh áp lớn để đạt hiệu suất cao hơn.", "Buck dùng đóng cắt, cuộn cảm và tụ để chuyển năng lượng hiệu quả hơn nhưng nhiễu hơn.", [["Khi muốn mạch đơn giản nhất và dòng rất nhỏ.", "LDO có thể phù hợp hơn."], ["Khi không chấp nhận bất kỳ nhiễu chuyển mạch nào.", "Buck có nhiễu chuyển mạch cần xử lý."], ["Khi đầu ra phải lớn hơn đầu vào.", "Buck là hạ áp."]]),
-        f("buck noise", "Tài liệu cấu kiện, mục Buck converter", "Vì sao buck converter cần layout cẩn thận?", "Dòng chuyển mạch nhanh tạo nhiễu và vòng dòng nóng; layout sai gây EMI, ripple và lỗi đo analog.", "Buck có cạnh chuyển mạch nhanh, diode/MOSFET/inductor/capacitor tạo vòng dòng xung.", [["Vì buck không có dòng xung.", "Buck hoạt động bằng chuyển mạch dòng."], ["Vì layout không ảnh hưởng nguồn.", "Layout rất quan trọng trong nguồn switching."], ["Vì chỉ có tín hiệu DC lý tưởng.", "Buck có ripple và xung chuyển mạch."]]),
-        f("power-good", sources.tiLdo, "Power-good hoặc reset nguồn có ích gì cho MCU?", "Giữ hoặc báo reset cho đến khi nguồn đủ ổn định để MCU chạy đúng.", "Power-good hoặc undervoltage reset giúp tránh trạng thái logic sai khi nguồn chưa sẵn sàng.", [["Làm MCU chạy trước khi có nguồn.", "Mục tiêu là tránh chạy khi nguồn chưa ổn định."], ["Thay thế mọi tụ decoupling.", "Power-good không cấp dòng xung."], ["Chỉ dùng cho LED trang trí.", "Nó phục vụ trạng thái khởi động hệ thống."]]),
-        f("input protection", "Tài liệu cấu kiện, mục reverse polarity và input protection", "Bảo vệ đầu vào nguồn thường phải xét các lỗi nào?", "Ngược cực, quá áp, quá dòng, surge, cắm nóng và năng lượng tải.", "Nguồn ngoài là đường lỗi năng lượng lớn nên cần nhiều lớp bảo vệ.", [["Chỉ cần bảo vệ lỗi chính tả firmware.", "Đây là bảo vệ điện."], ["Không cần cầu chì hay eFuse trong mọi thiết kế.", "Tùy rủi ro có thể cần fuse, PTC, eFuse."], ["Nguồn ngoài luôn sạch tuyệt đối.", "Nguồn ngoài có thể sai cực, nhiễu hoặc surge."]]),
-        f("high-side switch", "TI High-Side Switches", "High-side switch/eFuse có thể tích hợp chức năng gì?", "Giới hạn dòng, bảo vệ quá nhiệt, bảo vệ ngắn mạch, báo lỗi và đóng cắt tải phía nguồn.", "IC nguồn thông minh giúp bảo vệ tải và hệ thống tốt hơn transistor rời đơn giản.", [["Chỉ là điện trở cố định.", "Đó là IC/công tắc nguồn."], ["Không liên quan bảo vệ quá dòng.", "Giới hạn dòng là chức năng quan trọng."], ["Chỉ dùng để khuếch đại âm thanh.", "Nó dùng trong phân phối/bảo vệ nguồn."]]),
-        f("ESD", sources.stEsd, "TVS bảo vệ ESD nên đặt ở đâu?", "Gần đầu nối hoặc nơi xung đi vào, với đường xuống mass ngắn và thấp cảm.", "Nếu TVS đặt xa, xung vẫn chạy sâu vào mạch.", [["Càng gần MCU sau đường dài càng tốt trong mọi trường hợp.", "Nên chặn xung từ cửa vào."], ["Không cần mass tốt.", "Dòng xung cần đường hồi về mass."], ["Đặt trong phần mềm là đủ.", "ESD là hiện tượng phần cứng."]]),
-        f("TVS capacitance", sources.stEsd, "Vì sao phải xem điện dung TVS trên đường tín hiệu nhanh?", "Điện dung lớn có thể làm chậm cạnh, méo tín hiệu hoặc giảm băng thông.", "TVS cho USB, I2C, ADC, GPIO có yêu cầu điện dung khác nhau.", [["Điện dung TVS luôn bằng 0.", "TVS thực có điện dung."], ["Tín hiệu nhanh không bị điện dung ảnh hưởng.", "Điện dung làm tải tín hiệu."], ["Chỉ xem màu package.", "Cần xem datasheet."]]),
-        f("thermal", sources.onsemiMosfet, "Tại sao cùng một MOSFET nhưng package khác nhau có thể chịu công suất khác nhau?", "Vì đường thoát nhiệt từ chip ra môi trường khác nhau, điện trở nhiệt và diện tích đồng PCB khác nhau.", "Package và layout quyết định nhiệt độ mối nối khi tiêu tán công suất.", [["Package không ảnh hưởng nhiệt.", "Package ảnh hưởng mạnh."], ["Công suất không tạo nhiệt.", "Công suất tiêu tán biến thành nhiệt."], ["PCB không giúp tản nhiệt.", "Vùng đồng PCB có thể là đường tản nhiệt chính."]]),
+        f("LDO", sources.tiLdo, "LDO có ưu điểm và nhược điểm chính nào?", "Đơn giản, nhiễu thấp, nhưng phần chênh áp nhân dòng tải biến thành nhiệt.", "Khi dùng LDO cần xét dropout, dòng tĩnh, độ ổn định với tụ ngoài và công suất nhiệt.", [["Luôn hiệu suất cao như buck ở mọi chênh áp.", "LDO là tuyến tính nên tổn hao lớn khi chênh áp lớn."], ["Không bao giờ cần tụ đầu ra.", "LDO cần tụ theo khuyến nghị để ổn định."], ["Không có dropout voltage.", "Điện áp dropout là thông số quan trọng của LDO."]]),
+        f("dropout", sources.tiLdo, "Điện áp dropout của LDO là gì?", "Mức chênh tối thiểu giữa đầu vào và đầu ra để LDO còn giữ được điện áp ra ổn định.", "Khi Vin quá gần Vout, LDO vào vùng dropout và điện áp đầu ra bị sụt.", [["Điện áp dropout của LDO là dòng rò của tụ khử nhiễu nguồn.", "Điện áp dropout liên quan chênh áp LDO."], ["Điện áp dropout của LDO là điện áp xung ESD.", "Điện áp dropout không phải xung ESD."], ["Điện áp dropout của LDO là tần số xung nhịp I2C.", "Điện áp dropout không liên quan I2C."]]),
+        f("buck", "Tài liệu cấu kiện, mục Buck converter", "Buck converter thường được chọn thay LDO khi nào?", "Khi cần hạ áp với dòng lớn hoặc chênh áp lớn để đạt hiệu suất cao hơn.", "Buck dùng đóng cắt, cuộn cảm và tụ để chuyển năng lượng hiệu quả hơn nhưng nhiễu hơn.", [["Khi muốn mạch đơn giản nhất và dòng rất nhỏ.", "LDO có thể phù hợp hơn."], ["Khi không chấp nhận bất kỳ nhiễu chuyển mạch nào.", "Buck có nhiễu chuyển mạch cần xử lý."], ["Khi đầu ra phải lớn hơn đầu vào.", "Buck là bộ biến đổi hạ áp, nên không dùng để tạo điện áp đầu ra lớn hơn đầu vào."]]),
+        f("buck noise", "Tài liệu cấu kiện, mục Buck converter", "Vì sao buck converter cần layout cẩn thận?", "Dòng chuyển mạch nhanh tạo nhiễu và vòng dòng nóng; bố trí mạch in sai gây nhiễu điện từ, gợn áp và lỗi đo analog.", "Nguồn buck có cạnh chuyển mạch nhanh; diode, MOSFET, cuộn cảm và tụ tạo vòng dòng xung cần bố trí rất ngắn.", [["Vì buck không có dòng xung.", "Buck hoạt động bằng chuyển mạch dòng."], ["Vì bố trí mạch in không ảnh hưởng nguồn.", "Bố trí mạch in rất quan trọng trong nguồn chuyển mạch."], ["Vì chỉ có tín hiệu DC lý tưởng.", "Nguồn buck có gợn áp và xung chuyển mạch."]]),
+        f("power-good", sources.tiLdo, "Power-good hoặc reset nguồn có ích gì cho MCU?", "Giữ hoặc báo reset cho đến khi nguồn đủ ổn định để MCU chạy đúng.", "Tín hiệu báo nguồn ổn định hoặc mạch reset thấp áp giúp tránh trạng thái logic sai khi nguồn chưa sẵn sàng.", [["Tín hiệu báo nguồn ổn định làm MCU chạy trước khi có nguồn.", "Mục tiêu là tránh chạy khi nguồn chưa ổn định."], ["Tín hiệu báo nguồn ổn định thay thế mọi tụ decoupling.", "Tín hiệu báo nguồn ổn định không cấp dòng xung."], ["Tín hiệu báo nguồn ổn định chỉ dùng cho LED trang trí.", "Tín hiệu báo nguồn ổn định phục vụ trạng thái khởi động hệ thống."]]),
+        f("input protection", "Tài liệu cấu kiện, mục reverse polarity và input protection", "Bảo vệ đầu vào nguồn thường phải xét các lỗi nào?", "Bảo vệ đầu vào nguồn thường phải xét ngược cực, quá áp, quá dòng, surge, cắm nóng và năng lượng tải.", "Nguồn ngoài là đường lỗi năng lượng lớn nên cần nhiều lớp bảo vệ.", [["Chỉ cần sửa lỗi phần mềm là đủ để bảo vệ đầu vào nguồn.", "Đây là bảo vệ điện, không thể thay bằng sửa lỗi phần mềm."], ["Không cần cầu chì hay eFuse trong mọi thiết kế.", "Tùy rủi ro có thể cần fuse, PTC, eFuse."], ["Nguồn ngoài luôn sạch tuyệt đối.", "Nguồn ngoài có thể sai cực, nhiễu hoặc surge."]]),
+        f("high-side switch", "TI High-Side Switches", "High-side switch/eFuse có thể tích hợp chức năng gì?", "Giới hạn dòng, bảo vệ quá nhiệt, bảo vệ ngắn mạch, báo lỗi và đóng cắt tải phía nguồn.", "IC nguồn thông minh giúp bảo vệ tải và hệ thống tốt hơn transistor rời đơn giản.", [["Chỉ là điện trở cố định.", "Đó là IC hoặc công tắc nguồn."], ["Không liên quan bảo vệ quá dòng.", "Giới hạn dòng là chức năng quan trọng."], ["Chỉ dùng để khuếch đại âm thanh.", "High-side switch dùng trong phân phối và bảo vệ nguồn."]]),
+        f("ESD", sources.stEsd, "TVS bảo vệ ESD nên đặt ở đâu?", "TVS bảo vệ ESD nên đặt gần đầu nối hoặc nơi xung đi vào, với đường xuống mass ngắn và thấp cảm.", "Nếu TVS đặt xa, xung vẫn chạy sâu vào mạch.", [["TVS bảo vệ ESD càng gần MCU sau đường dài càng tốt trong mọi trường hợp.", "Nên chặn xung từ cửa vào."], ["TVS bảo vệ ESD không cần mass tốt.", "Dòng xung cần đường hồi về mass."], ["TVS bảo vệ ESD đặt trong phần mềm là đủ.", "ESD là hiện tượng phần cứng."]]),
+        f("điện dung TVS", sources.stEsd, "Vì sao phải xem điện dung TVS trên đường tín hiệu nhanh?", "Điện dung lớn có thể làm chậm cạnh, méo tín hiệu hoặc giảm băng thông.", "TVS cho USB, I2C, ADC, GPIO có yêu cầu điện dung khác nhau.", [["Điện dung TVS luôn bằng 0.", "TVS thực có điện dung."], ["Tín hiệu nhanh không bị điện dung ảnh hưởng.", "Điện dung làm tải tín hiệu."], ["Chỉ xem màu package.", "Cần xem datasheet."]]),
+        f("thermal", sources.onsemiMosfet, "Tại sao cùng một MOSFET nhưng package khác nhau có thể chịu công suất khác nhau?", "Vì đường thoát nhiệt từ chip ra môi trường khác nhau, điện trở nhiệt và diện tích đồng PCB khác nhau.", "Package và layout quyết định nhiệt độ mối nối khi tiêu tán công suất.", [["Package không ảnh hưởng nhiệt.", "Vỏ linh kiện ảnh hưởng mạnh đến đường thoát nhiệt."], ["Công suất không tạo nhiệt.", "Công suất tiêu tán biến thành nhiệt."], ["PCB không giúp tản nhiệt.", "Vùng đồng PCB có thể là đường tản nhiệt chính."]]),
         f("junction temperature", "Tài liệu cấu kiện, mục nhiệt/package", "Thông số nhiệt độ mối nối cần kiểm tra vì sao?", "Vì chip hỏng hoặc giảm tuổi thọ nếu nhiệt độ mối nối vượt giới hạn, dù vỏ ngoài chỉ hơi ấm.", "Nhiệt độ bên trong cao hơn nhiệt độ môi trường và vỏ.", [["Chỉ nhiệt độ không khí là đủ.", "Cần ước lượng nhiệt độ mối nối."], ["Nếu chạm tay không nóng thì chắc chắn an toàn.", "Tay không đánh giá chính xác mối nối chip."], ["Không liên quan dòng tải.", "Dòng tải tạo công suất và nhiệt."]]),
-        f("decoupling placement", sources.tiDecoupling, "Điều gì quan trọng nhất khi đặt tụ decoupling local?", "Đường nối từ tụ đến chân nguồn và mass của IC phải thật ngắn, vòng dòng nhỏ.", "TI nhấn mạnh local decoupling có điện cảm thấp nhất khi đặt sát IC.", [["Giá trị tụ là yếu tố duy nhất, vị trí không quan trọng.", "Vị trí quyết định điện cảm đường dòng."], ["Đặt tụ ở góc xa PCB để đẹp.", "Xa IC giảm hiệu quả ở tần số cao."], ["Chỉ cần tụ bulk ở đầu vào nguồn.", "Local và bulk có vai trò khác nhau."]])
+        f("decoupling placement", sources.tiDecoupling, "Điều gì quan trọng nhất khi đặt tụ khử nhiễu nguồn gần IC?", "Đường nối từ tụ đến chân nguồn và mass của IC phải thật ngắn, vòng dòng nhỏ.", "Tụ khử nhiễu nguồn có điện cảm đường nối thấp nhất khi đặt sát IC.", [["Giá trị tụ là yếu tố duy nhất, vị trí không quan trọng.", "Vị trí quyết định điện cảm đường dòng."], ["Tụ khử nhiễu nguồn đặt ở góc xa PCB chỉ để đẹp vẫn đủ hiệu quả.", "Xa IC giảm hiệu quả ở tần số cao."], ["Chỉ cần tụ dung lượng lớn ở đầu vào nguồn.", "Tụ đặt gần IC và tụ dung lượng lớn có vai trò khác nhau."]])
       ]
     }
   ];
@@ -551,7 +551,7 @@
     .replace(/Đổi lại high-side giữ mass tải gần mass hệ thống\./g, "Đổi lại, đo dòng phía nguồn dương giữ mass của tải gần mass hệ thống.")
     .replace(/kéo xuống mass thường dễ đo hơn high-side\./g, "Đo dòng phía mass thường dễ đo hơn đo dòng phía nguồn dương.")
     .replace(/GPIO và source cần mốc chung\./g, "GPIO và cực S của MOSFET cần cùng mốc tham chiếu để điện áp giữa cực G và cực S được xác định đúng.")
-    .replace(/Emitter nối nguồn dương trong mọi low-side NPN\./g, "Trong mạch NPN kéo xuống mass, cực E không nối nguồn dương; cực E thường nối mass và tải nằm phía cực C.")
+    .replace(/Emitter nối nguồn dương trong mọi low-side NPN\./g, "Trong mạch NPN kéo xuống mass, cực E luôn nối nguồn dương.")
     .replace(/Low-side NPN thường emitter về mass\./g, "Mạch NPN kéo xuống mass thường nối cực E về mass.")
     .replace(/Tải mắc giữa nguồn dương và collector, emitter nối mass, transistor kéo đầu dưới tải xuống mass\./g, "Trong mạch NPN kéo xuống mass, tải mắc giữa nguồn dương và cực C; cực E nối mass, transistor kéo đầu dưới tải xuống mass khi dẫn.")
     .replace(/Cần đủ dòng base qua điện trở để transistor vào bão hòa theo dòng tải mong muốn\./g, "Cần cấp đủ dòng vào cực B qua điện trở hạn dòng để transistor vào bão hòa theo dòng tải mong muốn.")
@@ -563,9 +563,12 @@
     .replace(/series resistor/gi, "điện trở nối tiếp")
     .replace(/open-drain/gi, "ngõ ra cực máng hở")
     .replace(/pull-up và pull-down/gi, "điện trở kéo lên và kéo xuống")
+    .replace(/pull-up/gi, "điện trở kéo lên")
+    .replace(/pull-down/gi, "điện trở kéo xuống")
     .replace(/floating input/gi, "đầu vào bị treo mức")
     .replace(/debounce/gi, "chống dội phím")
     .replace(/anti-alias/gi, "chống chồng phổ")
+    .replace(/aliasing/gi, "chồng phổ")
     .replace(/High-side switch/g, "Công tắc đóng cắt phía nguồn dương")
     .replace(/high-side switch/gi, "công tắc đóng cắt phía nguồn dương")
     .replace(/high-side sensing/gi, "đo dòng phía nguồn dương")
@@ -578,21 +581,29 @@
     .replace(/gate driver/gi, "driver cổng MOSFET")
     .replace(/level shifting/gi, "chuyển mức logic")
     .replace(/input protection/gi, "bảo vệ đầu vào")
-    .replace(/decoupling placement/gi, "vị trí đặt tụ decoupling")
+    .replace(/decoupling placement/gi, "vị trí đặt tụ khử nhiễu nguồn")
     .replace(/junction temperature/gi, "nhiệt độ mối nối")
     .replace(/thermal/gi, "nhiệt")
     .replace(/reference/gi, "nguồn tham chiếu")
     .replace(/buffer/gi, "mạch đệm")
-    .replace(/dropout/gi, "điện áp dropout")
-    .replace(/điện áp điện áp dropout voltage/gi, "điện áp dropout")
-    .replace(/điện áp điện áp dropout/gi, "điện áp dropout")
+    .replace(/dropout voltage/gi, "điện áp rơi tối thiểu")
+    .replace(/dropout/gi, "điện áp rơi tối thiểu")
+    .replace(/điện áp điện áp rơi tối thiểu/gi, "điện áp rơi tối thiểu")
+    .replace(/dùng để để/gi, "dùng để")
     .replace(/buck noise/gi, "nhiễu của nguồn buck")
     .replace(/buck converter/gi, "nguồn buck")
     .replace(/power-good/gi, "tín hiệu báo nguồn ổn định")
-    .replace(/relay solenoid/gi, "relay hoặc cuộn dây solenoid")
+    .replace(/relay solenoid/gi, "rơ-le hoặc cuộn hút")
+    .replace(/\brelay\b/gi, "rơ-le")
+    .replace(/\bsolenoid\b/gi, "cuộn hút")
     .replace(/motor DC/gi, "động cơ DC")
+    .replace(/\bmotor\b/gi, "động cơ")
     .replace(/current shunt/gi, "điện trở shunt đo dòng")
+    .replace(/current sensing/gi, "đo dòng")
     .replace(/common-mode/gi, "chế độ chung")
+    .replace(/\bground\b/gi, "mass")
+    .replace(/load cell/gi, "cảm biến lực dạng cầu")
+    .replace(/excitation/gi, "nguồn kích thích")
     .replace(/high-side/gi, "phía nguồn dương")
     .replace(/ratiometric/gi, "đo theo tỷ lệ nguồn tham chiếu")
     .replace(/comparator/gi, "bộ so sánh")
@@ -602,7 +613,7 @@
     .replace(/\bflyback\b/gi, "hồi tiếp cho tải cảm")
     .replace(/\bfreewheel\b/gi, "hồi tiếp dòng")
     .replace(/\bclamp\b/gi, "kẹp áp")
-    .replace(/\bdatasheet\b/gi, "tài liệu dữ liệu linh kiện")
+    .replace(/\bdatasheet\b/gi, "bảng thông số linh kiện")
     .replace(/\blayout\b/gi, "bố trí mạch in")
     .replace(/\beFuse\b/g, "cầu chì điện tử")
     .replace(/\bfuse\b/gi, "cầu chì")
@@ -621,6 +632,8 @@
     .replace(/\binput\b/gi, "đầu vào")
     .replace(/\boutput\b/gi, "đầu ra")
     .replace(/\bsink\b/gi, "hút dòng")
+    .replace(/\bclock\b/gi, "xung nhịp")
+    .replace(/\breset\b/gi, "khởi động lại")
     .replace(/push-pull/gi, "đẩy-kéo")
     .replace(/open-collector/gi, "ngõ ra cực góp hở")
     .replace(/rise time/gi, "thời gian cạnh lên")
@@ -629,11 +642,15 @@
     .replace(/\brail\b/gi, "đường nguồn")
     .replace(/\bsurge\b/gi, "xung quá áp năng lượng lớn")
     .replace(/switching/gi, "chuyển mạch")
-    .replace(/local decoupling/gi, "tụ decoupling đặt cục bộ")
+    .replace(/\bringing\b/gi, "dao động cạnh")
+    .replace(/local decoupling/gi, "tụ khử nhiễu nguồn đặt cục bộ")
+    .replace(/tụ decoupling/gi, "tụ khử nhiễu nguồn")
+    .replace(/\bdecoupling\b/gi, "khử nhiễu nguồn")
     .replace(/\blocal\b/gi, "cục bộ")
     .replace(/\bbulk\b/gi, "tụ dung lượng lớn")
     .replace(/tụ tụ dung lượng lớn/gi, "tụ dung lượng lớn")
     .replace(/optocoupler/gi, "bộ ghép quang")
+    .replace(/\bhysteresis\b/gi, "ngưỡng có trễ")
     .replace(/digital isolator/gi, "bộ cách ly số")
     .replace(/\bhardware\b/gi, "phần cứng")
     .replace(/\bsoftware\b/gi, "phần mềm")
@@ -649,13 +666,23 @@
     .replace(/tài liệu nhấn mạnh/gi, "điểm cần nhớ là")
     .replace(/\bTI LDO material\s+(nhấn mạnh|mô tả)\s+/gi, "")
     .replace(/\b(Microchip AN246|TI|Analog Devices|onsemi|STMicroelectronics|ST|NXP)\s+(giải thích|mô tả|nhấn mạnh|gợi ý|ghi|nêu)\s+/gi, "")
-    .replace(/Lời giải này bám đúng mệnh đề và nguồn tham khảo\./g, "Lời giải này giải thích đúng nguyên nhân kỹ thuật của nhận định.")
+    .replace(/Lời giải này bám đúng mệnh đề và nguồn tham khảo\./g, "Đây là nguyên nhân kỹ thuật trực tiếp của nhận định.")
     .replace(/^mạch điều khiển/g, "Mạch điều khiển")
-    .replace(/^điện áp dropout/g, "Điện áp dropout")
-    .replace(/^Vị trí đặt tụ decoupling đặt tụ/gi, "Tụ decoupling nên đặt")
-    .replace(/^Vị trí đặt tụ decoupling chỉ cần/gi, "Khi đặt tụ decoupling, chỉ cần")
+    .replace(/^điện áp rơi tối thiểu/g, "Điện áp rơi tối thiểu")
+    .replace(/^Vị trí đặt tụ khử nhiễu nguồn đặt tụ/gi, "Tụ khử nhiễu nguồn nên đặt")
+    .replace(/^Vị trí đặt tụ khử nhiễu nguồn chỉ cần/gi, "Khi đặt tụ khử nhiễu nguồn, chỉ cần")
     .replace(/xung xung quá áp/gi, "xung quá áp")
     .replace(/xung xung nhịp/gi, "xung nhịp")
+    .replace(/ESD là xung nhanh\./g, "ESD là xung điện áp rất nhanh, vì vậy phần tử bảo vệ phải phản ứng nhanh và đặt gần đường cần bảo vệ.")
+    .replace(/Dòng tải tạo công suất\./g, "Dòng tải càng lớn thì công suất tổn hao trên linh kiện càng tăng, nên phải kiểm tra giới hạn dòng và nhiệt.")
+    .replace(/Cuộn dây là tải cảm\./g, "Cuộn dây là tải cảm, nên khi ngắt dòng có thể sinh điện áp ngược cần đường xả năng lượng.")
+    .replace(/Mục tiêu là cách ly\./g, "Mục tiêu của phần tử cách ly là truyền tín hiệu nhưng tách miền điện, không phải tạo đường dẫn mass trực tiếp.")
+    .replace(/Đó là bảo vệ tải cảm\./g, "Bảo vệ tải cảm xử lý xung do cuộn cảm khi ngắt dòng, không thay thế chức năng cách ly tín hiệu.")
+    .replace(/Đó là cơ chế đẩy-kéo\./g, "Ngõ ra đẩy-kéo chủ động kéo lên và kéo xuống, khác với ngõ ra hở cần điện trở kéo.")
+    .replace(/Không đảo giữ cùng pha\./g, "Mạch khuếch đại không đảo giữ cùng pha giữa đầu vào và đầu ra, đồng thời đặt hệ số khuếch đại bằng mạng hồi tiếp.")
+    .replace(/Đây là lỗi analog ADC\./g, "Đây là sai số phát sinh trong chuỗi đo tương tự và ADC, nên không thể coi là lỗi truyền thông số.")
+    .replace(/LDO có thể phù hợp hơn\./g, "LDO thường phù hợp hơn khi ưu tiên nhiễu thấp và dòng nhỏ, dù hiệu suất giảm khi chênh áp lớn.")
+    .replace(/TVS thực có điện dung\./g, "TVS thật luôn có điện dung ký sinh, nên phải chọn loại có điện dung phù hợp với đường tín hiệu tốc độ cao.")
     .replace(/\s{2,}/g, " ")
     .trim();
 
@@ -771,8 +798,8 @@
       if (yearMatch) return finishSentence(`${yearMatch[1]} là ${role} vào năm ${yearMatch[2]}`);
       return finishSentence(`${cleanAnswer} là ${match[1]}`);
     }
-    if (/điện áp dropout voltage của LDO là gì/i.test(cleanStem) || /dropout voltage của LDO là gì/i.test(cleanStem)) {
-      return finishSentence(`Điện áp dropout của LDO là ${lowerAnswer}`);
+    if (/điện áp rơi tối thiểu của LDO là gì/i.test(cleanStem) || /dropout voltage của LDO là gì/i.test(cleanStem)) {
+      return finishSentence(`Điện áp rơi tối thiểu của LDO là ${lowerAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) có bao nhiêu .+$/i))) {
       return finishSentence(`${match[1]} có ${cleanAnswer}`);
@@ -800,6 +827,7 @@
       return finishSentence(`${match[1]}: ${cleanAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) có phải .+ không$/i))) {
+      if (startsWithSubject(cleanAnswer, match[1])) return finishSentence(cleanAnswer);
       return finishSentence(`${match[1]}: ${cleanAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) có (?:đặc điểm|nhiệm vụ|tác dụng|vai trò) gì$/i))) {
@@ -808,6 +836,9 @@
     }
     if ((match = cleanStem.match(/^(.+?) dùng để làm gì$/i))) {
       if (startsWithSubject(cleanAnswer, match[1])) return finishSentence(cleanAnswer);
+      if (!/^(Làm|Tạo|Đặt|Tăng|Giảm|Cấp|Cung cấp|Giới hạn|Hạn|Lọc|Tích|Truyền|Bảo vệ|Chặn|Xử lý|Dẫn|Đưa|Chuyển|Kéo|Giữ)\b/i.test(cleanAnswer)) {
+        return finishSentence(`${topicLabel(topic)}: ${lowerAnswer}`);
+      }
       return finishSentence(`${match[1]} dùng để ${lowerAnswer}`);
     }
     if ((match = cleanStem.match(/^(.+?) dùng khi nào$/i))) {
@@ -854,6 +885,7 @@
     .replace(/^Cần kiểm tra\s+/i, "")
     .replace(/^Không thể tối ưu đồng thời\s+/i, "")
     .replace(/^Bắt đầu từ\s+/i, "")
+    .replace(/^Chúng\s+/i, "")
     .replace(/^Nó kết hợp nhiều (?:khối|miền) chức năng như\s+/i, "")
     .replace(/^Lõi xử lý có thể là\s+/i, "")
     .replace(/^Cấu trúc gồm\s+/i, "")
@@ -905,16 +937,16 @@
     return copy;
   };
 
-  const listText = (items) => `Gồm ${items.join(", ")}.`;
+  const listText = (items) => `Gồm: ${items.join(", ")}.`;
 
   const falseStem = (chapter, fact, index) => {
     const topic = topicLabel(fact.topic);
     const templates = [
-      `Phát biểu nào KHÔNG đúng về ${topic}?`,
-      `Điểm nào là bẫy khi nói về ${topic}?`,
-      `Nhận định nào cần bác bỏ khi học ${topic}?`,
-      `Cách hiểu nào dễ gây sai về ${topic}?`,
-      `Phương án nào trái với kiến thức về ${topic}?`
+      `Về ${topic}, phát biểu nào dưới đây không đúng?`,
+      `Về ${topic}, nhận định nào dưới đây cần bác bỏ?`,
+      `Với ${topic}, cách hiểu nào dưới đây dễ gây sai?`,
+      `Về ${topic}, phương án nào trái với kiến thức kỹ thuật?`,
+      `Về ${topic}, phát biểu nào dưới đây sai hoặc dễ gây nhầm lẫn?`
     ];
     return scrubText(templates[index % templates.length]);
   };
@@ -931,10 +963,10 @@
     const topic = topicLabel(fact.topic);
     const claim = claimForPrompt(fact, falseItem.text);
     const templates = [
-      `Với ${topic}, cần sửa cách hiểu sau thế nào: "${claim}"?`,
-      `Một nhận định gây nhầm lẫn về ${topic} là: "${claim}" Phiên bản đúng là gì?`,
-      `Nếu gặp phát biểu "${claim}", nên chọn cách hiểu nào để sửa lại?`,
-      `Cách hiểu nào thay thế tốt nhất cho nhận định sai sau: "${claim}"?`
+      `Để sửa hiểu nhầm "${claim}" về ${topic}, phát biểu nào đúng nhất?`,
+      `Phát biểu "${claim}" sai về ${topic}. Cách sửa nào đúng nhất?`,
+      `Phát biểu "${claim}" nên được thay bằng nhận định nào?`,
+      `Nhận định nào thay thế đúng nhất cho phát biểu sai "${claim}"?`
     ];
     return scrubText(templates[index % templates.length]);
   };
@@ -944,9 +976,9 @@
     const claim = claimForPrompt(fact, falseItem.text);
     const templates = [
       `Lỗi chính trong lựa chọn sau về ${topic} là gì: "${claim}"?`,
-      `Vì sao cách hiểu này không ổn về ${topic}: "${claim}"?`,
+      `Với ${topic}, phát biểu "${claim}" sai ở điểm nào?`,
       `Điểm sai cần nhận ra trong phát biểu "${claim}" là gì?`,
-      `Khi phân tích ${topic}, vì sao không nên chọn nhận định "${claim}"?`
+      `Phát biểu "${claim}" không đúng về ${topic} vì lý do nào?`
     ];
     return scrubText(templates[index % templates.length]);
   };
@@ -987,7 +1019,7 @@
       topic: fact.topic,
       stem: falseStem(chapter, fact, index),
       choices: normalizeChoices([
-        { text: claimFromAnswer(fact.stem, falseItem.text, fact.topic), correct: true, reason: `Đây là phát biểu sai. ${falseItem.reason}` },
+        { text: claimFromAnswer(fact.stem, falseItem.text, fact.topic), correct: true, reason: `Nhận định này sai: ${falseItem.reason}` },
         ...trueFacts.map(trueChoiceFrom)
       ].map(scrubChoice), index * 3 + chapter.id.length)
     };
@@ -1078,17 +1110,64 @@
     };
   };
 
-  const explainQuestion = (chapter, fact, index) => ({
-    id: `${chapter.id}-e-${index + 1}`,
-    type: "Giải thích",
-    source: sourceLabel(chapter),
-    topic: fact.topic,
-    stem: scrubText(`Vì sao nhận định sau là quan trọng: ${fact.correct}`),
-    choices: normalizeChoices([
-      { text: fact.why, correct: true, reason: "Lời giải này giải thích đúng nguyên nhân kỹ thuật của nhận định." },
-      ...fact.wrong.map((item) => ({ text: item.reason, correct: false, reason: "Đây là lý do dùng để bác bỏ phương án sai, không phải giải thích cho nhận định đúng." }))
-    ].map(scrubChoice), index * 7 + chapter.id.length)
-  });
+  const explainQuestion = (chapter, fact, index) => {
+    const claim = stripFinalPunctuation(claimFromAnswer(fact.stem, fact.correct, fact.topic));
+    return {
+      id: `${chapter.id}-e-${index + 1}`,
+      type: "Giải thích",
+      source: sourceLabel(chapter),
+      topic: fact.topic,
+      stem: scrubText(`Vì sao phát biểu sau đúng: "${claim}"?`),
+      choices: normalizeChoices([
+        { text: fact.why, correct: true, reason: "Đây là nguyên nhân kỹ thuật trực tiếp của phát biểu." },
+        ...fact.wrong.map((item) => ({ text: item.reason, correct: false, reason: "Lý do này dùng để bác bỏ một phát biểu sai, không giải thích trực tiếp phát biểu đang hỏi." }))
+      ].map(scrubChoice), index * 7 + chapter.id.length)
+    };
+  };
+
+  const questionKey = (question) => [question.stem, ...question.choices.map((choice) => choice.text)]
+    .join("|")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const foldForContext = (value) => String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\u0111/g, "d")
+    .replace(/\u0110/g, "D")
+    .toLowerCase();
+
+  const pickContextPrefix = (prefixes, stem, seed) => {
+    const flatStem = foldForContext(stem);
+    const hasLead = (lead) => new RegExp(`(^|[,\\s])${lead}\\s`).test(flatStem);
+    for (let offset = 0; offset < prefixes.length; offset += 1) {
+      const prefix = prefixes[(seed + offset) % prefixes.length];
+      const flatPrefix = foldForContext(prefix);
+      if (flatPrefix.startsWith("khi ") && hasLead("khi")) continue;
+      if (flatPrefix.startsWith("trong ") && hasLead("trong")) continue;
+      if (flatPrefix.startsWith("voi ") && hasLead("voi")) continue;
+      return prefix;
+    }
+    return prefixes[seed % prefixes.length];
+  };
+
+  const contextualizedQuestion = (question, seed) => {
+    const prefixes = [
+      "Trong thiết kế mạch nhúng thực tế",
+      "Khi phân tích một mạch nhúng",
+      "Với mục tiêu chọn linh kiện đúng",
+      "Khi kiểm tra một thiết kế nhúng",
+      "Trong tình huống cần tránh lỗi mạch"
+    ];
+    const stem = stripFinalPunctuation(question.stem);
+    const ending = /\?\s*$/.test(question.stem) ? "?" : ".";
+    const prefix = pickContextPrefix(prefixes, stem, seed);
+    return {
+      ...question,
+      stem: scrubText(`${prefix}, ${lowerFirst(stem)}${ending}`)
+    };
+  };
 
   const buildQuestions = (chapter) => {
     const variants = [
@@ -1102,11 +1181,17 @@
       (chapter, fact, facts, index) => countListQuestion(chapter, fact, facts, index)
     ];
     const questions = [];
+    const seen = new Set();
     let index = 0;
     while (questions.length < 100) {
       const variant = variants[index % variants.length];
       const fact = chapter.facts[(index * 7 + Math.floor(index / chapter.facts.length)) % chapter.facts.length];
-      questions.push(variant(chapter, fact, chapter.facts, index));
+      let question = variant(chapter, fact, chapter.facts, index);
+      for (let attempt = 0; seen.has(questionKey(question)) && attempt < 5; attempt += 1) {
+        question = contextualizedQuestion(question, index + attempt);
+      }
+      seen.add(questionKey(question));
+      questions.push(question);
       index += 1;
     }
     return questions.map((question, questionIndex) => ({

@@ -44,7 +44,7 @@
   "assumptions": [
     "Các đề chỉ phục vụ ôn tập tham khảo, không phải đề đã thi hoặc đề chính thức.",
     "Nội dung bám các mục 1.1 đến 2.5 của đề cương ôn tập và kiến thức đã hệ thống hóa.",
-    "Không yêu cầu học thuộc model chip cụ thể hoặc các con số minh họa ngoài phạm vi cần nhớ.",
+    "Không yêu cầu học thuộc mã chip cụ thể hoặc các con số minh họa ngoài phạm vi cần nhớ.",
     "Câu tự luận có gợi ý đáp án để tự luyện lập luận, không phải mục nộp chấm."
   ],
   "recipe": [
@@ -84,18 +84,18 @@
 };
   const ESSAYS = [
   {
-    "title": "Thiết kế nút đo cảm biến dùng MCU",
-    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, firmware, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử.",
+    "title": "Thiết kế nút đo cảm biến dùng vi điều khiển",
+    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, phần mềm nhúng, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử.",
     "expected": [
-      "Nêu lõi xử lý, bộ nhớ, nguồn, reset, clock, cảm biến, output hoặc giao tiếp.",
-      "Giải thích firmware đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
-      "Phân tích lựa chọn MCU, RAM/Flash và ngoại vi theo yêu cầu.",
-      "Đề cập tiết kiệm năng lượng bằng sleep, duty cycle hoặc tắt ngoại vi.",
-      "Nêu kiểm thử tích hợp phần cứng và firmware."
+      "Nêu lõi xử lý, bộ nhớ, nguồn, mạch khởi động lại, xung nhịp, cảm biến, đầu ra hoặc giao tiếp.",
+      "Giải thích phần mềm nhúng đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
+      "Phân tích lựa chọn vi điều khiển, RAM, bộ nhớ Flash và ngoại vi theo yêu cầu.",
+      "Đề cập tiết kiệm năng lượng bằng chế độ ngủ, giảm chu kỳ hoạt động hoặc tắt ngoại vi khi không dùng.",
+      "Nêu kiểm thử tích hợp phần cứng và phần mềm nhúng."
     ],
     "rubric": [
       "2 điểm: cấu trúc phần cứng hợp lý.",
-      "2 điểm: luồng firmware rõ.",
+      "2 điểm: luồng phần mềm nhúng rõ.",
       "2 điểm: lựa chọn bộ nhớ và ngoại vi đúng.",
       "2 điểm: năng lượng và độ tin cậy.",
       "2 điểm: kiểm thử và rủi ro."
@@ -103,12 +103,12 @@
   },
   {
     "title": "Phân tích lựa chọn bộ xử lý",
-    "prompt": "So sánh vi xử lý, vi điều khiển, DSP, FPGA và ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại.",
+    "prompt": "So sánh vi xử lý, vi điều khiển, bộ xử lý tín hiệu số DSP, mảng logic lập trình được FPGA và mạch tích hợp chuyên dụng ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại.",
     "expected": [
       "Phân biệt mức tích hợp của vi xử lý và vi điều khiển.",
       "Nêu DSP cho xử lý tín hiệu, FPGA cho logic song song cấu hình được, ASIC cho tối ưu cố định số lượng lớn.",
       "Phân tích tiêu chí tốc độ, năng lượng, chi phí, linh hoạt và sản lượng.",
-      "Không sa vào học thuộc model cụ thể.",
+      "Không sa vào học thuộc mã linh kiện cụ thể.",
       "Kết luận theo yêu cầu ứng dụng."
     ],
     "rubric": [
@@ -120,47 +120,47 @@
     ]
   },
   {
-    "title": "Quy trình build và khởi động firmware",
-    "prompt": "Mô tả từ mã nguồn tới firmware chạy trên MCU, sau đó trình bày vai trò startup code và bootloader trong khởi động/cập nhật hệ thống.",
+    "title": "Quy trình dịch và khởi động phần mềm nhúng",
+    "prompt": "Mô tả quá trình từ mã nguồn tới phần mềm nhúng chạy trên vi điều khiển, sau đó trình bày vai trò của mã khởi động và bộ nạp khởi động trong khởi động hoặc cập nhật hệ thống.",
     "expected": [
-      "Nêu tiền xử lý, compiler, assembler, linker/loader.",
-      "Giải thích object, thư viện và image cuối.",
-      "Trình bày reset/vector, stack, data/BSS và chuyển tới chương trình chính.",
-      "Nêu bootloader kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
+      "Nêu các bước tiền xử lý, biên dịch, hợp dịch, liên kết và nạp chương trình.",
+      "Giải thích tệp đối tượng, thư viện và bản chương trình cuối cùng.",
+      "Trình bày vector khởi động, ngăn xếp, vùng dữ liệu, vùng BSS và bước chuyển tới chương trình chính.",
+      "Nêu bộ nạp khởi động kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
       "Phân tích rủi ro cập nhật lỗi và cơ chế phục hồi."
     ],
     "rubric": [
       "2 điểm: quy trình dịch.",
       "2 điểm: vai trò công cụ.",
-      "2 điểm: startup.",
-      "2 điểm: bootloader.",
+      "2 điểm: mã khởi động.",
+      "2 điểm: bộ nạp khởi động.",
       "2 điểm: cập nhật an toàn."
     ]
   },
   {
-    "title": "Thiết kế input số chống nhiễu",
-    "prompt": "Một nút nhấn hoặc cảm biến số nối với MCU qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định.",
+    "title": "Thiết kế đầu vào số chống nhiễu",
+    "prompt": "Một nút nhấn hoặc cảm biến số nối với vi điều khiển qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định.",
     "expected": [
-      "Dùng pull-up hoặc pull-down để tránh thả nổi.",
-      "Cân nhắc lọc RC, Schmitt trigger hoặc hysteresis.",
+      "Dùng điện trở kéo lên hoặc kéo xuống để tránh trạng thái thả nổi.",
+      "Cân nhắc lọc RC, cổng Schmitt hoặc ngưỡng có trễ.",
       "Có chống nảy bằng phần cứng hoặc phần mềm.",
-      "Bảo vệ quá áp/ESD bằng điện trở, TVS/diode kẹp khi cần.",
-      "Đọc datasheet về ngưỡng logic và giới hạn dòng."
+      "Bảo vệ quá áp và phóng tĩnh điện bằng điện trở, diode TVS hoặc diode kẹp khi cần.",
+      "Tra bảng thông số của linh kiện về ngưỡng logic và giới hạn dòng."
     ],
     "rubric": [
       "2 điểm: trạng thái mặc định.",
       "2 điểm: chống nhiễu/chống nảy.",
       "2 điểm: bảo vệ điện.",
-      "2 điểm: cấu hình firmware.",
+      "2 điểm: cấu hình phần mềm nhúng.",
       "2 điểm: phân tích giới hạn."
     ]
   },
   {
     "title": "Thiết kế bảo vệ quá áp cho cổng I/O",
-    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp MCU. Giải thích vai trò từng linh kiện và các đánh đổi.",
+    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp cho phép của vi điều khiển. Giải thích vai trò từng linh kiện và các đánh đổi.",
     "expected": [
       "Đưa tín hiệu về vùng điện áp an toàn bằng chia áp hoặc giới hạn dòng.",
-      "Dùng diode clamp, TVS hoặc Zener phù hợp để kẹp quá áp.",
+      "Dùng diode kẹp, diode TVS hoặc diode Zener phù hợp để kẹp quá áp.",
       "Có điện trở nối tiếp để giới hạn dòng.",
       "Có thể thêm lọc RC nếu tín hiệu chậm và nhiễu.",
       "Phân tích ảnh hưởng tới tốc độ cạnh, lề nhiễu và năng lượng xung."
@@ -168,8 +168,8 @@
     "rubric": [
       "2 điểm: mạch cơ bản.",
       "2 điểm: vai trò linh kiện.",
-      "2 điểm: bảo vệ ESD/quá áp.",
-      "2 điểm: đánh đổi timing.",
+      "2 điểm: bảo vệ phóng tĩnh điện và quá áp.",
+      "2 điểm: đánh đổi thời gian tín hiệu.",
       "2 điểm: tiêu chí chọn linh kiện."
     ]
   },
@@ -177,17 +177,17 @@
     "title": "Chọn UART, RS-232, RS-485, SPI hoặc I2C",
     "prompt": "Cho các yêu cầu khác nhau về khoảng cách, số thiết bị, tốc độ, số chân và môi trường nhiễu. Trình bày cách chọn giữa UART/RS-232/RS-485, SPI và I2C.",
     "expected": [
-      "Phân biệt inter-system và intra-system.",
-      "Nêu UART TTL và RS-232 cần chuyển mức.",
-      "Nêu RS-485 cho đường dài/nhiễu/nhiều nút.",
-      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây có địa chỉ và ACK.",
+      "Phân biệt giao tiếp trong cùng hệ thống và giao tiếp giữa các hệ thống.",
+      "Nêu UART mức TTL và RS-232 cần chuyển mức điện áp.",
+      "Nêu RS-485 phù hợp hơn cho đường dài, môi trường nhiễu hoặc nhiều nút.",
+      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây hơn và có địa chỉ cùng bit xác nhận.",
       "Kết luận theo ràng buộc thiết kế thay vì chọn theo tên quen."
     ],
     "rubric": [
       "2 điểm: phân biệt chuẩn.",
-      "2 điểm: tiêu chí khoảng cách/nhiễu.",
-      "2 điểm: tốc độ/số chân.",
-      "2 điểm: số thiết bị/topology.",
+      "2 điểm: tiêu chí khoảng cách và nhiễu.",
+      "2 điểm: tốc độ và số chân.",
+      "2 điểm: số thiết bị và cấu trúc nối.",
       "2 điểm: lập luận lựa chọn."
     ]
   },
@@ -195,11 +195,11 @@
     "title": "Phân tích phép đo ADC",
     "prompt": "Một hệ nhúng đo điện áp cảm biến bằng ADC. Trình bày công thức cơ bản, độ phân giải, sai số, lấy mẫu và các cách cải thiện chất lượng đo.",
     "expected": [
-      "Nêu 2^N mức, LSB và quan hệ với Vref.",
+      "Nêu 2^N mức, bước lượng tử LSB và quan hệ với điện áp tham chiếu Vref.",
       "Giải thích sai số lượng tử và giới hạn khoảng nửa LSB với ADC lý tưởng.",
-      "Nêu Nyquist và sample-and-hold.",
-      "Phân biệt nhiễu/sai số ADC với sai số mạch ngoài.",
-      "Đề xuất Vref ổn định, lọc, hiệu chuẩn, giảm trở nguồn, layout tốt và lấy trung bình khi phù hợp."
+      "Nêu điều kiện Nyquist và mạch lấy mẫu-giữ.",
+      "Phân biệt nhiễu hoặc sai số của ADC với sai số từ mạch ngoài.",
+      "Đề xuất điện áp tham chiếu ổn định, lọc, hiệu chuẩn, giảm trở nguồn, bố trí mạch in tốt và lấy trung bình khi phù hợp."
     ],
     "rubric": [
       "2 điểm: công thức/độ phân giải.",
@@ -210,36 +210,36 @@
     ]
   },
   {
-    "title": "Signal Integrity và EMC cho đường cảm biến",
+    "title": "Toàn vẹn tín hiệu và EMC cho đường cảm biến",
     "prompt": "Một dây cảm biến dài chạy gần tải công suất và đường PWM. Phân tích các đường nhiễu có thể xảy ra và đề xuất biện pháp giảm nhiễu.",
     "expected": [
-      "Nêu truyền dẫn, phát xạ, ghép điện dung và ghép cảm ứng.",
-      "Phân tích dU/dt, dI/dt, vòng dòng và dây dài.",
-      "Đề xuất xoắn dây, vi sai, shield, lọc, cách ly hoặc tăng khoảng cách.",
-      "Đề cập grounding, dòng hồi tiếp, tách analog/digital/công suất.",
+      "Nêu nhiễu dẫn, nhiễu phát xạ, ghép điện dung và ghép cảm ứng.",
+      "Phân tích tốc độ thay đổi điện áp, tốc độ thay đổi dòng điện, vòng dòng và dây dài.",
+      "Đề xuất xoắn dây, truyền vi sai, lớp che chắn, lọc, cách ly hoặc tăng khoảng cách.",
+      "Đề cập nối mass, dòng hồi tiếp, tách vùng tương tự, vùng số và vùng công suất.",
       "Liên hệ EMC: giảm phát xạ và tăng miễn nhiễm."
     ],
     "rubric": [
       "2 điểm: nhận diện đường nhiễu.",
       "2 điểm: phân tích nguyên nhân.",
       "2 điểm: biện pháp dây/cáp.",
-      "2 điểm: layout/grounding.",
+      "2 điểm: bố trí mạch in và nối mass.",
       "2 điểm: EMC tổng thể."
     ]
   },
   {
-    "title": "Thiết kế nút đo cảm biến dùng MCU - biến thể 9",
-    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, firmware, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Thiết kế nút đo cảm biến dùng vi điều khiển - biến thể 9",
+    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, phần mềm nhúng, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu lõi xử lý, bộ nhớ, nguồn, reset, clock, cảm biến, output hoặc giao tiếp.",
-      "Giải thích firmware đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
-      "Phân tích lựa chọn MCU, RAM/Flash và ngoại vi theo yêu cầu.",
-      "Đề cập tiết kiệm năng lượng bằng sleep, duty cycle hoặc tắt ngoại vi.",
-      "Nêu kiểm thử tích hợp phần cứng và firmware."
+      "Nêu lõi xử lý, bộ nhớ, nguồn, mạch khởi động lại, xung nhịp, cảm biến, đầu ra hoặc giao tiếp.",
+      "Giải thích phần mềm nhúng đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
+      "Phân tích lựa chọn vi điều khiển, RAM, bộ nhớ Flash và ngoại vi theo yêu cầu.",
+      "Đề cập tiết kiệm năng lượng bằng chế độ ngủ, giảm chu kỳ hoạt động hoặc tắt ngoại vi khi không dùng.",
+      "Nêu kiểm thử tích hợp phần cứng và phần mềm nhúng."
     ],
     "rubric": [
       "2 điểm: cấu trúc phần cứng hợp lý.",
-      "2 điểm: luồng firmware rõ.",
+      "2 điểm: luồng phần mềm nhúng rõ.",
       "2 điểm: lựa chọn bộ nhớ và ngoại vi đúng.",
       "2 điểm: năng lượng và độ tin cậy.",
       "2 điểm: kiểm thử và rủi ro."
@@ -247,12 +247,12 @@
   },
   {
     "title": "Phân tích lựa chọn bộ xử lý - biến thể 10",
-    "prompt": "So sánh vi xử lý, vi điều khiển, DSP, FPGA và ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "So sánh vi xử lý, vi điều khiển, bộ xử lý tín hiệu số DSP, mảng logic lập trình được FPGA và mạch tích hợp chuyên dụng ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
       "Phân biệt mức tích hợp của vi xử lý và vi điều khiển.",
       "Nêu DSP cho xử lý tín hiệu, FPGA cho logic song song cấu hình được, ASIC cho tối ưu cố định số lượng lớn.",
       "Phân tích tiêu chí tốc độ, năng lượng, chi phí, linh hoạt và sản lượng.",
-      "Không sa vào học thuộc model cụ thể.",
+      "Không sa vào học thuộc mã linh kiện cụ thể.",
       "Kết luận theo yêu cầu ứng dụng."
     ],
     "rubric": [
@@ -264,47 +264,47 @@
     ]
   },
   {
-    "title": "Quy trình build và khởi động firmware - biến thể 11",
-    "prompt": "Mô tả từ mã nguồn tới firmware chạy trên MCU, sau đó trình bày vai trò startup code và bootloader trong khởi động/cập nhật hệ thống. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Quy trình dịch và khởi động phần mềm nhúng - biến thể 11",
+    "prompt": "Mô tả quá trình từ mã nguồn tới phần mềm nhúng chạy trên vi điều khiển, sau đó trình bày vai trò của mã khởi động và bộ nạp khởi động trong khởi động hoặc cập nhật hệ thống. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu tiền xử lý, compiler, assembler, linker/loader.",
-      "Giải thích object, thư viện và image cuối.",
-      "Trình bày reset/vector, stack, data/BSS và chuyển tới chương trình chính.",
-      "Nêu bootloader kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
+      "Nêu các bước tiền xử lý, biên dịch, hợp dịch, liên kết và nạp chương trình.",
+      "Giải thích tệp đối tượng, thư viện và bản chương trình cuối cùng.",
+      "Trình bày vector khởi động, ngăn xếp, vùng dữ liệu, vùng BSS và bước chuyển tới chương trình chính.",
+      "Nêu bộ nạp khởi động kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
       "Phân tích rủi ro cập nhật lỗi và cơ chế phục hồi."
     ],
     "rubric": [
       "2 điểm: quy trình dịch.",
       "2 điểm: vai trò công cụ.",
-      "2 điểm: startup.",
-      "2 điểm: bootloader.",
+      "2 điểm: mã khởi động.",
+      "2 điểm: bộ nạp khởi động.",
       "2 điểm: cập nhật an toàn."
     ]
   },
   {
-    "title": "Thiết kế input số chống nhiễu - biến thể 12",
-    "prompt": "Một nút nhấn hoặc cảm biến số nối với MCU qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Thiết kế đầu vào số chống nhiễu - biến thể 12",
+    "prompt": "Một nút nhấn hoặc cảm biến số nối với vi điều khiển qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Dùng pull-up hoặc pull-down để tránh thả nổi.",
-      "Cân nhắc lọc RC, Schmitt trigger hoặc hysteresis.",
+      "Dùng điện trở kéo lên hoặc kéo xuống để tránh trạng thái thả nổi.",
+      "Cân nhắc lọc RC, cổng Schmitt hoặc ngưỡng có trễ.",
       "Có chống nảy bằng phần cứng hoặc phần mềm.",
-      "Bảo vệ quá áp/ESD bằng điện trở, TVS/diode kẹp khi cần.",
-      "Đọc datasheet về ngưỡng logic và giới hạn dòng."
+      "Bảo vệ quá áp và phóng tĩnh điện bằng điện trở, diode TVS hoặc diode kẹp khi cần.",
+      "Tra bảng thông số của linh kiện về ngưỡng logic và giới hạn dòng."
     ],
     "rubric": [
       "2 điểm: trạng thái mặc định.",
       "2 điểm: chống nhiễu/chống nảy.",
       "2 điểm: bảo vệ điện.",
-      "2 điểm: cấu hình firmware.",
+      "2 điểm: cấu hình phần mềm nhúng.",
       "2 điểm: phân tích giới hạn."
     ]
   },
   {
     "title": "Thiết kế bảo vệ quá áp cho cổng I/O - biến thể 13",
-    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp MCU. Giải thích vai trò từng linh kiện và các đánh đổi. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp cho phép của vi điều khiển. Giải thích vai trò từng linh kiện và các đánh đổi. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
       "Đưa tín hiệu về vùng điện áp an toàn bằng chia áp hoặc giới hạn dòng.",
-      "Dùng diode clamp, TVS hoặc Zener phù hợp để kẹp quá áp.",
+      "Dùng diode kẹp, diode TVS hoặc diode Zener phù hợp để kẹp quá áp.",
       "Có điện trở nối tiếp để giới hạn dòng.",
       "Có thể thêm lọc RC nếu tín hiệu chậm và nhiễu.",
       "Phân tích ảnh hưởng tới tốc độ cạnh, lề nhiễu và năng lượng xung."
@@ -312,38 +312,38 @@
     "rubric": [
       "2 điểm: mạch cơ bản.",
       "2 điểm: vai trò linh kiện.",
-      "2 điểm: bảo vệ ESD/quá áp.",
-      "2 điểm: đánh đổi timing.",
+      "2 điểm: bảo vệ phóng tĩnh điện và quá áp.",
+      "2 điểm: đánh đổi thời gian tín hiệu.",
       "2 điểm: tiêu chí chọn linh kiện."
     ]
   },
   {
     "title": "Chọn UART, RS-232, RS-485, SPI hoặc I2C - biến thể 14",
-    "prompt": "Cho các yêu cầu khác nhau về khoảng cách, số thiết bị, tốc độ, số chân và môi trường nhiễu. Trình bày cách chọn giữa UART/RS-232/RS-485, SPI và I2C. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Cho các yêu cầu khác nhau về khoảng cách, số thiết bị, tốc độ, số chân và môi trường nhiễu. Trình bày cách chọn giữa UART/RS-232/RS-485, SPI và I2C. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Phân biệt inter-system và intra-system.",
-      "Nêu UART TTL và RS-232 cần chuyển mức.",
-      "Nêu RS-485 cho đường dài/nhiễu/nhiều nút.",
-      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây có địa chỉ và ACK.",
+      "Phân biệt giao tiếp trong cùng hệ thống và giao tiếp giữa các hệ thống.",
+      "Nêu UART mức TTL và RS-232 cần chuyển mức điện áp.",
+      "Nêu RS-485 phù hợp hơn cho đường dài, môi trường nhiễu hoặc nhiều nút.",
+      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây hơn và có địa chỉ cùng bit xác nhận.",
       "Kết luận theo ràng buộc thiết kế thay vì chọn theo tên quen."
     ],
     "rubric": [
       "2 điểm: phân biệt chuẩn.",
-      "2 điểm: tiêu chí khoảng cách/nhiễu.",
-      "2 điểm: tốc độ/số chân.",
-      "2 điểm: số thiết bị/topology.",
+      "2 điểm: tiêu chí khoảng cách và nhiễu.",
+      "2 điểm: tốc độ và số chân.",
+      "2 điểm: số thiết bị và cấu trúc nối.",
       "2 điểm: lập luận lựa chọn."
     ]
   },
   {
     "title": "Phân tích phép đo ADC - biến thể 15",
-    "prompt": "Một hệ nhúng đo điện áp cảm biến bằng ADC. Trình bày công thức cơ bản, độ phân giải, sai số, lấy mẫu và các cách cải thiện chất lượng đo. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Một hệ nhúng đo điện áp cảm biến bằng ADC. Trình bày công thức cơ bản, độ phân giải, sai số, lấy mẫu và các cách cải thiện chất lượng đo. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu 2^N mức, LSB và quan hệ với Vref.",
+      "Nêu 2^N mức, bước lượng tử LSB và quan hệ với điện áp tham chiếu Vref.",
       "Giải thích sai số lượng tử và giới hạn khoảng nửa LSB với ADC lý tưởng.",
-      "Nêu Nyquist và sample-and-hold.",
-      "Phân biệt nhiễu/sai số ADC với sai số mạch ngoài.",
-      "Đề xuất Vref ổn định, lọc, hiệu chuẩn, giảm trở nguồn, layout tốt và lấy trung bình khi phù hợp."
+      "Nêu điều kiện Nyquist và mạch lấy mẫu-giữ.",
+      "Phân biệt nhiễu hoặc sai số của ADC với sai số từ mạch ngoài.",
+      "Đề xuất điện áp tham chiếu ổn định, lọc, hiệu chuẩn, giảm trở nguồn, bố trí mạch in tốt và lấy trung bình khi phù hợp."
     ],
     "rubric": [
       "2 điểm: công thức/độ phân giải.",
@@ -354,36 +354,36 @@
     ]
   },
   {
-    "title": "Signal Integrity và EMC cho đường cảm biến - biến thể 16",
-    "prompt": "Một dây cảm biến dài chạy gần tải công suất và đường PWM. Phân tích các đường nhiễu có thể xảy ra và đề xuất biện pháp giảm nhiễu. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Toàn vẹn tín hiệu và EMC cho đường cảm biến - biến thể 16",
+    "prompt": "Một dây cảm biến dài chạy gần tải công suất và đường PWM. Phân tích các đường nhiễu có thể xảy ra và đề xuất biện pháp giảm nhiễu. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu truyền dẫn, phát xạ, ghép điện dung và ghép cảm ứng.",
-      "Phân tích dU/dt, dI/dt, vòng dòng và dây dài.",
-      "Đề xuất xoắn dây, vi sai, shield, lọc, cách ly hoặc tăng khoảng cách.",
-      "Đề cập grounding, dòng hồi tiếp, tách analog/digital/công suất.",
+      "Nêu nhiễu dẫn, nhiễu phát xạ, ghép điện dung và ghép cảm ứng.",
+      "Phân tích tốc độ thay đổi điện áp, tốc độ thay đổi dòng điện, vòng dòng và dây dài.",
+      "Đề xuất xoắn dây, truyền vi sai, lớp che chắn, lọc, cách ly hoặc tăng khoảng cách.",
+      "Đề cập nối mass, dòng hồi tiếp, tách vùng tương tự, vùng số và vùng công suất.",
       "Liên hệ EMC: giảm phát xạ và tăng miễn nhiễm."
     ],
     "rubric": [
       "2 điểm: nhận diện đường nhiễu.",
       "2 điểm: phân tích nguyên nhân.",
       "2 điểm: biện pháp dây/cáp.",
-      "2 điểm: layout/grounding.",
+      "2 điểm: bố trí mạch in và nối mass.",
       "2 điểm: EMC tổng thể."
     ]
   },
   {
-    "title": "Thiết kế nút đo cảm biến dùng MCU - biến thể 17",
-    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, firmware, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Thiết kế nút đo cảm biến dùng vi điều khiển - biến thể 17",
+    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, phần mềm nhúng, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu lõi xử lý, bộ nhớ, nguồn, reset, clock, cảm biến, output hoặc giao tiếp.",
-      "Giải thích firmware đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
-      "Phân tích lựa chọn MCU, RAM/Flash và ngoại vi theo yêu cầu.",
-      "Đề cập tiết kiệm năng lượng bằng sleep, duty cycle hoặc tắt ngoại vi.",
-      "Nêu kiểm thử tích hợp phần cứng và firmware."
+      "Nêu lõi xử lý, bộ nhớ, nguồn, mạch khởi động lại, xung nhịp, cảm biến, đầu ra hoặc giao tiếp.",
+      "Giải thích phần mềm nhúng đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
+      "Phân tích lựa chọn vi điều khiển, RAM, bộ nhớ Flash và ngoại vi theo yêu cầu.",
+      "Đề cập tiết kiệm năng lượng bằng chế độ ngủ, giảm chu kỳ hoạt động hoặc tắt ngoại vi khi không dùng.",
+      "Nêu kiểm thử tích hợp phần cứng và phần mềm nhúng."
     ],
     "rubric": [
       "2 điểm: cấu trúc phần cứng hợp lý.",
-      "2 điểm: luồng firmware rõ.",
+      "2 điểm: luồng phần mềm nhúng rõ.",
       "2 điểm: lựa chọn bộ nhớ và ngoại vi đúng.",
       "2 điểm: năng lượng và độ tin cậy.",
       "2 điểm: kiểm thử và rủi ro."
@@ -391,12 +391,12 @@
   },
   {
     "title": "Phân tích lựa chọn bộ xử lý - biến thể 18",
-    "prompt": "So sánh vi xử lý, vi điều khiển, DSP, FPGA và ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "So sánh vi xử lý, vi điều khiển, bộ xử lý tín hiệu số DSP, mảng logic lập trình được FPGA và mạch tích hợp chuyên dụng ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
       "Phân biệt mức tích hợp của vi xử lý và vi điều khiển.",
       "Nêu DSP cho xử lý tín hiệu, FPGA cho logic song song cấu hình được, ASIC cho tối ưu cố định số lượng lớn.",
       "Phân tích tiêu chí tốc độ, năng lượng, chi phí, linh hoạt và sản lượng.",
-      "Không sa vào học thuộc model cụ thể.",
+      "Không sa vào học thuộc mã linh kiện cụ thể.",
       "Kết luận theo yêu cầu ứng dụng."
     ],
     "rubric": [
@@ -408,47 +408,47 @@
     ]
   },
   {
-    "title": "Quy trình build và khởi động firmware - biến thể 19",
-    "prompt": "Mô tả từ mã nguồn tới firmware chạy trên MCU, sau đó trình bày vai trò startup code và bootloader trong khởi động/cập nhật hệ thống. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Quy trình dịch và khởi động phần mềm nhúng - biến thể 19",
+    "prompt": "Mô tả quá trình từ mã nguồn tới phần mềm nhúng chạy trên vi điều khiển, sau đó trình bày vai trò của mã khởi động và bộ nạp khởi động trong khởi động hoặc cập nhật hệ thống. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu tiền xử lý, compiler, assembler, linker/loader.",
-      "Giải thích object, thư viện và image cuối.",
-      "Trình bày reset/vector, stack, data/BSS và chuyển tới chương trình chính.",
-      "Nêu bootloader kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
+      "Nêu các bước tiền xử lý, biên dịch, hợp dịch, liên kết và nạp chương trình.",
+      "Giải thích tệp đối tượng, thư viện và bản chương trình cuối cùng.",
+      "Trình bày vector khởi động, ngăn xếp, vùng dữ liệu, vùng BSS và bước chuyển tới chương trình chính.",
+      "Nêu bộ nạp khởi động kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
       "Phân tích rủi ro cập nhật lỗi và cơ chế phục hồi."
     ],
     "rubric": [
       "2 điểm: quy trình dịch.",
       "2 điểm: vai trò công cụ.",
-      "2 điểm: startup.",
-      "2 điểm: bootloader.",
+      "2 điểm: mã khởi động.",
+      "2 điểm: bộ nạp khởi động.",
       "2 điểm: cập nhật an toàn."
     ]
   },
   {
-    "title": "Thiết kế input số chống nhiễu - biến thể 20",
-    "prompt": "Một nút nhấn hoặc cảm biến số nối với MCU qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Thiết kế đầu vào số chống nhiễu - biến thể 20",
+    "prompt": "Một nút nhấn hoặc cảm biến số nối với vi điều khiển qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Dùng pull-up hoặc pull-down để tránh thả nổi.",
-      "Cân nhắc lọc RC, Schmitt trigger hoặc hysteresis.",
+      "Dùng điện trở kéo lên hoặc kéo xuống để tránh trạng thái thả nổi.",
+      "Cân nhắc lọc RC, cổng Schmitt hoặc ngưỡng có trễ.",
       "Có chống nảy bằng phần cứng hoặc phần mềm.",
-      "Bảo vệ quá áp/ESD bằng điện trở, TVS/diode kẹp khi cần.",
-      "Đọc datasheet về ngưỡng logic và giới hạn dòng."
+      "Bảo vệ quá áp và phóng tĩnh điện bằng điện trở, diode TVS hoặc diode kẹp khi cần.",
+      "Tra bảng thông số của linh kiện về ngưỡng logic và giới hạn dòng."
     ],
     "rubric": [
       "2 điểm: trạng thái mặc định.",
       "2 điểm: chống nhiễu/chống nảy.",
       "2 điểm: bảo vệ điện.",
-      "2 điểm: cấu hình firmware.",
+      "2 điểm: cấu hình phần mềm nhúng.",
       "2 điểm: phân tích giới hạn."
     ]
   },
   {
     "title": "Thiết kế bảo vệ quá áp cho cổng I/O - biến thể 21",
-    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp MCU. Giải thích vai trò từng linh kiện và các đánh đổi. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp cho phép của vi điều khiển. Giải thích vai trò từng linh kiện và các đánh đổi. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
       "Đưa tín hiệu về vùng điện áp an toàn bằng chia áp hoặc giới hạn dòng.",
-      "Dùng diode clamp, TVS hoặc Zener phù hợp để kẹp quá áp.",
+      "Dùng diode kẹp, diode TVS hoặc diode Zener phù hợp để kẹp quá áp.",
       "Có điện trở nối tiếp để giới hạn dòng.",
       "Có thể thêm lọc RC nếu tín hiệu chậm và nhiễu.",
       "Phân tích ảnh hưởng tới tốc độ cạnh, lề nhiễu và năng lượng xung."
@@ -456,38 +456,38 @@
     "rubric": [
       "2 điểm: mạch cơ bản.",
       "2 điểm: vai trò linh kiện.",
-      "2 điểm: bảo vệ ESD/quá áp.",
-      "2 điểm: đánh đổi timing.",
+      "2 điểm: bảo vệ phóng tĩnh điện và quá áp.",
+      "2 điểm: đánh đổi thời gian tín hiệu.",
       "2 điểm: tiêu chí chọn linh kiện."
     ]
   },
   {
     "title": "Chọn UART, RS-232, RS-485, SPI hoặc I2C - biến thể 22",
-    "prompt": "Cho các yêu cầu khác nhau về khoảng cách, số thiết bị, tốc độ, số chân và môi trường nhiễu. Trình bày cách chọn giữa UART/RS-232/RS-485, SPI và I2C. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Cho các yêu cầu khác nhau về khoảng cách, số thiết bị, tốc độ, số chân và môi trường nhiễu. Trình bày cách chọn giữa UART/RS-232/RS-485, SPI và I2C. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Phân biệt inter-system và intra-system.",
-      "Nêu UART TTL và RS-232 cần chuyển mức.",
-      "Nêu RS-485 cho đường dài/nhiễu/nhiều nút.",
-      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây có địa chỉ và ACK.",
+      "Phân biệt giao tiếp trong cùng hệ thống và giao tiếp giữa các hệ thống.",
+      "Nêu UART mức TTL và RS-232 cần chuyển mức điện áp.",
+      "Nêu RS-485 phù hợp hơn cho đường dài, môi trường nhiễu hoặc nhiều nút.",
+      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây hơn và có địa chỉ cùng bit xác nhận.",
       "Kết luận theo ràng buộc thiết kế thay vì chọn theo tên quen."
     ],
     "rubric": [
       "2 điểm: phân biệt chuẩn.",
-      "2 điểm: tiêu chí khoảng cách/nhiễu.",
-      "2 điểm: tốc độ/số chân.",
-      "2 điểm: số thiết bị/topology.",
+      "2 điểm: tiêu chí khoảng cách và nhiễu.",
+      "2 điểm: tốc độ và số chân.",
+      "2 điểm: số thiết bị và cấu trúc nối.",
       "2 điểm: lập luận lựa chọn."
     ]
   },
   {
     "title": "Phân tích phép đo ADC - biến thể 23",
-    "prompt": "Một hệ nhúng đo điện áp cảm biến bằng ADC. Trình bày công thức cơ bản, độ phân giải, sai số, lấy mẫu và các cách cải thiện chất lượng đo. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Một hệ nhúng đo điện áp cảm biến bằng ADC. Trình bày công thức cơ bản, độ phân giải, sai số, lấy mẫu và các cách cải thiện chất lượng đo. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu 2^N mức, LSB và quan hệ với Vref.",
+      "Nêu 2^N mức, bước lượng tử LSB và quan hệ với điện áp tham chiếu Vref.",
       "Giải thích sai số lượng tử và giới hạn khoảng nửa LSB với ADC lý tưởng.",
-      "Nêu Nyquist và sample-and-hold.",
-      "Phân biệt nhiễu/sai số ADC với sai số mạch ngoài.",
-      "Đề xuất Vref ổn định, lọc, hiệu chuẩn, giảm trở nguồn, layout tốt và lấy trung bình khi phù hợp."
+      "Nêu điều kiện Nyquist và mạch lấy mẫu-giữ.",
+      "Phân biệt nhiễu hoặc sai số của ADC với sai số từ mạch ngoài.",
+      "Đề xuất điện áp tham chiếu ổn định, lọc, hiệu chuẩn, giảm trở nguồn, bố trí mạch in tốt và lấy trung bình khi phù hợp."
     ],
     "rubric": [
       "2 điểm: công thức/độ phân giải.",
@@ -498,36 +498,36 @@
     ]
   },
   {
-    "title": "Signal Integrity và EMC cho đường cảm biến - biến thể 24",
-    "prompt": "Một dây cảm biến dài chạy gần tải công suất và đường PWM. Phân tích các đường nhiễu có thể xảy ra và đề xuất biện pháp giảm nhiễu. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Toàn vẹn tín hiệu và EMC cho đường cảm biến - biến thể 24",
+    "prompt": "Một dây cảm biến dài chạy gần tải công suất và đường PWM. Phân tích các đường nhiễu có thể xảy ra và đề xuất biện pháp giảm nhiễu. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu truyền dẫn, phát xạ, ghép điện dung và ghép cảm ứng.",
-      "Phân tích dU/dt, dI/dt, vòng dòng và dây dài.",
-      "Đề xuất xoắn dây, vi sai, shield, lọc, cách ly hoặc tăng khoảng cách.",
-      "Đề cập grounding, dòng hồi tiếp, tách analog/digital/công suất.",
+      "Nêu nhiễu dẫn, nhiễu phát xạ, ghép điện dung và ghép cảm ứng.",
+      "Phân tích tốc độ thay đổi điện áp, tốc độ thay đổi dòng điện, vòng dòng và dây dài.",
+      "Đề xuất xoắn dây, truyền vi sai, lớp che chắn, lọc, cách ly hoặc tăng khoảng cách.",
+      "Đề cập nối mass, dòng hồi tiếp, tách vùng tương tự, vùng số và vùng công suất.",
       "Liên hệ EMC: giảm phát xạ và tăng miễn nhiễm."
     ],
     "rubric": [
       "2 điểm: nhận diện đường nhiễu.",
       "2 điểm: phân tích nguyên nhân.",
       "2 điểm: biện pháp dây/cáp.",
-      "2 điểm: layout/grounding.",
+      "2 điểm: bố trí mạch in và nối mass.",
       "2 điểm: EMC tổng thể."
     ]
   },
   {
-    "title": "Thiết kế nút đo cảm biến dùng MCU - biến thể 25",
-    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, firmware, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Thiết kế nút đo cảm biến dùng vi điều khiển - biến thể 25",
+    "prompt": "Trình bày thiết kế mức khối cho một nút đo cảm biến dùng vi điều khiển: phần cứng chính, phần mềm nhúng, lựa chọn bộ nhớ, giao tiếp, năng lượng và kiểm thử. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu lõi xử lý, bộ nhớ, nguồn, reset, clock, cảm biến, output hoặc giao tiếp.",
-      "Giải thích firmware đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
-      "Phân tích lựa chọn MCU, RAM/Flash và ngoại vi theo yêu cầu.",
-      "Đề cập tiết kiệm năng lượng bằng sleep, duty cycle hoặc tắt ngoại vi.",
-      "Nêu kiểm thử tích hợp phần cứng và firmware."
+      "Nêu lõi xử lý, bộ nhớ, nguồn, mạch khởi động lại, xung nhịp, cảm biến, đầu ra hoặc giao tiếp.",
+      "Giải thích phần mềm nhúng đọc cảm biến, xử lý, truyền dữ liệu và quản lý lỗi.",
+      "Phân tích lựa chọn vi điều khiển, RAM, bộ nhớ Flash và ngoại vi theo yêu cầu.",
+      "Đề cập tiết kiệm năng lượng bằng chế độ ngủ, giảm chu kỳ hoạt động hoặc tắt ngoại vi khi không dùng.",
+      "Nêu kiểm thử tích hợp phần cứng và phần mềm nhúng."
     ],
     "rubric": [
       "2 điểm: cấu trúc phần cứng hợp lý.",
-      "2 điểm: luồng firmware rõ.",
+      "2 điểm: luồng phần mềm nhúng rõ.",
       "2 điểm: lựa chọn bộ nhớ và ngoại vi đúng.",
       "2 điểm: năng lượng và độ tin cậy.",
       "2 điểm: kiểm thử và rủi ro."
@@ -535,12 +535,12 @@
   },
   {
     "title": "Phân tích lựa chọn bộ xử lý - biến thể 26",
-    "prompt": "So sánh vi xử lý, vi điều khiển, DSP, FPGA và ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "So sánh vi xử lý, vi điều khiển, bộ xử lý tín hiệu số DSP, mảng logic lập trình được FPGA và mạch tích hợp chuyên dụng ASIC trong một bài toán nhúng. Nêu tiêu chí chọn và ví dụ tình huống nên ưu tiên từng loại. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
       "Phân biệt mức tích hợp của vi xử lý và vi điều khiển.",
       "Nêu DSP cho xử lý tín hiệu, FPGA cho logic song song cấu hình được, ASIC cho tối ưu cố định số lượng lớn.",
       "Phân tích tiêu chí tốc độ, năng lượng, chi phí, linh hoạt và sản lượng.",
-      "Không sa vào học thuộc model cụ thể.",
+      "Không sa vào học thuộc mã linh kiện cụ thể.",
       "Kết luận theo yêu cầu ứng dụng."
     ],
     "rubric": [
@@ -552,47 +552,47 @@
     ]
   },
   {
-    "title": "Quy trình build và khởi động firmware - biến thể 27",
-    "prompt": "Mô tả từ mã nguồn tới firmware chạy trên MCU, sau đó trình bày vai trò startup code và bootloader trong khởi động/cập nhật hệ thống. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Quy trình dịch và khởi động phần mềm nhúng - biến thể 27",
+    "prompt": "Mô tả quá trình từ mã nguồn tới phần mềm nhúng chạy trên vi điều khiển, sau đó trình bày vai trò của mã khởi động và bộ nạp khởi động trong khởi động hoặc cập nhật hệ thống. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Nêu tiền xử lý, compiler, assembler, linker/loader.",
-      "Giải thích object, thư viện và image cuối.",
-      "Trình bày reset/vector, stack, data/BSS và chuyển tới chương trình chính.",
-      "Nêu bootloader kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
+      "Nêu các bước tiền xử lý, biên dịch, hợp dịch, liên kết và nạp chương trình.",
+      "Giải thích tệp đối tượng, thư viện và bản chương trình cuối cùng.",
+      "Trình bày vector khởi động, ngăn xếp, vùng dữ liệu, vùng BSS và bước chuyển tới chương trình chính.",
+      "Nêu bộ nạp khởi động kiểm tra, nạp, cập nhật hoặc nhảy tới ứng dụng.",
       "Phân tích rủi ro cập nhật lỗi và cơ chế phục hồi."
     ],
     "rubric": [
       "2 điểm: quy trình dịch.",
       "2 điểm: vai trò công cụ.",
-      "2 điểm: startup.",
-      "2 điểm: bootloader.",
+      "2 điểm: mã khởi động.",
+      "2 điểm: bộ nạp khởi động.",
       "2 điểm: cập nhật an toàn."
     ]
   },
   {
-    "title": "Thiết kế input số chống nhiễu - biến thể 28",
-    "prompt": "Một nút nhấn hoặc cảm biến số nối với MCU qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "title": "Thiết kế đầu vào số chống nhiễu - biến thể 28",
+    "prompt": "Một nút nhấn hoặc cảm biến số nối với vi điều khiển qua dây dài trong môi trường nhiễu. Hãy đề xuất mạch và cấu hình phần mềm để đọc ổn định. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Dùng pull-up hoặc pull-down để tránh thả nổi.",
-      "Cân nhắc lọc RC, Schmitt trigger hoặc hysteresis.",
+      "Dùng điện trở kéo lên hoặc kéo xuống để tránh trạng thái thả nổi.",
+      "Cân nhắc lọc RC, cổng Schmitt hoặc ngưỡng có trễ.",
       "Có chống nảy bằng phần cứng hoặc phần mềm.",
-      "Bảo vệ quá áp/ESD bằng điện trở, TVS/diode kẹp khi cần.",
-      "Đọc datasheet về ngưỡng logic và giới hạn dòng."
+      "Bảo vệ quá áp và phóng tĩnh điện bằng điện trở, diode TVS hoặc diode kẹp khi cần.",
+      "Tra bảng thông số của linh kiện về ngưỡng logic và giới hạn dòng."
     ],
     "rubric": [
       "2 điểm: trạng thái mặc định.",
       "2 điểm: chống nhiễu/chống nảy.",
       "2 điểm: bảo vệ điện.",
-      "2 điểm: cấu hình firmware.",
+      "2 điểm: cấu hình phần mềm nhúng.",
       "2 điểm: phân tích giới hạn."
     ]
   },
   {
     "title": "Thiết kế bảo vệ quá áp cho cổng I/O - biến thể 29",
-    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp MCU. Giải thích vai trò từng linh kiện và các đánh đổi. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Đề xuất mạch bảo vệ đơn giản cho một tín hiệu số chậm có mức cao lớn hơn điện áp cho phép của vi điều khiển. Giải thích vai trò từng linh kiện và các đánh đổi. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
       "Đưa tín hiệu về vùng điện áp an toàn bằng chia áp hoặc giới hạn dòng.",
-      "Dùng diode clamp, TVS hoặc Zener phù hợp để kẹp quá áp.",
+      "Dùng diode kẹp, diode TVS hoặc diode Zener phù hợp để kẹp quá áp.",
       "Có điện trở nối tiếp để giới hạn dòng.",
       "Có thể thêm lọc RC nếu tín hiệu chậm và nhiễu.",
       "Phân tích ảnh hưởng tới tốc độ cạnh, lề nhiễu và năng lượng xung."
@@ -600,26 +600,26 @@
     "rubric": [
       "2 điểm: mạch cơ bản.",
       "2 điểm: vai trò linh kiện.",
-      "2 điểm: bảo vệ ESD/quá áp.",
-      "2 điểm: đánh đổi timing.",
+      "2 điểm: bảo vệ phóng tĩnh điện và quá áp.",
+      "2 điểm: đánh đổi thời gian tín hiệu.",
       "2 điểm: tiêu chí chọn linh kiện."
     ]
   },
   {
     "title": "Chọn UART, RS-232, RS-485, SPI hoặc I2C - biến thể 30",
-    "prompt": "Cho các yêu cầu khác nhau về khoảng cách, số thiết bị, tốc độ, số chân và môi trường nhiễu. Trình bày cách chọn giữa UART/RS-232/RS-485, SPI và I2C. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật firmware để lập luận rõ hơn.",
+    "prompt": "Cho các yêu cầu khác nhau về khoảng cách, số thiết bị, tốc độ, số chân và môi trường nhiễu. Trình bày cách chọn giữa UART/RS-232/RS-485, SPI và I2C. Có thể giả định thêm ràng buộc cụ thể về chi phí, năng lượng, nhiễu hoặc khả năng cập nhật phần mềm nhúng để lập luận rõ hơn.",
     "expected": [
-      "Phân biệt inter-system và intra-system.",
-      "Nêu UART TTL và RS-232 cần chuyển mức.",
-      "Nêu RS-485 cho đường dài/nhiễu/nhiều nút.",
-      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây có địa chỉ và ACK.",
+      "Phân biệt giao tiếp trong cùng hệ thống và giao tiếp giữa các hệ thống.",
+      "Nêu UART mức TTL và RS-232 cần chuyển mức điện áp.",
+      "Nêu RS-485 phù hợp hơn cho đường dài, môi trường nhiễu hoặc nhiều nút.",
+      "Nêu SPI nhanh nhưng nhiều dây, I2C ít dây hơn và có địa chỉ cùng bit xác nhận.",
       "Kết luận theo ràng buộc thiết kế thay vì chọn theo tên quen."
     ],
     "rubric": [
       "2 điểm: phân biệt chuẩn.",
-      "2 điểm: tiêu chí khoảng cách/nhiễu.",
-      "2 điểm: tốc độ/số chân.",
-      "2 điểm: số thiết bị/topology.",
+      "2 điểm: tiêu chí khoảng cách và nhiễu.",
+      "2 điểm: tốc độ và số chân.",
+      "2 điểm: số thiết bị và cấu trúc nối.",
       "2 điểm: lập luận lựa chọn."
     ]
   }
@@ -633,6 +633,76 @@
     const shift = copy.length ? seed % copy.length : 0;
     return copy.slice(shift).concat(copy.slice(0, shift));
   };
+
+  const lowerFirstText = (value) => {
+    const text = String(value || "");
+    if (/^(ADC|PWM|DAC|UART|SPI|I2C|RS-|MCU|CPU|TVS|ESD|DNL|INL|TUE|LSB|Vref|Vin|Flash)\b/.test(text)) return text;
+    return text.replace(/^\p{Lu}/u, (ch) => ch.toLocaleLowerCase("vi-VN"));
+  };
+
+  const foldForContext = (value) => String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\u0111/g, "d")
+    .replace(/\u0110/g, "D")
+    .toLowerCase();
+
+  const contextLead = (value) => {
+    const flat = foldForContext(value);
+    if (flat.startsWith("khi phan tich")) return "khi phan tich";
+    if (flat.startsWith("trong mot tinh huong")) return "trong mot tinh huong";
+    if (flat.startsWith("voi mot bai toan")) return "voi mot bai toan";
+    if (flat.startsWith("khi kiem tra")) return "khi kiem tra";
+    if (flat.startsWith("trong boi canh")) return "trong boi canh";
+    return flat.split(" ").slice(0, 4).join(" ");
+  };
+
+  const pickContextPrefix = (prefixes, stem, seed) => {
+    const flatStem = foldForContext(stem);
+    const hasLead = (lead) => new RegExp(`(^|[,\\s])${lead}\\s`).test(flatStem);
+    for (let offset = 0; offset < prefixes.length; offset += 1) {
+      const prefix = prefixes[(seed + offset) % prefixes.length];
+      const flatPrefix = foldForContext(prefix);
+      if (flatPrefix.startsWith("khi ") && hasLead("khi")) continue;
+      if (flatPrefix.startsWith("trong ") && hasLead("trong")) continue;
+      if (flatPrefix.startsWith("voi ") && hasLead("voi")) continue;
+      const lead = contextLead(prefix);
+      if (lead && !flatStem.includes(lead)) return prefix;
+    }
+    return prefixes[seed % prefixes.length];
+  };
+
+  const stripFinalPunctuation = (value) => String(value || "").replace(/[.!?]\s*$/, "");
+
+  const examQuestionKey = (question) => [question.stem, ...question.choices.map((choice) => choice.text)]
+    .join("|")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const contextualizedExamQuestion = (question, seed) => {
+    const prefixes = [
+      "Trong một tình huống thiết kế tương tự",
+      "Khi đặt vào bối cảnh kiểm tra hệ nhúng",
+      "Với cùng mảng kiến thức kỹ thuật",
+      "Ở một phương án thiết kế khác",
+      "Khi rà soát lại lựa chọn kỹ thuật",
+      "Xét trong một ngữ cảnh kỹ thuật khác",
+      "Với một biến thể yêu cầu tương tự",
+      "Trong cách đặt vấn đề khác",
+      "Ở cùng nội dung nhưng tình huống khác",
+      "Xét trên một phương án triển khai khác"
+    ];
+    const stem = stripFinalPunctuation(question.stem);
+    const ending = /\?\s*$/.test(question.stem) ? "?" : ".";
+    const prefix = pickContextPrefix(prefixes, stem, seed);
+    return {
+      ...question,
+      stem: `${prefix}, ${lowerFirstText(stem)}${ending}`
+    };
+  };
+
+  const globalQuestionKeys = new Set();
 
   const pick = (chapter, examIndex, count, used) => {
     const questions = chapter?.questions || [];
@@ -680,20 +750,28 @@
         picked.push(...pick(chapter, examIndex, count, used));
       }
     }
-    const questions = picked.map((question, index) => ({
-      id: `de-${String(examIndex + 1).padStart(2, "0")}-q${String(index + 1).padStart(2, "0")}`,
-      type: question.type,
-      source: question.source,
-      topic: question.topic,
-      bloom: question.bloom,
-      outline: question.outline,
-      stem: question.stem,
-      choices: rotateChoices(question.choices, examIndex + index)
-    }));
+    const questions = picked.map((question, index) => {
+      const baseExamQuestion = {
+        id: `de-${String(examIndex + 1).padStart(2, "0")}-q${String(index + 1).padStart(2, "0")}`,
+        type: question.type,
+        source: question.source,
+        topic: question.topic,
+        bloom: question.bloom,
+        outline: question.outline,
+        stem: question.stem,
+        choices: rotateChoices(question.choices, examIndex + index)
+      };
+      let examQuestion = baseExamQuestion;
+      for (let attempt = 0; globalQuestionKeys.has(examQuestionKey(examQuestion)) && attempt < 12; attempt += 1) {
+        examQuestion = contextualizedExamQuestion(baseExamQuestion, examIndex + index + attempt);
+      }
+      globalQuestionKeys.add(examQuestionKey(examQuestion));
+      return examQuestion;
+    });
     return {
       id: `de-${String(examIndex + 1).padStart(2, "0")}`,
       title: `Đề tham khảo ${String(examIndex + 1).padStart(2, "0")}`,
-      focus: "Bám đề cương chính thức: hệ thống nhúng, phần cứng, phần mềm, I/O, bảo vệ, giao tiếp nâng cao, ADC và EMC.",
+      focus: "Phạm vi ôn tập: hệ thống nhúng, phần cứng, phần mềm, I/O, bảo vệ, giao tiếp nâng cao, ADC và EMC.",
       duration: "Tham khảo",
       durationMinutes: 60,
       mcqCount: questions.length,
