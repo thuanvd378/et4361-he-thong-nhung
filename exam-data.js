@@ -626,6 +626,7 @@
 ];
 
   const byChapter = new Map((embedded?.chapters || []).map((chapter) => [chapter.id, chapter]));
+  const CALCULATION_CHAPTER_ID = "giao-tiep-nhung-nang-cao";
 
   const rotateChoices = (choices, seed) => {
     const copy = choices.map((choice) => ({ ...choice }));
@@ -652,9 +653,33 @@
     return result;
   };
 
+  const pickCalculation = (chapter, examIndex, used) => {
+    const questions = (chapter?.questions || []).filter((question) => question.id.includes("-calc-"));
+    if (!questions.length) return [];
+    const start = (examIndex * 7) % questions.length;
+    for (let offset = 0; offset < questions.length; offset += 1) {
+      const question = questions[(start + offset) % questions.length];
+      if (!used.has(question.id)) {
+        used.add(question.id);
+        return [question];
+      }
+    }
+    return [];
+  };
+
   const buildExam = (examIndex) => {
     const used = new Set();
-    const picked = BLUEPRINT.recipe.flatMap(([chapterId, count]) => pick(byChapter.get(chapterId), examIndex, count, used));
+    const picked = [];
+    for (const [chapterId, count] of BLUEPRINT.recipe) {
+      const chapter = byChapter.get(chapterId);
+      if (chapterId === CALCULATION_CHAPTER_ID) {
+        const calculation = pickCalculation(chapter, examIndex, used);
+        picked.push(...calculation);
+        picked.push(...pick(chapter, examIndex, count - calculation.length, used));
+      } else {
+        picked.push(...pick(chapter, examIndex, count, used));
+      }
+    }
     const questions = picked.map((question, index) => ({
       id: `de-${String(examIndex + 1).padStart(2, "0")}-q${String(index + 1).padStart(2, "0")}`,
       type: question.type,

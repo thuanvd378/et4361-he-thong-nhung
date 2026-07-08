@@ -16639,19 +16639,146 @@
           "setIndex": 0
         },
         {
-          "id": "bao-ve-cong-io-diode-clamp-q003",
-          "type": "Bloom 3 - Vận dụng",
+          "id": "bao-ve-cong-io-esd-q003",
+          "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
-          "bloom": 3,
+          "topic": "ESD và xung nhiễu",
+          "bloom": 4,
           "outline": "2.3",
-          "stem": "Một input có nguy cơ vượt nhẹ trên VCC hoặc dưới GND. Phương án kẹp áp nào hợp lý về nguyên tắc?",
+          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
           "choices": [
             {
-              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
-              "correct": false,
-              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": true,
+              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
             },
+            {
+              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
+              "correct": false,
+              "reason": "ESD là xung rất nhanh, điện áp cao."
+            },
+            {
+              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
+              "correct": false,
+              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
+            },
+            {
+              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
+              "correct": false,
+              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
+            }
+          ],
+          "number": 3,
+          "setIndex": 0
+        },
+        {
+          "id": "bao-ve-cong-io-combined-protection-lst004",
+          "type": "Chọn tổ hợp",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "kết hợp nhiều tầng bảo vệ",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Tổ hợp nào đúng và đủ nhất về kết hợp nhiều tầng bảo vệ?",
+          "choices": [
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định, buffer hoặc cách ly, digital isolator cho tốc độ cao hơn.",
+              "correct": false,
+              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+            },
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định, buffer hoặc cách ly.",
+              "correct": true,
+              "reason": "Tổ hợp này khớp với kiến thức về kết hợp nhiều tầng bảo vệ."
+            },
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định, sai mức logic.",
+              "correct": false,
+              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+            },
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định.",
+              "correct": false,
+              "reason": "Phương án này thiếu một thành phần quan trọng."
+            }
+          ],
+          "number": 4,
+          "setIndex": 0
+        },
+        {
+          "id": "bao-ve-cong-io-series-resistor-q005",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "điện trở nối tiếp bảo vệ đầu vào",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Khi học điện trở nối tiếp bảo vệ đầu vào, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": true,
+              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "correct": false,
+              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+            },
+            {
+              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "correct": false,
+              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+            },
+            {
+              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
+              "correct": false,
+              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+            }
+          ],
+          "number": 5,
+          "setIndex": 0
+        },
+        {
+          "id": "bao-ve-cong-io-simple-overvoltage-design-s006",
+          "type": "Chọn phát biểu sai",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
+          "bloom": 1,
+          "outline": "2.3",
+          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+            },
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            },
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì dòng xung cần đường thoát an toàn."
+            }
+          ],
+          "number": 6,
+          "setIndex": 0
+        },
+        {
+          "id": "bao-ve-cong-io-diode-clamp-q007",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "diode kẹp áp",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích diode kẹp áp, nhận định nào chỉ ra đúng nguyên nhân hoặc đánh đổi chính?",
+          "choices": [
             {
               "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
               "correct": true,
@@ -16666,13 +16793,150 @@
               "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
               "correct": false,
               "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
+            },
+            {
+              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
+              "correct": false,
+              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
             }
           ],
-          "number": 3,
+          "number": 7,
           "setIndex": 0
         },
         {
-          "id": "bao-ve-cong-io-source-sink-protection-q004",
+          "id": "bao-ve-cong-io-protection-circuit-choice-q008",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích cấu trúc bảo vệ input số đi ra ngoài thiết bị, nhận định nào đúng?",
+          "choices": [
+            {
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
+              "correct": false,
+              "reason": "Phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
+            },
+            {
+              "text": "Chỉ mắc một tụ rất lớn song song input và bỏ toàn bộ hạn dòng/kẹp áp.",
+              "correct": false,
+              "reason": "Tụ có thể lọc nhiễu chậm nhưng không đủ để giới hạn dòng quá áp hoặc xả ESD đúng cách."
+            },
+            {
+              "text": "Đặt TVS ở xa đầu nối, sau chân MCU, để xung đi qua toàn bộ mạch trước khi bị kẹp.",
+              "correct": false,
+              "reason": "TVS bảo vệ hiệu quả hơn khi đặt gần điểm xâm nhập và có đường xả ngắn."
+            },
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": true,
+              "reason": "Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            }
+          ],
+          "number": 8,
+          "setIndex": 0
+        },
+        {
+          "id": "bao-ve-cong-io-tvs-zener-q009",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "TVS và Zener",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Trong một tình huống thiết kế cần áp dụng TVS và Zener, lựa chọn nào phù hợp nhất?",
+          "choices": [
+            {
+              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
+              "correct": false,
+              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
+            },
+            {
+              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
+              "correct": false,
+              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
+            },
+            {
+              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
+              "correct": false,
+              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
+            },
+            {
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
+              "correct": true,
+              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            }
+          ],
+          "number": 9,
+          "setIndex": 0
+        },
+        {
+          "id": "bao-ve-cong-io-divider-clamp-design-q010",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chia áp và kẹp áp cho input quá mức",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích mạch chia áp đưa tín hiệu quá mức vào MCU, rủi ro nào vẫn cần xử lý thêm?",
+          "choices": [
+            {
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
+              "correct": false,
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
+            },
+            {
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
+              "correct": true,
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
+            },
+            {
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
+              "correct": false,
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
+            },
+            {
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
+              "correct": false,
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
+            }
+          ],
+          "number": 10,
+          "setIndex": 0
+        },
+        {
+          "id": "bao-ve-cong-io-opto-isolator-q011",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "optocoupler và digital isolator",
+          "bloom": 1,
+          "outline": "2.3",
+          "stem": "Optocoupler và digital isolator được mô tả đúng nhất bởi phương án nào?",
+          "choices": [
+            {
+              "text": "Optocoupler luôn phù hợp cho mọi bus tốc độ cao mà không cần xem băng thông.",
+              "correct": false,
+              "reason": "Optocoupler thường chậm hơn digital isolator."
+            },
+            {
+              "text": "Cách ly tín hiệu yêu cầu nối chung trực tiếp hai mass ở mọi trường hợp.",
+              "correct": false,
+              "reason": "Cách ly nhằm tách hai miền điện, tùy thiết kế có thể không nối trực tiếp mass."
+            },
+            {
+              "text": "Digital isolator không cách ly, nó chỉ đổi màu tín hiệu trong sơ đồ.",
+              "correct": false,
+              "reason": "Digital isolator là linh kiện cách ly tín hiệu số."
+            },
+            {
+              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
+              "correct": true,
+              "reason": "Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
+            }
+          ],
+          "number": 11,
+          "setIndex": 1
+        },
+        {
+          "id": "bao-ve-cong-io-source-sink-protection-q012",
           "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "bảo vệ dòng source và sink",
@@ -16701,17 +16965,17 @@
               "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
             }
           ],
-          "number": 4,
-          "setIndex": 0
+          "number": 12,
+          "setIndex": 1
         },
         {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q005",
+          "id": "bao-ve-cong-io-buffer-sacrifice-q013",
           "type": "Bloom 2 - Hiểu",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "IC đệm bảo vệ",
           "bloom": 2,
           "outline": "2.3",
-          "stem": "Khi học IC đệm bảo vệ, nên hiểu thế nào?",
+          "stem": "Cách giải thích nào phù hợp nhất về IC đệm bảo vệ?",
           "choices": [
             {
               "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
@@ -16734,11 +16998,77 @@
               "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
             }
           ],
-          "number": 5,
-          "setIndex": 0
+          "number": 13,
+          "setIndex": 1
         },
         {
-          "id": "bao-ve-cong-io-series-resistor-s006",
+          "id": "bao-ve-cong-io-esd-q014",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "ESD và xung nhiễu",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Khi học ESD và xung nhiễu, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
+              "correct": false,
+              "reason": "ESD là xung rất nhanh, điện áp cao."
+            },
+            {
+              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
+              "correct": false,
+              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
+            },
+            {
+              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
+              "correct": false,
+              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
+            },
+            {
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": true,
+              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
+            }
+          ],
+          "number": 14,
+          "setIndex": 1
+        },
+        {
+          "id": "bao-ve-cong-io-combined-protection-q015",
+          "type": "Bloom 5 - Đánh giá",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "kết hợp nhiều tầng bảo vệ",
+          "bloom": 5,
+          "outline": "2.3",
+          "stem": "Nếu input đi ra môi trường nhiễu và có nguy cơ ESD, cách tiếp cận nào hợp lý nhất?",
+          "choices": [
+            {
+              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
+              "correct": false,
+              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
+            },
+            {
+              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
+              "correct": false,
+              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
+            },
+            {
+              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
+              "correct": false,
+              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
+            },
+            {
+              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
+              "correct": true,
+              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
+            }
+          ],
+          "number": 15,
+          "setIndex": 1
+        },
+        {
+          "id": "bao-ve-cong-io-series-resistor-s016",
           "type": "Chọn phát biểu sai",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "điện trở nối tiếp bảo vệ đầu vào",
@@ -16747,31 +17077,31 @@
           "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
           "choices": [
             {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
-            },
-            {
               "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
               "correct": false,
               "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
             },
             {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
             },
             {
-              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
             }
           ],
-          "number": 6,
-          "setIndex": 0
+          "number": 16,
+          "setIndex": 1
         },
         {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q007",
+          "id": "bao-ve-cong-io-simple-overvoltage-design-q017",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
@@ -16779,16 +17109,6 @@
           "outline": "2.3",
           "stem": "Một tín hiệu công nghiệp chậm có mức cao lớn hơn nhiều so với nguồn MCU. Phương án thiết kế bảo vệ đơn giản nào hợp lý?",
           "choices": [
-            {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
-              "correct": false,
-              "reason": "Dòng xung cần đường thoát an toàn."
-            },
-            {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
-              "correct": true,
-              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
-            },
             {
               "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
               "correct": false,
@@ -16798,327 +17118,30 @@
               "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
               "correct": false,
               "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
-            }
-          ],
-          "number": 7,
-          "setIndex": 0
-        },
-        {
-          "id": "bao-ve-cong-io-opto-isolator-cnt008",
-          "type": "Số lượng và thành phần",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Về optocoupler và digital isolator, phương án nào vừa đúng số lượng vừa đúng nội dung?",
-          "choices": [
-            {
-              "text": "Có 4 ý chính: optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm, quá dòng.",
-              "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
             },
             {
-              "text": "Có 3 ý chính: optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm.",
-              "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về optocoupler và digital isolator."
-            },
-            {
-              "text": "Có 3 ý chính: optocoupler cho tín hiệu chậm, buffer hoặc cách ly, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm.",
+              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
               "correct": false,
-              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
-            },
-            {
-              "text": "Có 2 ý chính: optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn.",
-              "correct": false,
-              "reason": "Phương án này thiếu một thành phần quan trọng."
-            }
-          ],
-          "number": 8,
-          "setIndex": 0
-        },
-        {
-          "id": "bao-ve-cong-io-esd-q009",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "ESD và xung nhiễu",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
-          "choices": [
-            {
-              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
-              "correct": false,
-              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
-            },
-            {
-              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
-              "correct": false,
-              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
-            },
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": true,
-              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            },
-            {
-              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
-              "correct": false,
-              "reason": "ESD là xung rất nhanh, điện áp cao."
-            }
-          ],
-          "number": 9,
-          "setIndex": 0
-        },
-        {
-          "id": "bao-ve-cong-io-combined-protection-q010",
-          "type": "Bloom 5 - Đánh giá",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "kết hợp nhiều tầng bảo vệ",
-          "bloom": 5,
-          "outline": "2.3",
-          "stem": "Nếu input đi ra môi trường nhiễu và có nguy cơ ESD, cách tiếp cận nào hợp lý nhất?",
-          "choices": [
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": true,
-              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            },
-            {
-              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
-              "correct": false,
-              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
-            },
-            {
-              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
-              "correct": false,
-              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
-            },
-            {
-              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
-              "correct": false,
-              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
-            }
-          ],
-          "number": 10,
-          "setIndex": 0
-        },
-        {
-          "id": "bao-ve-cong-io-tvs-zener-q011",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "TVS và Zener",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "TVS và Zener được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
-              "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
-            },
-            {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
-              "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
-            },
-            {
-              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
-              "correct": false,
-              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
-            },
-            {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": true,
-              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
-            }
-          ],
-          "number": 11,
-          "setIndex": 1
-        },
-        {
-          "id": "bao-ve-cong-io-esd-q012",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "ESD và xung nhiễu",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
-          "choices": [
-            {
-              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
-              "correct": false,
-              "reason": "ESD là xung rất nhanh, điện áp cao."
-            },
-            {
-              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
-              "correct": false,
-              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
-            },
-            {
-              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
-              "correct": false,
-              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
-            },
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": true,
-              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            }
-          ],
-          "number": 12,
-          "setIndex": 1
-        },
-        {
-          "id": "bao-ve-cong-io-combined-protection-q013",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "kết hợp nhiều tầng bảo vệ",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng kết hợp nhiều tầng bảo vệ, lựa chọn nào phù hợp nhất?",
-          "choices": [
-            {
-              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
-              "correct": false,
-              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
-            },
-            {
-              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
-              "correct": false,
-              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
-            },
-            {
-              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
-              "correct": false,
-              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
-            },
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": true,
-              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            }
-          ],
-          "number": 13,
-          "setIndex": 1
-        },
-        {
-          "id": "bao-ve-cong-io-tvs-zener-q014",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "TVS và Zener",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích chọn linh kiện bảo vệ cho đường tín hiệu nhanh đi ra cổng ngoài, nhận định nào đúng?",
-          "choices": [
-            {
-              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
-              "correct": false,
-              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
-            },
-            {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": true,
-              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
-            },
-            {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
-              "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
-            },
-            {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
-              "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
-            }
-          ],
-          "number": 14,
-          "setIndex": 1
-        },
-        {
-          "id": "bao-ve-cong-io-protection-purpose-q015",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "mục đích bảo vệ I/O",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Phương án nào diễn giải đúng mục đích bảo vệ I/O?",
-          "choices": [
-            {
-              "text": "Chân MCU luôn chịu được mọi xung kV từ môi trường công nghiệp.",
-              "correct": false,
-              "reason": "ESD hoặc xung nhiễu lớn có thể phá hỏng cấu trúc bán dẫn."
-            },
-            {
-              "text": "Sai mức logic không ảnh hưởng hệ thống vì phần mềm luôn tự sửa được điện áp ngoài giới hạn.",
-              "correct": false,
-              "reason": "Điện áp ngoài giới hạn có thể làm sai đọc hoặc hỏng phần cứng."
-            },
-            {
-              "text": "Bảo vệ I/O nhằm giảm nguy cơ hỏng chân IC do quá áp, quá dòng, xung nhiễu, ESD, sai mức logic hoặc chênh lệch mass.",
-              "correct": true,
-              "reason": "Chân MCU thường mỏng manh hơn môi trường bên ngoài, nên cần lớp bảo vệ trước khi tín hiệu vào IC chính."
-            },
-            {
-              "text": "Bảo vệ I/O chỉ để làm đẹp sơ đồ, không liên quan độ bền chân IC.",
-              "correct": false,
-              "reason": "Bảo vệ I/O giúp giảm hỏng hóc thực tế."
-            }
-          ],
-          "number": 15,
-          "setIndex": 1
-        },
-        {
-          "id": "bao-ve-cong-io-rc-filter-s016",
-          "type": "Chọn phát biểu sai",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "lọc RC cho đầu vào",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
-            },
-            {
-              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì tụ lớn với điện trở tạo trễ RC đáng kể."
-            },
-            {
-              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
+              "reason": "Dòng xung cần đường thoát an toàn."
             },
             {
               "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+              "correct": true,
+              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
             }
           ],
-          "number": 16,
+          "number": 17,
           "setIndex": 1
         },
         {
-          "id": "bao-ve-cong-io-diode-clamp-q017",
-          "type": "Bloom 1 - Nhớ",
+          "id": "bao-ve-cong-io-diode-clamp-q018",
+          "type": "Bloom 2 - Hiểu",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "diode kẹp áp",
-          "bloom": 1,
+          "bloom": 2,
           "outline": "2.3",
-          "stem": "Diode kẹp áp được mô tả đúng nhất bởi phương án nào?",
+          "stem": "Phương án nào diễn giải đúng diode kẹp áp?",
           "choices": [
-            {
-              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
-              "correct": false,
-              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
-            },
-            {
-              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
-              "correct": true,
-              "reason": "Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
-            },
             {
               "text": "Diode kẹp hoạt động tốt nhất khi không có đường cho dòng xung thoát đi.",
               "correct": false,
@@ -17128,138 +17151,115 @@
               "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
               "correct": false,
               "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
-            }
-          ],
-          "number": 17,
-          "setIndex": 1
-        },
-        {
-          "id": "bao-ve-cong-io-source-sink-protection-q018",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "bảo vệ dòng source và sink",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Phương án nào diễn giải đúng bảo vệ dòng source và sink?",
-          "choices": [
-            {
-              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
-              "correct": false,
-              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
             },
             {
-              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
+              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
               "correct": false,
-              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
+              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
             },
             {
-              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
-              "correct": false,
-              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
-            },
-            {
-              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
+              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
               "correct": true,
-              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
+              "reason": "Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
             }
           ],
           "number": 18,
           "setIndex": 1
         },
         {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q019",
+          "id": "bao-ve-cong-io-protection-circuit-choice-q019",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "IC đệm bảo vệ",
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
           "bloom": 3,
           "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng IC đệm bảo vệ, lựa chọn nào phù hợp nhất?",
+          "stem": "Một input số chậm đi từ dây ngoài vào MCU 3,3 V và có nguy cơ ESD. Cấu trúc bảo vệ nào hợp lý nhất?",
           "choices": [
             {
-              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
+              "text": "Đặt TVS ở xa đầu nối, sau chân MCU, để xung đi qua toàn bộ mạch trước khi bị kẹp.",
               "correct": false,
-              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
+              "reason": "TVS bảo vệ hiệu quả hơn khi đặt gần điểm xâm nhập và có đường xả ngắn."
             },
             {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
               "correct": true,
-              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
+              "reason": "Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
             },
             {
-              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
               "correct": false,
-              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
+              "reason": "Phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
             },
             {
-              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
+              "text": "Chỉ mắc một tụ rất lớn song song input và bỏ toàn bộ hạn dòng/kẹp áp.",
               "correct": false,
-              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
+              "reason": "Tụ có thể lọc nhiễu chậm nhưng không đủ để giới hạn dòng quá áp hoặc xả ESD đúng cách."
             }
           ],
           "number": 19,
           "setIndex": 1
         },
         {
-          "id": "bao-ve-cong-io-series-resistor-q020",
-          "type": "Bloom 4 - Phân tích",
+          "id": "bao-ve-cong-io-tvs-zener-q020",
+          "type": "Bloom 5 - Đánh giá",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "điện trở nối tiếp bảo vệ đầu vào",
-          "bloom": 4,
+          "topic": "TVS và Zener",
+          "bloom": 5,
           "outline": "2.3",
-          "stem": "Khi phân tích một input tốc độ cao có điện trở nối tiếp quá lớn, nguyên nhân nào có thể làm tín hiệu méo?",
+          "stem": "Nếu cần kẹp xung ESD nhanh ở cổng người dùng có thể chạm vào, linh kiện nào thường phù hợp hơn Zener thông thường?",
           "choices": [
             {
-              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
               "correct": false,
-              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
             },
             {
-              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
               "correct": false,
-              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
             },
             {
-              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
-              "correct": false,
-              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
-            },
-            {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
               "correct": true,
-              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            },
+            {
+              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
+              "correct": false,
+              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
             }
           ],
           "number": 20,
           "setIndex": 1
         },
         {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q021",
+          "id": "bao-ve-cong-io-divider-clamp-design-q021",
           "type": "Bloom 5 - Đánh giá",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
+          "topic": "chia áp và kẹp áp cho input quá mức",
           "bloom": 5,
           "outline": "2.3",
-          "stem": "Nếu đề bài yêu cầu thiết kế bảo vệ quá áp đơn giản cho input chậm, phương án nào đáng chọn nhất?",
+          "stem": "Nếu đề bài cho input chậm vượt VCC và yêu cầu bảo vệ đơn giản, phương án nào cân bằng nhất?",
           "choices": [
             {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
               "correct": false,
-              "reason": "Dòng xung cần đường thoát an toàn."
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
             },
             {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
               "correct": true,
-              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
             },
             {
-              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
               "correct": false,
-              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
             },
             {
-              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
               "correct": false,
-              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
             }
           ],
           "number": 21,
@@ -17299,211 +17299,79 @@
           "setIndex": 2
         },
         {
-          "id": "bao-ve-cong-io-series-resistor-q023",
+          "id": "bao-ve-cong-io-source-sink-protection-q023",
           "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "điện trở nối tiếp bảo vệ đầu vào",
+          "topic": "bảo vệ dòng source và sink",
           "bloom": 4,
           "outline": "2.3",
-          "stem": "Khi phân tích một input tốc độ cao có điện trở nối tiếp quá lớn, nguyên nhân nào có thể làm tín hiệu méo?",
+          "stem": "Khi phân tích output điều khiển tải cảm, nhận định nào đúng về bảo vệ dòng và xung ngược?",
           "choices": [
             {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
               "correct": true,
-              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
             },
             {
-              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
               "correct": false,
-              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
             },
             {
-              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
               "correct": false,
-              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
             },
             {
-              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
+              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
               "correct": false,
-              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
             }
           ],
           "number": 23,
           "setIndex": 2
         },
         {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q024",
-          "type": "Bloom 5 - Đánh giá",
+          "id": "bao-ve-cong-io-buffer-sacrifice-q024",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
-          "bloom": 5,
+          "topic": "IC đệm bảo vệ",
+          "bloom": 3,
           "outline": "2.3",
-          "stem": "Nếu đề bài yêu cầu thiết kế bảo vệ quá áp đơn giản cho input chậm, phương án nào đáng chọn nhất?",
+          "stem": "Khi sử dụng IC đệm bảo vệ trong hệ nhúng, phương án nào đúng nhất?",
           "choices": [
             {
-              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
-              "correct": false,
-              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
-            },
-            {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
-              "correct": false,
-              "reason": "Dòng xung cần đường thoát an toàn."
-            },
-            {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
               "correct": true,
-              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
             },
             {
-              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
+              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
               "correct": false,
-              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
+              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
+            },
+            {
+              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
+              "correct": false,
+              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
+            },
+            {
+              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
+              "correct": false,
+              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
             }
           ],
           "number": 24,
           "setIndex": 2
         },
         {
-          "id": "bao-ve-cong-io-opto-isolator-q025",
-          "type": "Bloom 5 - Đánh giá",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
-          "bloom": 5,
-          "outline": "2.3",
-          "stem": "Nếu cần cách ly một tín hiệu số tốc độ cao hơn khả năng optocoupler thường, lựa chọn nào hợp lý hơn?",
-          "choices": [
-            {
-              "text": "Digital isolator không cách ly, nó chỉ đổi màu tín hiệu trong sơ đồ.",
-              "correct": false,
-              "reason": "Digital isolator là linh kiện cách ly tín hiệu số."
-            },
-            {
-              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
-              "correct": true,
-              "reason": "Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
-            },
-            {
-              "text": "Optocoupler luôn phù hợp cho mọi bus tốc độ cao mà không cần xem băng thông.",
-              "correct": false,
-              "reason": "Optocoupler thường chậm hơn digital isolator."
-            },
-            {
-              "text": "Cách ly tín hiệu yêu cầu nối chung trực tiếp hai mass ở mọi trường hợp.",
-              "correct": false,
-              "reason": "Cách ly nhằm tách hai miền điện, tùy thiết kế có thể không nối trực tiếp mass."
-            }
-          ],
-          "number": 25,
-          "setIndex": 2
-        },
-        {
-          "id": "bao-ve-cong-io-esd-s026",
-          "type": "Chọn phát biểu sai",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "ESD và xung nhiễu",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            },
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            },
-            {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
-            },
-            {
-              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì eSD có thể phá hỏng hoặc làm suy giảm linh kiện."
-            }
-          ],
-          "number": 26,
-          "setIndex": 2
-        },
-        {
-          "id": "bao-ve-cong-io-combined-protection-q027",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "kết hợp nhiều tầng bảo vệ",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Phương án nào nhận diện đúng kết hợp nhiều tầng bảo vệ?",
-          "choices": [
-            {
-              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
-              "correct": false,
-              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
-            },
-            {
-              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
-              "correct": false,
-              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
-            },
-            {
-              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
-              "correct": false,
-              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
-            },
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": true,
-              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            }
-          ],
-          "number": 27,
-          "setIndex": 2
-        },
-        {
-          "id": "bao-ve-cong-io-tvs-zener-q028",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "TVS và Zener",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích chọn linh kiện bảo vệ cho đường tín hiệu nhanh đi ra cổng ngoài, nhận định nào đúng?",
-          "choices": [
-            {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
-              "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
-            },
-            {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
-              "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
-            },
-            {
-              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
-              "correct": false,
-              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
-            },
-            {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": true,
-              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
-            }
-          ],
-          "number": 28,
-          "setIndex": 2
-        },
-        {
-          "id": "bao-ve-cong-io-protection-purpose-q029",
+          "id": "bao-ve-cong-io-protection-purpose-q025",
           "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "mục đích bảo vệ I/O",
           "bloom": 1,
           "outline": "2.3",
-          "stem": "Mục đích bảo vệ I/O được mô tả đúng nhất bởi phương án nào?",
+          "stem": "Nhận định nào đúng về mục đích bảo vệ I/O?",
           "choices": [
             {
               "text": "Sai mức logic không ảnh hưởng hệ thống vì phần mềm luôn tự sửa được điện áp ngoài giới hạn.",
@@ -17526,50 +17394,116 @@
               "reason": "ESD hoặc xung nhiễu lớn có thể phá hỏng cấu trúc bán dẫn."
             }
           ],
-          "number": 29,
+          "number": 25,
           "setIndex": 2
         },
         {
-          "id": "bao-ve-cong-io-rc-filter-q030",
-          "type": "Bloom 5 - Đánh giá",
+          "id": "bao-ve-cong-io-rc-filter-s026",
+          "type": "Chọn phát biểu sai",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "lọc RC cho đầu vào",
-          "bloom": 5,
+          "bloom": 2,
           "outline": "2.3",
-          "stem": "Nếu cần lọc nhiễu nút nhấn chậm, phương án RC nên được chọn theo tiêu chí nào?",
+          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
           "choices": [
             {
               "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
-              "correct": true,
-              "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
             },
             {
-              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
               "correct": false,
-              "reason": "Tụ lớn với điện trở tạo trễ RC đáng kể."
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            },
+            {
+              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
             },
             {
               "text": "Lọc RC không thể giảm nhiễu cao tần trên input.",
-              "correct": false,
-              "reason": "RC thông thấp là cách giảm thành phần cao tần."
-            },
-            {
-              "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
-              "correct": false,
-              "reason": "Lọc quá chậm có thể làm méo cạnh và sai timing."
+              "correct": true,
+              "reason": "Phát biểu này sai vì rC thông thấp là cách giảm thành phần cao tần."
             }
           ],
-          "number": 30,
+          "number": 26,
           "setIndex": 2
         },
         {
-          "id": "bao-ve-cong-io-diode-clamp-q031",
+          "id": "bao-ve-cong-io-series-resistor-q027",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "điện trở nối tiếp bảo vệ đầu vào",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một chân input có mạch bảo vệ nội và tín hiệu nút nhấn chậm từ môi trường ngoài. Lựa chọn bảo vệ đơn giản nào phù hợp?",
+          "choices": [
+            {
+              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
+              "correct": false,
+              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+            },
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": true,
+              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "correct": false,
+              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+            },
+            {
+              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "correct": false,
+              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+            }
+          ],
+          "number": 27,
+          "setIndex": 2
+        },
+        {
+          "id": "bao-ve-cong-io-simple-overvoltage-design-q028",
           "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
+          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
           "bloom": 4,
           "outline": "2.3",
-          "stem": "Khi phân tích diode kẹp áp, nhận định nào chỉ ra đúng nguyên nhân hoặc đánh đổi chính?",
+          "stem": "Khi phân tích một mạch bảo vệ quá áp đầu vào, tiêu chí nào quan trọng nhất?",
+          "choices": [
+            {
+              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
+              "correct": false,
+              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
+            },
+            {
+              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
+              "correct": false,
+              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
+            },
+            {
+              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "correct": false,
+              "reason": "Dòng xung cần đường thoát an toàn."
+            },
+            {
+              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "correct": true,
+              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+            }
+          ],
+          "number": 28,
+          "setIndex": 2
+        },
+        {
+          "id": "bao-ve-cong-io-diode-clamp-q029",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "diode kẹp áp",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Khi học diode kẹp áp, nên hiểu thế nào?",
           "choices": [
             {
               "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
@@ -17592,23 +17526,150 @@
               "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
             }
           ],
+          "number": 29,
+          "setIndex": 2
+        },
+        {
+          "id": "bao-ve-cong-io-protection-circuit-choice-q030",
+          "type": "Bloom 5 - Đánh giá",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
+          "bloom": 5,
+          "outline": "2.3",
+          "stem": "Nếu phải chọn phương án bảo vệ đơn giản nhưng đủ lớp cho input số chậm, phương án nào đáng chọn?",
+          "choices": [
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": true,
+              "reason": "Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            },
+            {
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
+              "correct": false,
+              "reason": "Phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
+            },
+            {
+              "text": "Chỉ mắc một tụ rất lớn song song input và bỏ toàn bộ hạn dòng/kẹp áp.",
+              "correct": false,
+              "reason": "Tụ có thể lọc nhiễu chậm nhưng không đủ để giới hạn dòng quá áp hoặc xả ESD đúng cách."
+            },
+            {
+              "text": "Đặt TVS ở xa đầu nối, sau chân MCU, để xung đi qua toàn bộ mạch trước khi bị kẹp.",
+              "correct": false,
+              "reason": "TVS bảo vệ hiệu quả hơn khi đặt gần điểm xâm nhập và có đường xả ngắn."
+            }
+          ],
+          "number": 30,
+          "setIndex": 2
+        },
+        {
+          "id": "bao-ve-cong-io-tvs-zener-q031",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "TVS và Zener",
+          "bloom": 1,
+          "outline": "2.3",
+          "stem": "Nhận định nào đúng về TVS và Zener?",
+          "choices": [
+            {
+              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
+              "correct": false,
+              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
+            },
+            {
+              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
+              "correct": false,
+              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
+            },
+            {
+              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
+              "correct": false,
+              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
+            },
+            {
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
+              "correct": true,
+              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            }
+          ],
           "number": 31,
           "setIndex": 3
         },
         {
-          "id": "bao-ve-cong-io-source-sink-protection-q032",
-          "type": "Bloom 3 - Vận dụng",
+          "id": "bao-ve-cong-io-divider-clamp-design-q032",
+          "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "bảo vệ dòng source và sink",
-          "bloom": 3,
+          "topic": "chia áp và kẹp áp cho input quá mức",
+          "bloom": 4,
           "outline": "2.3",
-          "stem": "Khi sử dụng bảo vệ dòng source và sink trong hệ nhúng, phương án nào đúng nhất?",
+          "stem": "Khi phân tích mạch chia áp đưa tín hiệu quá mức vào MCU, rủi ro nào vẫn cần xử lý thêm?",
           "choices": [
             {
-              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
-              "correct": true,
-              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
+              "correct": false,
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
             },
+            {
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
+              "correct": false,
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
+            },
+            {
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
+              "correct": false,
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
+            },
+            {
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
+              "correct": true,
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
+            }
+          ],
+          "number": 32,
+          "setIndex": 3
+        },
+        {
+          "id": "bao-ve-cong-io-opto-isolator-q033",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "optocoupler và digital isolator",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Trong một tình huống thiết kế cần áp dụng optocoupler và digital isolator, lựa chọn nào phù hợp nhất?",
+          "choices": [
+            {
+              "text": "Optocoupler luôn phù hợp cho mọi bus tốc độ cao mà không cần xem băng thông.",
+              "correct": false,
+              "reason": "Optocoupler thường chậm hơn digital isolator."
+            },
+            {
+              "text": "Cách ly tín hiệu yêu cầu nối chung trực tiếp hai mass ở mọi trường hợp.",
+              "correct": false,
+              "reason": "Cách ly nhằm tách hai miền điện, tùy thiết kế có thể không nối trực tiếp mass."
+            },
+            {
+              "text": "Digital isolator không cách ly, nó chỉ đổi màu tín hiệu trong sơ đồ.",
+              "correct": false,
+              "reason": "Digital isolator là linh kiện cách ly tín hiệu số."
+            },
+            {
+              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
+              "correct": true,
+              "reason": "Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
+            }
+          ],
+          "number": 33,
+          "setIndex": 3
+        },
+        {
+          "id": "bao-ve-cong-io-source-sink-protection-q034",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "bảo vệ dòng source và sink",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Cách giải thích nào phù hợp nhất về bảo vệ dòng source và sink?",
+          "choices": [
             {
               "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
               "correct": false,
@@ -17623,19 +17684,24 @@
               "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
               "correct": false,
               "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
+            },
+            {
+              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
+              "correct": true,
+              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
             }
           ],
-          "number": 32,
+          "number": 34,
           "setIndex": 3
         },
         {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q033",
-          "type": "Bloom 1 - Nhớ",
+          "id": "bao-ve-cong-io-buffer-sacrifice-q035",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "IC đệm bảo vệ",
-          "bloom": 1,
+          "bloom": 3,
           "outline": "2.3",
-          "stem": "Phương án nào nhận diện đúng IC đệm bảo vệ?",
+          "stem": "Trong một tình huống thiết kế cần áp dụng IC đệm bảo vệ, lựa chọn nào phù hợp nhất?",
           "choices": [
             {
               "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
@@ -17658,226 +17724,84 @@
               "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
             }
           ],
-          "number": 33,
-          "setIndex": 3
-        },
-        {
-          "id": "bao-ve-cong-io-diode-clamp-q034",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Cách giải thích nào phù hợp nhất về diode kẹp áp?",
-          "choices": [
-            {
-              "text": "Diode kẹp hoạt động tốt nhất khi không có đường cho dòng xung thoát đi.",
-              "correct": false,
-              "reason": "Cần có đường dòng về rail hoặc mass phù hợp."
-            },
-            {
-              "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
-              "correct": false,
-              "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
-            },
-            {
-              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
-              "correct": false,
-              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
-            },
-            {
-              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
-              "correct": true,
-              "reason": "Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
-            }
-          ],
-          "number": 34,
-          "setIndex": 3
-        },
-        {
-          "id": "bao-ve-cong-io-source-sink-protection-q035",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "bảo vệ dòng source và sink",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng bảo vệ dòng source và sink, lựa chọn nào phù hợp nhất?",
-          "choices": [
-            {
-              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
-              "correct": false,
-              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
-            },
-            {
-              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
-              "correct": true,
-              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
-            },
-            {
-              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
-              "correct": false,
-              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
-            },
-            {
-              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
-              "correct": false,
-              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
-            }
-          ],
           "number": 35,
           "setIndex": 3
         },
         {
-          "id": "bao-ve-cong-io-buffer-sacrifice-s036",
+          "id": "bao-ve-cong-io-protection-purpose-s036",
           "type": "Chọn phát biểu sai",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "IC đệm bảo vệ",
+          "topic": "mục đích bảo vệ I/O",
           "bloom": 2,
           "outline": "2.3",
           "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
           "choices": [
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            },
-            {
-              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
-            },
             {
               "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
               "correct": false,
               "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
             },
             {
-              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
+              "text": "Sai mức logic không ảnh hưởng hệ thống vì phần mềm luôn tự sửa được điện áp ngoài giới hạn.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì điện áp ngoài giới hạn có thể làm sai đọc hoặc hỏng phần cứng."
+            },
+            {
+              "text": "Bảo vệ I/O nhằm giảm nguy cơ hỏng chân IC do quá áp, quá dòng, xung nhiễu, ESD, sai mức logic hoặc chênh lệch mass.",
               "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Chân MCU thường mỏng manh hơn môi trường bên ngoài, nên cần lớp bảo vệ trước khi tín hiệu vào IC chính."
+            },
+            {
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
             }
           ],
           "number": 36,
           "setIndex": 3
         },
         {
-          "id": "bao-ve-cong-io-series-resistor-q037",
-          "type": "Bloom 2 - Hiểu",
+          "id": "bao-ve-cong-io-rc-filter-q037",
+          "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "điện trở nối tiếp bảo vệ đầu vào",
-          "bloom": 2,
+          "topic": "lọc RC cho đầu vào",
+          "bloom": 1,
           "outline": "2.3",
-          "stem": "Cách giải thích nào phù hợp nhất về điện trở nối tiếp bảo vệ đầu vào?",
+          "stem": "Nhận định nào đúng về lọc RC cho đầu vào?",
           "choices": [
             {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
+              "correct": false,
+              "reason": "Lọc quá chậm có thể làm méo cạnh và sai timing."
+            },
+            {
+              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
               "correct": true,
-              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+              "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
             },
             {
-              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
               "correct": false,
-              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+              "reason": "Tụ lớn với điện trở tạo trễ RC đáng kể."
             },
             {
-              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "text": "Lọc RC không thể giảm nhiễu cao tần trên input.",
               "correct": false,
-              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
-            },
-            {
-              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
-              "correct": false,
-              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+              "reason": "RC thông thấp là cách giảm thành phần cao tần."
             }
           ],
           "number": 37,
           "setIndex": 3
         },
         {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q038",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích một mạch bảo vệ quá áp đầu vào, tiêu chí nào quan trọng nhất?",
-          "choices": [
-            {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
-              "correct": false,
-              "reason": "Dòng xung cần đường thoát an toàn."
-            },
-            {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
-              "correct": true,
-              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
-            },
-            {
-              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
-              "correct": false,
-              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
-            },
-            {
-              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
-              "correct": false,
-              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
-            }
-          ],
-          "number": 38,
-          "setIndex": 3
-        },
-        {
-          "id": "bao-ve-cong-io-opto-isolator-q039",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng optocoupler và digital isolator, lựa chọn nào phù hợp nhất?",
-          "choices": [
-            {
-              "text": "Digital isolator không cách ly, nó chỉ đổi màu tín hiệu trong sơ đồ.",
-              "correct": false,
-              "reason": "Digital isolator là linh kiện cách ly tín hiệu số."
-            },
-            {
-              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
-              "correct": true,
-              "reason": "Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
-            },
-            {
-              "text": "Optocoupler luôn phù hợp cho mọi bus tốc độ cao mà không cần xem băng thông.",
-              "correct": false,
-              "reason": "Optocoupler thường chậm hơn digital isolator."
-            },
-            {
-              "text": "Cách ly tín hiệu yêu cầu nối chung trực tiếp hai mass ở mọi trường hợp.",
-              "correct": false,
-              "reason": "Cách ly nhằm tách hai miền điện, tùy thiết kế có thể không nối trực tiếp mass."
-            }
-          ],
-          "number": 39,
-          "setIndex": 3
-        },
-        {
-          "id": "bao-ve-cong-io-esd-q040",
+          "id": "bao-ve-cong-io-esd-q038",
           "type": "Bloom 2 - Hiểu",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "ESD và xung nhiễu",
           "bloom": 2,
           "outline": "2.3",
-          "stem": "Cách giải thích nào phù hợp nhất về ESD và xung nhiễu?",
+          "stem": "Khi học ESD và xung nhiễu, nên hiểu thế nào?",
           "choices": [
-            {
-              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
-              "correct": false,
-              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
-            },
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": true,
-              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            },
             {
               "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
               "correct": false,
@@ -17887,19 +17811,29 @@
               "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
               "correct": false,
               "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
+            },
+            {
+              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
+              "correct": false,
+              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
+            },
+            {
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": true,
+              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
             }
           ],
-          "number": 40,
+          "number": 38,
           "setIndex": 3
         },
         {
-          "id": "bao-ve-cong-io-combined-protection-q041",
-          "type": "Bloom 1 - Nhớ",
+          "id": "bao-ve-cong-io-combined-protection-q039",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "kết hợp nhiều tầng bảo vệ",
-          "bloom": 1,
+          "bloom": 3,
           "outline": "2.3",
-          "stem": "Kết hợp nhiều tầng bảo vệ được mô tả đúng nhất bởi phương án nào?",
+          "stem": "Trong một tình huống thiết kế cần áp dụng kết hợp nhiều tầng bảo vệ, lựa chọn nào phù hợp nhất?",
           "choices": [
             {
               "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
@@ -17920,6 +17854,72 @@
               "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
               "correct": false,
               "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
+            }
+          ],
+          "number": 39,
+          "setIndex": 3
+        },
+        {
+          "id": "bao-ve-cong-io-diode-clamp-q040",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "diode kẹp áp",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một input có nguy cơ vượt nhẹ trên VCC hoặc dưới GND. Phương án kẹp áp nào hợp lý về nguyên tắc?",
+          "choices": [
+            {
+              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
+              "correct": true,
+              "reason": "Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
+            },
+            {
+              "text": "Diode kẹp hoạt động tốt nhất khi không có đường cho dòng xung thoát đi.",
+              "correct": false,
+              "reason": "Cần có đường dòng về rail hoặc mass phù hợp."
+            },
+            {
+              "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
+              "correct": false,
+              "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
+            },
+            {
+              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
+              "correct": false,
+              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
+            }
+          ],
+          "number": 40,
+          "setIndex": 3
+        },
+        {
+          "id": "bao-ve-cong-io-protection-circuit-choice-q041",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một input số chậm đi từ dây ngoài vào MCU 3,3 V và có nguy cơ ESD. Cấu trúc bảo vệ nào hợp lý nhất?",
+          "choices": [
+            {
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
+              "correct": false,
+              "reason": "Phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
+            },
+            {
+              "text": "Chỉ mắc một tụ rất lớn song song input và bỏ toàn bộ hạn dòng/kẹp áp.",
+              "correct": false,
+              "reason": "Tụ có thể lọc nhiễu chậm nhưng không đủ để giới hạn dòng quá áp hoặc xả ESD đúng cách."
+            },
+            {
+              "text": "Đặt TVS ở xa đầu nối, sau chân MCU, để xung đi qua toàn bộ mạch trước khi bị kẹp.",
+              "correct": false,
+              "reason": "TVS bảo vệ hiệu quả hơn khi đặt gần điểm xâm nhập và có đường xả ngắn."
+            },
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": true,
+              "reason": "Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
             }
           ],
           "number": 41,
@@ -17959,13 +17959,145 @@
           "setIndex": 4
         },
         {
-          "id": "bao-ve-cong-io-protection-purpose-q043",
+          "id": "bao-ve-cong-io-divider-clamp-design-q043",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chia áp và kẹp áp cho input quá mức",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một tín hiệu logic 12 V chậm cần đưa vào MCU 3,3 V. Cách phối hợp chia áp và bảo vệ nào hợp lý?",
+          "choices": [
+            {
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
+              "correct": false,
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
+            },
+            {
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
+              "correct": true,
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
+            },
+            {
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
+              "correct": false,
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
+            },
+            {
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
+              "correct": false,
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
+            }
+          ],
+          "number": 43,
+          "setIndex": 4
+        },
+        {
+          "id": "bao-ve-cong-io-opto-isolator-lst044",
+          "type": "Chọn tổ hợp",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "optocoupler và digital isolator",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Tổ hợp nào đúng và đủ nhất về optocoupler và digital isolator?",
+          "choices": [
+            {
+              "text": "Gồm optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm, kẹp áp.",
+              "correct": false,
+              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+            },
+            {
+              "text": "Gồm optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm.",
+              "correct": true,
+              "reason": "Tổ hợp này khớp với kiến thức về optocoupler và digital isolator."
+            },
+            {
+              "text": "Gồm optocoupler cho tín hiệu chậm, sai mức logic, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm.",
+              "correct": false,
+              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+            },
+            {
+              "text": "Gồm optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn.",
+              "correct": false,
+              "reason": "Phương án này thiếu một thành phần quan trọng."
+            }
+          ],
+          "number": 44,
+          "setIndex": 4
+        },
+        {
+          "id": "bao-ve-cong-io-source-sink-protection-q045",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "bảo vệ dòng source và sink",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Phương án nào diễn giải đúng bảo vệ dòng source và sink?",
+          "choices": [
+            {
+              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
+              "correct": true,
+              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
+            },
+            {
+              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
+              "correct": false,
+              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
+            },
+            {
+              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
+              "correct": false,
+              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
+            },
+            {
+              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
+              "correct": false,
+              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
+            }
+          ],
+          "number": 45,
+          "setIndex": 4
+        },
+        {
+          "id": "bao-ve-cong-io-buffer-sacrifice-s046",
+          "type": "Chọn phát biểu sai",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "IC đệm bảo vệ",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
+            },
+            {
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
+            },
+            {
+              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
+            },
+            {
+              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì buffer không đủ cho mọi xung năng lượng lớn."
+            }
+          ],
+          "number": 46,
+          "setIndex": 4
+        },
+        {
+          "id": "bao-ve-cong-io-protection-purpose-q047",
           "type": "Bloom 2 - Hiểu",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "mục đích bảo vệ I/O",
           "bloom": 2,
           "outline": "2.3",
-          "stem": "Cách giải thích nào phù hợp nhất về mục đích bảo vệ I/O?",
+          "stem": "Khi học mục đích bảo vệ I/O, nên hiểu thế nào?",
           "choices": [
             {
               "text": "Chân MCU luôn chịu được mọi xung kV từ môi trường công nghiệp.",
@@ -17988,11 +18120,11 @@
               "reason": "Bảo vệ I/O giúp giảm hỏng hóc thực tế."
             }
           ],
-          "number": 43,
+          "number": 47,
           "setIndex": 4
         },
         {
-          "id": "bao-ve-cong-io-rc-filter-q044",
+          "id": "bao-ve-cong-io-rc-filter-q048",
           "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "lọc RC cho đầu vào",
@@ -18021,202 +18153,70 @@
               "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
             }
           ],
-          "number": 44,
-          "setIndex": 4
-        },
-        {
-          "id": "bao-ve-cong-io-tvs-zener-q045",
-          "type": "Bloom 5 - Đánh giá",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "TVS và Zener",
-          "bloom": 5,
-          "outline": "2.3",
-          "stem": "Nếu cần kẹp xung ESD nhanh ở cổng người dùng có thể chạm vào, linh kiện nào thường phù hợp hơn Zener thông thường?",
-          "choices": [
-            {
-              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
-              "correct": false,
-              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
-            },
-            {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": true,
-              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
-            },
-            {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
-              "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
-            },
-            {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
-              "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
-            }
-          ],
-          "number": 45,
-          "setIndex": 4
-        },
-        {
-          "id": "bao-ve-cong-io-protection-purpose-s046",
-          "type": "Chọn phát biểu sai",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "mục đích bảo vệ I/O",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Bảo vệ I/O nhằm giảm nguy cơ hỏng chân IC do quá áp, quá dòng, xung nhiễu, ESD, sai mức logic hoặc chênh lệch mass.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Chân MCU thường mỏng manh hơn môi trường bên ngoài, nên cần lớp bảo vệ trước khi tín hiệu vào IC chính."
-            },
-            {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
-            },
-            {
-              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
-            },
-            {
-              "text": "Bảo vệ I/O chỉ để làm đẹp sơ đồ, không liên quan độ bền chân IC.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì bảo vệ I/O giúp giảm hỏng hóc thực tế."
-            }
-          ],
-          "number": 46,
-          "setIndex": 4
-        },
-        {
-          "id": "bao-ve-cong-io-rc-filter-q047",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "lọc RC cho đầu vào",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Lọc RC cho đầu vào được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
-              "correct": false,
-              "reason": "Tụ lớn với điện trở tạo trễ RC đáng kể."
-            },
-            {
-              "text": "Lọc RC không thể giảm nhiễu cao tần trên input.",
-              "correct": false,
-              "reason": "RC thông thấp là cách giảm thành phần cao tần."
-            },
-            {
-              "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
-              "correct": false,
-              "reason": "Lọc quá chậm có thể làm méo cạnh và sai timing."
-            },
-            {
-              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
-              "correct": true,
-              "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
-            }
-          ],
-          "number": 47,
-          "setIndex": 4
-        },
-        {
-          "id": "bao-ve-cong-io-diode-clamp-q048",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Một input có nguy cơ vượt nhẹ trên VCC hoặc dưới GND. Phương án kẹp áp nào hợp lý về nguyên tắc?",
-          "choices": [
-            {
-              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
-              "correct": true,
-              "reason": "Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
-            },
-            {
-              "text": "Diode kẹp hoạt động tốt nhất khi không có đường cho dòng xung thoát đi.",
-              "correct": false,
-              "reason": "Cần có đường dòng về rail hoặc mass phù hợp."
-            },
-            {
-              "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
-              "correct": false,
-              "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
-            },
-            {
-              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
-              "correct": false,
-              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
-            }
-          ],
           "number": 48,
           "setIndex": 4
         },
         {
-          "id": "bao-ve-cong-io-source-sink-protection-q049",
+          "id": "bao-ve-cong-io-esd-q049",
           "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "bảo vệ dòng source và sink",
+          "topic": "ESD và xung nhiễu",
           "bloom": 1,
           "outline": "2.3",
-          "stem": "Nhận định nào đúng về bảo vệ dòng source và sink?",
+          "stem": "Nhận định nào đúng về ESD và xung nhiễu?",
           "choices": [
             {
-              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
+              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
               "correct": false,
-              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
+              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
             },
             {
-              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
               "correct": true,
-              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
+              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
             },
             {
-              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
+              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
               "correct": false,
-              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
+              "reason": "ESD là xung rất nhanh, điện áp cao."
             },
             {
-              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
+              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
               "correct": false,
-              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
+              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
             }
           ],
           "number": 49,
           "setIndex": 4
         },
         {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q050",
-          "type": "Bloom 2 - Hiểu",
+          "id": "bao-ve-cong-io-combined-protection-q050",
+          "type": "Bloom 5 - Đánh giá",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "IC đệm bảo vệ",
-          "bloom": 2,
+          "topic": "kết hợp nhiều tầng bảo vệ",
+          "bloom": 5,
           "outline": "2.3",
-          "stem": "Khi học IC đệm bảo vệ, nên hiểu thế nào?",
+          "stem": "Nếu input đi ra môi trường nhiễu và có nguy cơ ESD, cách tiếp cận nào hợp lý nhất?",
           "choices": [
             {
-              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
-              "correct": false,
-              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
-            },
-            {
-              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
-              "correct": false,
-              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
-            },
-            {
-              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
-              "correct": false,
-              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
-            },
-            {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
+              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
               "correct": true,
-              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
+              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
+            },
+            {
+              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
+              "correct": false,
+              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
+            },
+            {
+              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
+              "correct": false,
+              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
+            },
+            {
+              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
+              "correct": false,
+              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
             }
           ],
           "number": 50,
@@ -18289,13 +18289,79 @@
           "setIndex": 5
         },
         {
-          "id": "bao-ve-cong-io-opto-isolator-q053",
+          "id": "bao-ve-cong-io-tvs-zener-q053",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
+          "topic": "TVS và Zener",
           "bloom": 3,
           "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng optocoupler và digital isolator, lựa chọn nào phù hợp nhất?",
+          "stem": "Trong một tình huống thiết kế cần áp dụng TVS và Zener, lựa chọn nào phù hợp nhất?",
+          "choices": [
+            {
+              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
+              "correct": false,
+              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
+            },
+            {
+              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
+              "correct": false,
+              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
+            },
+            {
+              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
+              "correct": false,
+              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
+            },
+            {
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
+              "correct": true,
+              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            }
+          ],
+          "number": 53,
+          "setIndex": 5
+        },
+        {
+          "id": "bao-ve-cong-io-divider-clamp-design-q054",
+          "type": "Bloom 5 - Đánh giá",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chia áp và kẹp áp cho input quá mức",
+          "bloom": 5,
+          "outline": "2.3",
+          "stem": "Nếu đề bài cho input chậm vượt VCC và yêu cầu bảo vệ đơn giản, phương án nào cân bằng nhất?",
+          "choices": [
+            {
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
+              "correct": true,
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
+            },
+            {
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
+              "correct": false,
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
+            },
+            {
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
+              "correct": false,
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
+            },
+            {
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
+              "correct": false,
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
+            }
+          ],
+          "number": 54,
+          "setIndex": 5
+        },
+        {
+          "id": "bao-ve-cong-io-opto-isolator-q055",
+          "type": "Bloom 5 - Đánh giá",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "optocoupler và digital isolator",
+          "bloom": 5,
+          "outline": "2.3",
+          "stem": "Nếu cần cách ly một tín hiệu số tốc độ cao hơn khả năng optocoupler thường, lựa chọn nào hợp lý hơn?",
           "choices": [
             {
               "text": "Optocoupler luôn phù hợp cho mọi bus tốc độ cao mà không cần xem băng thông.",
@@ -18318,248 +18384,116 @@
               "reason": "Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
             }
           ],
-          "number": 53,
-          "setIndex": 5
-        },
-        {
-          "id": "bao-ve-cong-io-esd-q054",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "ESD và xung nhiễu",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
-          "choices": [
-            {
-              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
-              "correct": false,
-              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
-            },
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": true,
-              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            },
-            {
-              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
-              "correct": false,
-              "reason": "ESD là xung rất nhanh, điện áp cao."
-            },
-            {
-              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
-              "correct": false,
-              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
-            }
-          ],
-          "number": 54,
-          "setIndex": 5
-        },
-        {
-          "id": "bao-ve-cong-io-combined-protection-q055",
-          "type": "Bloom 5 - Đánh giá",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "kết hợp nhiều tầng bảo vệ",
-          "bloom": 5,
-          "outline": "2.3",
-          "stem": "Nếu input đi ra môi trường nhiễu và có nguy cơ ESD, cách tiếp cận nào hợp lý nhất?",
-          "choices": [
-            {
-              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
-              "correct": false,
-              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
-            },
-            {
-              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
-              "correct": false,
-              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
-            },
-            {
-              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
-              "correct": false,
-              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
-            },
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": true,
-              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            }
-          ],
           "number": 55,
           "setIndex": 5
         },
         {
-          "id": "bao-ve-cong-io-opto-isolator-s056",
+          "id": "bao-ve-cong-io-source-sink-protection-s056",
           "type": "Chọn phát biểu sai",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
+          "topic": "bảo vệ dòng source và sink",
           "bloom": 2,
           "outline": "2.3",
           "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
           "choices": [
             {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
+              "text": "Bảo vệ I/O nhằm giảm nguy cơ hỏng chân IC do quá áp, quá dòng, xung nhiễu, ESD, sai mức logic hoặc chênh lệch mass.",
               "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Chân MCU thường mỏng manh hơn môi trường bên ngoài, nên cần lớp bảo vệ trước khi tín hiệu vào IC chính."
             },
             {
-              "text": "Cách ly tín hiệu yêu cầu nối chung trực tiếp hai mass ở mọi trường hợp.",
+              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
               "correct": true,
-              "reason": "Phát biểu này sai vì cách ly nhằm tách hai miền điện, tùy thiết kế có thể không nối trực tiếp mass."
-            },
-            {
-              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
+              "reason": "Phát biểu này sai vì tải cảm tạo xung ngược khi ngắt dòng."
             },
             {
               "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
               "correct": false,
               "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
+            },
+            {
+              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
             }
           ],
           "number": 56,
           "setIndex": 5
         },
         {
-          "id": "bao-ve-cong-io-esd-q057",
-          "type": "Bloom 4 - Phân tích",
+          "id": "bao-ve-cong-io-buffer-sacrifice-q057",
+          "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "ESD và xung nhiễu",
-          "bloom": 4,
+          "topic": "IC đệm bảo vệ",
+          "bloom": 1,
           "outline": "2.3",
-          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
+          "stem": "Phương án nào nhận diện đúng IC đệm bảo vệ?",
           "choices": [
             {
-              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
+              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
               "correct": false,
-              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
+              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
             },
             {
-              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
-              "correct": false,
-              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
-            },
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
               "correct": true,
-              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
+              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
             },
             {
-              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
+              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
               "correct": false,
-              "reason": "ESD là xung rất nhanh, điện áp cao."
+              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
+            },
+            {
+              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
+              "correct": false,
+              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
             }
           ],
           "number": 57,
           "setIndex": 5
         },
         {
-          "id": "bao-ve-cong-io-combined-protection-cnt058",
+          "id": "bao-ve-cong-io-protection-purpose-cnt058",
           "type": "Số lượng và thành phần",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "kết hợp nhiều tầng bảo vệ",
+          "topic": "mục đích bảo vệ I/O",
           "bloom": 2,
           "outline": "2.3",
-          "stem": "Về kết hợp nhiều tầng bảo vệ, phương án nào vừa đúng số lượng vừa đúng nội dung?",
+          "stem": "Về mục đích bảo vệ I/O, phương án nào vừa đúng số lượng vừa đúng nội dung?",
           "choices": [
             {
-              "text": "Có 5 ý chính: hạn dòng, lọc, quá dòng, kéo mức xác định, buffer hoặc cách ly.",
+              "text": "Có 5 ý chính: quá áp, quá dòng, digital isolator cho tốc độ cao hơn, nhiễu xung, sai mức logic.",
               "correct": false,
               "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
             },
             {
-              "text": "Có 4 ý chính: hạn dòng, lọc, kẹp áp, kéo mức xác định.",
+              "text": "Có 4 ý chính: quá áp, quá dòng, ESD, nhiễu xung.",
               "correct": false,
               "reason": "Phương án này thiếu một thành phần quan trọng."
             },
             {
-              "text": "Có 6 ý chính: hạn dòng, lọc, kẹp áp, kéo mức xác định, buffer hoặc cách ly, sai mức logic.",
+              "text": "Có 6 ý chính: quá áp, quá dòng, ESD, nhiễu xung, sai mức logic, hạn dòng.",
               "correct": false,
               "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
             },
             {
-              "text": "Có 5 ý chính: hạn dòng, lọc, kẹp áp, kéo mức xác định, buffer hoặc cách ly.",
+              "text": "Có 5 ý chính: quá áp, quá dòng, ESD, nhiễu xung, sai mức logic.",
               "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về kết hợp nhiều tầng bảo vệ."
+              "reason": "Tổ hợp này khớp với kiến thức về mục đích bảo vệ I/O."
             }
           ],
           "number": 58,
           "setIndex": 5
         },
         {
-          "id": "bao-ve-cong-io-tvs-zener-q059",
+          "id": "bao-ve-cong-io-rc-filter-q059",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "TVS và Zener",
+          "topic": "lọc RC cho đầu vào",
           "bloom": 3,
           "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng TVS và Zener, lựa chọn nào phù hợp nhất?",
-          "choices": [
-            {
-              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
-              "correct": false,
-              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
-            },
-            {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": true,
-              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
-            },
-            {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
-              "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
-            },
-            {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
-              "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
-            }
-          ],
-          "number": 59,
-          "setIndex": 5
-        },
-        {
-          "id": "bao-ve-cong-io-protection-purpose-q060",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "mục đích bảo vệ I/O",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Phương án nào nhận diện đúng mục đích bảo vệ I/O?",
-          "choices": [
-            {
-              "text": "Chân MCU luôn chịu được mọi xung kV từ môi trường công nghiệp.",
-              "correct": false,
-              "reason": "ESD hoặc xung nhiễu lớn có thể phá hỏng cấu trúc bán dẫn."
-            },
-            {
-              "text": "Sai mức logic không ảnh hưởng hệ thống vì phần mềm luôn tự sửa được điện áp ngoài giới hạn.",
-              "correct": false,
-              "reason": "Điện áp ngoài giới hạn có thể làm sai đọc hoặc hỏng phần cứng."
-            },
-            {
-              "text": "Bảo vệ I/O nhằm giảm nguy cơ hỏng chân IC do quá áp, quá dòng, xung nhiễu, ESD, sai mức logic hoặc chênh lệch mass.",
-              "correct": true,
-              "reason": "Chân MCU thường mỏng manh hơn môi trường bên ngoài, nên cần lớp bảo vệ trước khi tín hiệu vào IC chính."
-            },
-            {
-              "text": "Bảo vệ I/O chỉ để làm đẹp sơ đồ, không liên quan độ bền chân IC.",
-              "correct": false,
-              "reason": "Bảo vệ I/O giúp giảm hỏng hóc thực tế."
-            }
-          ],
-          "number": 60,
-          "setIndex": 5
-        },
-        {
-          "id": "bao-ve-cong-io-rc-filter-q061",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "lọc RC cho đầu vào",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Nhận định nào đúng về lọc RC cho đầu vào?",
+          "stem": "Trong một tình huống thiết kế cần áp dụng lọc RC cho đầu vào, lựa chọn nào phù hợp nhất?",
           "choices": [
             {
               "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
@@ -18582,17 +18516,149 @@
               "reason": "RC thông thấp là cách giảm thành phần cao tần."
             }
           ],
+          "number": 59,
+          "setIndex": 5
+        },
+        {
+          "id": "bao-ve-cong-io-esd-q060",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "ESD và xung nhiễu",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
+          "choices": [
+            {
+              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
+              "correct": false,
+              "reason": "ESD là xung rất nhanh, điện áp cao."
+            },
+            {
+              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
+              "correct": false,
+              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
+            },
+            {
+              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
+              "correct": false,
+              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
+            },
+            {
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": true,
+              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
+            }
+          ],
+          "number": 60,
+          "setIndex": 5
+        },
+        {
+          "id": "bao-ve-cong-io-combined-protection-q061",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "kết hợp nhiều tầng bảo vệ",
+          "bloom": 1,
+          "outline": "2.3",
+          "stem": "Nhận định nào đúng về kết hợp nhiều tầng bảo vệ?",
+          "choices": [
+            {
+              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
+              "correct": false,
+              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
+            },
+            {
+              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
+              "correct": true,
+              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
+            },
+            {
+              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
+              "correct": false,
+              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
+            },
+            {
+              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
+              "correct": false,
+              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
+            }
+          ],
           "number": 61,
           "setIndex": 6
         },
         {
-          "id": "bao-ve-cong-io-diode-clamp-q062",
+          "id": "bao-ve-cong-io-series-resistor-q062",
           "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
+          "topic": "điện trở nối tiếp bảo vệ đầu vào",
           "bloom": 1,
           "outline": "2.3",
-          "stem": "Diode kẹp áp được mô tả đúng nhất bởi phương án nào?",
+          "stem": "Điện trở nối tiếp bảo vệ đầu vào được mô tả đúng nhất bởi phương án nào?",
+          "choices": [
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": true,
+              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "correct": false,
+              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+            },
+            {
+              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "correct": false,
+              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+            },
+            {
+              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
+              "correct": false,
+              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+            }
+          ],
+          "number": 62,
+          "setIndex": 6
+        },
+        {
+          "id": "bao-ve-cong-io-simple-overvoltage-design-q063",
+          "type": "Bloom 5 - Đánh giá",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
+          "bloom": 5,
+          "outline": "2.3",
+          "stem": "Nếu đề bài yêu cầu thiết kế bảo vệ quá áp đơn giản cho input chậm, phương án nào đáng chọn nhất?",
+          "choices": [
+            {
+              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
+              "correct": false,
+              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
+            },
+            {
+              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
+              "correct": false,
+              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
+            },
+            {
+              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "correct": false,
+              "reason": "Dòng xung cần đường thoát an toàn."
+            },
+            {
+              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "correct": true,
+              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+            }
+          ],
+          "number": 63,
+          "setIndex": 6
+        },
+        {
+          "id": "bao-ve-cong-io-diode-clamp-q064",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "diode kẹp áp",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một input có nguy cơ vượt nhẹ trên VCC hoặc dưới GND. Phương án kẹp áp nào hợp lý về nguyên tắc?",
           "choices": [
             {
               "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
@@ -18615,18 +18681,89 @@
               "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
             }
           ],
-          "number": 62,
+          "number": 64,
           "setIndex": 6
         },
         {
-          "id": "bao-ve-cong-io-source-sink-protection-q063",
-          "type": "Bloom 4 - Phân tích",
+          "id": "bao-ve-cong-io-protection-circuit-choice-q065",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một input số chậm đi từ dây ngoài vào MCU 3,3 V và có nguy cơ ESD. Cấu trúc bảo vệ nào hợp lý nhất?",
+          "choices": [
+            {
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
+              "correct": false,
+              "reason": "Phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
+            },
+            {
+              "text": "Chỉ mắc một tụ rất lớn song song input và bỏ toàn bộ hạn dòng/kẹp áp.",
+              "correct": false,
+              "reason": "Tụ có thể lọc nhiễu chậm nhưng không đủ để giới hạn dòng quá áp hoặc xả ESD đúng cách."
+            },
+            {
+              "text": "Đặt TVS ở xa đầu nối, sau chân MCU, để xung đi qua toàn bộ mạch trước khi bị kẹp.",
+              "correct": false,
+              "reason": "TVS bảo vệ hiệu quả hơn khi đặt gần điểm xâm nhập và có đường xả ngắn."
+            },
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": true,
+              "reason": "Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            }
+          ],
+          "number": 65,
+          "setIndex": 6
+        },
+        {
+          "id": "bao-ve-cong-io-opto-isolator-s066",
+          "type": "Chọn phát biểu sai",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "optocoupler và digital isolator",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
+            },
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            },
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Digital isolator không cách ly, nó chỉ đổi màu tín hiệu trong sơ đồ.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì digital isolator là linh kiện cách ly tín hiệu số."
+            }
+          ],
+          "number": 66,
+          "setIndex": 6
+        },
+        {
+          "id": "bao-ve-cong-io-source-sink-protection-q067",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "bảo vệ dòng source và sink",
-          "bloom": 4,
+          "bloom": 3,
           "outline": "2.3",
-          "stem": "Khi phân tích output điều khiển tải cảm, nhận định nào đúng về bảo vệ dòng và xung ngược?",
+          "stem": "Trong một tình huống thiết kế cần áp dụng bảo vệ dòng source và sink, lựa chọn nào phù hợp nhất?",
           "choices": [
+            {
+              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
+              "correct": false,
+              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
+            },
             {
               "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
               "correct": true,
@@ -18641,242 +18778,105 @@
               "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
               "correct": false,
               "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
-            },
-            {
-              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
-              "correct": false,
-              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
-            }
-          ],
-          "number": 63,
-          "setIndex": 6
-        },
-        {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q064",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "IC đệm bảo vệ",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Khi sử dụng IC đệm bảo vệ trong hệ nhúng, phương án nào đúng nhất?",
-          "choices": [
-            {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
-              "correct": true,
-              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
-            },
-            {
-              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
-              "correct": false,
-              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
-            },
-            {
-              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
-              "correct": false,
-              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
-            },
-            {
-              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
-              "correct": false,
-              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
-            }
-          ],
-          "number": 64,
-          "setIndex": 6
-        },
-        {
-          "id": "bao-ve-cong-io-series-resistor-q065",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "điện trở nối tiếp bảo vệ đầu vào",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Điện trở nối tiếp bảo vệ đầu vào được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
-              "correct": false,
-              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
-            },
-            {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
-              "correct": true,
-              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
-            },
-            {
-              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
-              "correct": false,
-              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
-            },
-            {
-              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
-              "correct": false,
-              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
-            }
-          ],
-          "number": 65,
-          "setIndex": 6
-        },
-        {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-s066",
-          "type": "Chọn phát biểu sai",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
-            },
-            {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
-            },
-            {
-              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
-            },
-            {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì dòng xung cần đường thoát an toàn."
-            }
-          ],
-          "number": 66,
-          "setIndex": 6
-        },
-        {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q067",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "IC đệm bảo vệ",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng IC đệm bảo vệ, lựa chọn nào phù hợp nhất?",
-          "choices": [
-            {
-              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
-              "correct": false,
-              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
-            },
-            {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
-              "correct": true,
-              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
-            },
-            {
-              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
-              "correct": false,
-              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
-            },
-            {
-              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
-              "correct": false,
-              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
             }
           ],
           "number": 67,
           "setIndex": 6
         },
         {
-          "id": "bao-ve-cong-io-series-resistor-q068",
+          "id": "bao-ve-cong-io-buffer-sacrifice-q068",
           "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "điện trở nối tiếp bảo vệ đầu vào",
+          "topic": "IC đệm bảo vệ",
           "bloom": 4,
           "outline": "2.3",
-          "stem": "Khi phân tích một input tốc độ cao có điện trở nối tiếp quá lớn, nguyên nhân nào có thể làm tín hiệu méo?",
+          "stem": "Khi phân tích việc thêm IC đệm trước input MCU, nhận định nào đúng về vai trò và giới hạn của nó?",
           "choices": [
             {
-              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
               "correct": false,
-              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
             },
             {
-              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
               "correct": false,
-              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
             },
             {
-              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
+              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
               "correct": false,
-              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
             },
             {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
               "correct": true,
-              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
             }
           ],
           "number": 68,
           "setIndex": 6
         },
         {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q069",
-          "type": "Bloom 5 - Đánh giá",
+          "id": "bao-ve-cong-io-protection-purpose-q069",
+          "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
-          "bloom": 5,
+          "topic": "mục đích bảo vệ I/O",
+          "bloom": 1,
           "outline": "2.3",
-          "stem": "Nếu đề bài yêu cầu thiết kế bảo vệ quá áp đơn giản cho input chậm, phương án nào đáng chọn nhất?",
+          "stem": "Phương án nào nhận diện đúng mục đích bảo vệ I/O?",
           "choices": [
             {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "text": "Sai mức logic không ảnh hưởng hệ thống vì phần mềm luôn tự sửa được điện áp ngoài giới hạn.",
               "correct": false,
-              "reason": "Dòng xung cần đường thoát an toàn."
+              "reason": "Điện áp ngoài giới hạn có thể làm sai đọc hoặc hỏng phần cứng."
             },
             {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "text": "Bảo vệ I/O nhằm giảm nguy cơ hỏng chân IC do quá áp, quá dòng, xung nhiễu, ESD, sai mức logic hoặc chênh lệch mass.",
               "correct": true,
-              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+              "reason": "Chân MCU thường mỏng manh hơn môi trường bên ngoài, nên cần lớp bảo vệ trước khi tín hiệu vào IC chính."
             },
             {
-              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
+              "text": "Bảo vệ I/O chỉ để làm đẹp sơ đồ, không liên quan độ bền chân IC.",
               "correct": false,
-              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
+              "reason": "Bảo vệ I/O giúp giảm hỏng hóc thực tế."
             },
             {
-              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
+              "text": "Chân MCU luôn chịu được mọi xung kV từ môi trường công nghiệp.",
               "correct": false,
-              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
+              "reason": "ESD hoặc xung nhiễu lớn có thể phá hỏng cấu trúc bán dẫn."
             }
           ],
           "number": 69,
           "setIndex": 6
         },
         {
-          "id": "bao-ve-cong-io-opto-isolator-q070",
+          "id": "bao-ve-cong-io-rc-filter-q070",
           "type": "Bloom 5 - Đánh giá",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
+          "topic": "lọc RC cho đầu vào",
           "bloom": 5,
           "outline": "2.3",
-          "stem": "Nếu cần cách ly một tín hiệu số tốc độ cao hơn khả năng optocoupler thường, lựa chọn nào hợp lý hơn?",
+          "stem": "Nếu cần lọc nhiễu nút nhấn chậm, phương án RC nên được chọn theo tiêu chí nào?",
           "choices": [
             {
-              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
+              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
               "correct": true,
-              "reason": "Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
+              "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
             },
             {
-              "text": "Optocoupler luôn phù hợp cho mọi bus tốc độ cao mà không cần xem băng thông.",
+              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
               "correct": false,
-              "reason": "Optocoupler thường chậm hơn digital isolator."
+              "reason": "Tụ lớn với điện trở tạo trễ RC đáng kể."
             },
             {
-              "text": "Cách ly tín hiệu yêu cầu nối chung trực tiếp hai mass ở mọi trường hợp.",
+              "text": "Lọc RC không thể giảm nhiễu cao tần trên input.",
               "correct": false,
-              "reason": "Cách ly nhằm tách hai miền điện, tùy thiết kế có thể không nối trực tiếp mass."
+              "reason": "RC thông thấp là cách giảm thành phần cao tần."
             },
             {
-              "text": "Digital isolator không cách ly, nó chỉ đổi màu tín hiệu trong sơ đồ.",
+              "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
               "correct": false,
-              "reason": "Digital isolator là linh kiện cách ly tín hiệu số."
+              "reason": "Lọc quá chậm có thể làm méo cạnh và sai timing."
             }
           ],
           "number": 70,
@@ -18949,321 +18949,14 @@
           "setIndex": 7
         },
         {
-          "id": "bao-ve-cong-io-tvs-zener-q073",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "TVS và Zener",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng TVS và Zener, lựa chọn nào phù hợp nhất?",
-          "choices": [
-            {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
-              "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
-            },
-            {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
-              "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
-            },
-            {
-              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
-              "correct": false,
-              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
-            },
-            {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
-              "correct": true,
-              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
-            }
-          ],
-          "number": 73,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-protection-purpose-lst074",
-          "type": "Chọn tổ hợp",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "mục đích bảo vệ I/O",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Tổ hợp nào đúng và đủ nhất về mục đích bảo vệ I/O?",
-          "choices": [
-            {
-              "text": "Gồm quá áp, quá dòng, ESD, nhiễu xung, hạn dòng.",
-              "correct": false,
-              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
-            },
-            {
-              "text": "Gồm quá áp, quá dòng, ESD, nhiễu xung.",
-              "correct": false,
-              "reason": "Phương án này thiếu một thành phần quan trọng."
-            },
-            {
-              "text": "Gồm quá áp, quá dòng, ESD, nhiễu xung, sai mức logic, kéo mức xác định.",
-              "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
-            },
-            {
-              "text": "Gồm quá áp, quá dòng, ESD, nhiễu xung, sai mức logic.",
-              "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về mục đích bảo vệ I/O."
-            }
-          ],
-          "number": 74,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-rc-filter-q075",
-          "type": "Bloom 5 - Đánh giá",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "lọc RC cho đầu vào",
-          "bloom": 5,
-          "outline": "2.3",
-          "stem": "Nếu cần lọc nhiễu nút nhấn chậm, phương án RC nên được chọn theo tiêu chí nào?",
-          "choices": [
-            {
-              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
-              "correct": false,
-              "reason": "Tụ lớn với điện trở tạo trễ RC đáng kể."
-            },
-            {
-              "text": "Lọc RC không thể giảm nhiễu cao tần trên input.",
-              "correct": false,
-              "reason": "RC thông thấp là cách giảm thành phần cao tần."
-            },
-            {
-              "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
-              "correct": false,
-              "reason": "Lọc quá chậm có thể làm méo cạnh và sai timing."
-            },
-            {
-              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
-              "correct": true,
-              "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
-            }
-          ],
-          "number": 75,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-diode-clamp-s076",
-          "type": "Chọn phát biểu sai",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
-            },
-            {
-              "text": "Diode kẹp hoạt động tốt nhất khi không có đường cho dòng xung thoát đi.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì cần có đường dòng về rail hoặc mass phù hợp."
-            },
-            {
-              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
-            },
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            }
-          ],
-          "number": 76,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-source-sink-protection-q077",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "bảo vệ dòng source và sink",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Khi học bảo vệ dòng source và sink, nên hiểu thế nào?",
-          "choices": [
-            {
-              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
-              "correct": true,
-              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
-            },
-            {
-              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
-              "correct": false,
-              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
-            },
-            {
-              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
-              "correct": false,
-              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
-            },
-            {
-              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
-              "correct": false,
-              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
-            }
-          ],
-          "number": 77,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-rc-filter-q078",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "lọc RC cho đầu vào",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích một input bị mất xung sau khi thêm tụ lọc lớn, nguyên nhân nào hợp lý nhất?",
-          "choices": [
-            {
-              "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
-              "correct": false,
-              "reason": "Lọc quá chậm có thể làm méo cạnh và sai timing."
-            },
-            {
-              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
-              "correct": true,
-              "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
-            },
-            {
-              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
-              "correct": false,
-              "reason": "Tụ lớn với điện trở tạo trễ RC đáng kể."
-            },
-            {
-              "text": "Lọc RC không thể giảm nhiễu cao tần trên input.",
-              "correct": false,
-              "reason": "RC thông thấp là cách giảm thành phần cao tần."
-            }
-          ],
-          "number": 78,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-diode-clamp-q079",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích diode kẹp áp, nhận định nào chỉ ra đúng nguyên nhân hoặc đánh đổi chính?",
-          "choices": [
-            {
-              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
-              "correct": true,
-              "reason": "Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
-            },
-            {
-              "text": "Diode kẹp hoạt động tốt nhất khi không có đường cho dòng xung thoát đi.",
-              "correct": false,
-              "reason": "Cần có đường dòng về rail hoặc mass phù hợp."
-            },
-            {
-              "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
-              "correct": false,
-              "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
-            },
-            {
-              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
-              "correct": false,
-              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
-            }
-          ],
-          "number": 79,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-source-sink-protection-q080",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "bảo vệ dòng source và sink",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Khi sử dụng bảo vệ dòng source và sink trong hệ nhúng, phương án nào đúng nhất?",
-          "choices": [
-            {
-              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
-              "correct": true,
-              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
-            },
-            {
-              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
-              "correct": false,
-              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
-            },
-            {
-              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
-              "correct": false,
-              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
-            },
-            {
-              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
-              "correct": false,
-              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
-            }
-          ],
-          "number": 80,
-          "setIndex": 7
-        },
-        {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q081",
+          "id": "bao-ve-cong-io-series-resistor-q073",
           "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "IC đệm bảo vệ",
+          "topic": "điện trở nối tiếp bảo vệ đầu vào",
           "bloom": 1,
           "outline": "2.3",
-          "stem": "Phương án nào nhận diện đúng IC đệm bảo vệ?",
+          "stem": "Nhận định nào đúng về điện trở nối tiếp bảo vệ đầu vào?",
           "choices": [
-            {
-              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
-              "correct": false,
-              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
-            },
-            {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
-              "correct": true,
-              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
-            },
-            {
-              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
-              "correct": false,
-              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
-            },
-            {
-              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
-              "correct": false,
-              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
-            }
-          ],
-          "number": 81,
-          "setIndex": 8
-        },
-        {
-          "id": "bao-ve-cong-io-series-resistor-q082",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "điện trở nối tiếp bảo vệ đầu vào",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Cách giải thích nào phù hợp nhất về điện trở nối tiếp bảo vệ đầu vào?",
-          "choices": [
-            {
-              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
-              "correct": false,
-              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
-            },
-            {
-              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
-              "correct": false,
-              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
-            },
             {
               "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
               "correct": false,
@@ -19273,19 +18966,29 @@
               "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
               "correct": true,
               "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "correct": false,
+              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+            },
+            {
+              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "correct": false,
+              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
             }
           ],
-          "number": 82,
-          "setIndex": 8
+          "number": 73,
+          "setIndex": 7
         },
         {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q083",
-          "type": "Bloom 3 - Vận dụng",
+          "id": "bao-ve-cong-io-simple-overvoltage-design-q074",
+          "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
-          "bloom": 3,
+          "bloom": 4,
           "outline": "2.3",
-          "stem": "Một tín hiệu công nghiệp chậm có mức cao lớn hơn nhiều so với nguồn MCU. Phương án thiết kế bảo vệ đơn giản nào hợp lý?",
+          "stem": "Khi phân tích một mạch bảo vệ quá áp đầu vào, tiêu chí nào quan trọng nhất?",
           "choices": [
             {
               "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
@@ -19308,127 +19011,84 @@
               "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
             }
           ],
-          "number": 83,
-          "setIndex": 8
+          "number": 74,
+          "setIndex": 7
         },
         {
-          "id": "bao-ve-cong-io-opto-isolator-lst084",
-          "type": "Chọn tổ hợp",
+          "id": "bao-ve-cong-io-diode-clamp-q075",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
-          "bloom": 2,
+          "topic": "diode kẹp áp",
+          "bloom": 3,
           "outline": "2.3",
-          "stem": "Tổ hợp nào đúng và đủ nhất về optocoupler và digital isolator?",
+          "stem": "Một input có nguy cơ vượt nhẹ trên VCC hoặc dưới GND. Phương án kẹp áp nào hợp lý về nguyên tắc?",
           "choices": [
             {
-              "text": "Gồm optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm, kẹp áp.",
+              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
               "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
             },
             {
-              "text": "Gồm optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm.",
+              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
               "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về optocoupler và digital isolator."
+              "reason": "Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
             },
             {
-              "text": "Gồm optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, sai mức logic.",
+              "text": "Diode kẹp hoạt động tốt nhất khi không có đường cho dòng xung thoát đi.",
               "correct": false,
-              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+              "reason": "Cần có đường dòng về rail hoặc mass phù hợp."
             },
             {
-              "text": "Gồm optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn.",
+              "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
               "correct": false,
-              "reason": "Phương án này thiếu một thành phần quan trọng."
+              "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
             }
           ],
-          "number": 84,
-          "setIndex": 8
+          "number": 75,
+          "setIndex": 7
         },
         {
-          "id": "bao-ve-cong-io-esd-q085",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "ESD và xung nhiễu",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Nhận định nào đúng về ESD và xung nhiễu?",
-          "choices": [
-            {
-              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
-              "correct": false,
-              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
-            },
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": true,
-              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            },
-            {
-              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
-              "correct": false,
-              "reason": "ESD là xung rất nhanh, điện áp cao."
-            },
-            {
-              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
-              "correct": false,
-              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
-            }
-          ],
-          "number": 85,
-          "setIndex": 8
-        },
-        {
-          "id": "bao-ve-cong-io-combined-protection-s086",
+          "id": "bao-ve-cong-io-protection-circuit-choice-s076",
           "type": "Chọn phát biểu sai",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "kết hợp nhiều tầng bảo vệ",
-          "bloom": 2,
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
+          "bloom": 1,
           "outline": "2.3",
           "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
           "choices": [
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            },
-            {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
-            },
             {
               "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
               "correct": false,
               "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
             },
             {
-              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
               "correct": true,
-              "reason": "Phát biểu này sai vì bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
+              "reason": "Phát biểu này sai vì phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
+            },
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            },
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
             }
           ],
-          "number": 86,
-          "setIndex": 8
+          "number": 76,
+          "setIndex": 7
         },
         {
-          "id": "bao-ve-cong-io-tvs-zener-q087",
+          "id": "bao-ve-cong-io-tvs-zener-q077",
           "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "TVS và Zener",
           "bloom": 1,
           "outline": "2.3",
-          "stem": "Phương án nào nhận diện đúng TVS và Zener?",
+          "stem": "TVS và Zener được mô tả đúng nhất bởi phương án nào?",
           "choices": [
-            {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
-              "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
-            },
-            {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
-              "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
-            },
             {
               "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
               "correct": false,
@@ -19438,118 +19098,95 @@
               "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
               "correct": true,
               "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            },
+            {
+              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
+              "correct": false,
+              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
+            },
+            {
+              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
+              "correct": false,
+              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
             }
           ],
-          "number": 87,
-          "setIndex": 8
+          "number": 77,
+          "setIndex": 7
         },
         {
-          "id": "bao-ve-cong-io-protection-purpose-cnt088",
-          "type": "Số lượng và thành phần",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "mục đích bảo vệ I/O",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Về mục đích bảo vệ I/O, phương án nào vừa đúng số lượng vừa đúng nội dung?",
-          "choices": [
-            {
-              "text": "Có 6 ý chính: quá áp, quá dòng, ESD, nhiễu xung, sai mức logic, kéo mức xác định.",
-              "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
-            },
-            {
-              "text": "Có 5 ý chính: quá áp, quá dòng, ESD, nhiễu xung, sai mức logic.",
-              "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về mục đích bảo vệ I/O."
-            },
-            {
-              "text": "Có 5 ý chính: quá áp, quá dòng, hạn dòng, nhiễu xung, sai mức logic.",
-              "correct": false,
-              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
-            },
-            {
-              "text": "Có 4 ý chính: quá áp, quá dòng, ESD, nhiễu xung.",
-              "correct": false,
-              "reason": "Phương án này thiếu một thành phần quan trọng."
-            }
-          ],
-          "number": 88,
-          "setIndex": 8
-        },
-        {
-          "id": "bao-ve-cong-io-combined-protection-q089",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "kết hợp nhiều tầng bảo vệ",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Trong một tình huống thiết kế cần áp dụng kết hợp nhiều tầng bảo vệ, lựa chọn nào phù hợp nhất?",
-          "choices": [
-            {
-              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
-              "correct": false,
-              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
-            },
-            {
-              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
-              "correct": false,
-              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
-            },
-            {
-              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
-              "correct": false,
-              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
-            },
-            {
-              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
-              "correct": true,
-              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
-            }
-          ],
-          "number": 89,
-          "setIndex": 8
-        },
-        {
-          "id": "bao-ve-cong-io-tvs-zener-q090",
+          "id": "bao-ve-cong-io-divider-clamp-design-q078",
           "type": "Bloom 5 - Đánh giá",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "TVS và Zener",
+          "topic": "chia áp và kẹp áp cho input quá mức",
           "bloom": 5,
           "outline": "2.3",
-          "stem": "Nếu cần kẹp xung ESD nhanh ở cổng người dùng có thể chạm vào, linh kiện nào thường phù hợp hơn Zener thông thường?",
+          "stem": "Nếu đề bài cho input chậm vượt VCC và yêu cầu bảo vệ đơn giản, phương án nào cân bằng nhất?",
           "choices": [
             {
-              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
               "correct": true,
-              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
             },
             {
-              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
               "correct": false,
-              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
             },
             {
-              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
               "correct": false,
-              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
             },
             {
-              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
               "correct": false,
-              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
             }
           ],
-          "number": 90,
-          "setIndex": 8
+          "number": 78,
+          "setIndex": 7
         },
         {
-          "id": "bao-ve-cong-io-protection-purpose-q091",
-          "type": "Bloom 2 - Hiểu",
+          "id": "bao-ve-cong-io-buffer-sacrifice-q079",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "IC đệm bảo vệ",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích việc thêm IC đệm trước input MCU, nhận định nào đúng về vai trò và giới hạn của nó?",
+          "choices": [
+            {
+              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
+              "correct": true,
+              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
+            },
+            {
+              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
+              "correct": false,
+              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
+            },
+            {
+              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
+              "correct": false,
+              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
+            },
+            {
+              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
+              "correct": false,
+              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
+            }
+          ],
+          "number": 79,
+          "setIndex": 7
+        },
+        {
+          "id": "bao-ve-cong-io-protection-purpose-q080",
+          "type": "Bloom 1 - Nhớ",
           "source": "2.3 Bảo vệ cổng I/O",
           "topic": "mục đích bảo vệ I/O",
-          "bloom": 2,
+          "bloom": 1,
           "outline": "2.3",
-          "stem": "Cách giải thích nào phù hợp nhất về mục đích bảo vệ I/O?",
+          "stem": "Mục đích bảo vệ I/O được mô tả đúng nhất bởi phương án nào?",
           "choices": [
             {
               "text": "Chân MCU luôn chịu được mọi xung kV từ môi trường công nghiệp.",
@@ -19570,6 +19207,369 @@
               "text": "Bảo vệ I/O chỉ để làm đẹp sơ đồ, không liên quan độ bền chân IC.",
               "correct": false,
               "reason": "Bảo vệ I/O giúp giảm hỏng hóc thực tế."
+            }
+          ],
+          "number": 80,
+          "setIndex": 7
+        },
+        {
+          "id": "bao-ve-cong-io-rc-filter-q081",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "lọc RC cho đầu vào",
+          "bloom": 1,
+          "outline": "2.3",
+          "stem": "Phương án nào nhận diện đúng lọc RC cho đầu vào?",
+          "choices": [
+            {
+              "text": "Tín hiệu clock nhanh nên được lọc bằng RC rất chậm để luôn chính xác hơn.",
+              "correct": false,
+              "reason": "Lọc quá chậm có thể làm méo cạnh và sai timing."
+            },
+            {
+              "text": "Mạch RC có thể lọc nhiễu cao tần hoặc xung ngắn ở đầu vào, nhưng hằng số thời gian quá lớn sẽ làm chậm cạnh và gây trễ tín hiệu.",
+              "correct": true,
+              "reason": "Thiết kế lọc phải cân bằng giữa giảm nhiễu và giữ timing đúng cho tín hiệu cần đọc."
+            },
+            {
+              "text": "Tụ lọc càng lớn luôn càng tốt vì không bao giờ làm chậm tín hiệu.",
+              "correct": false,
+              "reason": "Tụ lớn với điện trở tạo trễ RC đáng kể."
+            },
+            {
+              "text": "Lọc RC không thể giảm nhiễu cao tần trên input.",
+              "correct": false,
+              "reason": "RC thông thấp là cách giảm thành phần cao tần."
+            }
+          ],
+          "number": 81,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-esd-q082",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "ESD và xung nhiễu",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Cách giải thích nào phù hợp nhất về ESD và xung nhiễu?",
+          "choices": [
+            {
+              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
+              "correct": false,
+              "reason": "ESD là xung rất nhanh, điện áp cao."
+            },
+            {
+              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
+              "correct": false,
+              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
+            },
+            {
+              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
+              "correct": false,
+              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
+            },
+            {
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": true,
+              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
+            }
+          ],
+          "number": 82,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-combined-protection-q083",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "kết hợp nhiều tầng bảo vệ",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Trong một tình huống thiết kế cần áp dụng kết hợp nhiều tầng bảo vệ, lựa chọn nào phù hợp nhất?",
+          "choices": [
+            {
+              "text": "Điện trở kéo mức xác định không liên quan input bị hở hoặc dây dài.",
+              "correct": false,
+              "reason": "Pull-up/pull-down giúp tránh trạng thái trôi khi nguồn tín hiệu không chủ động."
+            },
+            {
+              "text": "Một cổng I/O ra môi trường khắc nghiệt thường kết hợp hạn dòng, lọc, TVS hoặc diode kẹp, kéo mức xác định, buffer hoặc cách ly tùy rủi ro.",
+              "correct": true,
+              "reason": "Nhiều tầng giúp giảm năng lượng xung từng bước trước khi phần còn lại tới chân IC chính."
+            },
+            {
+              "text": "Thiết kế bảo vệ tốt nhất luôn chỉ dùng một linh kiện bất kỳ, không cần xét môi trường.",
+              "correct": false,
+              "reason": "Môi trường khác nhau cần phối hợp linh kiện phù hợp."
+            },
+            {
+              "text": "TVS đặt sau dây dài, sau IC chính vẫn bảo vệ tốt như đặt gần điểm vào.",
+              "correct": false,
+              "reason": "Bảo vệ xung thường cần đặt gần điểm xâm nhập và có đường xả ngắn."
+            }
+          ],
+          "number": 83,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-series-resistor-q084",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "điện trở nối tiếp bảo vệ đầu vào",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích một input tốc độ cao có điện trở nối tiếp quá lớn, nguyên nhân nào có thể làm tín hiệu méo?",
+          "choices": [
+            {
+              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "correct": false,
+              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+            },
+            {
+              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "correct": false,
+              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+            },
+            {
+              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
+              "correct": false,
+              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+            },
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": true,
+              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            }
+          ],
+          "number": 84,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-simple-overvoltage-design-q085",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một tín hiệu công nghiệp chậm có mức cao lớn hơn nhiều so với nguồn MCU. Phương án thiết kế bảo vệ đơn giản nào hợp lý?",
+          "choices": [
+            {
+              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
+              "correct": false,
+              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
+            },
+            {
+              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
+              "correct": false,
+              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
+            },
+            {
+              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "correct": false,
+              "reason": "Dòng xung cần đường thoát an toàn."
+            },
+            {
+              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "correct": true,
+              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+            }
+          ],
+          "number": 85,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-diode-clamp-s086",
+          "type": "Chọn phát biểu sai",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "diode kẹp áp",
+          "bloom": 2,
+          "outline": "2.3",
+          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Diode kẹp không tự tiêu tán mọi năng lượng; hệ cần đường dòng an toàn và kiểm tra giới hạn linh kiện."
+            },
+            {
+              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
+            },
+            {
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            },
+            {
+              "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì khi kẹp, diode dẫn dòng và phải giới hạn dòng."
+            }
+          ],
+          "number": 86,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-protection-circuit-choice-q087",
+          "type": "Bloom 5 - Đánh giá",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
+          "bloom": 5,
+          "outline": "2.3",
+          "stem": "Nếu phải chọn phương án bảo vệ đơn giản nhưng đủ lớp cho input số chậm, phương án nào đáng chọn?",
+          "choices": [
+            {
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
+              "correct": false,
+              "reason": "Phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
+            },
+            {
+              "text": "Chỉ mắc một tụ rất lớn song song input và bỏ toàn bộ hạn dòng/kẹp áp.",
+              "correct": false,
+              "reason": "Tụ có thể lọc nhiễu chậm nhưng không đủ để giới hạn dòng quá áp hoặc xả ESD đúng cách."
+            },
+            {
+              "text": "Đặt TVS ở xa đầu nối, sau chân MCU, để xung đi qua toàn bộ mạch trước khi bị kẹp.",
+              "correct": false,
+              "reason": "TVS bảo vệ hiệu quả hơn khi đặt gần điểm xâm nhập và có đường xả ngắn."
+            },
+            {
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
+              "correct": true,
+              "reason": "Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            }
+          ],
+          "number": 87,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-tvs-zener-q088",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "TVS và Zener",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích chọn linh kiện bảo vệ cho đường tín hiệu nhanh đi ra cổng ngoài, nhận định nào đúng?",
+          "choices": [
+            {
+              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
+              "correct": false,
+              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
+            },
+            {
+              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
+              "correct": false,
+              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
+            },
+            {
+              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
+              "correct": false,
+              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
+            },
+            {
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
+              "correct": true,
+              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
+            }
+          ],
+          "number": 88,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-divider-clamp-design-q089",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "chia áp và kẹp áp cho input quá mức",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Một tín hiệu logic 12 V chậm cần đưa vào MCU 3,3 V. Cách phối hợp chia áp và bảo vệ nào hợp lý?",
+          "choices": [
+            {
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
+              "correct": false,
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
+            },
+            {
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
+              "correct": false,
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
+            },
+            {
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
+              "correct": false,
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
+            },
+            {
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
+              "correct": true,
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
+            }
+          ],
+          "number": 89,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-opto-isolator-q090",
+          "type": "Bloom 5 - Đánh giá",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "optocoupler và digital isolator",
+          "bloom": 5,
+          "outline": "2.3",
+          "stem": "Nếu cần cách ly một tín hiệu số tốc độ cao hơn khả năng optocoupler thường, lựa chọn nào hợp lý hơn?",
+          "choices": [
+            {
+              "text": "Optocoupler cách ly bằng ánh sáng và phù hợp tín hiệu chậm; digital isolator cũng cách ly nhưng thường hỗ trợ tốc độ cao hơn nhờ cơ chế điện dung, từ hoặc biến áp vi mô.",
+              "correct": true,
+              "reason": "Cách ly giúp bảo vệ MCU khi có chênh lệch mass, điện áp nguy hiểm hoặc môi trường nhiễu."
+            },
+            {
+              "text": "Optocoupler luôn phù hợp cho mọi bus tốc độ cao mà không cần xem băng thông.",
+              "correct": false,
+              "reason": "Optocoupler thường chậm hơn digital isolator."
+            },
+            {
+              "text": "Cách ly tín hiệu yêu cầu nối chung trực tiếp hai mass ở mọi trường hợp.",
+              "correct": false,
+              "reason": "Cách ly nhằm tách hai miền điện, tùy thiết kế có thể không nối trực tiếp mass."
+            },
+            {
+              "text": "Digital isolator không cách ly, nó chỉ đổi màu tín hiệu trong sơ đồ.",
+              "correct": false,
+              "reason": "Digital isolator là linh kiện cách ly tín hiệu số."
+            }
+          ],
+          "number": 90,
+          "setIndex": 8
+        },
+        {
+          "id": "bao-ve-cong-io-source-sink-protection-q091",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "bảo vệ dòng source và sink",
+          "bloom": 3,
+          "outline": "2.3",
+          "stem": "Trong một tình huống thiết kế cần áp dụng bảo vệ dòng source và sink, lựa chọn nào phù hợp nhất?",
+          "choices": [
+            {
+              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
+              "correct": false,
+              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
+            },
+            {
+              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
+              "correct": true,
+              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
+            },
+            {
+              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
+              "correct": false,
+              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
+            },
+            {
+              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
+              "correct": false,
+              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
             }
           ],
           "number": 91,
@@ -19609,14 +19609,151 @@
           "setIndex": 9
         },
         {
-          "id": "bao-ve-cong-io-diode-clamp-q093",
-          "type": "Bloom 2 - Hiểu",
+          "id": "bao-ve-cong-io-esd-q093",
+          "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "diode kẹp áp",
+          "topic": "ESD và xung nhiễu",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
+          "choices": [
+            {
+              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
+              "correct": false,
+              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
+            },
+            {
+              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
+              "correct": false,
+              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
+            },
+            {
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": true,
+              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
+            },
+            {
+              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
+              "correct": false,
+              "reason": "ESD là xung rất nhanh, điện áp cao."
+            }
+          ],
+          "number": 93,
+          "setIndex": 9
+        },
+        {
+          "id": "bao-ve-cong-io-combined-protection-lst094",
+          "type": "Chọn tổ hợp",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "kết hợp nhiều tầng bảo vệ",
           "bloom": 2,
           "outline": "2.3",
-          "stem": "Phương án nào diễn giải đúng diode kẹp áp?",
+          "stem": "Tổ hợp nào đúng và đủ nhất về kết hợp nhiều tầng bảo vệ?",
           "choices": [
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định, nhiễu xung.",
+              "correct": false,
+              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+            },
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định.",
+              "correct": false,
+              "reason": "Phương án này thiếu một thành phần quan trọng."
+            },
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định, buffer hoặc cách ly, optocoupler cho tín hiệu chậm.",
+              "correct": false,
+              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+            },
+            {
+              "text": "Gồm hạn dòng, lọc, kẹp áp, kéo mức xác định, buffer hoặc cách ly.",
+              "correct": true,
+              "reason": "Tổ hợp này khớp với kiến thức về kết hợp nhiều tầng bảo vệ."
+            }
+          ],
+          "number": 94,
+          "setIndex": 9
+        },
+        {
+          "id": "bao-ve-cong-io-series-resistor-q095",
+          "type": "Bloom 4 - Phân tích",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "điện trở nối tiếp bảo vệ đầu vào",
+          "bloom": 4,
+          "outline": "2.3",
+          "stem": "Khi phân tích một input tốc độ cao có điện trở nối tiếp quá lớn, nguyên nhân nào có thể làm tín hiệu méo?",
+          "choices": [
+            {
+              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
+              "correct": true,
+              "reason": "Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
+            },
+            {
+              "text": "Điện trở nối tiếp biến mọi quá áp thành an toàn tuyệt đối mà không cần xét dòng và năng lượng.",
+              "correct": false,
+              "reason": "Điện trở chỉ giới hạn dòng; xung lớn vẫn cần phần tử kẹp phù hợp."
+            },
+            {
+              "text": "Điện trở nối tiếp không bao giờ ảnh hưởng tốc độ cạnh dù tín hiệu rất nhanh.",
+              "correct": false,
+              "reason": "R nối tiếp với điện dung tạo hiệu ứng RC làm chậm cạnh."
+            },
+            {
+              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
+              "correct": false,
+              "reason": "Trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
+            }
+          ],
+          "number": 95,
+          "setIndex": 9
+        },
+        {
+          "id": "bao-ve-cong-io-simple-overvoltage-design-s096",
+          "type": "Chọn phát biểu sai",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
+          "bloom": 1,
+          "outline": "2.3",
+          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
+            },
+            {
+              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì dòng xung cần đường thoát an toàn."
+            },
+            {
+              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+            },
+            {
+              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
+            }
+          ],
+          "number": 96,
+          "setIndex": 9
+        },
+        {
+          "id": "bao-ve-cong-io-diode-clamp-q097",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.3 Bảo vệ cổng I/O",
+          "topic": "diode kẹp áp",
+          "bloom": 1,
+          "outline": "2.3",
+          "stem": "Nhận định nào đúng về diode kẹp áp?",
+          "choices": [
+            {
+              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
+              "correct": false,
+              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
+            },
             {
               "text": "Diode kẹp dẫn dòng về rail nguồn hoặc mass khi điện áp vượt quá vùng an toàn; điện trở nối tiếp cần giới hạn dòng qua diode.",
               "correct": true,
@@ -19631,242 +19768,105 @@
               "text": "Diode kẹp không cần điện trở hạn dòng vì dòng qua diode luôn bằng không.",
               "correct": false,
               "reason": "Khi kẹp, diode dẫn dòng và phải giới hạn dòng."
-            },
-            {
-              "text": "Diode kẹp chỉ dùng để tạo clock cho UART, không liên quan quá áp.",
-              "correct": false,
-              "reason": "Diode kẹp dùng để hạn chế điện áp vào vùng an toàn."
-            }
-          ],
-          "number": 93,
-          "setIndex": 9
-        },
-        {
-          "id": "bao-ve-cong-io-source-sink-protection-q094",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "bảo vệ dòng source và sink",
-          "bloom": 1,
-          "outline": "2.3",
-          "stem": "Nhận định nào đúng về bảo vệ dòng source và sink?",
-          "choices": [
-            {
-              "text": "Khi dùng chân I/O điều khiển tải, phải kiểm tra giới hạn dòng source/sink, điện áp tải và năng lượng xung; tải lớn cần driver hoặc cách ly.",
-              "correct": true,
-              "reason": "Bảo vệ output không chỉ là quá áp đầu vào, mà còn là tránh quá dòng và xung ngược từ tải."
-            },
-            {
-              "text": "Dòng source/sink không cần kiểm tra vì mọi chân MCU chịu được dòng tải tùy ý.",
-              "correct": false,
-              "reason": "Mỗi chân có giới hạn dòng trong datasheet."
-            },
-            {
-              "text": "Tải cảm không tạo vấn đề cho output vì dòng qua cuộn dây biến mất ngay khi tắt.",
-              "correct": false,
-              "reason": "Tải cảm tạo xung ngược khi ngắt dòng."
-            },
-            {
-              "text": "Driver ngoài luôn làm MCU nguy hiểm hơn so với nối trực tiếp tải lớn.",
-              "correct": false,
-              "reason": "Driver phù hợp giúp MCU chỉ điều khiển tín hiệu nhỏ."
-            }
-          ],
-          "number": 94,
-          "setIndex": 9
-        },
-        {
-          "id": "bao-ve-cong-io-buffer-sacrifice-q095",
-          "type": "Bloom 4 - Phân tích",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "IC đệm bảo vệ",
-          "bloom": 4,
-          "outline": "2.3",
-          "stem": "Khi phân tích việc thêm IC đệm trước input MCU, nhận định nào đúng về vai trò và giới hạn của nó?",
-          "choices": [
-            {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
-              "correct": true,
-              "reason": "Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
-            },
-            {
-              "text": "IC đệm thay thế hoàn toàn TVS, điện trở hạn dòng và cách ly trong mọi môi trường ESD mạnh.",
-              "correct": false,
-              "reason": "Buffer không đủ cho mọi xung năng lượng lớn."
-            },
-            {
-              "text": "IC đệm không ảnh hưởng fan-out hoặc khả năng tải tín hiệu.",
-              "correct": false,
-              "reason": "Buffer có thể tăng fan-out và định dạng lại mức logic."
-            },
-            {
-              "text": "Nếu IC đệm hỏng thì MCU chắc chắn vẫn hỏng trước vì đệm không thể là tầng hy sinh.",
-              "correct": false,
-              "reason": "Trong nhiều thiết kế, buffer có thể hỏng trước để giảm rủi ro cho IC chính."
-            }
-          ],
-          "number": 95,
-          "setIndex": 9
-        },
-        {
-          "id": "bao-ve-cong-io-series-resistor-s096",
-          "type": "Chọn phát biểu sai",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "điện trở nối tiếp bảo vệ đầu vào",
-          "bloom": 2,
-          "outline": "2.3",
-          "stem": "Trong nhóm kiến thức \"2.3 Bảo vệ cổng I/O\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "IC đệm có thể đóng vai trò tầng hy sinh, tăng khả năng tải hoặc định dạng lại mức logic, nhưng không thay thế bảo vệ chuyên dụng trước xung năng lượng lớn.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Buffer hữu ích ở một số ngõ vào, nhưng môi trường khắc nghiệt vẫn cần hạn dòng, kẹp áp, lọc hoặc cách ly."
-            },
-            {
-              "text": "Điện trở nối tiếp chỉ mắc song song với nguồn nuôi, không nằm trên đường tín hiệu.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì trong bảo vệ input, điện trở thường mắc nối tiếp đường tín hiệu."
-            },
-            {
-              "text": "Điện trở nối tiếp giới hạn dòng vào chân IC khi có quá áp hoặc xung nhiễu, nhưng có thể làm chậm cạnh tín hiệu do kết hợp với điện dung đầu vào.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Đây là phương án đơn giản, hữu ích khi IC đã có diode bảo vệ nội hoặc tín hiệu không quá nhanh."
-            },
-            {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
-            }
-          ],
-          "number": 96,
-          "setIndex": 9
-        },
-        {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q097",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
-          "bloom": 3,
-          "outline": "2.3",
-          "stem": "Một tín hiệu công nghiệp chậm có mức cao lớn hơn nhiều so với nguồn MCU. Phương án thiết kế bảo vệ đơn giản nào hợp lý?",
-          "choices": [
-            {
-              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
-              "correct": false,
-              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
-            },
-            {
-              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
-              "correct": false,
-              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
-            },
-            {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
-              "correct": false,
-              "reason": "Dòng xung cần đường thoát an toàn."
-            },
-            {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
-              "correct": true,
-              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
             }
           ],
           "number": 97,
           "setIndex": 9
         },
         {
-          "id": "bao-ve-cong-io-opto-isolator-cnt098",
-          "type": "Số lượng và thành phần",
+          "id": "bao-ve-cong-io-protection-circuit-choice-q098",
+          "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "optocoupler và digital isolator",
-          "bloom": 2,
+          "topic": "chọn cấu trúc mạch bảo vệ đầu vào",
+          "bloom": 4,
           "outline": "2.3",
-          "stem": "Về optocoupler và digital isolator, phương án nào vừa đúng số lượng vừa đúng nội dung?",
+          "stem": "Khi phân tích cấu trúc bảo vệ input số đi ra ngoài thiết bị, nhận định nào đúng?",
           "choices": [
             {
-              "text": "Có 3 ý chính: optocoupler cho tín hiệu chậm, quá dòng, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm.",
+              "text": "Đặt TVS ở xa đầu nối, sau chân MCU, để xung đi qua toàn bộ mạch trước khi bị kẹp.",
               "correct": false,
-              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+              "reason": "TVS bảo vệ hiệu quả hơn khi đặt gần điểm xâm nhập và có đường xả ngắn."
             },
             {
-              "text": "Có 2 ý chính: optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn.",
-              "correct": false,
-              "reason": "Phương án này thiếu một thành phần quan trọng."
-            },
-            {
-              "text": "Có 4 ý chính: optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm, sai mức logic.",
-              "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
-            },
-            {
-              "text": "Có 3 ý chính: optocoupler cho tín hiệu chậm, digital isolator cho tốc độ cao hơn, cách ly khi chênh lệch mass hoặc điện áp nguy hiểm.",
+              "text": "Một cấu trúc hợp lý cho input số chậm đi ra ngoài là điện trở nối tiếp để hạn dòng, TVS gần đầu nối để xả xung, diode kẹp hoặc Zener phù hợp và điện trở kéo để tạo trạng thái xác định.",
               "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về optocoupler và digital isolator."
+              "reason": "Cấu trúc này xử lý đồng thời dòng sự cố, xung ESD/quá áp và trạng thái khi dây hở; từng linh kiện phải chọn theo điện áp, năng lượng xung và tốc độ tín hiệu."
+            },
+            {
+              "text": "Nối thẳng dây ngoài vào chân MCU rồi chỉ xử lý sai số bằng phần mềm.",
+              "correct": false,
+              "reason": "Phần mềm không bảo vệ được transistor đầu vào khi điện áp vượt giới hạn."
+            },
+            {
+              "text": "Chỉ mắc một tụ rất lớn song song input và bỏ toàn bộ hạn dòng/kẹp áp.",
+              "correct": false,
+              "reason": "Tụ có thể lọc nhiễu chậm nhưng không đủ để giới hạn dòng quá áp hoặc xả ESD đúng cách."
             }
           ],
           "number": 98,
           "setIndex": 9
         },
         {
-          "id": "bao-ve-cong-io-esd-q099",
-          "type": "Bloom 4 - Phân tích",
+          "id": "bao-ve-cong-io-tvs-zener-q099",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "ESD và xung nhiễu",
-          "bloom": 4,
+          "topic": "TVS và Zener",
+          "bloom": 3,
           "outline": "2.3",
-          "stem": "Khi phân tích vì sao cổng nối ra ngoài dễ hỏng do chạm tay hoặc dây dài, nhận định nào đúng về ESD?",
+          "stem": "Trong một tình huống thiết kế cần áp dụng TVS và Zener, lựa chọn nào phù hợp nhất?",
           "choices": [
             {
-              "text": "ESD là phóng tĩnh điện có điện áp rất cao trong thời gian rất ngắn, có thể làm hỏng hoặc suy giảm chân I/O nếu không có đường xả và kẹp phù hợp.",
+              "text": "Điện áp làm việc của TVS nên thấp hơn mức tín hiệu bình thường để TVS dẫn liên tục.",
+              "correct": false,
+              "reason": "TVS phải không dẫn trong điều kiện bình thường nhưng kẹp khi quá áp."
+            },
+            {
+              "text": "TVS phù hợp kẹp xung quá áp nhanh, năng lượng lớn trong thời gian ngắn; Zener có thể kẹp mức điện áp nhưng thường không thay thế TVS cho xung ESD mạnh.",
               "correct": true,
-              "reason": "Năng lượng xung tuy ngắn nhưng biên độ cao và cạnh rất nhanh, nên cần linh kiện bảo vệ đặt đúng vị trí và layout hợp lý."
+              "reason": "Cần chọn linh kiện theo điện áp làm việc, điện áp kẹp, năng lượng xung, điện dung và tốc độ tín hiệu."
             },
             {
-              "text": "ESD là dòng một chiều nhỏ kéo dài nhiều giờ nên chỉ cần tụ nguồn lớn là đủ.",
+              "text": "TVS và Zener luôn giống hệt nhau nên chọn linh kiện nào cũng được cho mọi ESD.",
               "correct": false,
-              "reason": "ESD là xung rất nhanh, điện áp cao."
+              "reason": "TVS được tối ưu cho xung quá áp nhanh, Zener thường dùng kẹp mức theo mục tiêu khác."
             },
             {
-              "text": "ESD chỉ ảnh hưởng phần mềm, không thể làm hỏng cấu trúc bán dẫn.",
+              "text": "Điện dung của linh kiện bảo vệ không ảnh hưởng tín hiệu tốc độ cao.",
               "correct": false,
-              "reason": "ESD có thể phá hỏng hoặc làm suy giảm linh kiện."
-            },
-            {
-              "text": "Bảo vệ ESD đặt ở đâu trên PCB cũng như nhau, không liên quan đường xả dòng.",
-              "correct": false,
-              "reason": "Vị trí và đường xả ảnh hưởng hiệu quả bảo vệ."
+              "reason": "Điện dung ký sinh có thể làm méo hoặc suy hao tín hiệu nhanh."
             }
           ],
           "number": 99,
           "setIndex": 9
         },
         {
-          "id": "bao-ve-cong-io-simple-overvoltage-design-q100",
+          "id": "bao-ve-cong-io-divider-clamp-design-q100",
           "type": "Bloom 4 - Phân tích",
           "source": "2.3 Bảo vệ cổng I/O",
-          "topic": "thiết kế mạch bảo vệ quá áp đơn giản",
+          "topic": "chia áp và kẹp áp cho input quá mức",
           "bloom": 4,
           "outline": "2.3",
-          "stem": "Khi phân tích một mạch bảo vệ quá áp đầu vào, tiêu chí nào quan trọng nhất?",
+          "stem": "Khi phân tích mạch chia áp đưa tín hiệu quá mức vào MCU, rủi ro nào vẫn cần xử lý thêm?",
           "choices": [
             {
-              "text": "Đưa trực tiếp tín hiệu 24 V vào chân MCU 3,3 V là phương án tối ưu vì phần mềm có thể tự trừ điện áp.",
+              "text": "Cầu chia áp chỉ dùng cho tín hiệu âm thanh nên không thể đưa mức logic cao về vùng MCU.",
               "correct": false,
-              "reason": "Quá áp vượt giới hạn có thể phá hỏng chân MCU."
+              "reason": "Cầu chia áp có thể dùng cho tín hiệu chậm nếu trở kháng và ngưỡng logic phù hợp."
             },
             {
-              "text": "Chỉ thêm tụ rất lớn xuống mass là đủ cho mọi tín hiệu số nhanh và chậm.",
+              "text": "Chỉ cần cầu chia áp là đủ cho mọi xung ESD năng lượng lớn từ dây ngoài.",
               "correct": false,
-              "reason": "Tụ lớn có thể làm mất timing; quá áp vẫn cần giới hạn/kẹp."
+              "reason": "ESD cần đường xả/kẹp phù hợp, cầu chia áp đơn thuần thường không đủ."
             },
             {
-              "text": "Mạch bảo vệ không cần nối mass hoặc đường hồi dòng cho xung vì dòng sự cố tự biến mất.",
+              "text": "Kẹp áp về rail nguồn không cần giới hạn dòng vì rail nguồn tự hấp thụ mọi năng lượng.",
               "correct": false,
-              "reason": "Dòng xung cần đường thoát an toàn."
+              "reason": "Dòng kẹp phải được giới hạn và dẫn về đường phù hợp để tránh làm hỏng rail hoặc diode."
             },
             {
-              "text": "Với tín hiệu chậm có thể vượt mức MCU, mạch cơ bản thường dùng chia áp hoặc hạn dòng, kẹp về rail an toàn bằng diode/TVS và thêm lọc nếu cần.",
+              "text": "Với tín hiệu chậm có mức cao vượt VCC, cầu chia áp đưa mức điện áp về vùng logic an toàn, còn điện trở nối tiếp và phần tử kẹp giúp giới hạn dòng khi có xung hoặc sai mức.",
               "correct": true,
-              "reason": "Mục tiêu là đưa điện áp vào vùng logic hợp lệ, giới hạn dòng sự cố và không làm méo tín hiệu vượt yêu cầu timing."
+              "reason": "Cầu chia áp xử lý mức DC bình thường; phần tử bảo vệ xử lý bất thường như ESD, cắm nhầm hoặc xung quá áp."
             }
           ],
           "number": 100,
@@ -19950,73 +19950,469 @@
           "setIndex": 0
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-nyquist-q003",
+          "id": "giao-tiep-nhung-nang-cao-calc-adc-code-q003",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "tốc độ lấy mẫu và Nyquist",
+          "topic": "tính mã ADC lý tưởng",
           "bloom": 3,
           "outline": "2.4",
-          "stem": "Một tín hiệu có thành phần cao nhất 1 kHz. Tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản nên như thế nào?",
+          "stem": "ADC 12 bit có Vref = 3,3 V, điện áp vào Vin = 1,65 V. Mã ADC lý tưởng gần giá trị nào nhất?",
           "choices": [
             {
-              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
+              "text": "Mã lý tưởng xấp xỉ 4095 vì Vin bằng đúng Vref.",
               "correct": false,
-              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
+              "reason": "Vin = 1,65 V chỉ bằng một nửa Vref = 3,3 V."
             },
             {
-              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
+              "text": "Mã lý tưởng xấp xỉ 12 vì ADC có 12 bit.",
               "correct": false,
-              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
+              "reason": "Số bit không phải mã đọc; mã 12 bit chạy từ 0 đến 4095."
             },
             {
-              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
+              "text": "Mã lý tưởng xấp xỉ 0 vì Vin khác 0 nên ADC không đọc được.",
               "correct": false,
-              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
+              "reason": "Vin trong dải đo phải cho mã tỉ lệ với Vin/Vref."
             },
             {
-              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
+              "text": "Với ADC 12 bit, Vref = 3,3 V và Vin = 1,65 V, mã lý tưởng xấp xỉ (1,65 / 3,3) * 4095 = 2047,5, thường làm tròn khoảng 2048.",
               "correct": true,
-              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
+              "reason": "Vin bằng một nửa Vref nên mã nằm gần giữa thang 0 đến 4095."
             }
           ],
           "number": 3,
           "setIndex": 0
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-q004",
-          "type": "Bloom 1 - Nhớ",
+          "id": "giao-tiep-nhung-nang-cao-calc-flash-comparators-q004",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu trúc UART song công",
-          "bloom": 1,
+          "topic": "tính số comparator của Flash ADC",
+          "bloom": 3,
           "outline": "2.4",
-          "stem": "Nhận định nào đúng về cấu trúc UART song công?",
+          "stem": "Một Flash ADC 3 bit lý tưởng cần bao nhiêu comparator theo cấu trúc cơ bản?",
           "choices": [
             {
-              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
+              "text": "Flash ADC 3 bit cần 8 comparator vì có 8 mã.",
+              "correct": false,
+              "reason": "Với 8 mã cần 7 ngưỡng so sánh giữa các mã."
+            },
+            {
+              "text": "Flash ADC 3 bit không cần comparator vì dùng phần mềm để so sánh.",
+              "correct": false,
+              "reason": "Flash ADC dựa trên nhiều comparator phần cứng chạy song song."
+            },
+            {
+              "text": "Flash ADC N bit thường cần 2^N - 1 comparator; với 3 bit cần 2^3 - 1 = 7 comparator.",
               "correct": true,
-              "reason": "TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
+              "reason": "Mỗi ngưỡng lượng tử cần một comparator, nên số comparator tăng rất nhanh khi tăng số bit."
             },
             {
-              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
+              "text": "Flash ADC 3 bit chỉ cần 3 comparator vì có 3 bit đầu ra.",
               "correct": false,
-              "reason": "Thông thường TX của bên này nối RX của bên kia."
-            },
-            {
-              "text": "UART không thể truyền và nhận cùng lúc vì chỉ có một thanh ghi dùng chung.",
-              "correct": false,
-              "reason": "UART có các khối truyền và nhận riêng."
-            },
-            {
-              "text": "UART TTL không cần mốc điện áp chung trong mọi trường hợp không cách ly.",
-              "correct": false,
-              "reason": "Hai bên thường cần GND chung hoặc cách ly phù hợp."
+              "reason": "Số comparator phụ thuộc số mức/ngưỡng, không phải số bit trực tiếp."
             }
           ],
           "number": 4,
           "setIndex": 0
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-i2c-basic-q005",
+          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q005",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "RS-232 và UART TTL",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "RS-232 và UART TTL được mô tả đúng nhất bởi phương án nào?",
+          "choices": [
+            {
+              "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
+              "correct": false,
+              "reason": "RS-232 dùng mức dương/âm khác TTL."
+            },
+            {
+              "text": "MAX232 dùng để đổi I2C thành SPI, không liên quan RS-232.",
+              "correct": false,
+              "reason": "MAX232 chuyển mức giữa TTL và RS-232."
+            },
+            {
+              "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
+              "correct": false,
+              "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
+            },
+            {
+              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
+              "correct": true,
+              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
+            }
+          ],
+          "number": 5,
+          "setIndex": 0
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-i2c-frame-s006",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "khung truyền I2C",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
+            },
+            {
+              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
+            },
+            {
+              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
+            },
+            {
+              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
+            }
+          ],
+          "number": 6,
+          "setIndex": 0
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-quantization-error-q007",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính sai số lượng tử cực đại",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "ADC 12 bit dùng Vref = 3,3 V. Sai số lượng tử cực đại lý tưởng gần bao nhiêu?",
+          "choices": [
+            {
+              "text": "Sai số cực đại khoảng 3,3 V vì ADC có dải đo 3,3 V.",
+              "correct": false,
+              "reason": "3,3 V là toàn dải đo, không phải sai số lượng tử cực đại."
+            },
+            {
+              "text": "Sai số cực đại khoảng 12 mV vì ADC có 12 bit.",
+              "correct": false,
+              "reason": "Không lấy số bit làm mV; cần tính LSB trước."
+            },
+            {
+              "text": "Sai số cực đại bằng 0 mV vì ADC lý tưởng không có lượng tử hóa.",
+              "correct": false,
+              "reason": "ADC lý tưởng vẫn có sai số lượng tử do mã hữu hạn."
+            },
+            {
+              "text": "Với ADC 12 bit, Vref = 3,3 V, 1 LSB khoảng 0,805 mV nên sai số lượng tử cực đại lý tưởng khoảng 0,5 LSB = 0,403 mV.",
+              "correct": true,
+              "reason": "Sai số lượng tử lý tưởng thường bị giới hạn trong nửa bước lượng tử."
+            }
+          ],
+          "number": 7,
+          "setIndex": 0
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-improvement-cnt008",
+          "type": "Số lượng và thành phần",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cải thiện chất lượng ADC",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Về cải thiện chất lượng ADC, phương án nào vừa đúng số lượng vừa đúng nội dung?",
+          "choices": [
+            {
+              "text": "Có 5 ý chính: Vref ổn định, lọc tín hiệu, cần transceiver, hiệu chuẩn, layout analog.",
+              "correct": false,
+              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+            },
+            {
+              "text": "Có 4 ý chính: Vref ổn định, lọc tín hiệu, giảm trở nguồn, hiệu chuẩn.",
+              "correct": false,
+              "reason": "Phương án này thiếu một thành phần quan trọng."
+            },
+            {
+              "text": "Có 6 ý chính: Vref ổn định, lọc tín hiệu, giảm trở nguồn, hiệu chuẩn, layout analog, MOSI đưa dữ liệu từ master tới slave.",
+              "correct": false,
+              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+            },
+            {
+              "text": "Có 5 ý chính: Vref ổn định, lọc tín hiệu, giảm trở nguồn, hiệu chuẩn, layout analog.",
+              "correct": true,
+              "reason": "Tổ hợp này khớp với kiến thức về cải thiện chất lượng ADC."
+            }
+          ],
+          "number": 8,
+          "setIndex": 0
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q009",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "termination và quyền phát RS-485",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một mạng RS-485 nhiều nút bị lỗi khi hai node trả lời cùng lúc. Nguyên nhân thiết kế nào cần kiểm tra?",
+          "choices": [
+            {
+              "text": "DE/RE không ảnh hưởng quyền phát vì transceiver tự đoán bên nào nói trước.",
+              "correct": false,
+              "reason": "Firmware hoặc phần cứng phải điều khiển quyền phát/nhận phù hợp."
+            },
+            {
+              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
+              "correct": true,
+              "reason": "Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
+            },
+            {
+              "text": "Trong RS-485 half-duplex, mọi nút nên bật driver phát cùng lúc để tăng độ mạnh tín hiệu.",
+              "correct": false,
+              "reason": "Nhiều driver phát cùng lúc gây xung đột bus."
+            },
+            {
+              "text": "Điện trở kết thúc luôn đặt ở mọi nút nhánh bất kể cấu trúc bus.",
+              "correct": false,
+              "reason": "Thông thường termination đặt ở hai đầu đường bus chính."
+            }
+          ],
+          "number": 9,
+          "setIndex": 0
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q010",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "số mức ADC và LSB",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Cách giải thích nào phù hợp nhất về số mức ADC và LSB?",
+          "choices": [
+            {
+              "text": "Độ phân giải danh định luôn bằng độ chính xác tuyệt đối của phép đo.",
+              "correct": false,
+              "reason": "Độ chính xác còn bị giới hạn bởi nhiễu, Vref và sai số ADC."
+            },
+            {
+              "text": "ADC N bit chia dải đo thành 2^N mức; kích thước 1 LSB xấp xỉ bằng giới hạn đo chia cho 2^N.",
+              "correct": true,
+              "reason": "Số bit càng cao thì LSB càng nhỏ, nhưng độ chính xác thực tế còn phụ thuộc nhiễu và sai số."
+            },
+            {
+              "text": "ADC N bit chỉ có N mức đo nên 12 bit có đúng 12 mức.",
+              "correct": false,
+              "reason": "ADC N bit có 2^N mức."
+            },
+            {
+              "text": "LSB tăng khi số bit tăng nếu dải đo giữ nguyên.",
+              "correct": false,
+              "reason": "Số bit tăng làm LSB nhỏ hơn."
+            }
+          ],
+          "number": 10,
+          "setIndex": 0
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-nyquist-q011",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính tốc độ lấy mẫu tối thiểu",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một tín hiệu analog có thành phần cao nhất 1 kHz. Theo điều kiện Nyquist cơ bản, tốc độ lấy mẫu tối thiểu là bao nhiêu?",
+          "choices": [
+            {
+              "text": "Tốc độ tối thiểu là 0,5 kHz vì lấy một nửa tần số tín hiệu.",
+              "correct": false,
+              "reason": "Đây là đảo ngược điều kiện Nyquist."
+            },
+            {
+              "text": "Tốc độ tối thiểu là 1 kHz vì chỉ cần bằng tần số tín hiệu.",
+              "correct": false,
+              "reason": "Bằng fmax vẫn chưa đủ theo điều kiện Nyquist cơ bản."
+            },
+            {
+              "text": "Tốc độ tối thiểu là 1 Hz vì tín hiệu đã có đơn vị kHz.",
+              "correct": false,
+              "reason": "Đơn vị không được bỏ qua; cần nhân đôi 1 kHz."
+            },
+            {
+              "text": "Nếu thành phần tần số cao nhất của tín hiệu là 1 kHz, tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản là 2 kHz.",
+              "correct": true,
+              "reason": "Điều kiện cơ bản là fs >= 2 * fmax, nên 2 * 1 kHz = 2 kHz."
+            }
+          ],
+          "number": 11,
+          "setIndex": 1
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-pwm-average-q012",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính điện áp trung bình PWM",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "PWM có mức cao 3,3 V và duty cycle 40%. Sau bộ lọc thông thấp lý tưởng, điện áp trung bình gần bao nhiêu?",
+          "choices": [
+            {
+              "text": "Giá trị trung bình là 0,40 V vì duty cycle 40%.",
+              "correct": false,
+              "reason": "Duty cycle là tỉ lệ, cần nhân với điện áp mức cao."
+            },
+            {
+              "text": "Giá trị trung bình là 8,25 V vì lấy 3,3 V chia cho 40%.",
+              "correct": false,
+              "reason": "Công thức đúng là duty cycle nhân Vdd, không phải chia."
+            },
+            {
+              "text": "PWM 3,3 V với duty cycle 40% có giá trị trung bình lý tưởng sau lọc thông thấp xấp xỉ 0,4 * 3,3 V = 1,32 V.",
+              "correct": true,
+              "reason": "Sau lọc thông thấp lý tưởng, thành phần một chiều của PWM bằng duty cycle nhân biên độ mức cao."
+            },
+            {
+              "text": "Giá trị trung bình là 3,3 V vì PWM luôn có mức cao 3,3 V.",
+              "correct": false,
+              "reason": "PWM chỉ ở mức cao 40% thời gian trong tình huống này."
+            }
+          ],
+          "number": 12,
+          "setIndex": 1
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-mode-q013",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "CPOL và CPHA trong SPI",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về CPOL và CPHA trong SPI?",
+          "choices": [
+            {
+              "text": "CPOL và CPHA chỉ quyết định địa chỉ I2C của slave.",
+              "correct": false,
+              "reason": "CPOL/CPHA là thông số timing của SPI."
+            },
+            {
+              "text": "Hai thiết bị SPI có thể chọn mode bất kỳ khác nhau mà vẫn luôn đọc đúng.",
+              "correct": false,
+              "reason": "Sai mode có thể làm sai dữ liệu."
+            },
+            {
+              "text": "CPHA quyết định điện áp nguồn cho bus, không liên quan cạnh lấy mẫu.",
+              "correct": false,
+              "reason": "CPHA quyết định pha lấy mẫu/dịch bit."
+            },
+            {
+              "text": "Các mode SPI được xác định bởi CPOL và CPHA, quyết định mức nghỉ của clock và cạnh lấy mẫu dữ liệu.",
+              "correct": true,
+              "reason": "Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
+            }
+          ],
+          "number": 13,
+          "setIndex": 1
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-dout-q014",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "công thức mã ADC",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Khi học công thức mã ADC, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "Vref càng nhiễu thì kết quả ADC càng ổn định hơn.",
+              "correct": false,
+              "reason": "Vref nhiễu làm phép đo dao động."
+            },
+            {
+              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
+              "correct": true,
+              "reason": "Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
+            },
+            {
+              "text": "Mã ADC không phụ thuộc Vref vì ADC chỉ đếm số lần CPU chạy vòng lặp.",
+              "correct": false,
+              "reason": "Mã ADC phụ thuộc điện áp vào và điện áp tham chiếu."
+            },
+            {
+              "text": "Khi Ain vượt dải đo, ADC lý tưởng vẫn tăng mã vô hạn không bão hòa.",
+              "correct": false,
+              "reason": "ADC có giới hạn mã cực đại và có thể bão hòa."
+            }
+          ],
+          "number": 14,
+          "setIndex": 1
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q015",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "SAR ADC và Flash ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Nếu cần ADC tích hợp trong MCU cho đo cảm biến thông thường, kiến trúc nào thường hợp lý hơn Flash ADC rất nhanh?",
+          "choices": [
+            {
+              "text": "Flash ADC dùng đúng một comparator cho mọi số bit nên rẻ và ít công suất nhất.",
+              "correct": false,
+              "reason": "Flash ADC cần số comparator tăng nhanh theo số bit."
+            },
+            {
+              "text": "SAR ADC không có quá trình xấp xỉ, chỉ đọc trực tiếp địa chỉ I2C.",
+              "correct": false,
+              "reason": "SAR ADC thử dần từng bit dựa trên so sánh."
+            },
+            {
+              "text": "Mọi MCU phổ thông đều dùng Flash ADC rất lớn vì không quan tâm diện tích.",
+              "correct": false,
+              "reason": "MCU thường dùng SAR hoặc kiến trúc khác phù hợp hơn."
+            },
+            {
+              "text": "SAR ADC thử dần từng bit bằng DAC nội và comparator nên cân bằng tốc độ, độ phân giải, chi phí; Flash ADC dùng nhiều comparator nên rất nhanh nhưng tốn diện tích và công suất.",
+              "correct": true,
+              "reason": "MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
+            }
+          ],
+          "number": 15,
+          "setIndex": 1
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-s016",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cấu trúc UART song công",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
+            },
+            {
+              "text": "SAR ADC thử dần từng bit bằng DAC nội và comparator nên cân bằng tốc độ, độ phân giải, chi phí; Flash ADC dùng nhiều comparator nên rất nhanh nhưng tốn diện tích và công suất.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
+            },
+            {
+              "text": "PWM 3,3 V với duty cycle 40% có giá trị trung bình lý tưởng sau lọc thông thấp xấp xỉ 0,4 * 3,3 V = 1,32 V.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Sau lọc thông thấp lý tưởng, thành phần một chiều của PWM bằng duty cycle nhân biên độ mức cao."
+            },
+            {
+              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì thông thường TX của bên này nối RX của bên kia."
+            }
+          ],
+          "number": 16,
+          "setIndex": 1
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-i2c-basic-q017",
           "type": "Bloom 1 - Nhớ",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "I2C",
@@ -20045,480 +20441,23 @@
               "reason": "I2C tiết kiệm chân, hỗ trợ nhiều thiết bị có địa chỉ, nhưng tốc độ và độ dài bị ảnh hưởng bởi điện dung bus và pull-up."
             }
           ],
-          "number": 5,
-          "setIndex": 0
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sample-hold-s006",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sample-and-hold và trở nguồn ADC",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
-            },
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            },
-            {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
-            }
-          ],
-          "number": 6,
-          "setIndex": 0
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q007",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "RS-232 và UART TTL",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về RS-232 và UART TTL?",
-          "choices": [
-            {
-              "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
-              "correct": false,
-              "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
-            },
-            {
-              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
-              "correct": true,
-              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
-            },
-            {
-              "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
-              "correct": false,
-              "reason": "RS-232 dùng mức dương/âm khác TTL."
-            },
-            {
-              "text": "MAX232 dùng để đổi I2C thành SPI, không liên quan RS-232.",
-              "correct": false,
-              "reason": "MAX232 chuyển mức giữa TTL và RS-232."
-            }
-          ],
-          "number": 7,
-          "setIndex": 0
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-i2c-frame-q008",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "khung truyền I2C",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Khi học khung truyền I2C, nên hiểu thế nào?",
-          "choices": [
-            {
-              "text": "I2C không có START hoặc STOP, mọi byte tự trôi trên bus không có ranh giới.",
-              "correct": false,
-              "reason": "START/STOP đánh dấu giao dịch trên bus."
-            },
-            {
-              "text": "ACK trong I2C là mức cao bắt buộc do bên nhận kéo lên.",
-              "correct": false,
-              "reason": "ACK thường là bên nhận kéo SDA xuống thấp ở xung thứ 9."
-            },
-            {
-              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
-              "correct": false,
-              "reason": "Repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
-            },
-            {
-              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
-              "correct": true,
-              "reason": "ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
-            }
-          ],
-          "number": 8,
-          "setIndex": 0
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q009",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SAR ADC và Flash ADC",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Nếu cần ADC tích hợp trong MCU cho đo cảm biến thông thường, kiến trúc nào thường hợp lý hơn Flash ADC rất nhanh?",
-          "choices": [
-            {
-              "text": "Mọi MCU phổ thông đều dùng Flash ADC rất lớn vì không quan tâm diện tích.",
-              "correct": false,
-              "reason": "MCU thường dùng SAR hoặc kiến trúc khác phù hợp hơn."
-            },
-            {
-              "text": "SAR ADC thử dần từng bit bằng DAC nội và comparator nên cân bằng tốc độ, độ phân giải, chi phí; Flash ADC dùng nhiều comparator nên rất nhanh nhưng tốn diện tích và công suất.",
-              "correct": true,
-              "reason": "MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
-            },
-            {
-              "text": "Flash ADC dùng đúng một comparator cho mọi số bit nên rẻ và ít công suất nhất.",
-              "correct": false,
-              "reason": "Flash ADC cần số comparator tăng nhanh theo số bit."
-            },
-            {
-              "text": "SAR ADC không có quá trình xấp xỉ, chỉ đọc trực tiếp địa chỉ I2C.",
-              "correct": false,
-              "reason": "SAR ADC thử dần từng bit dựa trên so sánh."
-            }
-          ],
-          "number": 9,
-          "setIndex": 0
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs485-q010",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "RS-485",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về RS-485?",
-          "choices": [
-            {
-              "text": "Half-duplex trên RS-485 nghĩa là cả hai đầu truyền đồng thời mọi lúc.",
-              "correct": false,
-              "reason": "Half-duplex là hai chiều luân phiên."
-            },
-            {
-              "text": "RS-485 dùng truyền vi sai trên cặp dây, hỗ trợ khoảng cách xa và nhiều nút tốt hơn RS-232; mạng hai dây thường hoạt động half-duplex.",
-              "correct": true,
-              "reason": "Transceiver RS-485 chuyển tín hiệu logic của MCU thành cặp vi sai A/B và cần quản lý quyền phát trên bus."
-            },
-            {
-              "text": "RS-485 hai dây luôn là UART TTL nối thẳng, không cần transceiver.",
-              "correct": false,
-              "reason": "Cần transceiver để tạo và nhận tín hiệu vi sai."
-            },
-            {
-              "text": "RS-485 chỉ hỗ trợ đúng một bộ phát và một bộ nhận như kết nối point-to-point cổ điển.",
-              "correct": false,
-              "reason": "RS-485 hỗ trợ multi-drop hoặc multi-point tùy cấu trúc."
-            }
-          ],
-          "number": 10,
-          "setIndex": 0
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q011",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "so sánh SPI và I2C",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "So sánh SPI và I2C được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "I2C không có ACK nên master không biết byte có được nhận hay không.",
-              "correct": false,
-              "reason": "I2C có cơ chế ACK/NACK."
-            },
-            {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
-              "correct": true,
-              "reason": "Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
-            },
-            {
-              "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
-              "correct": false,
-              "reason": "SPI dạng sao cần thêm CS cho từng slave."
-            },
-            {
-              "text": "I2C luôn nhanh hơn SPI và phù hợp mọi truyền dữ liệu dung lượng lớn.",
-              "correct": false,
-              "reason": "SPI thường có lợi thế tốc độ cho dữ liệu nhiều."
-            }
-          ],
-          "number": 11,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-errors-q012",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "các sai số ADC",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một ADC 12 bit nhưng kết quả đo không chính xác. Nhận định nào đúng khi đánh giá sai số?",
-          "choices": [
-            {
-              "text": "DNL hỏi toàn bộ đường truyền cong bao nhiêu so với đường thẳng, còn INL hỏi từng bước rộng bao nhiêu.",
-              "correct": false,
-              "reason": "Phát biểu này đảo ý nghĩa DNL và INL."
-            },
-            {
-              "text": "TUE là tổng số học đơn giản của mọi loại sai số đã liệt kê.",
-              "correct": false,
-              "reason": "TUE là sai lệch tổng chưa hiệu chỉnh, không chỉ là tổng cộng đơn giản."
-            },
-            {
-              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
-              "correct": true,
-              "reason": "Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
-            },
-            {
-              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
-              "correct": false,
-              "reason": "Offset là lệch gốc, gain là lệch độ dốc."
-            }
-          ],
-          "number": 12,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q013",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "termination và quyền phát RS-485",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về termination và quyền phát RS-485?",
-          "choices": [
-            {
-              "text": "Trong RS-485 half-duplex, mọi nút nên bật driver phát cùng lúc để tăng độ mạnh tín hiệu.",
-              "correct": false,
-              "reason": "Nhiều driver phát cùng lúc gây xung đột bus."
-            },
-            {
-              "text": "Điện trở kết thúc luôn đặt ở mọi nút nhánh bất kể cấu trúc bus.",
-              "correct": false,
-              "reason": "Thông thường termination đặt ở hai đầu đường bus chính."
-            },
-            {
-              "text": "DE/RE không ảnh hưởng quyền phát vì transceiver tự đoán bên nào nói trước.",
-              "correct": false,
-              "reason": "Firmware hoặc phần cứng phải điều khiển quyền phát/nhận phù hợp."
-            },
-            {
-              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
-              "correct": true,
-              "reason": "Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
-            }
-          ],
-          "number": 13,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q014",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "số mức ADC và LSB",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Khi học số mức ADC và LSB, nên hiểu thế nào?",
-          "choices": [
-            {
-              "text": "Độ phân giải danh định luôn bằng độ chính xác tuyệt đối của phép đo.",
-              "correct": false,
-              "reason": "Độ chính xác còn bị giới hạn bởi nhiễu, Vref và sai số ADC."
-            },
-            {
-              "text": "ADC N bit chia dải đo thành 2^N mức; kích thước 1 LSB xấp xỉ bằng giới hạn đo chia cho 2^N.",
-              "correct": true,
-              "reason": "Số bit càng cao thì LSB càng nhỏ, nhưng độ chính xác thực tế còn phụ thuộc nhiễu và sai số."
-            },
-            {
-              "text": "ADC N bit chỉ có N mức đo nên 12 bit có đúng 12 mức.",
-              "correct": false,
-              "reason": "ADC N bit có 2^N mức."
-            },
-            {
-              "text": "LSB tăng khi số bit tăng nếu dải đo giữ nguyên.",
-              "correct": false,
-              "reason": "Số bit tăng làm LSB nhỏ hơn."
-            }
-          ],
-          "number": 14,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-improvement-q015",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cải thiện chất lượng ADC",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một phép đo ADC dao động mạnh do nhiễu nguồn và layout gần đường PWM. Biện pháp nào hợp lý?",
-          "choices": [
-            {
-              "text": "Chỉ cần tăng số bit danh định là loại bỏ mọi nhiễu nguồn, layout xấu và trở nguồn lớn.",
-              "correct": false,
-              "reason": "Số bit cao không bù được thiết kế analog kém."
-            },
-            {
-              "text": "Vref càng nhiễu càng giúp kết quả đo ổn định vì ADC có thêm dao động.",
-              "correct": false,
-              "reason": "Vref phải ổn định để phép đo đáng tin."
-            },
-            {
-              "text": "Lọc số sau ADC luôn thay thế hoàn toàn lọc analog trước ADC trong mọi trường hợp aliasing.",
-              "correct": false,
-              "reason": "Chống aliasing cần xử lý trước khi lấy mẫu."
-            },
-            {
-              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
-              "correct": true,
-              "reason": "Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
-            }
-          ],
-          "number": 15,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-basic-s016",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SPI",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
-            },
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
-            },
-            {
-              "text": "SPI không có clock nên receiver phải đoán thời điểm lấy mẫu giống UART.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì sPI có SCLK do master tạo."
-            }
-          ],
-          "number": 16,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-dout-q017",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "công thức mã ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Công thức mã ADC được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Mã ADC không phụ thuộc Vref vì ADC chỉ đếm số lần CPU chạy vòng lặp.",
-              "correct": false,
-              "reason": "Mã ADC phụ thuộc điện áp vào và điện áp tham chiếu."
-            },
-            {
-              "text": "Khi Ain vượt dải đo, ADC lý tưởng vẫn tăng mã vô hạn không bão hòa.",
-              "correct": false,
-              "reason": "ADC có giới hạn mã cực đại và có thể bão hòa."
-            },
-            {
-              "text": "Vref càng nhiễu thì kết quả ADC càng ổn định hơn.",
-              "correct": false,
-              "reason": "Vref nhiễu làm phép đo dao động."
-            },
-            {
-              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
-              "correct": true,
-              "reason": "Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
-            }
-          ],
           "number": 17,
           "setIndex": 1
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q018",
+          "id": "giao-tiep-nhung-nang-cao-quantization-error-q018",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "DAC, R-2R và PWM",
+          "topic": "sai số lượng tử",
           "bloom": 3,
           "outline": "2.4",
-          "stem": "Cần tạo mức điều khiển analog chậm bằng MCU không có DAC. Phương án nào có thể dùng nếu chấp nhận lọc và ripple?",
+          "stem": "Một ADC lý tưởng số hóa tín hiệu sin vẫn có sai số dạng răng cưa nhỏ. Nguyên nhân nào đúng?",
           "choices": [
             {
-              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
+              "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
               "correct": true,
-              "reason": "PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
+              "reason": "Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
             },
-            {
-              "text": "PWM là ADC nên dùng để đọc điện áp cảm biến thành mã số.",
-              "correct": false,
-              "reason": "PWM là cách tạo tín hiệu ra dạng xung, không phải đọc analog."
-            },
-            {
-              "text": "Thang R-2R cần điện trở theo lũy thừa rất lớn cho từng bit nên không có lợi thế matching.",
-              "correct": false,
-              "reason": "R-2R chỉ dùng hai giá trị R và 2R."
-            },
-            {
-              "text": "Duty cycle PWM không ảnh hưởng điện áp trung bình sau lọc.",
-              "correct": false,
-              "reason": "Duty cycle quyết định giá trị trung bình."
-            }
-          ],
-          "number": 18,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-mode-q019",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "CPOL và CPHA trong SPI",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về CPOL và CPHA trong SPI?",
-          "choices": [
-            {
-              "text": "CPHA quyết định điện áp nguồn cho bus, không liên quan cạnh lấy mẫu.",
-              "correct": false,
-              "reason": "CPHA quyết định pha lấy mẫu/dịch bit."
-            },
-            {
-              "text": "Các mode SPI được xác định bởi CPOL và CPHA, quyết định mức nghỉ của clock và cạnh lấy mẫu dữ liệu.",
-              "correct": true,
-              "reason": "Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
-            },
-            {
-              "text": "CPOL và CPHA chỉ quyết định địa chỉ I2C của slave.",
-              "correct": false,
-              "reason": "CPOL/CPHA là thông số timing của SPI."
-            },
-            {
-              "text": "Hai thiết bị SPI có thể chọn mode bất kỳ khác nhau mà vẫn luôn đọc đúng.",
-              "correct": false,
-              "reason": "Sai mode có thể làm sai dữ liệu."
-            }
-          ],
-          "number": 19,
-          "setIndex": 1
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-quantization-error-q020",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sai số lượng tử",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Khi học sai số lượng tử, nên hiểu thế nào?",
-          "choices": [
             {
               "text": "Sai số lượng tử chỉ xuất hiện khi ADC bị hỏng, ADC lý tưởng không có sai số nào.",
               "correct": false,
@@ -20533,222 +20472,52 @@
               "text": "Tăng số bit luôn loại bỏ hoàn toàn mọi nhiễu mạch và sai số tham chiếu.",
               "correct": false,
               "reason": "Tăng số bit chỉ giảm bước lượng tử, không xóa sai số mạch."
-            },
-            {
-              "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
-              "correct": true,
-              "reason": "Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
             }
           ],
-          "number": 20,
+          "number": 18,
           "setIndex": 1
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-q021",
+          "id": "giao-tiep-nhung-nang-cao-adc-errors-q019",
           "type": "Bloom 1 - Nhớ",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu trúc UART song công",
+          "topic": "các sai số ADC",
           "bloom": 1,
           "outline": "2.4",
-          "stem": "Phương án nào nhận diện đúng cấu trúc UART song công?",
+          "stem": "Nhận định nào đúng về các sai số ADC?",
           "choices": [
             {
-              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
+              "text": "TUE là tổng số học đơn giản của mọi loại sai số đã liệt kê.",
               "correct": false,
-              "reason": "Thông thường TX của bên này nối RX của bên kia."
+              "reason": "TUE là sai lệch tổng chưa hiệu chỉnh, không chỉ là tổng cộng đơn giản."
             },
             {
-              "text": "UART không thể truyền và nhận cùng lúc vì chỉ có một thanh ghi dùng chung.",
-              "correct": false,
-              "reason": "UART có các khối truyền và nhận riêng."
-            },
-            {
-              "text": "UART TTL không cần mốc điện áp chung trong mọi trường hợp không cách ly.",
-              "correct": false,
-              "reason": "Hai bên thường cần GND chung hoặc cách ly phù hợp."
-            },
-            {
-              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
+              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
               "correct": true,
-              "reason": "TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
+              "reason": "Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
+            },
+            {
+              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
+              "correct": false,
+              "reason": "Offset là lệch gốc, gain là lệch độ dốc."
+            },
+            {
+              "text": "DNL hỏi toàn bộ đường truyền cong bao nhiêu so với đường thẳng, còn INL hỏi từng bước rộng bao nhiêu.",
+              "correct": false,
+              "reason": "Phát biểu này đảo ý nghĩa DNL và INL."
             }
           ],
-          "number": 21,
-          "setIndex": 2
+          "number": 19,
+          "setIndex": 1
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-i2c-basic-q022",
+          "id": "giao-tiep-nhung-nang-cao-rs485-q020",
           "type": "Bloom 2 - Hiểu",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "I2C",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về I2C?",
-          "choices": [
-            {
-              "text": "I2C không có địa chỉ thiết bị nên chỉ nối được đúng một slave.",
-              "correct": false,
-              "reason": "I2C dùng địa chỉ để nhiều slave dùng chung bus."
-            },
-            {
-              "text": "I2C là bus nối tiếp đồng bộ hai dây gồm SCL và SDA, dùng ngõ ra open-drain/open-collector với điện trở kéo lên.",
-              "correct": true,
-              "reason": "I2C tiết kiệm chân, hỗ trợ nhiều thiết bị có địa chỉ, nhưng tốc độ và độ dài bị ảnh hưởng bởi điện dung bus và pull-up."
-            },
-            {
-              "text": "I2C dùng bốn dây bắt buộc như SPI gồm MOSI, MISO, SCLK và CS.",
-              "correct": false,
-              "reason": "I2C cơ bản dùng SCL và SDA."
-            },
-            {
-              "text": "I2C dùng push-pull mạnh ở mọi thiết bị nên không cần pull-up.",
-              "correct": false,
-              "reason": "I2C dùng open-drain/open-collector và cần điện trở kéo lên."
-            }
-          ],
-          "number": 22,
-          "setIndex": 2
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sample-hold-q023",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sample-and-hold và trở nguồn ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Sample-and-hold và trở nguồn ADC được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
-              "correct": false,
-              "reason": "Đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
-            },
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": true,
-              "reason": "Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            },
-            {
-              "text": "Trở nguồn càng lớn luôn làm tụ lấy mẫu nạp nhanh hơn và chính xác hơn.",
-              "correct": false,
-              "reason": "Trở nguồn lớn làm hằng số thời gian RC tăng."
-            },
-            {
-              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
-              "correct": false,
-              "reason": "Nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
-            }
-          ],
-          "number": 23,
-          "setIndex": 2
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q024",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "RS-232 và UART TTL",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một MCU 3,3 V cần giao tiếp với cổng RS-232 cũ của máy tính. Lựa chọn nào phù hợp?",
-          "choices": [
-            {
-              "text": "MAX232 dùng để đổi I2C thành SPI, không liên quan RS-232.",
-              "correct": false,
-              "reason": "MAX232 chuyển mức giữa TTL và RS-232."
-            },
-            {
-              "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
-              "correct": false,
-              "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
-            },
-            {
-              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
-              "correct": true,
-              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
-            },
-            {
-              "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
-              "correct": false,
-              "reason": "RS-232 dùng mức dương/âm khác TTL."
-            }
-          ],
-          "number": 24,
-          "setIndex": 2
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-i2c-frame-q025",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "khung truyền I2C",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về khung truyền I2C?",
-          "choices": [
-            {
-              "text": "I2C không có START hoặc STOP, mọi byte tự trôi trên bus không có ranh giới.",
-              "correct": false,
-              "reason": "START/STOP đánh dấu giao dịch trên bus."
-            },
-            {
-              "text": "ACK trong I2C là mức cao bắt buộc do bên nhận kéo lên.",
-              "correct": false,
-              "reason": "ACK thường là bên nhận kéo SDA xuống thấp ở xung thứ 9."
-            },
-            {
-              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
-              "correct": false,
-              "reason": "Repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
-            },
-            {
-              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
-              "correct": true,
-              "reason": "ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
-            }
-          ],
-          "number": 25,
-          "setIndex": 2
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-s026",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SAR ADC và Flash ADC",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            },
-            {
-              "text": "SAR ADC không có quá trình xấp xỉ, chỉ đọc trực tiếp địa chỉ I2C.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì sAR ADC thử dần từng bit dựa trên so sánh."
-            },
-            {
-              "text": "SAR ADC thử dần từng bit bằng DAC nội và comparator nên cân bằng tốc độ, độ phân giải, chi phí; Flash ADC dùng nhiều comparator nên rất nhanh nhưng tốn diện tích và công suất.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
-            },
-            {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
-            }
-          ],
-          "number": 26,
-          "setIndex": 2
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs485-q027",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "RS-485",
-          "bloom": 3,
+          "bloom": 2,
           "outline": "2.4",
-          "stem": "Một hệ cần nối nhiều cảm biến xa trong môi trường nhiễu. Chuẩn có dây nào thường phù hợp hơn UART TTL trực tiếp?",
+          "stem": "Khi học RS-485, nên hiểu thế nào?",
           "choices": [
             {
               "text": "RS-485 hai dây luôn là UART TTL nối thẳng, không cần transceiver.",
@@ -20771,28 +20540,18 @@
               "reason": "Transceiver RS-485 chuyển tín hiệu logic của MCU thành cặp vi sai A/B và cần quản lý quyền phát trên bus."
             }
           ],
-          "number": 27,
-          "setIndex": 2
+          "number": 20,
+          "setIndex": 1
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q028",
-          "type": "Bloom 2 - Hiểu",
+          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q021",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "so sánh SPI và I2C",
-          "bloom": 2,
+          "bloom": 3,
           "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về so sánh SPI và I2C?",
+          "stem": "Một thiết kế cần đọc nhiều cảm biến tốc độ thấp trên cùng board và thiếu chân I/O. Lựa chọn nào thường hợp lý hơn?",
           "choices": [
-            {
-              "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
-              "correct": false,
-              "reason": "SPI dạng sao cần thêm CS cho từng slave."
-            },
-            {
-              "text": "I2C luôn nhanh hơn SPI và phù hợp mọi truyền dữ liệu dung lượng lớn.",
-              "correct": false,
-              "reason": "SPI thường có lợi thế tốc độ cho dữ liệu nhiều."
-            },
             {
               "text": "I2C không có ACK nên master không biết byte có được nhận hay không.",
               "correct": false,
@@ -20802,211 +20561,56 @@
               "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
               "correct": true,
               "reason": "Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
+            },
+            {
+              "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
+              "correct": false,
+              "reason": "SPI dạng sao cần thêm CS cho từng slave."
+            },
+            {
+              "text": "I2C luôn nhanh hơn SPI và phù hợp mọi truyền dữ liệu dung lượng lớn.",
+              "correct": false,
+              "reason": "SPI thường có lợi thế tốc độ cho dữ liệu nhiều."
             }
           ],
-          "number": 28,
+          "number": 21,
           "setIndex": 2
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-adc-errors-q029",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "các sai số ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Các sai số ADC được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
-              "correct": false,
-              "reason": "Offset là lệch gốc, gain là lệch độ dốc."
-            },
-            {
-              "text": "DNL hỏi toàn bộ đường truyền cong bao nhiêu so với đường thẳng, còn INL hỏi từng bước rộng bao nhiêu.",
-              "correct": false,
-              "reason": "Phát biểu này đảo ý nghĩa DNL và INL."
-            },
-            {
-              "text": "TUE là tổng số học đơn giản của mọi loại sai số đã liệt kê.",
-              "correct": false,
-              "reason": "TUE là sai lệch tổng chưa hiệu chỉnh, không chỉ là tổng cộng đơn giản."
-            },
-            {
-              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
-              "correct": true,
-              "reason": "Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
-            }
-          ],
-          "number": 29,
-          "setIndex": 2
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q030",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "termination và quyền phát RS-485",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một mạng RS-485 nhiều nút bị lỗi khi hai node trả lời cùng lúc. Nguyên nhân thiết kế nào cần kiểm tra?",
-          "choices": [
-            {
-              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
-              "correct": true,
-              "reason": "Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
-            },
-            {
-              "text": "Trong RS-485 half-duplex, mọi nút nên bật driver phát cùng lúc để tăng độ mạnh tín hiệu.",
-              "correct": false,
-              "reason": "Nhiều driver phát cùng lúc gây xung đột bus."
-            },
-            {
-              "text": "Điện trở kết thúc luôn đặt ở mọi nút nhánh bất kể cấu trúc bus.",
-              "correct": false,
-              "reason": "Thông thường termination đặt ở hai đầu đường bus chính."
-            },
-            {
-              "text": "DE/RE không ảnh hưởng quyền phát vì transceiver tự đoán bên nào nói trước.",
-              "correct": false,
-              "reason": "Firmware hoặc phần cứng phải điều khiển quyền phát/nhận phù hợp."
-            }
-          ],
-          "number": 30,
-          "setIndex": 2
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q031",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "số mức ADC và LSB",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về số mức ADC và LSB?",
-          "choices": [
-            {
-              "text": "Độ phân giải danh định luôn bằng độ chính xác tuyệt đối của phép đo.",
-              "correct": false,
-              "reason": "Độ chính xác còn bị giới hạn bởi nhiễu, Vref và sai số ADC."
-            },
-            {
-              "text": "ADC N bit chia dải đo thành 2^N mức; kích thước 1 LSB xấp xỉ bằng giới hạn đo chia cho 2^N.",
-              "correct": true,
-              "reason": "Số bit càng cao thì LSB càng nhỏ, nhưng độ chính xác thực tế còn phụ thuộc nhiễu và sai số."
-            },
-            {
-              "text": "ADC N bit chỉ có N mức đo nên 12 bit có đúng 12 mức.",
-              "correct": false,
-              "reason": "ADC N bit có 2^N mức."
-            },
-            {
-              "text": "LSB tăng khi số bit tăng nếu dải đo giữ nguyên.",
-              "correct": false,
-              "reason": "Số bit tăng làm LSB nhỏ hơn."
-            }
-          ],
-          "number": 31,
-          "setIndex": 3
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-improvement-q032",
+          "id": "giao-tiep-nhung-nang-cao-nyquist-q022",
           "type": "Bloom 2 - Hiểu",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cải thiện chất lượng ADC",
+          "topic": "tốc độ lấy mẫu và Nyquist",
           "bloom": 2,
           "outline": "2.4",
-          "stem": "Khi học cải thiện chất lượng ADC, nên hiểu thế nào?",
+          "stem": "Cách giải thích nào phù hợp nhất về tốc độ lấy mẫu và Nyquist?",
           "choices": [
             {
-              "text": "Chỉ cần tăng số bit danh định là loại bỏ mọi nhiễu nguồn, layout xấu và trở nguồn lớn.",
+              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
               "correct": false,
-              "reason": "Số bit cao không bù được thiết kế analog kém."
+              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
             },
             {
-              "text": "Vref càng nhiễu càng giúp kết quả đo ổn định vì ADC có thêm dao động.",
-              "correct": false,
-              "reason": "Vref phải ổn định để phép đo đáng tin."
-            },
-            {
-              "text": "Lọc số sau ADC luôn thay thế hoàn toàn lọc analog trước ADC trong mọi trường hợp aliasing.",
-              "correct": false,
-              "reason": "Chống aliasing cần xử lý trước khi lấy mẫu."
-            },
-            {
-              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
+              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
               "correct": true,
-              "reason": "Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
+              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
+            },
+            {
+              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
+              "correct": false,
+              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
+            },
+            {
+              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
+              "correct": false,
+              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
             }
           ],
-          "number": 32,
-          "setIndex": 3
+          "number": 22,
+          "setIndex": 2
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-spi-basic-q033",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SPI",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Phương án nào nhận diện đúng SPI?",
-          "choices": [
-            {
-              "text": "SPI không có clock nên receiver phải đoán thời điểm lấy mẫu giống UART.",
-              "correct": false,
-              "reason": "SPI có SCLK do master tạo."
-            },
-            {
-              "text": "SPI chỉ cần một dây duy nhất cho mọi slave, không cần chọn chip.",
-              "correct": false,
-              "reason": "SPI thường cần CS/SS để chọn slave."
-            },
-            {
-              "text": "MOSI là đường dữ liệu từ slave về master, còn MISO là từ master sang slave.",
-              "correct": false,
-              "reason": "Tên gọi chuẩn là MOSI từ master ra slave, MISO từ slave về master."
-            },
-            {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
-              "correct": true,
-              "reason": "SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
-            }
-          ],
-          "number": 33,
-          "setIndex": 3
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-dout-q034",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "công thức mã ADC",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về công thức mã ADC?",
-          "choices": [
-            {
-              "text": "Vref càng nhiễu thì kết quả ADC càng ổn định hơn.",
-              "correct": false,
-              "reason": "Vref nhiễu làm phép đo dao động."
-            },
-            {
-              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
-              "correct": true,
-              "reason": "Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
-            },
-            {
-              "text": "Mã ADC không phụ thuộc Vref vì ADC chỉ đếm số lần CPU chạy vòng lặp.",
-              "correct": false,
-              "reason": "Mã ADC phụ thuộc điện áp vào và điện áp tham chiếu."
-            },
-            {
-              "text": "Khi Ain vượt dải đo, ADC lý tưởng vẫn tăng mã vô hạn không bão hòa.",
-              "correct": false,
-              "reason": "ADC có giới hạn mã cực đại và có thể bão hòa."
-            }
-          ],
-          "number": 34,
-          "setIndex": 3
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q035",
+          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q023",
           "type": "Bloom 1 - Nhớ",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "DAC, R-2R và PWM",
@@ -21035,50 +20639,182 @@
               "reason": "R-2R chỉ dùng hai giá trị R và 2R."
             }
           ],
-          "number": 35,
-          "setIndex": 3
+          "number": 23,
+          "setIndex": 2
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-spi-mode-s036",
+          "id": "giao-tiep-nhung-nang-cao-spi-basic-lst024",
+          "type": "Chọn tổ hợp",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "SPI",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Tổ hợp nào đúng và đủ nhất về SPI?",
+          "choices": [
+            {
+              "text": "Gồm half-duplex hai dây, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master, CS hoặc SS chọn slave.",
+              "correct": false,
+              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+            },
+            {
+              "text": "Gồm SCLK tạo xung nhịp, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master.",
+              "correct": false,
+              "reason": "Phương án này thiếu một thành phần quan trọng."
+            },
+            {
+              "text": "Gồm SCLK tạo xung nhịp, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master, CS hoặc SS chọn slave, open-drain.",
+              "correct": false,
+              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+            },
+            {
+              "text": "Gồm SCLK tạo xung nhịp, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master, CS hoặc SS chọn slave.",
+              "correct": true,
+              "reason": "Tổ hợp này khớp với kiến thức về SPI."
+            }
+          ],
+          "number": 24,
+          "setIndex": 2
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-lsb-12bit-q025",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính LSB của ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một ADC 12 bit dùng Vref = 3,3 V. Giá trị gần đúng của 1 LSB là bao nhiêu?",
+          "choices": [
+            {
+              "text": "1 LSB luôn bằng 1 V vì tên gọi là một LSB.",
+              "correct": false,
+              "reason": "LSB phụ thuộc dải đo và số bit ADC."
+            },
+            {
+              "text": "Với ADC 12 bit và dải đo 3,3 V, 1 LSB xấp xỉ 3,3 V / 4096 = 0,000805 V, tức khoảng 0,805 mV.",
+              "correct": true,
+              "reason": "ADC 12 bit có 2^12 = 4096 mức, nên bước lượng tử lý tưởng bằng toàn dải đo chia cho 4096."
+            },
+            {
+              "text": "1 LSB xấp xỉ 3,3 V / 12 = 0,275 V.",
+              "correct": false,
+              "reason": "Không chia dải đo cho số bit; phải chia cho số mức 2^N."
+            },
+            {
+              "text": "1 LSB xấp xỉ 4096 / 3,3 = 1241 V.",
+              "correct": false,
+              "reason": "Công thức bị đảo đơn vị và cho kết quả vô lý."
+            }
+          ],
+          "number": 25,
+          "setIndex": 2
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-sample-hold-s026",
           "type": "Chọn phát biểu sai",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "CPOL và CPHA trong SPI",
+          "topic": "sample-and-hold và trở nguồn ADC",
           "bloom": 2,
           "outline": "2.4",
           "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
           "choices": [
             {
-              "text": "Các mode SPI được xác định bởi CPOL và CPHA, quyết định mức nghỉ của clock và cạnh lấy mẫu dữ liệu.",
+              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
               "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
             },
             {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
-            },
-            {
-              "text": "CPHA quyết định điện áp nguồn cho bus, không liên quan cạnh lấy mẫu.",
+              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
               "correct": true,
-              "reason": "Phát biểu này sai vì cPHA quyết định pha lấy mẫu/dịch bit."
+              "reason": "Phát biểu này sai vì nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
+            },
+            {
+              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
+            },
+            {
+              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
             }
           ],
-          "number": 36,
-          "setIndex": 3
+          "number": 26,
+          "setIndex": 2
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-quantization-error-q037",
+          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-q027",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cấu trúc UART song công",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Phương án nào diễn giải đúng cấu trúc UART song công?",
+          "choices": [
+            {
+              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
+              "correct": true,
+              "reason": "TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
+            },
+            {
+              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
+              "correct": false,
+              "reason": "Thông thường TX của bên này nối RX của bên kia."
+            },
+            {
+              "text": "UART không thể truyền và nhận cùng lúc vì chỉ có một thanh ghi dùng chung.",
+              "correct": false,
+              "reason": "UART có các khối truyền và nhận riêng."
+            },
+            {
+              "text": "UART TTL không cần mốc điện áp chung trong mọi trường hợp không cách ly.",
+              "correct": false,
+              "reason": "Hai bên thường cần GND chung hoặc cách ly phù hợp."
+            }
+          ],
+          "number": 27,
+          "setIndex": 2
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-i2c-basic-cnt028",
+          "type": "Số lượng và thành phần",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "I2C",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Về I2C, phương án nào vừa đúng số lượng vừa đúng nội dung?",
+          "choices": [
+            {
+              "text": "Có 5 ý chính: SCL, SDA, MOSI đưa dữ liệu từ master tới slave, điện trở kéo lên, địa chỉ slave.",
+              "correct": false,
+              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+            },
+            {
+              "text": "Có 4 ý chính: SCL, SDA, open-drain, điện trở kéo lên.",
+              "correct": false,
+              "reason": "Phương án này thiếu một thành phần quan trọng."
+            },
+            {
+              "text": "Có 6 ý chính: SCL, SDA, open-drain, điện trở kéo lên, địa chỉ slave, CS hoặc SS chọn slave.",
+              "correct": false,
+              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+            },
+            {
+              "text": "Có 5 ý chính: SCL, SDA, open-drain, điện trở kéo lên, địa chỉ slave.",
+              "correct": true,
+              "reason": "Tổ hợp này khớp với kiến thức về I2C."
+            }
+          ],
+          "number": 28,
+          "setIndex": 2
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-quantization-error-q029",
           "type": "Bloom 1 - Nhớ",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "sai số lượng tử",
           "bloom": 1,
           "outline": "2.4",
-          "stem": "Nhận định nào đúng về sai số lượng tử?",
+          "stem": "Sai số lượng tử được mô tả đúng nhất bởi phương án nào?",
           "choices": [
             {
               "text": "Sai số lượng tử chỉ xuất hiện khi ADC bị hỏng, ADC lý tưởng không có sai số nào.",
@@ -21099,6 +20835,270 @@
               "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
               "correct": true,
               "reason": "Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
+            }
+          ],
+          "number": 29,
+          "setIndex": 2
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-errors-q030",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "các sai số ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một ADC 12 bit nhưng kết quả đo không chính xác. Nhận định nào đúng khi đánh giá sai số?",
+          "choices": [
+            {
+              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
+              "correct": true,
+              "reason": "Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
+            },
+            {
+              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
+              "correct": false,
+              "reason": "Offset là lệch gốc, gain là lệch độ dốc."
+            },
+            {
+              "text": "DNL hỏi toàn bộ đường truyền cong bao nhiêu so với đường thẳng, còn INL hỏi từng bước rộng bao nhiêu.",
+              "correct": false,
+              "reason": "Phát biểu này đảo ý nghĩa DNL và INL."
+            },
+            {
+              "text": "TUE là tổng số học đơn giản của mọi loại sai số đã liệt kê.",
+              "correct": false,
+              "reason": "TUE là sai lệch tổng chưa hiệu chỉnh, không chỉ là tổng cộng đơn giản."
+            }
+          ],
+          "number": 30,
+          "setIndex": 2
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs485-q031",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "RS-485",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về RS-485?",
+          "choices": [
+            {
+              "text": "Half-duplex trên RS-485 nghĩa là cả hai đầu truyền đồng thời mọi lúc.",
+              "correct": false,
+              "reason": "Half-duplex là hai chiều luân phiên."
+            },
+            {
+              "text": "RS-485 dùng truyền vi sai trên cặp dây, hỗ trợ khoảng cách xa và nhiều nút tốt hơn RS-232; mạng hai dây thường hoạt động half-duplex.",
+              "correct": true,
+              "reason": "Transceiver RS-485 chuyển tín hiệu logic của MCU thành cặp vi sai A/B và cần quản lý quyền phát trên bus."
+            },
+            {
+              "text": "RS-485 hai dây luôn là UART TTL nối thẳng, không cần transceiver.",
+              "correct": false,
+              "reason": "Cần transceiver để tạo và nhận tín hiệu vi sai."
+            },
+            {
+              "text": "RS-485 chỉ hỗ trợ đúng một bộ phát và một bộ nhận như kết nối point-to-point cổ điển.",
+              "correct": false,
+              "reason": "RS-485 hỗ trợ multi-drop hoặc multi-point tùy cấu trúc."
+            }
+          ],
+          "number": 31,
+          "setIndex": 3
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q032",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "so sánh SPI và I2C",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Khi học so sánh SPI và I2C, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
+              "correct": false,
+              "reason": "SPI dạng sao cần thêm CS cho từng slave."
+            },
+            {
+              "text": "I2C luôn nhanh hơn SPI và phù hợp mọi truyền dữ liệu dung lượng lớn.",
+              "correct": false,
+              "reason": "SPI thường có lợi thế tốc độ cho dữ liệu nhiều."
+            },
+            {
+              "text": "I2C không có ACK nên master không biết byte có được nhận hay không.",
+              "correct": false,
+              "reason": "I2C có cơ chế ACK/NACK."
+            },
+            {
+              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
+              "correct": true,
+              "reason": "Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
+            }
+          ],
+          "number": 32,
+          "setIndex": 3
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-nyquist-q033",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tốc độ lấy mẫu và Nyquist",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một tín hiệu có thành phần cao nhất 1 kHz. Tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản nên như thế nào?",
+          "choices": [
+            {
+              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
+              "correct": false,
+              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
+            },
+            {
+              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
+              "correct": true,
+              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
+            },
+            {
+              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
+              "correct": false,
+              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
+            },
+            {
+              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
+              "correct": false,
+              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
+            }
+          ],
+          "number": 33,
+          "setIndex": 3
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q034",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "DAC, R-2R và PWM",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Cách giải thích nào phù hợp nhất về DAC, R-2R và PWM?",
+          "choices": [
+            {
+              "text": "Duty cycle PWM không ảnh hưởng điện áp trung bình sau lọc.",
+              "correct": false,
+              "reason": "Duty cycle quyết định giá trị trung bình."
+            },
+            {
+              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
+              "correct": true,
+              "reason": "PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
+            },
+            {
+              "text": "PWM là ADC nên dùng để đọc điện áp cảm biến thành mã số.",
+              "correct": false,
+              "reason": "PWM là cách tạo tín hiệu ra dạng xung, không phải đọc analog."
+            },
+            {
+              "text": "Thang R-2R cần điện trở theo lũy thừa rất lớn cho từng bit nên không có lợi thế matching.",
+              "correct": false,
+              "reason": "R-2R chỉ dùng hai giá trị R và 2R."
+            }
+          ],
+          "number": 34,
+          "setIndex": 3
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-basic-q035",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "SPI",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Khi học SPI, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
+              "correct": true,
+              "reason": "SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
+            },
+            {
+              "text": "SPI không có clock nên receiver phải đoán thời điểm lấy mẫu giống UART.",
+              "correct": false,
+              "reason": "SPI có SCLK do master tạo."
+            },
+            {
+              "text": "SPI chỉ cần một dây duy nhất cho mọi slave, không cần chọn chip.",
+              "correct": false,
+              "reason": "SPI thường cần CS/SS để chọn slave."
+            },
+            {
+              "text": "MOSI là đường dữ liệu từ slave về master, còn MISO là từ master sang slave.",
+              "correct": false,
+              "reason": "Tên gọi chuẩn là MOSI từ master ra slave, MISO từ slave về master."
+            }
+          ],
+          "number": 35,
+          "setIndex": 3
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-lsb-12bit-s036",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính LSB của ADC",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Với ADC 12 bit và dải đo 3,3 V, 1 LSB xấp xỉ 3,3 V / 4096 = 0,000805 V, tức khoảng 0,805 mV.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. ADC 12 bit có 2^12 = 4096 mức, nên bước lượng tử lý tưởng bằng toàn dải đo chia cho 4096."
+            },
+            {
+              "text": "Với ADC 12 bit, Vref = 3,3 V và Vin = 1,65 V, mã lý tưởng xấp xỉ (1,65 / 3,3) * 4095 = 2047,5, thường làm tròn khoảng 2048.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Vin bằng một nửa Vref nên mã nằm gần giữa thang 0 đến 4095."
+            },
+            {
+              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
+            },
+            {
+              "text": "1 LSB luôn bằng 1 V vì tên gọi là một LSB.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì lSB phụ thuộc dải đo và số bit ADC."
+            }
+          ],
+          "number": 36,
+          "setIndex": 3
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-sample-hold-q037",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "sample-and-hold và trở nguồn ADC",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về sample-and-hold và trở nguồn ADC?",
+          "choices": [
+            {
+              "text": "Trở nguồn càng lớn luôn làm tụ lấy mẫu nạp nhanh hơn và chính xác hơn.",
+              "correct": false,
+              "reason": "Trở nguồn lớn làm hằng số thời gian RC tăng."
+            },
+            {
+              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
+              "correct": false,
+              "reason": "Nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
+            },
+            {
+              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
+              "correct": false,
+              "reason": "Đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
+            },
+            {
+              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
+              "correct": true,
+              "reason": "Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
             }
           ],
           "number": 37,
@@ -21171,47 +21171,85 @@
           "setIndex": 3
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-nyquist-q040",
-          "type": "Bloom 2 - Hiểu",
+          "id": "giao-tiep-nhung-nang-cao-calc-adc-code-q040",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "tốc độ lấy mẫu và Nyquist",
-          "bloom": 2,
+          "topic": "tính mã ADC lý tưởng",
+          "bloom": 3,
           "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về tốc độ lấy mẫu và Nyquist?",
+          "stem": "ADC 12 bit có Vref = 3,3 V, điện áp vào Vin = 1,65 V. Mã ADC lý tưởng gần giá trị nào nhất?",
           "choices": [
             {
-              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
+              "text": "Mã lý tưởng xấp xỉ 12 vì ADC có 12 bit.",
               "correct": false,
-              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
+              "reason": "Số bit không phải mã đọc; mã 12 bit chạy từ 0 đến 4095."
             },
             {
-              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
+              "text": "Mã lý tưởng xấp xỉ 0 vì Vin khác 0 nên ADC không đọc được.",
               "correct": false,
-              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
+              "reason": "Vin trong dải đo phải cho mã tỉ lệ với Vin/Vref."
             },
             {
-              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
-              "correct": false,
-              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
-            },
-            {
-              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
+              "text": "Với ADC 12 bit, Vref = 3,3 V và Vin = 1,65 V, mã lý tưởng xấp xỉ (1,65 / 3,3) * 4095 = 2047,5, thường làm tròn khoảng 2048.",
               "correct": true,
-              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
+              "reason": "Vin bằng một nửa Vref nên mã nằm gần giữa thang 0 đến 4095."
+            },
+            {
+              "text": "Mã lý tưởng xấp xỉ 4095 vì Vin bằng đúng Vref.",
+              "correct": false,
+              "reason": "Vin = 1,65 V chỉ bằng một nửa Vref = 3,3 V."
             }
           ],
           "number": 40,
           "setIndex": 3
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q041",
-          "type": "Bloom 1 - Nhớ",
+          "id": "giao-tiep-nhung-nang-cao-calc-flash-comparators-q041",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính số comparator của Flash ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một Flash ADC 3 bit lý tưởng cần bao nhiêu comparator theo cấu trúc cơ bản?",
+          "choices": [
+            {
+              "text": "Flash ADC 3 bit không cần comparator vì dùng phần mềm để so sánh.",
+              "correct": false,
+              "reason": "Flash ADC dựa trên nhiều comparator phần cứng chạy song song."
+            },
+            {
+              "text": "Flash ADC N bit thường cần 2^N - 1 comparator; với 3 bit cần 2^3 - 1 = 7 comparator.",
+              "correct": true,
+              "reason": "Mỗi ngưỡng lượng tử cần một comparator, nên số comparator tăng rất nhanh khi tăng số bit."
+            },
+            {
+              "text": "Flash ADC 3 bit chỉ cần 3 comparator vì có 3 bit đầu ra.",
+              "correct": false,
+              "reason": "Số comparator phụ thuộc số mức/ngưỡng, không phải số bit trực tiếp."
+            },
+            {
+              "text": "Flash ADC 3 bit cần 8 comparator vì có 8 mã.",
+              "correct": false,
+              "reason": "Với 8 mã cần 7 ngưỡng so sánh giữa các mã."
+            }
+          ],
+          "number": 41,
+          "setIndex": 4
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q042",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "RS-232 và UART TTL",
-          "bloom": 1,
+          "bloom": 3,
           "outline": "2.4",
-          "stem": "RS-232 và UART TTL được mô tả đúng nhất bởi phương án nào?",
+          "stem": "Một MCU 3,3 V cần giao tiếp với cổng RS-232 cũ của máy tính. Lựa chọn nào phù hợp?",
           "choices": [
+            {
+              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
+              "correct": true,
+              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
+            },
             {
               "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
               "correct": false,
@@ -21226,25 +21264,25 @@
               "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
               "correct": false,
               "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
-            },
-            {
-              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
-              "correct": true,
-              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
             }
           ],
-          "number": 41,
+          "number": 42,
           "setIndex": 4
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-i2c-frame-q042",
-          "type": "Bloom 3 - Vận dụng",
+          "id": "giao-tiep-nhung-nang-cao-i2c-frame-q043",
+          "type": "Bloom 1 - Nhớ",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "khung truyền I2C",
-          "bloom": 3,
+          "bloom": 1,
           "outline": "2.4",
-          "stem": "Khi đọc một ô nhớ từ EEPROM I2C, vì sao thường có pha ghi địa chỉ rồi repeated start để đọc?",
+          "stem": "Nhận định nào đúng về khung truyền I2C?",
           "choices": [
+            {
+              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
+              "correct": false,
+              "reason": "Repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
+            },
             {
               "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
               "correct": true,
@@ -21259,195 +21297,119 @@
               "text": "ACK trong I2C là mức cao bắt buộc do bên nhận kéo lên.",
               "correct": false,
               "reason": "ACK thường là bên nhận kéo SDA xuống thấp ở xung thứ 9."
-            },
-            {
-              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
-              "correct": false,
-              "reason": "Repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
-            }
-          ],
-          "number": 42,
-          "setIndex": 4
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q043",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SAR ADC và Flash ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về SAR ADC và Flash ADC?",
-          "choices": [
-            {
-              "text": "Mọi MCU phổ thông đều dùng Flash ADC rất lớn vì không quan tâm diện tích.",
-              "correct": false,
-              "reason": "MCU thường dùng SAR hoặc kiến trúc khác phù hợp hơn."
-            },
-            {
-              "text": "SAR ADC thử dần từng bit bằng DAC nội và comparator nên cân bằng tốc độ, độ phân giải, chi phí; Flash ADC dùng nhiều comparator nên rất nhanh nhưng tốn diện tích và công suất.",
-              "correct": true,
-              "reason": "MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
-            },
-            {
-              "text": "Flash ADC dùng đúng một comparator cho mọi số bit nên rẻ và ít công suất nhất.",
-              "correct": false,
-              "reason": "Flash ADC cần số comparator tăng nhanh theo số bit."
-            },
-            {
-              "text": "SAR ADC không có quá trình xấp xỉ, chỉ đọc trực tiếp địa chỉ I2C.",
-              "correct": false,
-              "reason": "SAR ADC thử dần từng bit dựa trên so sánh."
             }
           ],
           "number": 43,
           "setIndex": 4
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-rs485-lst044",
-          "type": "Chọn tổ hợp",
+          "id": "giao-tiep-nhung-nang-cao-calc-quantization-error-q044",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "RS-485",
-          "bloom": 2,
+          "topic": "tính sai số lượng tử cực đại",
+          "bloom": 3,
           "outline": "2.4",
-          "stem": "Tổ hợp nào đúng và đủ nhất về RS-485?",
+          "stem": "ADC 12 bit dùng Vref = 3,3 V. Sai số lượng tử cực đại lý tưởng gần bao nhiêu?",
           "choices": [
             {
-              "text": "Gồm điện trở kéo lên, nhiều nút, half-duplex hai dây, cần transceiver.",
+              "text": "Sai số cực đại khoảng 12 mV vì ADC có 12 bit.",
               "correct": false,
-              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
+              "reason": "Không lấy số bit làm mV; cần tính LSB trước."
             },
             {
-              "text": "Gồm truyền vi sai, nhiều nút, half-duplex hai dây.",
+              "text": "Sai số cực đại bằng 0 mV vì ADC lý tưởng không có lượng tử hóa.",
               "correct": false,
-              "reason": "Phương án này thiếu một thành phần quan trọng."
+              "reason": "ADC lý tưởng vẫn có sai số lượng tử do mã hữu hạn."
             },
             {
-              "text": "Gồm truyền vi sai, nhiều nút, half-duplex hai dây, cần transceiver, offset.",
-              "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
-            },
-            {
-              "text": "Gồm truyền vi sai, nhiều nút, half-duplex hai dây, cần transceiver.",
+              "text": "Với ADC 12 bit, Vref = 3,3 V, 1 LSB khoảng 0,805 mV nên sai số lượng tử cực đại lý tưởng khoảng 0,5 LSB = 0,403 mV.",
               "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về RS-485."
+              "reason": "Sai số lượng tử lý tưởng thường bị giới hạn trong nửa bước lượng tử."
+            },
+            {
+              "text": "Sai số cực đại khoảng 3,3 V vì ADC có dải đo 3,3 V.",
+              "correct": false,
+              "reason": "3,3 V là toàn dải đo, không phải sai số lượng tử cực đại."
             }
           ],
           "number": 44,
           "setIndex": 4
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q045",
+          "id": "giao-tiep-nhung-nang-cao-adc-improvement-q045",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "so sánh SPI và I2C",
+          "topic": "cải thiện chất lượng ADC",
           "bloom": 3,
           "outline": "2.4",
-          "stem": "Một thiết kế cần đọc nhiều cảm biến tốc độ thấp trên cùng board và thiếu chân I/O. Lựa chọn nào thường hợp lý hơn?",
+          "stem": "Một phép đo ADC dao động mạnh do nhiễu nguồn và layout gần đường PWM. Biện pháp nào hợp lý?",
           "choices": [
             {
-              "text": "I2C không có ACK nên master không biết byte có được nhận hay không.",
+              "text": "Lọc số sau ADC luôn thay thế hoàn toàn lọc analog trước ADC trong mọi trường hợp aliasing.",
               "correct": false,
-              "reason": "I2C có cơ chế ACK/NACK."
+              "reason": "Chống aliasing cần xử lý trước khi lấy mẫu."
             },
             {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
+              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
               "correct": true,
-              "reason": "Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
+              "reason": "Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
             },
             {
-              "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
+              "text": "Chỉ cần tăng số bit danh định là loại bỏ mọi nhiễu nguồn, layout xấu và trở nguồn lớn.",
               "correct": false,
-              "reason": "SPI dạng sao cần thêm CS cho từng slave."
+              "reason": "Số bit cao không bù được thiết kế analog kém."
             },
             {
-              "text": "I2C luôn nhanh hơn SPI và phù hợp mọi truyền dữ liệu dung lượng lớn.",
+              "text": "Vref càng nhiễu càng giúp kết quả đo ổn định vì ADC có thêm dao động.",
               "correct": false,
-              "reason": "SPI thường có lợi thế tốc độ cho dữ liệu nhiều."
+              "reason": "Vref phải ổn định để phép đo đáng tin."
             }
           ],
           "number": 45,
           "setIndex": 4
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-adc-errors-s046",
+          "id": "giao-tiep-nhung-nang-cao-rs485-termination-s046",
           "type": "Chọn phát biểu sai",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "các sai số ADC",
+          "topic": "termination và quyền phát RS-485",
           "bloom": 2,
           "outline": "2.4",
           "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
           "choices": [
             {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
+              "text": "RS-485 dùng truyền vi sai trên cặp dây, hỗ trợ khoảng cách xa và nhiều nút tốt hơn RS-232; mạng hai dây thường hoạt động half-duplex.",
               "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Transceiver RS-485 chuyển tín hiệu logic của MCU thành cặp vi sai A/B và cần quản lý quyền phát trên bus."
             },
             {
-              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
+              "text": "Trong RS-485 half-duplex, mọi nút nên bật driver phát cùng lúc để tăng độ mạnh tín hiệu.",
               "correct": true,
-              "reason": "Phát biểu này sai vì offset là lệch gốc, gain là lệch độ dốc."
+              "reason": "Phát biểu này sai vì nhiều driver phát cùng lúc gây xung đột bus."
             },
             {
-              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
+              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
               "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
             },
             {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
+              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
               "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
             }
           ],
           "number": 46,
           "setIndex": 4
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q047",
+          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q047",
           "type": "Bloom 1 - Nhớ",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "termination và quyền phát RS-485",
+          "topic": "số mức ADC và LSB",
           "bloom": 1,
           "outline": "2.4",
-          "stem": "Termination và quyền phát RS-485 được mô tả đúng nhất bởi phương án nào?",
+          "stem": "Số mức ADC và LSB được mô tả đúng nhất bởi phương án nào?",
           "choices": [
-            {
-              "text": "DE/RE không ảnh hưởng quyền phát vì transceiver tự đoán bên nào nói trước.",
-              "correct": false,
-              "reason": "Firmware hoặc phần cứng phải điều khiển quyền phát/nhận phù hợp."
-            },
-            {
-              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
-              "correct": true,
-              "reason": "Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
-            },
-            {
-              "text": "Trong RS-485 half-duplex, mọi nút nên bật driver phát cùng lúc để tăng độ mạnh tín hiệu.",
-              "correct": false,
-              "reason": "Nhiều driver phát cùng lúc gây xung đột bus."
-            },
-            {
-              "text": "Điện trở kết thúc luôn đặt ở mọi nút nhánh bất kể cấu trúc bus.",
-              "correct": false,
-              "reason": "Thông thường termination đặt ở hai đầu đường bus chính."
-            }
-          ],
-          "number": 47,
-          "setIndex": 4
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q048",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "số mức ADC và LSB",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một ADC 12 bit có dải đo 3,3 V. Cách tính gần đúng kích thước 1 LSB nào đúng?",
-          "choices": [
-            {
-              "text": "LSB tăng khi số bit tăng nếu dải đo giữ nguyên.",
-              "correct": false,
-              "reason": "Số bit tăng làm LSB nhỏ hơn."
-            },
             {
               "text": "Độ phân giải danh định luôn bằng độ chính xác tuyệt đối của phép đo.",
               "correct": false,
@@ -21462,72 +21424,110 @@
               "text": "ADC N bit chỉ có N mức đo nên 12 bit có đúng 12 mức.",
               "correct": false,
               "reason": "ADC N bit có 2^N mức."
+            },
+            {
+              "text": "LSB tăng khi số bit tăng nếu dải đo giữ nguyên.",
+              "correct": false,
+              "reason": "Số bit tăng làm LSB nhỏ hơn."
+            }
+          ],
+          "number": 47,
+          "setIndex": 4
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-nyquist-q048",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính tốc độ lấy mẫu tối thiểu",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một tín hiệu analog có thành phần cao nhất 1 kHz. Theo điều kiện Nyquist cơ bản, tốc độ lấy mẫu tối thiểu là bao nhiêu?",
+          "choices": [
+            {
+              "text": "Tốc độ tối thiểu là 1 kHz vì chỉ cần bằng tần số tín hiệu.",
+              "correct": false,
+              "reason": "Bằng fmax vẫn chưa đủ theo điều kiện Nyquist cơ bản."
+            },
+            {
+              "text": "Tốc độ tối thiểu là 1 Hz vì tín hiệu đã có đơn vị kHz.",
+              "correct": false,
+              "reason": "Đơn vị không được bỏ qua; cần nhân đôi 1 kHz."
+            },
+            {
+              "text": "Nếu thành phần tần số cao nhất của tín hiệu là 1 kHz, tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản là 2 kHz.",
+              "correct": true,
+              "reason": "Điều kiện cơ bản là fs >= 2 * fmax, nên 2 * 1 kHz = 2 kHz."
+            },
+            {
+              "text": "Tốc độ tối thiểu là 0,5 kHz vì lấy một nửa tần số tín hiệu.",
+              "correct": false,
+              "reason": "Đây là đảo ngược điều kiện Nyquist."
             }
           ],
           "number": 48,
           "setIndex": 4
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-adc-improvement-q049",
-          "type": "Bloom 1 - Nhớ",
+          "id": "giao-tiep-nhung-nang-cao-calc-pwm-average-q049",
+          "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cải thiện chất lượng ADC",
-          "bloom": 1,
+          "topic": "tính điện áp trung bình PWM",
+          "bloom": 3,
           "outline": "2.4",
-          "stem": "Nhận định nào đúng về cải thiện chất lượng ADC?",
+          "stem": "PWM có mức cao 3,3 V và duty cycle 40%. Sau bộ lọc thông thấp lý tưởng, điện áp trung bình gần bao nhiêu?",
           "choices": [
             {
-              "text": "Chỉ cần tăng số bit danh định là loại bỏ mọi nhiễu nguồn, layout xấu và trở nguồn lớn.",
+              "text": "Giá trị trung bình là 8,25 V vì lấy 3,3 V chia cho 40%.",
               "correct": false,
-              "reason": "Số bit cao không bù được thiết kế analog kém."
+              "reason": "Công thức đúng là duty cycle nhân Vdd, không phải chia."
             },
             {
-              "text": "Vref càng nhiễu càng giúp kết quả đo ổn định vì ADC có thêm dao động.",
-              "correct": false,
-              "reason": "Vref phải ổn định để phép đo đáng tin."
-            },
-            {
-              "text": "Lọc số sau ADC luôn thay thế hoàn toàn lọc analog trước ADC trong mọi trường hợp aliasing.",
-              "correct": false,
-              "reason": "Chống aliasing cần xử lý trước khi lấy mẫu."
-            },
-            {
-              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
+              "text": "PWM 3,3 V với duty cycle 40% có giá trị trung bình lý tưởng sau lọc thông thấp xấp xỉ 0,4 * 3,3 V = 1,32 V.",
               "correct": true,
-              "reason": "Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
+              "reason": "Sau lọc thông thấp lý tưởng, thành phần một chiều của PWM bằng duty cycle nhân biên độ mức cao."
+            },
+            {
+              "text": "Giá trị trung bình là 3,3 V vì PWM luôn có mức cao 3,3 V.",
+              "correct": false,
+              "reason": "PWM chỉ ở mức cao 40% thời gian trong tình huống này."
+            },
+            {
+              "text": "Giá trị trung bình là 0,40 V vì duty cycle 40%.",
+              "correct": false,
+              "reason": "Duty cycle là tỉ lệ, cần nhân với điện áp mức cao."
             }
           ],
           "number": 49,
           "setIndex": 4
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-spi-basic-q050",
+          "id": "giao-tiep-nhung-nang-cao-spi-mode-q050",
           "type": "Bloom 2 - Hiểu",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SPI",
+          "topic": "CPOL và CPHA trong SPI",
           "bloom": 2,
           "outline": "2.4",
-          "stem": "Khi học SPI, nên hiểu thế nào?",
+          "stem": "Khi học CPOL và CPHA trong SPI, nên hiểu thế nào?",
           "choices": [
             {
-              "text": "MOSI là đường dữ liệu từ slave về master, còn MISO là từ master sang slave.",
+              "text": "CPHA quyết định điện áp nguồn cho bus, không liên quan cạnh lấy mẫu.",
               "correct": false,
-              "reason": "Tên gọi chuẩn là MOSI từ master ra slave, MISO từ slave về master."
+              "reason": "CPHA quyết định pha lấy mẫu/dịch bit."
             },
             {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
+              "text": "Các mode SPI được xác định bởi CPOL và CPHA, quyết định mức nghỉ của clock và cạnh lấy mẫu dữ liệu.",
               "correct": true,
-              "reason": "SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
+              "reason": "Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
             },
             {
-              "text": "SPI không có clock nên receiver phải đoán thời điểm lấy mẫu giống UART.",
+              "text": "CPOL và CPHA chỉ quyết định địa chỉ I2C của slave.",
               "correct": false,
-              "reason": "SPI có SCLK do master tạo."
+              "reason": "CPOL/CPHA là thông số timing của SPI."
             },
             {
-              "text": "SPI chỉ cần một dây duy nhất cho mọi slave, không cần chọn chip.",
+              "text": "Hai thiết bị SPI có thể chọn mode bất kỳ khác nhau mà vẫn luôn đọc đúng.",
               "correct": false,
-              "reason": "SPI thường cần CS/SS để chọn slave."
+              "reason": "Sai mode có thể làm sai dữ liệu."
             }
           ],
           "number": 50,
@@ -21567,937 +21567,13 @@
           "setIndex": 5
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q052",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "DAC, R-2R và PWM",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về DAC, R-2R và PWM?",
-          "choices": [
-            {
-              "text": "PWM là ADC nên dùng để đọc điện áp cảm biến thành mã số.",
-              "correct": false,
-              "reason": "PWM là cách tạo tín hiệu ra dạng xung, không phải đọc analog."
-            },
-            {
-              "text": "Thang R-2R cần điện trở theo lũy thừa rất lớn cho từng bit nên không có lợi thế matching.",
-              "correct": false,
-              "reason": "R-2R chỉ dùng hai giá trị R và 2R."
-            },
-            {
-              "text": "Duty cycle PWM không ảnh hưởng điện áp trung bình sau lọc.",
-              "correct": false,
-              "reason": "Duty cycle quyết định giá trị trung bình."
-            },
-            {
-              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
-              "correct": true,
-              "reason": "PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
-            }
-          ],
-          "number": 52,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-mode-q053",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "CPOL và CPHA trong SPI",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "CPOL và CPHA trong SPI được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "CPOL và CPHA chỉ quyết định địa chỉ I2C của slave.",
-              "correct": false,
-              "reason": "CPOL/CPHA là thông số timing của SPI."
-            },
-            {
-              "text": "Hai thiết bị SPI có thể chọn mode bất kỳ khác nhau mà vẫn luôn đọc đúng.",
-              "correct": false,
-              "reason": "Sai mode có thể làm sai dữ liệu."
-            },
-            {
-              "text": "CPHA quyết định điện áp nguồn cho bus, không liên quan cạnh lấy mẫu.",
-              "correct": false,
-              "reason": "CPHA quyết định pha lấy mẫu/dịch bit."
-            },
-            {
-              "text": "Các mode SPI được xác định bởi CPOL và CPHA, quyết định mức nghỉ của clock và cạnh lấy mẫu dữ liệu.",
-              "correct": true,
-              "reason": "Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
-            }
-          ],
-          "number": 53,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-quantization-error-q054",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sai số lượng tử",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một ADC lý tưởng số hóa tín hiệu sin vẫn có sai số dạng răng cưa nhỏ. Nguyên nhân nào đúng?",
-          "choices": [
-            {
-              "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
-              "correct": true,
-              "reason": "Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
-            },
-            {
-              "text": "Sai số lượng tử chỉ xuất hiện khi ADC bị hỏng, ADC lý tưởng không có sai số nào.",
-              "correct": false,
-              "reason": "ADC lý tưởng vẫn lượng tử hóa tín hiệu liên tục."
-            },
-            {
-              "text": "Sai số lượng tử tăng vô hạn dù input nằm trong dải đo.",
-              "correct": false,
-              "reason": "Sai số lượng tử lý tưởng bị giới hạn quanh nửa LSB."
-            },
-            {
-              "text": "Tăng số bit luôn loại bỏ hoàn toàn mọi nhiễu mạch và sai số tham chiếu.",
-              "correct": false,
-              "reason": "Tăng số bit chỉ giảm bước lượng tử, không xóa sai số mạch."
-            }
-          ],
-          "number": 54,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-uart-basic-q055",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "UART",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về UART?",
-          "choices": [
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": true,
-              "reason": "UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "UART là bus song song cần một dây cho mỗi bit dữ liệu.",
-              "correct": false,
-              "reason": "UART truyền nối tiếp từng bit."
-            },
-            {
-              "text": "UART luôn truyền kèm đường clock riêng giống SPI.",
-              "correct": false,
-              "reason": "UART là bất đồng bộ, không có clock truyền riêng."
-            },
-            {
-              "text": "Khung UART không có start bit hay stop bit nên receiver tự đoán vị trí byte.",
-              "correct": false,
-              "reason": "Start/stop giúp đóng khung dữ liệu."
-            }
-          ],
-          "number": 55,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-topology-s056",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu hình nhiều slave SPI",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Nhiều slave SPI có thể mắc dạng sao với SCLK/MOSI/MISO chung và mỗi slave một CS riêng, hoặc dạng chuỗi nếu thiết bị hỗ trợ daisy-chain.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Dạng sao dễ điều khiển từng slave nhưng tốn thêm chân CS; daisy-chain tiết kiệm chân hơn nhưng phụ thuộc thiết bị và khung dữ liệu."
-            },
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
-            },
-            {
-              "text": "Daisy-chain luôn dùng được với mọi IC SPI dù IC không hỗ trợ dịch chuỗi.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì daisy-chain cần thiết bị hỗ trợ cách truyền nối tiếp qua chuỗi."
-            }
-          ],
-          "number": 56,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-nyquist-q057",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "tốc độ lấy mẫu và Nyquist",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một tín hiệu có thành phần cao nhất 1 kHz. Tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản nên như thế nào?",
-          "choices": [
-            {
-              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
-              "correct": false,
-              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
-            },
-            {
-              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
-              "correct": true,
-              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
-            },
-            {
-              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
-              "correct": false,
-              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
-            },
-            {
-              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
-              "correct": false,
-              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
-            }
-          ],
-          "number": 57,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-q058",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu trúc UART song công",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về cấu trúc UART song công?",
-          "choices": [
-            {
-              "text": "UART TTL không cần mốc điện áp chung trong mọi trường hợp không cách ly.",
-              "correct": false,
-              "reason": "Hai bên thường cần GND chung hoặc cách ly phù hợp."
-            },
-            {
-              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
-              "correct": true,
-              "reason": "TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
-            },
-            {
-              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
-              "correct": false,
-              "reason": "Thông thường TX của bên này nối RX của bên kia."
-            },
-            {
-              "text": "UART không thể truyền và nhận cùng lúc vì chỉ có một thanh ghi dùng chung.",
-              "correct": false,
-              "reason": "UART có các khối truyền và nhận riêng."
-            }
-          ],
-          "number": 58,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-i2c-basic-q059",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "I2C",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Khi học I2C, nên hiểu thế nào?",
-          "choices": [
-            {
-              "text": "I2C là bus nối tiếp đồng bộ hai dây gồm SCL và SDA, dùng ngõ ra open-drain/open-collector với điện trở kéo lên.",
-              "correct": true,
-              "reason": "I2C tiết kiệm chân, hỗ trợ nhiều thiết bị có địa chỉ, nhưng tốc độ và độ dài bị ảnh hưởng bởi điện dung bus và pull-up."
-            },
-            {
-              "text": "I2C dùng bốn dây bắt buộc như SPI gồm MOSI, MISO, SCLK và CS.",
-              "correct": false,
-              "reason": "I2C cơ bản dùng SCL và SDA."
-            },
-            {
-              "text": "I2C dùng push-pull mạnh ở mọi thiết bị nên không cần pull-up.",
-              "correct": false,
-              "reason": "I2C dùng open-drain/open-collector và cần điện trở kéo lên."
-            },
-            {
-              "text": "I2C không có địa chỉ thiết bị nên chỉ nối được đúng một slave.",
-              "correct": false,
-              "reason": "I2C dùng địa chỉ để nhiều slave dùng chung bus."
-            }
-          ],
-          "number": 59,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sample-hold-q060",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sample-and-hold và trở nguồn ADC",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "ADC đọc thấp sau khi chuyển kênh từ một cầu phân áp trở lớn. Nguyên nhân nào đáng nghi nhất?",
-          "choices": [
-            {
-              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
-              "correct": false,
-              "reason": "Nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
-            },
-            {
-              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
-              "correct": false,
-              "reason": "Đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
-            },
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": true,
-              "reason": "Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            },
-            {
-              "text": "Trở nguồn càng lớn luôn làm tụ lấy mẫu nạp nhanh hơn và chính xác hơn.",
-              "correct": false,
-              "reason": "Trở nguồn lớn làm hằng số thời gian RC tăng."
-            }
-          ],
-          "number": 60,
-          "setIndex": 5
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs485-q061",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "RS-485",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về RS-485?",
-          "choices": [
-            {
-              "text": "RS-485 hai dây luôn là UART TTL nối thẳng, không cần transceiver.",
-              "correct": false,
-              "reason": "Cần transceiver để tạo và nhận tín hiệu vi sai."
-            },
-            {
-              "text": "RS-485 chỉ hỗ trợ đúng một bộ phát và một bộ nhận như kết nối point-to-point cổ điển.",
-              "correct": false,
-              "reason": "RS-485 hỗ trợ multi-drop hoặc multi-point tùy cấu trúc."
-            },
-            {
-              "text": "Half-duplex trên RS-485 nghĩa là cả hai đầu truyền đồng thời mọi lúc.",
-              "correct": false,
-              "reason": "Half-duplex là hai chiều luân phiên."
-            },
-            {
-              "text": "RS-485 dùng truyền vi sai trên cặp dây, hỗ trợ khoảng cách xa và nhiều nút tốt hơn RS-232; mạng hai dây thường hoạt động half-duplex.",
-              "correct": true,
-              "reason": "Transceiver RS-485 chuyển tín hiệu logic của MCU thành cặp vi sai A/B và cần quản lý quyền phát trên bus."
-            }
-          ],
-          "number": 61,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q062",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "so sánh SPI và I2C",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Khi học so sánh SPI và I2C, nên hiểu thế nào?",
-          "choices": [
-            {
-              "text": "I2C không có ACK nên master không biết byte có được nhận hay không.",
-              "correct": false,
-              "reason": "I2C có cơ chế ACK/NACK."
-            },
-            {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
-              "correct": true,
-              "reason": "Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
-            },
-            {
-              "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
-              "correct": false,
-              "reason": "SPI dạng sao cần thêm CS cho từng slave."
-            },
-            {
-              "text": "I2C luôn nhanh hơn SPI và phù hợp mọi truyền dữ liệu dung lượng lớn.",
-              "correct": false,
-              "reason": "SPI thường có lợi thế tốc độ cho dữ liệu nhiều."
-            }
-          ],
-          "number": 62,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-errors-q063",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "các sai số ADC",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một ADC 12 bit nhưng kết quả đo không chính xác. Nhận định nào đúng khi đánh giá sai số?",
-          "choices": [
-            {
-              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
-              "correct": false,
-              "reason": "Offset là lệch gốc, gain là lệch độ dốc."
-            },
-            {
-              "text": "DNL hỏi toàn bộ đường truyền cong bao nhiêu so với đường thẳng, còn INL hỏi từng bước rộng bao nhiêu.",
-              "correct": false,
-              "reason": "Phát biểu này đảo ý nghĩa DNL và INL."
-            },
-            {
-              "text": "TUE là tổng số học đơn giản của mọi loại sai số đã liệt kê.",
-              "correct": false,
-              "reason": "TUE là sai lệch tổng chưa hiệu chỉnh, không chỉ là tổng cộng đơn giản."
-            },
-            {
-              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
-              "correct": true,
-              "reason": "Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
-            }
-          ],
-          "number": 63,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q064",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "termination và quyền phát RS-485",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về termination và quyền phát RS-485?",
-          "choices": [
-            {
-              "text": "Trong RS-485 half-duplex, mọi nút nên bật driver phát cùng lúc để tăng độ mạnh tín hiệu.",
-              "correct": false,
-              "reason": "Nhiều driver phát cùng lúc gây xung đột bus."
-            },
-            {
-              "text": "Điện trở kết thúc luôn đặt ở mọi nút nhánh bất kể cấu trúc bus.",
-              "correct": false,
-              "reason": "Thông thường termination đặt ở hai đầu đường bus chính."
-            },
-            {
-              "text": "DE/RE không ảnh hưởng quyền phát vì transceiver tự đoán bên nào nói trước.",
-              "correct": false,
-              "reason": "Firmware hoặc phần cứng phải điều khiển quyền phát/nhận phù hợp."
-            },
-            {
-              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
-              "correct": true,
-              "reason": "Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
-            }
-          ],
-          "number": 64,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q065",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "số mức ADC và LSB",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Số mức ADC và LSB được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "ADC N bit chỉ có N mức đo nên 12 bit có đúng 12 mức.",
-              "correct": false,
-              "reason": "ADC N bit có 2^N mức."
-            },
-            {
-              "text": "LSB tăng khi số bit tăng nếu dải đo giữ nguyên.",
-              "correct": false,
-              "reason": "Số bit tăng làm LSB nhỏ hơn."
-            },
-            {
-              "text": "Độ phân giải danh định luôn bằng độ chính xác tuyệt đối của phép đo.",
-              "correct": false,
-              "reason": "Độ chính xác còn bị giới hạn bởi nhiễu, Vref và sai số ADC."
-            },
-            {
-              "text": "ADC N bit chia dải đo thành 2^N mức; kích thước 1 LSB xấp xỉ bằng giới hạn đo chia cho 2^N.",
-              "correct": true,
-              "reason": "Số bit càng cao thì LSB càng nhỏ, nhưng độ chính xác thực tế còn phụ thuộc nhiễu và sai số."
-            }
-          ],
-          "number": 65,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-improvement-s066",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cải thiện chất lượng ADC",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            },
-            {
-              "text": "Lọc số sau ADC luôn thay thế hoàn toàn lọc analog trước ADC trong mọi trường hợp aliasing.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì chống aliasing cần xử lý trước khi lấy mẫu."
-            },
-            {
-              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
-            },
-            {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
-            }
-          ],
-          "number": 66,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-basic-q067",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SPI",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về SPI?",
-          "choices": [
-            {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
-              "correct": true,
-              "reason": "SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
-            },
-            {
-              "text": "SPI không có clock nên receiver phải đoán thời điểm lấy mẫu giống UART.",
-              "correct": false,
-              "reason": "SPI có SCLK do master tạo."
-            },
-            {
-              "text": "SPI chỉ cần một dây duy nhất cho mọi slave, không cần chọn chip.",
-              "correct": false,
-              "reason": "SPI thường cần CS/SS để chọn slave."
-            },
-            {
-              "text": "MOSI là đường dữ liệu từ slave về master, còn MISO là từ master sang slave.",
-              "correct": false,
-              "reason": "Tên gọi chuẩn là MOSI từ master ra slave, MISO từ slave về master."
-            }
-          ],
-          "number": 67,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-dout-q068",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "công thức mã ADC",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Khi học công thức mã ADC, nên hiểu thế nào?",
-          "choices": [
-            {
-              "text": "Mã ADC không phụ thuộc Vref vì ADC chỉ đếm số lần CPU chạy vòng lặp.",
-              "correct": false,
-              "reason": "Mã ADC phụ thuộc điện áp vào và điện áp tham chiếu."
-            },
-            {
-              "text": "Khi Ain vượt dải đo, ADC lý tưởng vẫn tăng mã vô hạn không bão hòa.",
-              "correct": false,
-              "reason": "ADC có giới hạn mã cực đại và có thể bão hòa."
-            },
-            {
-              "text": "Vref càng nhiễu thì kết quả ADC càng ổn định hơn.",
-              "correct": false,
-              "reason": "Vref nhiễu làm phép đo dao động."
-            },
-            {
-              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
-              "correct": true,
-              "reason": "Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
-            }
-          ],
-          "number": 68,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q069",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "DAC, R-2R và PWM",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Cần tạo mức điều khiển analog chậm bằng MCU không có DAC. Phương án nào có thể dùng nếu chấp nhận lọc và ripple?",
-          "choices": [
-            {
-              "text": "Duty cycle PWM không ảnh hưởng điện áp trung bình sau lọc.",
-              "correct": false,
-              "reason": "Duty cycle quyết định giá trị trung bình."
-            },
-            {
-              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
-              "correct": true,
-              "reason": "PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
-            },
-            {
-              "text": "PWM là ADC nên dùng để đọc điện áp cảm biến thành mã số.",
-              "correct": false,
-              "reason": "PWM là cách tạo tín hiệu ra dạng xung, không phải đọc analog."
-            },
-            {
-              "text": "Thang R-2R cần điện trở theo lũy thừa rất lớn cho từng bit nên không có lợi thế matching.",
-              "correct": false,
-              "reason": "R-2R chỉ dùng hai giá trị R và 2R."
-            }
-          ],
-          "number": 69,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-mode-q070",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "CPOL và CPHA trong SPI",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về CPOL và CPHA trong SPI?",
-          "choices": [
-            {
-              "text": "CPHA quyết định điện áp nguồn cho bus, không liên quan cạnh lấy mẫu.",
-              "correct": false,
-              "reason": "CPHA quyết định pha lấy mẫu/dịch bit."
-            },
-            {
-              "text": "Các mode SPI được xác định bởi CPOL và CPHA, quyết định mức nghỉ của clock và cạnh lấy mẫu dữ liệu.",
-              "correct": true,
-              "reason": "Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
-            },
-            {
-              "text": "CPOL và CPHA chỉ quyết định địa chỉ I2C của slave.",
-              "correct": false,
-              "reason": "CPOL/CPHA là thông số timing của SPI."
-            },
-            {
-              "text": "Hai thiết bị SPI có thể chọn mode bất kỳ khác nhau mà vẫn luôn đọc đúng.",
-              "correct": false,
-              "reason": "Sai mode có thể làm sai dữ liệu."
-            }
-          ],
-          "number": 70,
-          "setIndex": 6
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-quantization-error-q071",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sai số lượng tử",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Sai số lượng tử được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Tăng số bit luôn loại bỏ hoàn toàn mọi nhiễu mạch và sai số tham chiếu.",
-              "correct": false,
-              "reason": "Tăng số bit chỉ giảm bước lượng tử, không xóa sai số mạch."
-            },
-            {
-              "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
-              "correct": true,
-              "reason": "Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
-            },
-            {
-              "text": "Sai số lượng tử chỉ xuất hiện khi ADC bị hỏng, ADC lý tưởng không có sai số nào.",
-              "correct": false,
-              "reason": "ADC lý tưởng vẫn lượng tử hóa tín hiệu liên tục."
-            },
-            {
-              "text": "Sai số lượng tử tăng vô hạn dù input nằm trong dải đo.",
-              "correct": false,
-              "reason": "Sai số lượng tử lý tưởng bị giới hạn quanh nửa LSB."
-            }
-          ],
-          "number": 71,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-uart-basic-q072",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "UART",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Phương án nào nhận diện đúng UART?",
-          "choices": [
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": true,
-              "reason": "UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "UART là bus song song cần một dây cho mỗi bit dữ liệu.",
-              "correct": false,
-              "reason": "UART truyền nối tiếp từng bit."
-            },
-            {
-              "text": "UART luôn truyền kèm đường clock riêng giống SPI.",
-              "correct": false,
-              "reason": "UART là bất đồng bộ, không có clock truyền riêng."
-            },
-            {
-              "text": "Khung UART không có start bit hay stop bit nên receiver tự đoán vị trí byte.",
-              "correct": false,
-              "reason": "Start/stop giúp đóng khung dữ liệu."
-            }
-          ],
-          "number": 72,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-topology-q073",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu hình nhiều slave SPI",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về cấu hình nhiều slave SPI?",
-          "choices": [
-            {
-              "text": "Mọi slave SPI đều tự có địa chỉ trên bus như I2C nên không cần CS riêng.",
-              "correct": false,
-              "reason": "SPI cơ bản chọn slave bằng CS/SS, không dùng địa chỉ bus như I2C."
-            },
-            {
-              "text": "Daisy-chain luôn dùng được với mọi IC SPI dù IC không hỗ trợ dịch chuỗi.",
-              "correct": false,
-              "reason": "Daisy-chain cần thiết bị hỗ trợ cách truyền nối tiếp qua chuỗi."
-            },
-            {
-              "text": "Dạng sao bắt buộc dùng một đường dữ liệu riêng hoàn toàn cho từng slave.",
-              "correct": false,
-              "reason": "SCLK/MOSI/MISO có thể dùng chung, CS tách riêng."
-            },
-            {
-              "text": "Nhiều slave SPI có thể mắc dạng sao với SCLK/MOSI/MISO chung và mỗi slave một CS riêng, hoặc dạng chuỗi nếu thiết bị hỗ trợ daisy-chain.",
-              "correct": true,
-              "reason": "Dạng sao dễ điều khiển từng slave nhưng tốn thêm chân CS; daisy-chain tiết kiệm chân hơn nhưng phụ thuộc thiết bị và khung dữ liệu."
-            }
-          ],
-          "number": 73,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-nyquist-q074",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "tốc độ lấy mẫu và Nyquist",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Khi học tốc độ lấy mẫu và Nyquist, nên hiểu thế nào?",
-          "choices": [
-            {
-              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
-              "correct": false,
-              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
-            },
-            {
-              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
-              "correct": true,
-              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
-            },
-            {
-              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
-              "correct": false,
-              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
-            },
-            {
-              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
-              "correct": false,
-              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
-            }
-          ],
-          "number": 74,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-q075",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu trúc UART song công",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Phương án nào diễn giải đúng cấu trúc UART song công?",
-          "choices": [
-            {
-              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
-              "correct": true,
-              "reason": "TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
-            },
-            {
-              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
-              "correct": false,
-              "reason": "Thông thường TX của bên này nối RX của bên kia."
-            },
-            {
-              "text": "UART không thể truyền và nhận cùng lúc vì chỉ có một thanh ghi dùng chung.",
-              "correct": false,
-              "reason": "UART có các khối truyền và nhận riêng."
-            },
-            {
-              "text": "UART TTL không cần mốc điện áp chung trong mọi trường hợp không cách ly.",
-              "correct": false,
-              "reason": "Hai bên thường cần GND chung hoặc cách ly phù hợp."
-            }
-          ],
-          "number": 75,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-i2c-basic-s076",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "I2C",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "I2C là bus nối tiếp đồng bộ hai dây gồm SCL và SDA, dùng ngõ ra open-drain/open-collector với điện trở kéo lên.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. I2C tiết kiệm chân, hỗ trợ nhiều thiết bị có địa chỉ, nhưng tốc độ và độ dài bị ảnh hưởng bởi điện dung bus và pull-up."
-            },
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
-            },
-            {
-              "text": "I2C dùng bốn dây bắt buộc như SPI gồm MOSI, MISO, SCLK và CS.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì i2C cơ bản dùng SCL và SDA."
-            }
-          ],
-          "number": 76,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sample-hold-q077",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sample-and-hold và trở nguồn ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Sample-and-hold và trở nguồn ADC được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Trở nguồn càng lớn luôn làm tụ lấy mẫu nạp nhanh hơn và chính xác hơn.",
-              "correct": false,
-              "reason": "Trở nguồn lớn làm hằng số thời gian RC tăng."
-            },
-            {
-              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
-              "correct": false,
-              "reason": "Nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
-            },
-            {
-              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
-              "correct": false,
-              "reason": "Đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
-            },
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": true,
-              "reason": "Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            }
-          ],
-          "number": 77,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q078",
-          "type": "Bloom 3 - Vận dụng",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "RS-232 và UART TTL",
-          "bloom": 3,
-          "outline": "2.4",
-          "stem": "Một MCU 3,3 V cần giao tiếp với cổng RS-232 cũ của máy tính. Lựa chọn nào phù hợp?",
-          "choices": [
-            {
-              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
-              "correct": true,
-              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
-            },
-            {
-              "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
-              "correct": false,
-              "reason": "RS-232 dùng mức dương/âm khác TTL."
-            },
-            {
-              "text": "MAX232 dùng để đổi I2C thành SPI, không liên quan RS-232.",
-              "correct": false,
-              "reason": "MAX232 chuyển mức giữa TTL và RS-232."
-            },
-            {
-              "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
-              "correct": false,
-              "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
-            }
-          ],
-          "number": 78,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-i2c-frame-q079",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "khung truyền I2C",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về khung truyền I2C?",
-          "choices": [
-            {
-              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
-              "correct": false,
-              "reason": "Repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
-            },
-            {
-              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
-              "correct": true,
-              "reason": "ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
-            },
-            {
-              "text": "I2C không có START hoặc STOP, mọi byte tự trôi trên bus không có ranh giới.",
-              "correct": false,
-              "reason": "START/STOP đánh dấu giao dịch trên bus."
-            },
-            {
-              "text": "ACK trong I2C là mức cao bắt buộc do bên nhận kéo lên.",
-              "correct": false,
-              "reason": "ACK thường là bên nhận kéo SDA xuống thấp ở xung thứ 9."
-            }
-          ],
-          "number": 79,
-          "setIndex": 7
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q080",
+          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q052",
           "type": "Bloom 2 - Hiểu",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "SAR ADC và Flash ADC",
           "bloom": 2,
           "outline": "2.4",
-          "stem": "Khi học SAR ADC và Flash ADC, nên hiểu thế nào?",
+          "stem": "Cách giải thích nào phù hợp nhất về SAR ADC và Flash ADC?",
           "choices": [
             {
               "text": "Flash ADC dùng đúng một comparator cho mọi số bit nên rẻ và ít công suất nhất.",
@@ -22520,11 +21596,143 @@
               "reason": "MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
             }
           ],
-          "number": 80,
-          "setIndex": 7
+          "number": 52,
+          "setIndex": 5
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q081",
+          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q053",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "RS-232 và UART TTL",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "RS-232 và UART TTL được mô tả đúng nhất bởi phương án nào?",
+          "choices": [
+            {
+              "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
+              "correct": false,
+              "reason": "RS-232 dùng mức dương/âm khác TTL."
+            },
+            {
+              "text": "MAX232 dùng để đổi I2C thành SPI, không liên quan RS-232.",
+              "correct": false,
+              "reason": "MAX232 chuyển mức giữa TTL và RS-232."
+            },
+            {
+              "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
+              "correct": false,
+              "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
+            },
+            {
+              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
+              "correct": true,
+              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
+            }
+          ],
+          "number": 53,
+          "setIndex": 5
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-i2c-frame-q054",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "khung truyền I2C",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Khi đọc một ô nhớ từ EEPROM I2C, vì sao thường có pha ghi địa chỉ rồi repeated start để đọc?",
+          "choices": [
+            {
+              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
+              "correct": true,
+              "reason": "ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
+            },
+            {
+              "text": "I2C không có START hoặc STOP, mọi byte tự trôi trên bus không có ranh giới.",
+              "correct": false,
+              "reason": "START/STOP đánh dấu giao dịch trên bus."
+            },
+            {
+              "text": "ACK trong I2C là mức cao bắt buộc do bên nhận kéo lên.",
+              "correct": false,
+              "reason": "ACK thường là bên nhận kéo SDA xuống thấp ở xung thứ 9."
+            },
+            {
+              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
+              "correct": false,
+              "reason": "Repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
+            }
+          ],
+          "number": 54,
+          "setIndex": 5
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-quantization-error-q055",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính sai số lượng tử cực đại",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "ADC 12 bit dùng Vref = 3,3 V. Sai số lượng tử cực đại lý tưởng gần bao nhiêu?",
+          "choices": [
+            {
+              "text": "Sai số cực đại khoảng 3,3 V vì ADC có dải đo 3,3 V.",
+              "correct": false,
+              "reason": "3,3 V là toàn dải đo, không phải sai số lượng tử cực đại."
+            },
+            {
+              "text": "Sai số cực đại khoảng 12 mV vì ADC có 12 bit.",
+              "correct": false,
+              "reason": "Không lấy số bit làm mV; cần tính LSB trước."
+            },
+            {
+              "text": "Sai số cực đại bằng 0 mV vì ADC lý tưởng không có lượng tử hóa.",
+              "correct": false,
+              "reason": "ADC lý tưởng vẫn có sai số lượng tử do mã hữu hạn."
+            },
+            {
+              "text": "Với ADC 12 bit, Vref = 3,3 V, 1 LSB khoảng 0,805 mV nên sai số lượng tử cực đại lý tưởng khoảng 0,5 LSB = 0,403 mV.",
+              "correct": true,
+              "reason": "Sai số lượng tử lý tưởng thường bị giới hạn trong nửa bước lượng tử."
+            }
+          ],
+          "number": 55,
+          "setIndex": 5
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-improvement-s056",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cải thiện chất lượng ADC",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
+            },
+            {
+              "text": "I2C là bus nối tiếp đồng bộ hai dây gồm SCL và SDA, dùng ngõ ra open-drain/open-collector với điện trở kéo lên.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. I2C tiết kiệm chân, hỗ trợ nhiều thiết bị có địa chỉ, nhưng tốc độ và độ dài bị ảnh hưởng bởi điện dung bus và pull-up."
+            },
+            {
+              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
+            },
+            {
+              "text": "Vref càng nhiễu càng giúp kết quả đo ổn định vì ADC có thêm dao động.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì vref phải ổn định để phép đo đáng tin."
+            }
+          ],
+          "number": 56,
+          "setIndex": 5
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q057",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "termination và quyền phát RS-485",
@@ -22553,11 +21761,11 @@
               "reason": "Thông thường termination đặt ở hai đầu đường bus chính."
             }
           ],
-          "number": 81,
-          "setIndex": 8
+          "number": 57,
+          "setIndex": 5
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q082",
+          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q058",
           "type": "Bloom 2 - Hiểu",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "số mức ADC và LSB",
@@ -22586,149 +21794,83 @@
               "reason": "Số bit tăng làm LSB nhỏ hơn."
             }
           ],
-          "number": 82,
-          "setIndex": 8
+          "number": 58,
+          "setIndex": 5
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-adc-improvement-q083",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cải thiện chất lượng ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Cải thiện chất lượng ADC được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "Lọc số sau ADC luôn thay thế hoàn toàn lọc analog trước ADC trong mọi trường hợp aliasing.",
-              "correct": false,
-              "reason": "Chống aliasing cần xử lý trước khi lấy mẫu."
-            },
-            {
-              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
-              "correct": true,
-              "reason": "Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
-            },
-            {
-              "text": "Chỉ cần tăng số bit danh định là loại bỏ mọi nhiễu nguồn, layout xấu và trở nguồn lớn.",
-              "correct": false,
-              "reason": "Số bit cao không bù được thiết kế analog kém."
-            },
-            {
-              "text": "Vref càng nhiễu càng giúp kết quả đo ổn định vì ADC có thêm dao động.",
-              "correct": false,
-              "reason": "Vref phải ổn định để phép đo đáng tin."
-            }
-          ],
-          "number": 83,
-          "setIndex": 8
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-basic-lst084",
-          "type": "Chọn tổ hợp",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SPI",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Tổ hợp nào đúng và đủ nhất về SPI?",
-          "choices": [
-            {
-              "text": "Gồm hiệu chuẩn, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master, CS hoặc SS chọn slave.",
-              "correct": false,
-              "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
-            },
-            {
-              "text": "Gồm SCLK tạo xung nhịp, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master.",
-              "correct": false,
-              "reason": "Phương án này thiếu một thành phần quan trọng."
-            },
-            {
-              "text": "Gồm SCLK tạo xung nhịp, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master, CS hoặc SS chọn slave, start bit.",
-              "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
-            },
-            {
-              "text": "Gồm SCLK tạo xung nhịp, MOSI đưa dữ liệu từ master tới slave, MISO đưa dữ liệu từ slave về master, CS hoặc SS chọn slave.",
-              "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về SPI."
-            }
-          ],
-          "number": 84,
-          "setIndex": 8
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-adc-dout-q085",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "công thức mã ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về công thức mã ADC?",
-          "choices": [
-            {
-              "text": "Mã ADC không phụ thuộc Vref vì ADC chỉ đếm số lần CPU chạy vòng lặp.",
-              "correct": false,
-              "reason": "Mã ADC phụ thuộc điện áp vào và điện áp tham chiếu."
-            },
-            {
-              "text": "Khi Ain vượt dải đo, ADC lý tưởng vẫn tăng mã vô hạn không bão hòa.",
-              "correct": false,
-              "reason": "ADC có giới hạn mã cực đại và có thể bão hòa."
-            },
-            {
-              "text": "Vref càng nhiễu thì kết quả ADC càng ổn định hơn.",
-              "correct": false,
-              "reason": "Vref nhiễu làm phép đo dao động."
-            },
-            {
-              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
-              "correct": true,
-              "reason": "Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
-            }
-          ],
-          "number": 85,
-          "setIndex": 8
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-s086",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "DAC, R-2R và PWM",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            },
-            {
-              "text": "Thang R-2R cần điện trở theo lũy thừa rất lớn cho từng bit nên không có lợi thế matching.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì r-2R chỉ dùng hai giá trị R và 2R."
-            },
-            {
-              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
-            },
-            {
-              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
-            }
-          ],
-          "number": 86,
-          "setIndex": 8
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-mode-q087",
+          "id": "giao-tiep-nhung-nang-cao-calc-nyquist-q059",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "CPOL và CPHA trong SPI",
+          "topic": "tính tốc độ lấy mẫu tối thiểu",
           "bloom": 3,
           "outline": "2.4",
-          "stem": "Một cảm biến SPI trả dữ liệu lệch bit dù dây nối đúng. Cấu hình nào nên kiểm tra trước?",
+          "stem": "Một tín hiệu analog có thành phần cao nhất 1 kHz. Theo điều kiện Nyquist cơ bản, tốc độ lấy mẫu tối thiểu là bao nhiêu?",
+          "choices": [
+            {
+              "text": "Tốc độ tối thiểu là 0,5 kHz vì lấy một nửa tần số tín hiệu.",
+              "correct": false,
+              "reason": "Đây là đảo ngược điều kiện Nyquist."
+            },
+            {
+              "text": "Tốc độ tối thiểu là 1 kHz vì chỉ cần bằng tần số tín hiệu.",
+              "correct": false,
+              "reason": "Bằng fmax vẫn chưa đủ theo điều kiện Nyquist cơ bản."
+            },
+            {
+              "text": "Tốc độ tối thiểu là 1 Hz vì tín hiệu đã có đơn vị kHz.",
+              "correct": false,
+              "reason": "Đơn vị không được bỏ qua; cần nhân đôi 1 kHz."
+            },
+            {
+              "text": "Nếu thành phần tần số cao nhất của tín hiệu là 1 kHz, tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản là 2 kHz.",
+              "correct": true,
+              "reason": "Điều kiện cơ bản là fs >= 2 * fmax, nên 2 * 1 kHz = 2 kHz."
+            }
+          ],
+          "number": 59,
+          "setIndex": 5
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-pwm-average-q060",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính điện áp trung bình PWM",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "PWM có mức cao 3,3 V và duty cycle 40%. Sau bộ lọc thông thấp lý tưởng, điện áp trung bình gần bao nhiêu?",
+          "choices": [
+            {
+              "text": "Giá trị trung bình là 0,40 V vì duty cycle 40%.",
+              "correct": false,
+              "reason": "Duty cycle là tỉ lệ, cần nhân với điện áp mức cao."
+            },
+            {
+              "text": "Giá trị trung bình là 8,25 V vì lấy 3,3 V chia cho 40%.",
+              "correct": false,
+              "reason": "Công thức đúng là duty cycle nhân Vdd, không phải chia."
+            },
+            {
+              "text": "PWM 3,3 V với duty cycle 40% có giá trị trung bình lý tưởng sau lọc thông thấp xấp xỉ 0,4 * 3,3 V = 1,32 V.",
+              "correct": true,
+              "reason": "Sau lọc thông thấp lý tưởng, thành phần một chiều của PWM bằng duty cycle nhân biên độ mức cao."
+            },
+            {
+              "text": "Giá trị trung bình là 3,3 V vì PWM luôn có mức cao 3,3 V.",
+              "correct": false,
+              "reason": "PWM chỉ ở mức cao 40% thời gian trong tình huống này."
+            }
+          ],
+          "number": 60,
+          "setIndex": 5
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-mode-q061",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "CPOL và CPHA trong SPI",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về CPOL và CPHA trong SPI?",
           "choices": [
             {
               "text": "CPOL và CPHA chỉ quyết định địa chỉ I2C của slave.",
@@ -22751,314 +21893,50 @@
               "reason": "Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
             }
           ],
-          "number": 87,
-          "setIndex": 8
+          "number": 61,
+          "setIndex": 6
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-quantization-error-q088",
+          "id": "giao-tiep-nhung-nang-cao-adc-dout-q062",
           "type": "Bloom 2 - Hiểu",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sai số lượng tử",
+          "topic": "công thức mã ADC",
           "bloom": 2,
           "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về sai số lượng tử?",
+          "stem": "Khi học công thức mã ADC, nên hiểu thế nào?",
           "choices": [
             {
-              "text": "Sai số lượng tử chỉ xuất hiện khi ADC bị hỏng, ADC lý tưởng không có sai số nào.",
+              "text": "Vref càng nhiễu thì kết quả ADC càng ổn định hơn.",
               "correct": false,
-              "reason": "ADC lý tưởng vẫn lượng tử hóa tín hiệu liên tục."
+              "reason": "Vref nhiễu làm phép đo dao động."
             },
             {
-              "text": "Sai số lượng tử tăng vô hạn dù input nằm trong dải đo.",
-              "correct": false,
-              "reason": "Sai số lượng tử lý tưởng bị giới hạn quanh nửa LSB."
-            },
-            {
-              "text": "Tăng số bit luôn loại bỏ hoàn toàn mọi nhiễu mạch và sai số tham chiếu.",
-              "correct": false,
-              "reason": "Tăng số bit chỉ giảm bước lượng tử, không xóa sai số mạch."
-            },
-            {
-              "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
+              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
               "correct": true,
-              "reason": "Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
+              "reason": "Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
+            },
+            {
+              "text": "Mã ADC không phụ thuộc Vref vì ADC chỉ đếm số lần CPU chạy vòng lặp.",
+              "correct": false,
+              "reason": "Mã ADC phụ thuộc điện áp vào và điện áp tham chiếu."
+            },
+            {
+              "text": "Khi Ain vượt dải đo, ADC lý tưởng vẫn tăng mã vô hạn không bão hòa.",
+              "correct": false,
+              "reason": "ADC có giới hạn mã cực đại và có thể bão hòa."
             }
           ],
-          "number": 88,
-          "setIndex": 8
+          "number": 62,
+          "setIndex": 6
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-uart-basic-q089",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "UART",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "UART được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "UART là bus song song cần một dây cho mỗi bit dữ liệu.",
-              "correct": false,
-              "reason": "UART truyền nối tiếp từng bit."
-            },
-            {
-              "text": "UART luôn truyền kèm đường clock riêng giống SPI.",
-              "correct": false,
-              "reason": "UART là bất đồng bộ, không có clock truyền riêng."
-            },
-            {
-              "text": "Khung UART không có start bit hay stop bit nên receiver tự đoán vị trí byte.",
-              "correct": false,
-              "reason": "Start/stop giúp đóng khung dữ liệu."
-            },
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": true,
-              "reason": "UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            }
-          ],
-          "number": 89,
-          "setIndex": 8
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-spi-topology-q090",
+          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q063",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu hình nhiều slave SPI",
+          "topic": "SAR ADC và Flash ADC",
           "bloom": 3,
           "outline": "2.4",
-          "stem": "Một MCU có nhiều cảm biến SPI nhưng thiếu chân chọn chip. Cách phân tích nào đúng?",
-          "choices": [
-            {
-              "text": "Nhiều slave SPI có thể mắc dạng sao với SCLK/MOSI/MISO chung và mỗi slave một CS riêng, hoặc dạng chuỗi nếu thiết bị hỗ trợ daisy-chain.",
-              "correct": true,
-              "reason": "Dạng sao dễ điều khiển từng slave nhưng tốn thêm chân CS; daisy-chain tiết kiệm chân hơn nhưng phụ thuộc thiết bị và khung dữ liệu."
-            },
-            {
-              "text": "Mọi slave SPI đều tự có địa chỉ trên bus như I2C nên không cần CS riêng.",
-              "correct": false,
-              "reason": "SPI cơ bản chọn slave bằng CS/SS, không dùng địa chỉ bus như I2C."
-            },
-            {
-              "text": "Daisy-chain luôn dùng được với mọi IC SPI dù IC không hỗ trợ dịch chuỗi.",
-              "correct": false,
-              "reason": "Daisy-chain cần thiết bị hỗ trợ cách truyền nối tiếp qua chuỗi."
-            },
-            {
-              "text": "Dạng sao bắt buộc dùng một đường dữ liệu riêng hoàn toàn cho từng slave.",
-              "correct": false,
-              "reason": "SCLK/MOSI/MISO có thể dùng chung, CS tách riêng."
-            }
-          ],
-          "number": 90,
-          "setIndex": 8
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-nyquist-q091",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "tốc độ lấy mẫu và Nyquist",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về tốc độ lấy mẫu và Nyquist?",
-          "choices": [
-            {
-              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
-              "correct": false,
-              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
-            },
-            {
-              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
-              "correct": true,
-              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
-            },
-            {
-              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
-              "correct": false,
-              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
-            },
-            {
-              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
-              "correct": false,
-              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
-            }
-          ],
-          "number": 91,
-          "setIndex": 9
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-q092",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "cấu trúc UART song công",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Cấu trúc UART song công được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
-              "correct": true,
-              "reason": "TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
-            },
-            {
-              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
-              "correct": false,
-              "reason": "Thông thường TX của bên này nối RX của bên kia."
-            },
-            {
-              "text": "UART không thể truyền và nhận cùng lúc vì chỉ có một thanh ghi dùng chung.",
-              "correct": false,
-              "reason": "UART có các khối truyền và nhận riêng."
-            },
-            {
-              "text": "UART TTL không cần mốc điện áp chung trong mọi trường hợp không cách ly.",
-              "correct": false,
-              "reason": "Hai bên thường cần GND chung hoặc cách ly phù hợp."
-            }
-          ],
-          "number": 92,
-          "setIndex": 9
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-i2c-basic-q093",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "I2C",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Phương án nào nhận diện đúng I2C?",
-          "choices": [
-            {
-              "text": "I2C dùng bốn dây bắt buộc như SPI gồm MOSI, MISO, SCLK và CS.",
-              "correct": false,
-              "reason": "I2C cơ bản dùng SCL và SDA."
-            },
-            {
-              "text": "I2C dùng push-pull mạnh ở mọi thiết bị nên không cần pull-up.",
-              "correct": false,
-              "reason": "I2C dùng open-drain/open-collector và cần điện trở kéo lên."
-            },
-            {
-              "text": "I2C không có địa chỉ thiết bị nên chỉ nối được đúng một slave.",
-              "correct": false,
-              "reason": "I2C dùng địa chỉ để nhiều slave dùng chung bus."
-            },
-            {
-              "text": "I2C là bus nối tiếp đồng bộ hai dây gồm SCL và SDA, dùng ngõ ra open-drain/open-collector với điện trở kéo lên.",
-              "correct": true,
-              "reason": "I2C tiết kiệm chân, hỗ trợ nhiều thiết bị có địa chỉ, nhưng tốc độ và độ dài bị ảnh hưởng bởi điện dung bus và pull-up."
-            }
-          ],
-          "number": 93,
-          "setIndex": 9
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sample-hold-q094",
-          "type": "Bloom 2 - Hiểu",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "sample-and-hold và trở nguồn ADC",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về sample-and-hold và trở nguồn ADC?",
-          "choices": [
-            {
-              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
-              "correct": false,
-              "reason": "Đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
-            },
-            {
-              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
-              "correct": true,
-              "reason": "Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
-            },
-            {
-              "text": "Trở nguồn càng lớn luôn làm tụ lấy mẫu nạp nhanh hơn và chính xác hơn.",
-              "correct": false,
-              "reason": "Trở nguồn lớn làm hằng số thời gian RC tăng."
-            },
-            {
-              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
-              "correct": false,
-              "reason": "Nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
-            }
-          ],
-          "number": 94,
-          "setIndex": 9
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q095",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "RS-232 và UART TTL",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "RS-232 và UART TTL được mô tả đúng nhất bởi phương án nào?",
-          "choices": [
-            {
-              "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
-              "correct": false,
-              "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
-            },
-            {
-              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
-              "correct": true,
-              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
-            },
-            {
-              "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
-              "correct": false,
-              "reason": "RS-232 dùng mức dương/âm khác TTL."
-            },
-            {
-              "text": "MAX232 dùng để đổi I2C thành SPI, không liên quan RS-232.",
-              "correct": false,
-              "reason": "MAX232 chuyển mức giữa TTL và RS-232."
-            }
-          ],
-          "number": 95,
-          "setIndex": 9
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-i2c-frame-s096",
-          "type": "Chọn phát biểu sai",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "khung truyền I2C",
-          "bloom": 2,
-          "outline": "2.4",
-          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
-          "choices": [
-            {
-              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
-            },
-            {
-              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
-            },
-            {
-              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
-              "correct": false,
-              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
-            },
-            {
-              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
-              "correct": true,
-              "reason": "Phát biểu này sai vì repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
-            }
-          ],
-          "number": 96,
-          "setIndex": 9
-        },
-        {
-          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q097",
-          "type": "Bloom 1 - Nhớ",
-          "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "SAR ADC và Flash ADC",
-          "bloom": 1,
-          "outline": "2.4",
-          "stem": "Nhận định nào đúng về SAR ADC và Flash ADC?",
+          "stem": "Nếu cần ADC tích hợp trong MCU cho đo cảm biến thông thường, kiến trúc nào thường hợp lý hơn Flash ADC rất nhanh?",
           "choices": [
             {
               "text": "Flash ADC dùng đúng một comparator cho mọi số bit nên rẻ và ít công suất nhất.",
@@ -23081,11 +21959,143 @@
               "reason": "MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
             }
           ],
-          "number": 97,
-          "setIndex": 9
+          "number": 63,
+          "setIndex": 6
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-rs485-cnt098",
+          "id": "giao-tiep-nhung-nang-cao-uart-full-duplex-q064",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cấu trúc UART song công",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về cấu trúc UART song công?",
+          "choices": [
+            {
+              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
+              "correct": true,
+              "reason": "TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
+            },
+            {
+              "text": "TX phải nối TX và RX phải nối RX trong mọi kết nối UART TTL.",
+              "correct": false,
+              "reason": "Thông thường TX của bên này nối RX của bên kia."
+            },
+            {
+              "text": "UART không thể truyền và nhận cùng lúc vì chỉ có một thanh ghi dùng chung.",
+              "correct": false,
+              "reason": "UART có các khối truyền và nhận riêng."
+            },
+            {
+              "text": "UART TTL không cần mốc điện áp chung trong mọi trường hợp không cách ly.",
+              "correct": false,
+              "reason": "Hai bên thường cần GND chung hoặc cách ly phù hợp."
+            }
+          ],
+          "number": 64,
+          "setIndex": 6
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-i2c-basic-q065",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "I2C",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "I2C được mô tả đúng nhất bởi phương án nào?",
+          "choices": [
+            {
+              "text": "I2C dùng bốn dây bắt buộc như SPI gồm MOSI, MISO, SCLK và CS.",
+              "correct": false,
+              "reason": "I2C cơ bản dùng SCL và SDA."
+            },
+            {
+              "text": "I2C dùng push-pull mạnh ở mọi thiết bị nên không cần pull-up.",
+              "correct": false,
+              "reason": "I2C dùng open-drain/open-collector và cần điện trở kéo lên."
+            },
+            {
+              "text": "I2C không có địa chỉ thiết bị nên chỉ nối được đúng một slave.",
+              "correct": false,
+              "reason": "I2C dùng địa chỉ để nhiều slave dùng chung bus."
+            },
+            {
+              "text": "I2C là bus nối tiếp đồng bộ hai dây gồm SCL và SDA, dùng ngõ ra open-drain/open-collector với điện trở kéo lên.",
+              "correct": true,
+              "reason": "I2C tiết kiệm chân, hỗ trợ nhiều thiết bị có địa chỉ, nhưng tốc độ và độ dài bị ảnh hưởng bởi điện dung bus và pull-up."
+            }
+          ],
+          "number": 65,
+          "setIndex": 6
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-quantization-error-s066",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "sai số lượng tử",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
+            },
+            {
+              "text": "Tăng số bit luôn loại bỏ hoàn toàn mọi nhiễu mạch và sai số tham chiếu.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì tăng số bit chỉ giảm bước lượng tử, không xóa sai số mạch."
+            },
+            {
+              "text": "Sai số lượng tử xuất hiện vì điện áp analog liên tục bị gán vào các mức rời rạc; với ADC lý tưởng, sai số thường bị giới hạn khoảng nửa LSB.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Ngay cả ADC lý tưởng vẫn có sai số lượng tử vì số mã là hữu hạn."
+            },
+            {
+              "text": "Nếu thành phần tần số cao nhất của tín hiệu là 1 kHz, tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản là 2 kHz.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Điều kiện cơ bản là fs >= 2 * fmax, nên 2 * 1 kHz = 2 kHz."
+            }
+          ],
+          "number": 66,
+          "setIndex": 6
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-errors-q067",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "các sai số ADC",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về các sai số ADC?",
+          "choices": [
+            {
+              "text": "TUE là tổng số học đơn giản của mọi loại sai số đã liệt kê.",
+              "correct": false,
+              "reason": "TUE là sai lệch tổng chưa hiệu chỉnh, không chỉ là tổng cộng đơn giản."
+            },
+            {
+              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
+              "correct": true,
+              "reason": "Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
+            },
+            {
+              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
+              "correct": false,
+              "reason": "Offset là lệch gốc, gain là lệch độ dốc."
+            },
+            {
+              "text": "DNL hỏi toàn bộ đường truyền cong bao nhiêu so với đường thẳng, còn INL hỏi từng bước rộng bao nhiêu.",
+              "correct": false,
+              "reason": "Phát biểu này đảo ý nghĩa DNL và INL."
+            }
+          ],
+          "number": 67,
+          "setIndex": 6
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs485-cnt068",
           "type": "Số lượng và thành phần",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "RS-485",
@@ -23094,17 +22104,7 @@
           "stem": "Về RS-485, phương án nào vừa đúng số lượng vừa đúng nội dung?",
           "choices": [
             {
-              "text": "Có 5 ý chính: truyền vi sai, nhiều nút, half-duplex hai dây, cần transceiver, giảm trở nguồn.",
-              "correct": false,
-              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
-            },
-            {
-              "text": "Có 4 ý chính: truyền vi sai, nhiều nút, half-duplex hai dây, cần transceiver.",
-              "correct": true,
-              "reason": "Tổ hợp này khớp với kiến thức về RS-485."
-            },
-            {
-              "text": "Có 4 ý chính: truyền vi sai, nhiều nút, Vref ổn định, cần transceiver.",
+              "text": "Có 4 ý chính: layout analog, nhiều nút, half-duplex hai dây, cần transceiver.",
               "correct": false,
               "reason": "Phương án này giữ số lượng gần giống nhưng thay sai ít nhất một thành phần."
             },
@@ -23112,19 +22112,392 @@
               "text": "Có 3 ý chính: truyền vi sai, nhiều nút, half-duplex hai dây.",
               "correct": false,
               "reason": "Phương án này thiếu một thành phần quan trọng."
+            },
+            {
+              "text": "Có 5 ý chính: truyền vi sai, nhiều nút, half-duplex hai dây, cần transceiver, data bits.",
+              "correct": false,
+              "reason": "Phương án này thêm một thành phần không thuộc bộ đúng."
+            },
+            {
+              "text": "Có 4 ý chính: truyền vi sai, nhiều nút, half-duplex hai dây, cần transceiver.",
+              "correct": true,
+              "reason": "Tổ hợp này khớp với kiến thức về RS-485."
             }
           ],
-          "number": 98,
-          "setIndex": 9
+          "number": 68,
+          "setIndex": 6
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q099",
+          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q069",
           "type": "Bloom 3 - Vận dụng",
           "source": "2.4 Giao tiếp nhúng nâng cao",
           "topic": "so sánh SPI và I2C",
           "bloom": 3,
           "outline": "2.4",
           "stem": "Một thiết kế cần đọc nhiều cảm biến tốc độ thấp trên cùng board và thiếu chân I/O. Lựa chọn nào thường hợp lý hơn?",
+          "choices": [
+            {
+              "text": "I2C không có ACK nên master không biết byte có được nhận hay không.",
+              "correct": false,
+              "reason": "I2C có cơ chế ACK/NACK."
+            },
+            {
+              "text": "SPI thường nhanh hơn và full-duplex nhưng tốn nhiều dây; I2C tiết kiệm dây, có địa chỉ và ACK nhưng thường chậm hơn và nhạy với điện dung bus.",
+              "correct": true,
+              "reason": "Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
+            },
+            {
+              "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
+              "correct": false,
+              "reason": "SPI dạng sao cần thêm CS cho từng slave."
+            },
+            {
+              "text": "I2C luôn nhanh hơn SPI và phù hợp mọi truyền dữ liệu dung lượng lớn.",
+              "correct": false,
+              "reason": "SPI thường có lợi thế tốc độ cho dữ liệu nhiều."
+            }
+          ],
+          "number": 69,
+          "setIndex": 6
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-nyquist-q070",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tốc độ lấy mẫu và Nyquist",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Cách giải thích nào phù hợp nhất về tốc độ lấy mẫu và Nyquist?",
+          "choices": [
+            {
+              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
+              "correct": false,
+              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
+            },
+            {
+              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
+              "correct": true,
+              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
+            },
+            {
+              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
+              "correct": false,
+              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
+            },
+            {
+              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
+              "correct": false,
+              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
+            }
+          ],
+          "number": 70,
+          "setIndex": 6
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q071",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "DAC, R-2R và PWM",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "DAC, R-2R và PWM được mô tả đúng nhất bởi phương án nào?",
+          "choices": [
+            {
+              "text": "Duty cycle PWM không ảnh hưởng điện áp trung bình sau lọc.",
+              "correct": false,
+              "reason": "Duty cycle quyết định giá trị trung bình."
+            },
+            {
+              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
+              "correct": true,
+              "reason": "PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
+            },
+            {
+              "text": "PWM là ADC nên dùng để đọc điện áp cảm biến thành mã số.",
+              "correct": false,
+              "reason": "PWM là cách tạo tín hiệu ra dạng xung, không phải đọc analog."
+            },
+            {
+              "text": "Thang R-2R cần điện trở theo lũy thừa rất lớn cho từng bit nên không có lợi thế matching.",
+              "correct": false,
+              "reason": "R-2R chỉ dùng hai giá trị R và 2R."
+            }
+          ],
+          "number": 71,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-basic-q072",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "SPI",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Phương án nào nhận diện đúng SPI?",
+          "choices": [
+            {
+              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
+              "correct": true,
+              "reason": "SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
+            },
+            {
+              "text": "SPI không có clock nên receiver phải đoán thời điểm lấy mẫu giống UART.",
+              "correct": false,
+              "reason": "SPI có SCLK do master tạo."
+            },
+            {
+              "text": "SPI chỉ cần một dây duy nhất cho mọi slave, không cần chọn chip.",
+              "correct": false,
+              "reason": "SPI thường cần CS/SS để chọn slave."
+            },
+            {
+              "text": "MOSI là đường dữ liệu từ slave về master, còn MISO là từ master sang slave.",
+              "correct": false,
+              "reason": "Tên gọi chuẩn là MOSI từ master ra slave, MISO từ slave về master."
+            }
+          ],
+          "number": 72,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-lsb-12bit-q073",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính LSB của ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một ADC 12 bit dùng Vref = 3,3 V. Giá trị gần đúng của 1 LSB là bao nhiêu?",
+          "choices": [
+            {
+              "text": "1 LSB luôn bằng 1 V vì tên gọi là một LSB.",
+              "correct": false,
+              "reason": "LSB phụ thuộc dải đo và số bit ADC."
+            },
+            {
+              "text": "Với ADC 12 bit và dải đo 3,3 V, 1 LSB xấp xỉ 3,3 V / 4096 = 0,000805 V, tức khoảng 0,805 mV.",
+              "correct": true,
+              "reason": "ADC 12 bit có 2^12 = 4096 mức, nên bước lượng tử lý tưởng bằng toàn dải đo chia cho 4096."
+            },
+            {
+              "text": "1 LSB xấp xỉ 3,3 V / 12 = 0,275 V.",
+              "correct": false,
+              "reason": "Không chia dải đo cho số bit; phải chia cho số mức 2^N."
+            },
+            {
+              "text": "1 LSB xấp xỉ 4096 / 3,3 = 1241 V.",
+              "correct": false,
+              "reason": "Công thức bị đảo đơn vị và cho kết quả vô lý."
+            }
+          ],
+          "number": 73,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-sample-hold-q074",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "sample-and-hold và trở nguồn ADC",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Khi học sample-and-hold và trở nguồn ADC, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
+              "correct": false,
+              "reason": "Đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
+            },
+            {
+              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
+              "correct": true,
+              "reason": "Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
+            },
+            {
+              "text": "Trở nguồn càng lớn luôn làm tụ lấy mẫu nạp nhanh hơn và chính xác hơn.",
+              "correct": false,
+              "reason": "Trở nguồn lớn làm hằng số thời gian RC tăng."
+            },
+            {
+              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
+              "correct": false,
+              "reason": "Nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
+            }
+          ],
+          "number": 74,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-uart-basic-q075",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "UART",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Phương án nào diễn giải đúng UART?",
+          "choices": [
+            {
+              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
+              "correct": true,
+              "reason": "UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
+            },
+            {
+              "text": "UART là bus song song cần một dây cho mỗi bit dữ liệu.",
+              "correct": false,
+              "reason": "UART truyền nối tiếp từng bit."
+            },
+            {
+              "text": "UART luôn truyền kèm đường clock riêng giống SPI.",
+              "correct": false,
+              "reason": "UART là bất đồng bộ, không có clock truyền riêng."
+            },
+            {
+              "text": "Khung UART không có start bit hay stop bit nên receiver tự đoán vị trí byte.",
+              "correct": false,
+              "reason": "Start/stop giúp đóng khung dữ liệu."
+            }
+          ],
+          "number": 75,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-topology-s076",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cấu hình nhiều slave SPI",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Nhiều slave SPI có thể mắc dạng sao với SCLK/MOSI/MISO chung và mỗi slave một CS riêng, hoặc dạng chuỗi nếu thiết bị hỗ trợ daisy-chain.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Dạng sao dễ điều khiển từng slave nhưng tốn thêm chân CS; daisy-chain tiết kiệm chân hơn nhưng phụ thuộc thiết bị và khung dữ liệu."
+            },
+            {
+              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
+            },
+            {
+              "text": "Với ADC 12 bit và dải đo 3,3 V, 1 LSB xấp xỉ 3,3 V / 4096 = 0,000805 V, tức khoảng 0,805 mV.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. ADC 12 bit có 2^12 = 4096 mức, nên bước lượng tử lý tưởng bằng toàn dải đo chia cho 4096."
+            },
+            {
+              "text": "Mọi slave SPI đều tự có địa chỉ trên bus như I2C nên không cần CS riêng.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì sPI cơ bản chọn slave bằng CS/SS, không dùng địa chỉ bus như I2C."
+            }
+          ],
+          "number": 76,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-adc-code-q077",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính mã ADC lý tưởng",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "ADC 12 bit có Vref = 3,3 V, điện áp vào Vin = 1,65 V. Mã ADC lý tưởng gần giá trị nào nhất?",
+          "choices": [
+            {
+              "text": "Mã lý tưởng xấp xỉ 0 vì Vin khác 0 nên ADC không đọc được.",
+              "correct": false,
+              "reason": "Vin trong dải đo phải cho mã tỉ lệ với Vin/Vref."
+            },
+            {
+              "text": "Với ADC 12 bit, Vref = 3,3 V và Vin = 1,65 V, mã lý tưởng xấp xỉ (1,65 / 3,3) * 4095 = 2047,5, thường làm tròn khoảng 2048.",
+              "correct": true,
+              "reason": "Vin bằng một nửa Vref nên mã nằm gần giữa thang 0 đến 4095."
+            },
+            {
+              "text": "Mã lý tưởng xấp xỉ 4095 vì Vin bằng đúng Vref.",
+              "correct": false,
+              "reason": "Vin = 1,65 V chỉ bằng một nửa Vref = 3,3 V."
+            },
+            {
+              "text": "Mã lý tưởng xấp xỉ 12 vì ADC có 12 bit.",
+              "correct": false,
+              "reason": "Số bit không phải mã đọc; mã 12 bit chạy từ 0 đến 4095."
+            }
+          ],
+          "number": 77,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-flash-comparators-q078",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính số comparator của Flash ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một Flash ADC 3 bit lý tưởng cần bao nhiêu comparator theo cấu trúc cơ bản?",
+          "choices": [
+            {
+              "text": "Flash ADC N bit thường cần 2^N - 1 comparator; với 3 bit cần 2^3 - 1 = 7 comparator.",
+              "correct": true,
+              "reason": "Mỗi ngưỡng lượng tử cần một comparator, nên số comparator tăng rất nhanh khi tăng số bit."
+            },
+            {
+              "text": "Flash ADC 3 bit chỉ cần 3 comparator vì có 3 bit đầu ra.",
+              "correct": false,
+              "reason": "Số comparator phụ thuộc số mức/ngưỡng, không phải số bit trực tiếp."
+            },
+            {
+              "text": "Flash ADC 3 bit cần 8 comparator vì có 8 mã.",
+              "correct": false,
+              "reason": "Với 8 mã cần 7 ngưỡng so sánh giữa các mã."
+            },
+            {
+              "text": "Flash ADC 3 bit không cần comparator vì dùng phần mềm để so sánh.",
+              "correct": false,
+              "reason": "Flash ADC dựa trên nhiều comparator phần cứng chạy song song."
+            }
+          ],
+          "number": 78,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs485-q079",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "RS-485",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về RS-485?",
+          "choices": [
+            {
+              "text": "Half-duplex trên RS-485 nghĩa là cả hai đầu truyền đồng thời mọi lúc.",
+              "correct": false,
+              "reason": "Half-duplex là hai chiều luân phiên."
+            },
+            {
+              "text": "RS-485 dùng truyền vi sai trên cặp dây, hỗ trợ khoảng cách xa và nhiều nút tốt hơn RS-232; mạng hai dây thường hoạt động half-duplex.",
+              "correct": true,
+              "reason": "Transceiver RS-485 chuyển tín hiệu logic của MCU thành cặp vi sai A/B và cần quản lý quyền phát trên bus."
+            },
+            {
+              "text": "RS-485 hai dây luôn là UART TTL nối thẳng, không cần transceiver.",
+              "correct": false,
+              "reason": "Cần transceiver để tạo và nhận tín hiệu vi sai."
+            },
+            {
+              "text": "RS-485 chỉ hỗ trợ đúng một bộ phát và một bộ nhận như kết nối point-to-point cổ điển.",
+              "correct": false,
+              "reason": "RS-485 hỗ trợ multi-drop hoặc multi-point tùy cấu trúc."
+            }
+          ],
+          "number": 79,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-vs-i2c-q080",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "so sánh SPI và I2C",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Khi học so sánh SPI và I2C, nên hiểu thế nào?",
           "choices": [
             {
               "text": "SPI luôn tiết kiệm dây hơn I2C khi có nhiều slave vì không cần đường chọn nào.",
@@ -23147,37 +22520,664 @@
               "reason": "Lựa chọn phụ thuộc tốc độ, số chân, số thiết bị, khoảng cách, nhiễu và yêu cầu phản hồi."
             }
           ],
+          "number": 80,
+          "setIndex": 7
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-nyquist-q081",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tốc độ lấy mẫu và Nyquist",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một tín hiệu có thành phần cao nhất 1 kHz. Tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản nên như thế nào?",
+          "choices": [
+            {
+              "text": "Aliasing chỉ là lỗi giao diện web, không liên quan đo tín hiệu analog.",
+              "correct": false,
+              "reason": "Aliasing là hiện tượng lấy mẫu sai trong xử lý tín hiệu."
+            },
+            {
+              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
+              "correct": true,
+              "reason": "Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
+            },
+            {
+              "text": "Lấy mẫu càng chậm càng chống aliasing tốt vì CPU ít phải xử lý.",
+              "correct": false,
+              "reason": "Lấy mẫu dưới Nyquist gây aliasing."
+            },
+            {
+              "text": "Điều kiện Nyquist yêu cầu fs nhỏ hơn một nửa tần số tín hiệu.",
+              "correct": false,
+              "reason": "Điều kiện cơ bản là fs >= 2*fmax."
+            }
+          ],
+          "number": 81,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-dac-r2r-pwm-q082",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "DAC, R-2R và PWM",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Cách giải thích nào phù hợp nhất về DAC, R-2R và PWM?",
+          "choices": [
+            {
+              "text": "Duty cycle PWM không ảnh hưởng điện áp trung bình sau lọc.",
+              "correct": false,
+              "reason": "Duty cycle quyết định giá trị trung bình."
+            },
+            {
+              "text": "DAC tạo mức analog từ mã số; thang R-2R dùng hai giá trị điện trở để tạo trọng số bit, còn PWM tạo mức trung bình sau lọc bằng duty cycle.",
+              "correct": true,
+              "reason": "PWM rẻ và dễ dùng nhưng có ripple và băng thông hữu hạn; DAC thật phù hợp hơn khi cần mức analog sạch hơn."
+            },
+            {
+              "text": "PWM là ADC nên dùng để đọc điện áp cảm biến thành mã số.",
+              "correct": false,
+              "reason": "PWM là cách tạo tín hiệu ra dạng xung, không phải đọc analog."
+            },
+            {
+              "text": "Thang R-2R cần điện trở theo lũy thừa rất lớn cho từng bit nên không có lợi thế matching.",
+              "correct": false,
+              "reason": "R-2R chỉ dùng hai giá trị R và 2R."
+            }
+          ],
+          "number": 82,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-basic-q083",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "SPI",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Khi học SPI, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "SPI là giao tiếp nối tiếp đồng bộ, thường có SCLK, MOSI, MISO và CS/SS; master tạo clock và chọn slave bằng đường chọn chip.",
+              "correct": true,
+              "reason": "SPI truyền nhanh, full-duplex, phù hợp kết nối ngắn trong board nhưng cần nhiều dây hơn I2C khi có nhiều slave."
+            },
+            {
+              "text": "SPI không có clock nên receiver phải đoán thời điểm lấy mẫu giống UART.",
+              "correct": false,
+              "reason": "SPI có SCLK do master tạo."
+            },
+            {
+              "text": "SPI chỉ cần một dây duy nhất cho mọi slave, không cần chọn chip.",
+              "correct": false,
+              "reason": "SPI thường cần CS/SS để chọn slave."
+            },
+            {
+              "text": "MOSI là đường dữ liệu từ slave về master, còn MISO là từ master sang slave.",
+              "correct": false,
+              "reason": "Tên gọi chuẩn là MOSI từ master ra slave, MISO từ slave về master."
+            }
+          ],
+          "number": 83,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-lsb-12bit-q084",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính LSB của ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một ADC 12 bit dùng Vref = 3,3 V. Giá trị gần đúng của 1 LSB là bao nhiêu?",
+          "choices": [
+            {
+              "text": "1 LSB xấp xỉ 4096 / 3,3 = 1241 V.",
+              "correct": false,
+              "reason": "Công thức bị đảo đơn vị và cho kết quả vô lý."
+            },
+            {
+              "text": "1 LSB luôn bằng 1 V vì tên gọi là một LSB.",
+              "correct": false,
+              "reason": "LSB phụ thuộc dải đo và số bit ADC."
+            },
+            {
+              "text": "Với ADC 12 bit và dải đo 3,3 V, 1 LSB xấp xỉ 3,3 V / 4096 = 0,000805 V, tức khoảng 0,805 mV.",
+              "correct": true,
+              "reason": "ADC 12 bit có 2^12 = 4096 mức, nên bước lượng tử lý tưởng bằng toàn dải đo chia cho 4096."
+            },
+            {
+              "text": "1 LSB xấp xỉ 3,3 V / 12 = 0,275 V.",
+              "correct": false,
+              "reason": "Không chia dải đo cho số bit; phải chia cho số mức 2^N."
+            }
+          ],
+          "number": 84,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-sample-hold-q085",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "sample-and-hold và trở nguồn ADC",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về sample-and-hold và trở nguồn ADC?",
+          "choices": [
+            {
+              "text": "Trở nguồn càng lớn luôn làm tụ lấy mẫu nạp nhanh hơn và chính xác hơn.",
+              "correct": false,
+              "reason": "Trở nguồn lớn làm hằng số thời gian RC tăng."
+            },
+            {
+              "text": "Thời gian lấy mẫu không ảnh hưởng ADC vì tụ sample-and-hold không tồn tại.",
+              "correct": false,
+              "reason": "Nhiều ADC dùng tụ lấy mẫu cần thời gian settling."
+            },
+            {
+              "text": "Đổi địa chỉ I2C sẽ sửa được lỗi tụ ADC chưa nạp đủ.",
+              "correct": false,
+              "reason": "Đây là vấn đề analog đầu vào, không phải địa chỉ I2C."
+            },
+            {
+              "text": "Mạch lấy và giữ mẫu của ADC có tụ cần nạp đủ đến điện áp input; trở nguồn quá lớn hoặc thời gian lấy mẫu quá ngắn làm tụ chưa kịp ổn định.",
+              "correct": true,
+              "reason": "Kết quả ADC có thể sai dù công thức số bit đúng, vì lỗi nằm ở mạch đầu vào và động học nạp tụ."
+            }
+          ],
+          "number": 85,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-uart-basic-s086",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "UART",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Tốc độ lấy mẫu phải ít nhất gấp đôi tần số cao nhất của tín hiệu cần đo để tránh aliasing theo điều kiện Nyquist cơ bản.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Nếu lấy mẫu quá chậm, tín hiệu số thu được có thể biểu diễn sai tần số hoặc dạng tín hiệu ban đầu."
+            },
+            {
+              "text": "UART luôn truyền kèm đường clock riêng giống SPI.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì uART là bất đồng bộ, không có clock truyền riêng."
+            },
+            {
+              "text": "UART là khối phần cứng truyền nhận nối tiếp bất đồng bộ, dùng start bit, các bit dữ liệu, parity tùy chọn và stop bit.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. UART không truyền clock riêng; hai bên phải cấu hình baud phù hợp để lấy mẫu đúng thời điểm."
+            },
+            {
+              "text": "Với ADC 12 bit và dải đo 3,3 V, 1 LSB xấp xỉ 3,3 V / 4096 = 0,000805 V, tức khoảng 0,805 mV.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. ADC 12 bit có 2^12 = 4096 mức, nên bước lượng tử lý tưởng bằng toàn dải đo chia cho 4096."
+            }
+          ],
+          "number": 86,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-topology-q087",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cấu hình nhiều slave SPI",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một MCU có nhiều cảm biến SPI nhưng thiếu chân chọn chip. Cách phân tích nào đúng?",
+          "choices": [
+            {
+              "text": "Mọi slave SPI đều tự có địa chỉ trên bus như I2C nên không cần CS riêng.",
+              "correct": false,
+              "reason": "SPI cơ bản chọn slave bằng CS/SS, không dùng địa chỉ bus như I2C."
+            },
+            {
+              "text": "Daisy-chain luôn dùng được với mọi IC SPI dù IC không hỗ trợ dịch chuỗi.",
+              "correct": false,
+              "reason": "Daisy-chain cần thiết bị hỗ trợ cách truyền nối tiếp qua chuỗi."
+            },
+            {
+              "text": "Dạng sao bắt buộc dùng một đường dữ liệu riêng hoàn toàn cho từng slave.",
+              "correct": false,
+              "reason": "SCLK/MOSI/MISO có thể dùng chung, CS tách riêng."
+            },
+            {
+              "text": "Nhiều slave SPI có thể mắc dạng sao với SCLK/MOSI/MISO chung và mỗi slave một CS riêng, hoặc dạng chuỗi nếu thiết bị hỗ trợ daisy-chain.",
+              "correct": true,
+              "reason": "Dạng sao dễ điều khiển từng slave nhưng tốn thêm chân CS; daisy-chain tiết kiệm chân hơn nhưng phụ thuộc thiết bị và khung dữ liệu."
+            }
+          ],
+          "number": 87,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-adc-code-q088",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính mã ADC lý tưởng",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "ADC 12 bit có Vref = 3,3 V, điện áp vào Vin = 1,65 V. Mã ADC lý tưởng gần giá trị nào nhất?",
+          "choices": [
+            {
+              "text": "Mã lý tưởng xấp xỉ 12 vì ADC có 12 bit.",
+              "correct": false,
+              "reason": "Số bit không phải mã đọc; mã 12 bit chạy từ 0 đến 4095."
+            },
+            {
+              "text": "Mã lý tưởng xấp xỉ 0 vì Vin khác 0 nên ADC không đọc được.",
+              "correct": false,
+              "reason": "Vin trong dải đo phải cho mã tỉ lệ với Vin/Vref."
+            },
+            {
+              "text": "Với ADC 12 bit, Vref = 3,3 V và Vin = 1,65 V, mã lý tưởng xấp xỉ (1,65 / 3,3) * 4095 = 2047,5, thường làm tròn khoảng 2048.",
+              "correct": true,
+              "reason": "Vin bằng một nửa Vref nên mã nằm gần giữa thang 0 đến 4095."
+            },
+            {
+              "text": "Mã lý tưởng xấp xỉ 4095 vì Vin bằng đúng Vref.",
+              "correct": false,
+              "reason": "Vin = 1,65 V chỉ bằng một nửa Vref = 3,3 V."
+            }
+          ],
+          "number": 88,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-flash-comparators-q089",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính số comparator của Flash ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một Flash ADC 3 bit lý tưởng cần bao nhiêu comparator theo cấu trúc cơ bản?",
+          "choices": [
+            {
+              "text": "Flash ADC 3 bit không cần comparator vì dùng phần mềm để so sánh.",
+              "correct": false,
+              "reason": "Flash ADC dựa trên nhiều comparator phần cứng chạy song song."
+            },
+            {
+              "text": "Flash ADC N bit thường cần 2^N - 1 comparator; với 3 bit cần 2^3 - 1 = 7 comparator.",
+              "correct": true,
+              "reason": "Mỗi ngưỡng lượng tử cần một comparator, nên số comparator tăng rất nhanh khi tăng số bit."
+            },
+            {
+              "text": "Flash ADC 3 bit chỉ cần 3 comparator vì có 3 bit đầu ra.",
+              "correct": false,
+              "reason": "Số comparator phụ thuộc số mức/ngưỡng, không phải số bit trực tiếp."
+            },
+            {
+              "text": "Flash ADC 3 bit cần 8 comparator vì có 8 mã.",
+              "correct": false,
+              "reason": "Với 8 mã cần 7 ngưỡng so sánh giữa các mã."
+            }
+          ],
+          "number": 89,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs232-uart-q090",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "RS-232 và UART TTL",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một MCU 3,3 V cần giao tiếp với cổng RS-232 cũ của máy tính. Lựa chọn nào phù hợp?",
+          "choices": [
+            {
+              "text": "UART TTL tạo khung bit ở mức logic nội bộ; RS-232 là chuẩn điện dùng mức điện áp dương/âm nên cần IC chuyển mức như MAX232 khi nối với MCU TTL.",
+              "correct": true,
+              "reason": "Không được nối trực tiếp UART TTL vào đường RS-232 nếu mức điện áp không tương thích."
+            },
+            {
+              "text": "RS-232 và UART TTL có cùng mức 0 V/3,3 V nên luôn nối trực tiếp an toàn.",
+              "correct": false,
+              "reason": "RS-232 dùng mức dương/âm khác TTL."
+            },
+            {
+              "text": "MAX232 dùng để đổi I2C thành SPI, không liên quan RS-232.",
+              "correct": false,
+              "reason": "MAX232 chuyển mức giữa TTL và RS-232."
+            },
+            {
+              "text": "RS-232 không có liên hệ với khung UART nên không cần TX/RX.",
+              "correct": false,
+              "reason": "RS-232 thường truyền dữ liệu nối tiếp dựa trên tín hiệu UART đã chuyển mức."
+            }
+          ],
+          "number": 90,
+          "setIndex": 8
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-i2c-frame-q091",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "khung truyền I2C",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Nhận định nào đúng về khung truyền I2C?",
+          "choices": [
+            {
+              "text": "Repeated START chỉ dùng để reset MCU, không liên quan đổi hướng truyền.",
+              "correct": false,
+              "reason": "Repeated START thường dùng khi chuyển pha giao dịch mà chưa nhả bus."
+            },
+            {
+              "text": "Giao dịch I2C dùng START, địa chỉ slave, bit đọc/ghi, ACK/NACK cho từng byte và STOP hoặc REPEATED START khi cần đổi hướng truyền.",
+              "correct": true,
+              "reason": "ACK/NACK giúp bên phát biết byte đã được nhận, còn repeated start cho phép giữ bus khi chuyển từ ghi địa chỉ sang đọc dữ liệu."
+            },
+            {
+              "text": "I2C không có START hoặc STOP, mọi byte tự trôi trên bus không có ranh giới.",
+              "correct": false,
+              "reason": "START/STOP đánh dấu giao dịch trên bus."
+            },
+            {
+              "text": "ACK trong I2C là mức cao bắt buộc do bên nhận kéo lên.",
+              "correct": false,
+              "reason": "ACK thường là bên nhận kéo SDA xuống thấp ở xung thứ 9."
+            }
+          ],
+          "number": 91,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-quantization-error-q092",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính sai số lượng tử cực đại",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "ADC 12 bit dùng Vref = 3,3 V. Sai số lượng tử cực đại lý tưởng gần bao nhiêu?",
+          "choices": [
+            {
+              "text": "Sai số cực đại khoảng 12 mV vì ADC có 12 bit.",
+              "correct": false,
+              "reason": "Không lấy số bit làm mV; cần tính LSB trước."
+            },
+            {
+              "text": "Sai số cực đại bằng 0 mV vì ADC lý tưởng không có lượng tử hóa.",
+              "correct": false,
+              "reason": "ADC lý tưởng vẫn có sai số lượng tử do mã hữu hạn."
+            },
+            {
+              "text": "Với ADC 12 bit, Vref = 3,3 V, 1 LSB khoảng 0,805 mV nên sai số lượng tử cực đại lý tưởng khoảng 0,5 LSB = 0,403 mV.",
+              "correct": true,
+              "reason": "Sai số lượng tử lý tưởng thường bị giới hạn trong nửa bước lượng tử."
+            },
+            {
+              "text": "Sai số cực đại khoảng 3,3 V vì ADC có dải đo 3,3 V.",
+              "correct": false,
+              "reason": "3,3 V là toàn dải đo, không phải sai số lượng tử cực đại."
+            }
+          ],
+          "number": 92,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-improvement-q093",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "cải thiện chất lượng ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một phép đo ADC dao động mạnh do nhiễu nguồn và layout gần đường PWM. Biện pháp nào hợp lý?",
+          "choices": [
+            {
+              "text": "Lọc số sau ADC luôn thay thế hoàn toàn lọc analog trước ADC trong mọi trường hợp aliasing.",
+              "correct": false,
+              "reason": "Chống aliasing cần xử lý trước khi lấy mẫu."
+            },
+            {
+              "text": "Cải thiện ADC có thể gồm nguồn tham chiếu ổn định, lọc nguồn và tín hiệu, giảm trở nguồn, tăng thời gian lấy mẫu, hiệu chuẩn, layout analog tốt và lấy trung bình khi phù hợp.",
+              "correct": true,
+              "reason": "Chất lượng đo phụ thuộc cả ADC nội và cách thiết kế mạch xung quanh."
+            },
+            {
+              "text": "Chỉ cần tăng số bit danh định là loại bỏ mọi nhiễu nguồn, layout xấu và trở nguồn lớn.",
+              "correct": false,
+              "reason": "Số bit cao không bù được thiết kế analog kém."
+            },
+            {
+              "text": "Vref càng nhiễu càng giúp kết quả đo ổn định vì ADC có thêm dao động.",
+              "correct": false,
+              "reason": "Vref phải ổn định để phép đo đáng tin."
+            }
+          ],
+          "number": 93,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-rs485-termination-q094",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "termination và quyền phát RS-485",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Cách giải thích nào phù hợp nhất về termination và quyền phát RS-485?",
+          "choices": [
+            {
+              "text": "DE/RE không ảnh hưởng quyền phát vì transceiver tự đoán bên nào nói trước.",
+              "correct": false,
+              "reason": "Firmware hoặc phần cứng phải điều khiển quyền phát/nhận phù hợp."
+            },
+            {
+              "text": "Bus RS-485 đường dài thường cần điện trở kết thúc ở hai đầu và chỉ một driver được phát tại một thời điểm trên bus half-duplex.",
+              "correct": true,
+              "reason": "Termination giảm phản xạ, còn điều khiển DE/RE tránh xung đột khi nhiều nút cùng kéo bus."
+            },
+            {
+              "text": "Trong RS-485 half-duplex, mọi nút nên bật driver phát cùng lúc để tăng độ mạnh tín hiệu.",
+              "correct": false,
+              "reason": "Nhiều driver phát cùng lúc gây xung đột bus."
+            },
+            {
+              "text": "Điện trở kết thúc luôn đặt ở mọi nút nhánh bất kể cấu trúc bus.",
+              "correct": false,
+              "reason": "Thông thường termination đặt ở hai đầu đường bus chính."
+            }
+          ],
+          "number": 94,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-levels-lsb-q095",
+          "type": "Bloom 1 - Nhớ",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "số mức ADC và LSB",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Số mức ADC và LSB được mô tả đúng nhất bởi phương án nào?",
+          "choices": [
+            {
+              "text": "Độ phân giải danh định luôn bằng độ chính xác tuyệt đối của phép đo.",
+              "correct": false,
+              "reason": "Độ chính xác còn bị giới hạn bởi nhiễu, Vref và sai số ADC."
+            },
+            {
+              "text": "ADC N bit chia dải đo thành 2^N mức; kích thước 1 LSB xấp xỉ bằng giới hạn đo chia cho 2^N.",
+              "correct": true,
+              "reason": "Số bit càng cao thì LSB càng nhỏ, nhưng độ chính xác thực tế còn phụ thuộc nhiễu và sai số."
+            },
+            {
+              "text": "ADC N bit chỉ có N mức đo nên 12 bit có đúng 12 mức.",
+              "correct": false,
+              "reason": "ADC N bit có 2^N mức."
+            },
+            {
+              "text": "LSB tăng khi số bit tăng nếu dải đo giữ nguyên.",
+              "correct": false,
+              "reason": "Số bit tăng làm LSB nhỏ hơn."
+            }
+          ],
+          "number": 95,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-nyquist-s096",
+          "type": "Chọn phát biểu sai",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính tốc độ lấy mẫu tối thiểu",
+          "bloom": 1,
+          "outline": "2.4",
+          "stem": "Trong nhóm kiến thức \"2.4 Giao tiếp nhúng nâng cao\", phát biểu nào sai hoặc dễ gây nhầm lẫn?",
+          "choices": [
+            {
+              "text": "Nếu thành phần tần số cao nhất của tín hiệu là 1 kHz, tốc độ lấy mẫu tối thiểu theo Nyquist cơ bản là 2 kHz.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Điều kiện cơ bản là fs >= 2 * fmax, nên 2 * 1 kHz = 2 kHz."
+            },
+            {
+              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
+            },
+            {
+              "text": "UART có đường truyền và nhận riêng với thanh ghi dịch độc lập nên có thể full-duplex khi nối TX, RX và GND phù hợp.",
+              "correct": false,
+              "reason": "Phát biểu này đúng; câu hỏi yêu cầu chọn phát biểu sai. TX của bên này phải nối sang RX của bên kia; mốc điện áp chung thường cần thiết với mức logic TTL."
+            },
+            {
+              "text": "Tốc độ tối thiểu là 1 Hz vì tín hiệu đã có đơn vị kHz.",
+              "correct": true,
+              "reason": "Phát biểu này sai vì đơn vị không được bỏ qua; cần nhân đôi 1 kHz."
+            }
+          ],
+          "number": 96,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-calc-pwm-average-q097",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "tính điện áp trung bình PWM",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "PWM có mức cao 3,3 V và duty cycle 40%. Sau bộ lọc thông thấp lý tưởng, điện áp trung bình gần bao nhiêu?",
+          "choices": [
+            {
+              "text": "Giá trị trung bình là 8,25 V vì lấy 3,3 V chia cho 40%.",
+              "correct": false,
+              "reason": "Công thức đúng là duty cycle nhân Vdd, không phải chia."
+            },
+            {
+              "text": "PWM 3,3 V với duty cycle 40% có giá trị trung bình lý tưởng sau lọc thông thấp xấp xỉ 0,4 * 3,3 V = 1,32 V.",
+              "correct": true,
+              "reason": "Sau lọc thông thấp lý tưởng, thành phần một chiều của PWM bằng duty cycle nhân biên độ mức cao."
+            },
+            {
+              "text": "Giá trị trung bình là 3,3 V vì PWM luôn có mức cao 3,3 V.",
+              "correct": false,
+              "reason": "PWM chỉ ở mức cao 40% thời gian trong tình huống này."
+            },
+            {
+              "text": "Giá trị trung bình là 0,40 V vì duty cycle 40%.",
+              "correct": false,
+              "reason": "Duty cycle là tỉ lệ, cần nhân với điện áp mức cao."
+            }
+          ],
+          "number": 97,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-spi-mode-q098",
+          "type": "Bloom 2 - Hiểu",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "CPOL và CPHA trong SPI",
+          "bloom": 2,
+          "outline": "2.4",
+          "stem": "Khi học CPOL và CPHA trong SPI, nên hiểu thế nào?",
+          "choices": [
+            {
+              "text": "CPHA quyết định điện áp nguồn cho bus, không liên quan cạnh lấy mẫu.",
+              "correct": false,
+              "reason": "CPHA quyết định pha lấy mẫu/dịch bit."
+            },
+            {
+              "text": "Các mode SPI được xác định bởi CPOL và CPHA, quyết định mức nghỉ của clock và cạnh lấy mẫu dữ liệu.",
+              "correct": true,
+              "reason": "Hai thiết bị phải cấu hình cùng mode, nếu không dữ liệu có thể bị lấy mẫu sai cạnh hoặc lệch bit."
+            },
+            {
+              "text": "CPOL và CPHA chỉ quyết định địa chỉ I2C của slave.",
+              "correct": false,
+              "reason": "CPOL/CPHA là thông số timing của SPI."
+            },
+            {
+              "text": "Hai thiết bị SPI có thể chọn mode bất kỳ khác nhau mà vẫn luôn đọc đúng.",
+              "correct": false,
+              "reason": "Sai mode có thể làm sai dữ liệu."
+            }
+          ],
+          "number": 98,
+          "setIndex": 9
+        },
+        {
+          "id": "giao-tiep-nhung-nang-cao-adc-dout-q099",
+          "type": "Bloom 3 - Vận dụng",
+          "source": "2.4 Giao tiếp nhúng nâng cao",
+          "topic": "công thức mã ADC",
+          "bloom": 3,
+          "outline": "2.4",
+          "stem": "Một cảm biến cho cùng điện áp nhưng kết quả ADC thay đổi khi nguồn tham chiếu dao động. Giải thích nào đúng?",
+          "choices": [
+            {
+              "text": "Mã ADC không phụ thuộc Vref vì ADC chỉ đếm số lần CPU chạy vòng lặp.",
+              "correct": false,
+              "reason": "Mã ADC phụ thuộc điện áp vào và điện áp tham chiếu."
+            },
+            {
+              "text": "Khi Ain vượt dải đo, ADC lý tưởng vẫn tăng mã vô hạn không bão hòa.",
+              "correct": false,
+              "reason": "ADC có giới hạn mã cực đại và có thể bão hòa."
+            },
+            {
+              "text": "Vref càng nhiễu thì kết quả ADC càng ổn định hơn.",
+              "correct": false,
+              "reason": "Vref nhiễu làm phép đo dao động."
+            },
+            {
+              "text": "Với ADC lý tưởng unipolar, mã số xấp xỉ tỉ lệ với V_Ain/V_Ref nhân với giá trị cực đại của mã.",
+              "correct": true,
+              "reason": "Vref là thước đo của ADC; cùng Ain nhưng Vref thay đổi sẽ làm mã đọc thay đổi."
+            }
+          ],
           "number": 99,
           "setIndex": 9
         },
         {
-          "id": "giao-tiep-nhung-nang-cao-adc-errors-q100",
+          "id": "giao-tiep-nhung-nang-cao-sar-flash-adc-q100",
           "type": "Bloom 2 - Hiểu",
           "source": "2.4 Giao tiếp nhúng nâng cao",
-          "topic": "các sai số ADC",
+          "topic": "SAR ADC và Flash ADC",
           "bloom": 2,
           "outline": "2.4",
-          "stem": "Cách giải thích nào phù hợp nhất về các sai số ADC?",
+          "stem": "Cách giải thích nào phù hợp nhất về SAR ADC và Flash ADC?",
           "choices": [
             {
-              "text": "Offset error và gain error luôn là cùng một lỗi nên chỉ cần đo tại 0 V.",
+              "text": "Flash ADC dùng đúng một comparator cho mọi số bit nên rẻ và ít công suất nhất.",
               "correct": false,
-              "reason": "Offset là lệch gốc, gain là lệch độ dốc."
+              "reason": "Flash ADC cần số comparator tăng nhanh theo số bit."
             },
             {
-              "text": "DNL hỏi toàn bộ đường truyền cong bao nhiêu so với đường thẳng, còn INL hỏi từng bước rộng bao nhiêu.",
+              "text": "SAR ADC không có quá trình xấp xỉ, chỉ đọc trực tiếp địa chỉ I2C.",
               "correct": false,
-              "reason": "Phát biểu này đảo ý nghĩa DNL và INL."
+              "reason": "SAR ADC thử dần từng bit dựa trên so sánh."
             },
             {
-              "text": "TUE là tổng số học đơn giản của mọi loại sai số đã liệt kê.",
+              "text": "Mọi MCU phổ thông đều dùng Flash ADC rất lớn vì không quan tâm diện tích.",
               "correct": false,
-              "reason": "TUE là sai lệch tổng chưa hiệu chỉnh, không chỉ là tổng cộng đơn giản."
+              "reason": "MCU thường dùng SAR hoặc kiến trúc khác phù hợp hơn."
             },
             {
-              "text": "Các sai số ADC thường gặp gồm offset, gain, DNL, INL và TUE; chúng mô tả sai lệch gốc, độ dốc, từng bước mã, toàn đặc tuyến và sai lệch tổng chưa hiệu chỉnh.",
+              "text": "SAR ADC thử dần từng bit bằng DAC nội và comparator nên cân bằng tốc độ, độ phân giải, chi phí; Flash ADC dùng nhiều comparator nên rất nhanh nhưng tốn diện tích và công suất.",
               "correct": true,
-              "reason": "Không thể đánh giá ADC chỉ bằng số bit; cần xem sai số, nhiễu, Vref và mạch ngoài."
+              "reason": "MCU thường tích hợp SAR ADC vì phù hợp nhiều bài toán nhúng hơn Flash ADC tốc độ rất cao."
             }
           ],
           "number": 100,
