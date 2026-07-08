@@ -16,7 +16,7 @@ Nội dung trong repo không có mục đích dự đoán chính xác đề thi,
 
 ## Tính Năng Chính
 
-- **Hệ thống nhúng**: học theo các chương đã hệ thống hóa từ nội dung môn học.
+- **Hệ thống nhúng**: học theo các mục của đề cương ôn tập chính thức, từ tổng quan đến phần cứng, phần mềm, I/O, bảo vệ, giao tiếp nâng cao, ADC và EMC.
 - **Cấu kiện trong nhúng**: ôn lại các linh kiện, mạch giao tiếp, mạch nguồn, mạch bảo vệ và các kiến thức điện tử ứng dụng gần với hệ thống nhúng.
 - **Đề thi**: các bộ đề mô phỏng để luyện tập, gồm trắc nghiệm và câu tự luận tham khảo.
 - **Quiz theo bộ nhỏ**: mỗi chương được chia thành nhiều bộ câu hỏi để không phải làm quá dài trong một lần.
@@ -102,7 +102,7 @@ Trong đó:
 - `index.html`: file vào ứng dụng.
 - `styles.css`: giao diện và responsive layout.
 - `app.js`: logic render, điều hướng, chấm quiz, lưu tiến độ.
-- `embedded-data.js`: ngân hàng câu hỏi phần Hệ thống nhúng.
+- `embedded-data.js`: ngân hàng câu hỏi phần Hệ thống nhúng, được chia theo các mục 1.1 đến 2.5 của đề cương ôn tập.
 - `components-data.js`: nội dung phần Cấu kiện trong nhúng, gồm bài giảng và quiz.
 - `exam-data.js`: các bộ đề mô phỏng và gợi ý câu tự luận.
 - `assets/official/`: ảnh minh họa dùng trong bài giảng.
@@ -110,18 +110,24 @@ Trong đó:
 
 ## Phạm Vi Nội Dung
 
-Repo tập trung vào các mảng kiến thức gần với ET4361:
+Phần **Hệ thống nhúng** và **Đề thi** hiện bám các mục chính của đề cương ôn tập:
 
-- khái niệm và đặc điểm của hệ thống nhúng;
-- vi điều khiển, firmware, chu trình thiết kế và kiểm thử;
-- giao tiếp UART, SPI, I2C, RS-485, half-duplex;
-- ESP32 và các lưu ý khi dùng GPIO, ADC, Wi-Fi;
-- cảm biến, tín hiệu analog, lấy mẫu và lọc;
-- nguồn, decoupling, reset, watchdog và chống nhiễu;
+- tổng quan hệ thống nhúng: định nghĩa, đặc điểm, phân loại, cấu trúc, mô hình và quy trình thiết kế;
+- phần cứng nhúng: bộ xử lý, bộ nhớ, I/O, bus, ngoại vi và vấn đề năng lượng;
+- phần mềm nhúng: firmware, quy trình dịch, tối ưu mã, driver, hệ điều hành nhúng, middleware, ứng dụng, bootloader và khởi động hệ thống;
+- khái niệm giao tiếp: protocol, standard, đồng bộ/bất đồng bộ, inter/intra-system, kiểu kết nối, single-ended/differential, simplex/half-duplex/full-duplex và tốc độ truyền;
+- giao tiếp I/O cơ bản: đầu vào số, đầu ra số, analog I/O, DAC, PWM và chọn ngoại vi theo ràng buộc thiết kế;
+- bảo vệ cổng I/O: ESD, quá áp, hạn dòng, diode clamp, TVS, Zener, optocoupler, digital isolator và thiết kế bảo vệ đơn giản;
+- giao tiếp nâng cao: UART, RS-232, RS-485, SPI, I2C, ADC, sai số ADC, lấy mẫu, Vref, lọc, oversampling, DAC và PWM;
+- Signal Integrity và EMC: nguồn nhiễu, đường truyền nhiễu, shielding, grounding, cáp xoắn, layout analog/digital/công suất và giảm nhiễu.
+
+Phần **Cấu kiện trong nhúng** là nội dung bổ trợ để ôn lại các kiến thức điện tử ứng dụng gần với môn học:
+
 - transistor, MOSFET, relay, diode, op-amp, comparator;
 - bảo vệ cổng vào ra, ESD, clamp, diode flyback;
-- cấu trúc hệ thống IoT, edge, gateway, cloud;
-- đề mô phỏng để luyện trắc nghiệm và tự luận.
+- nguồn, lọc nguồn, decoupling, reset, watchdog và chống nhiễu;
+
+Tab **Đề thi** cung cấp các đề tham khảo để luyện trắc nghiệm và tự luận.
 
 ## Cách Cập Nhật Nội Dung
 

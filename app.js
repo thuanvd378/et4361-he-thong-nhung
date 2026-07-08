@@ -884,6 +884,7 @@
     const completed = EXAM_DATA.exams.filter((exam) => examAttempt(exam.id)).length;
     const bestAverage = EXAM_DATA.exams.reduce((sum, exam) => sum + (examAttempt(exam.id)?.bestPercent || 0), 0);
     const avg = EXAM_DATA.exams.length ? Math.round(bestAverage / EXAM_DATA.exams.length) : 0;
+    const mcqPerExam = EXAM_DATA.exams[0]?.mcqCount || 0;
     const blueprint = EXAM_DATA.blueprint.map((item) => `
       <div class="blueprint-row">
         <span>${escapeHtml(item.label)}</span>
@@ -928,7 +929,7 @@
         </div>
         <div class="summary-panel">
           <span class="metric-label">Mỗi đề</span>
-          <span class="metric-value">30</span>
+          <span class="metric-value">${mcqPerExam}</span>
           <span class="metric-note">Câu trắc nghiệm</span>
         </div>
         <div class="summary-panel">
@@ -940,8 +941,8 @@
 
       <section class="section-header">
         <div>
-          <h2 class="section-title">Đề thi mô phỏng</h2>
-          <div class="section-meta">30 bộ đề mô phỏng theo ma trận kiến thức hệ thống nhúng, cấu kiện ứng dụng và các bẫy khái niệm thường gặp.</div>
+          <h2 class="section-title">Đề thi tham khảo</h2>
+          <div class="section-meta">30 bộ đề tham khảo bám các mục 1.1 đến 2.5 của đề cương ôn tập.</div>
         </div>
         <div class="toolbar-actions">
           <button class="ghost-button" data-reset-exams>Đặt lại điểm đề</button>
@@ -950,11 +951,11 @@
 
       <section class="exam-blueprint">
         <div>
-          <h3>Ma trận suy luận</h3>
+          <h3>Ma trận ôn tập</h3>
           <div class="blueprint-list">${blueprint}</div>
         </div>
         <div>
-          <h3>Giả định khi ra đề</h3>
+          <h3>Lưu ý</h3>
           <ul>${assumptions}</ul>
         </div>
       </section>
