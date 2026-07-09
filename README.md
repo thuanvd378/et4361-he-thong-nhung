@@ -108,6 +108,46 @@ Trong đó:
 - `assets/official/`: ảnh minh họa dùng trong bài giảng.
 - `README.md`: mô tả repo, cách dùng, phạm vi nội dung và lưu ý.
 
+## Mức Độ Phân Loại Câu Hỏi
+
+Bảng dưới đây tóm tắt phạm vi kiến thức và mức độ câu hỏi dùng để xây dựng ngân hàng ôn tập. Mức Bloom được hiểu theo hướng:
+
+- **1 - Nhớ**: định nghĩa, liệt kê, nhận diện.
+- **2 - Hiểu**: giải thích, phân loại, so sánh cơ bản.
+- **3 - Vận dụng**: tính toán hoặc áp dụng quy trình vào tình huống.
+- **4 - Phân tích**: phân tách thành phần, tìm nguyên nhân, so sánh sâu.
+- **5 - Đánh giá**: chọn phương án hợp lý, đánh giá theo tiêu chí.
+- **6 - Sáng tạo/thiết kế**: đề xuất hoặc thiết kế phương án mới theo yêu cầu cho trước.
+
+| Phần/Mục | Nội dung | Yêu cầu ôn tập | Mức Bloom |
+|---|---|---|---|
+| **1. Hệ thống nhúng** |  |  |  |
+| **1.1 Tổng quan** | Định nghĩa, đặc điểm, phân loại | Ghi nhớ và hiểu các lý thuyết nền tảng. | 1-2 |
+|  | Cấu trúc và mô hình hệ thống nhúng | Ghi nhớ và hiểu các mô hình, lớp và thành phần điển hình. | 1-2 |
+|  | Quy trình thiết kế hệ thống nhúng | Ghi nhớ và hiểu các bước thiết kế, tích hợp và kiểm thử. | 1-2 |
+| **1.2 Phần cứng nhúng** | Bộ xử lý | Không yêu cầu nhớ model chip cụ thể; cần biết đặc trưng cơ bản của các họ chip quan trọng như AVR, STM32, ESP32; hiểu khác biệt giữa CPU, MCU, FPGA, DSP, ASIC. | 1, 2, 4, 5 |
+|  | Bộ nhớ | Hiểu nguyên lý lưu trữ, ưu/nhược điểm, khác biệt giữa bộ nhớ chương trình và dữ liệu; RAM, ROM, Flash. | 1, 2, 4, 5 |
+|  | Cổng vào/ra và bus truyền thông | Ghi nhớ và hiểu các khái niệm, vai trò I/O và bus trong hệ nhúng. | 1-2 |
+|  | Ngoại vi nhúng | Ghi nhớ và hiểu ngoại vi nhúng; không yêu cầu nhớ ví dụ chip cụ thể có ngoại vi cụ thể nào. | 1-2 |
+|  | Vấn đề năng lượng | Học kỹ các yếu tố ảnh hưởng năng lượng; không yêu cầu nhớ số liệu tiêu thụ cụ thể của từng chip trong bảng/đồ thị minh họa. | 1-5 |
+| **1.3 Phần mềm nhúng** | Một số khái niệm | Nhớ và hiểu khái niệm; phân tích, đánh giá khác biệt, ưu/nhược điểm của các phân loại liên quan. | 1, 2, 4, 5 |
+|  | Quy trình dịch sang mã máy | Học kỹ quy trình từ mã nguồn tới mã máy, liên kết, nạp và các lỗi liên quan. | 1-5 |
+|  | Trình điều khiển | Ghi nhớ và hiểu vai trò, phân loại, cách tổ chức truy cập phần cứng. | 1-2 |
+|  | Hệ điều hành nhúng | Ghi nhớ và hiểu các khái niệm hệ điều hành nhúng, nhân, tác vụ, luồng, quản lý ngữ cảnh. | 1-2 |
+|  | Phần mềm trung gian và phần mềm ứng dụng | Ghi nhớ và hiểu vai trò của lớp trung gian, lớp ứng dụng và quan hệ với phần cứng/phần mềm hệ thống. | 1-2 |
+|  | Bộ nạp khởi động và khởi động hệ thống | Học kỹ vai trò mã khởi động, vector khởi động, bộ nạp khởi động và cập nhật an toàn. | 1-5 |
+| **2. Thiết kế giao tiếp nhúng** |  |  |  |
+| **2.1 Một số khái niệm** | Tất cả | Nhớ và hiểu các khái niệm giao tiếp, giao thức, chuẩn, kiểu truyền và tốc độ truyền. | 1-2 |
+| **2.2 Giao tiếp I/O cơ bản** | Cấu trúc mạch I/O | Nhớ và hiểu cấu trúc điển hình; phân tích được các khối; không yêu cầu nhớ cấu trúc I/O cụ thể của một họ chip. | 1, 2, 4 |
+|  | Chức năng I/O số | Ghi nhớ và hiểu lý thuyết; lưu ý cách chọn giao tiếp ngoại vi theo ràng buộc thiết kế. | 1-2 |
+|  | Chức năng I/O tương tự | Ghi nhớ và hiểu lý thuyết; lưu ý ADC, DAC, PWM và lựa chọn ngoại vi theo ràng buộc thiết kế. | 1-2 |
+|  | Giao tiếp ngoại vi cơ bản | Ghi nhớ và hiểu lý thuyết; lưu ý chọn giao tiếp theo số chân, tốc độ, khoảng cách, nhiễu và số thiết bị. | 1-2 |
+| **2.3 Bảo vệ cổng I/O** | Mục đích của việc bảo vệ | Ghi nhớ và hiểu mục tiêu bảo vệ I/O trước quá áp, quá dòng, xung nhiễu và môi trường ngoài. | 1-2 |
+|  | ESD và sự nguy hại | Ghi nhớ và hiểu bản chất phóng tĩnh điện, rủi ro và đường xả xung. | 1-2 |
+|  | Cơ chế và các giải pháp bảo vệ | Học kỹ; có thể có thiết kế mạch bảo vệ quá áp mức đơn giản theo yêu cầu cho trước. | 1-6 |
+| **2.4 Giao tiếp nhúng nâng cao** | Tất cả | Ghi nhớ và hiểu UART, RS-232, RS-485, SPI, I2C; nhớ công thức và con số liên quan ADC ở mức cần dùng; có thể có tính toán theo công thức. | 1-3 |
+| **2.5 Signal Integrity và EMC** | Tất cả | Học kỹ các nguồn nhiễu, đường truyền nhiễu, nối mass, che chắn, bố trí mạch in, dây/cáp và biện pháp giảm nhiễu. | 1-5 |
+
 ## Phạm Vi Nội Dung
 
 Phần **Hệ thống nhúng** và **Đề thi** hiện bám các mục chính của đề cương ôn tập:
