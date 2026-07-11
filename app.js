@@ -748,6 +748,12 @@
       `;
     }).join("");
 
+    const conceptNote = question.explanation ? `
+      <section class="concept-note">
+        <h4>Kiến thức cần nắm</h4>
+        <p>${escapeHtml(question.explanation)}</p>
+      </section>
+    ` : "";
     const feedback = session.checked ? `
       <section class="feedback ${session.lastResult ? "good" : "bad"}">
         <h3 class="feedback-title">${session.lastResult ? "Đúng" : "Chưa đúng"}</h3>
@@ -760,6 +766,7 @@
             </div>
           `).join("")}
         </div>
+        ${conceptNote}
       </section>
     ` : "";
 
@@ -1122,6 +1129,12 @@
           <span>${escapeHtml(choice.reason)}</span>
         </div>
       `).join("");
+      const conceptNote = question.explanation ? `
+        <section class="concept-note">
+          <h4>Kiến thức cần nắm</h4>
+          <p>${escapeHtml(question.explanation)}</p>
+        </section>
+      ` : "";
       return `
         <details class="exam-review-item">
           <summary>
@@ -1131,6 +1144,7 @@
           <h4>${escapeHtml(question.stem)}</h4>
           <p><strong>Bạn chọn:</strong> ${selectedLabel}</p>
           <div class="explain-list">${explanations}</div>
+          ${conceptNote}
         </details>
       `;
     }).join("");

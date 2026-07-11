@@ -654,6 +654,27 @@ button {
   margin-bottom: 4px;
 }
 
+.concept-note {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--explain-line);
+}
+
+.concept-note h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.concept-note p {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.exam-review-item .concept-note {
+  margin: 0 14px 14px;
+}
+
 .empty-state {
   border: 1px dashed var(--line);
   border-radius: 8px;

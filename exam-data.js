@@ -758,6 +758,7 @@
         topic: question.topic,
         bloom: question.bloom,
         outline: question.outline,
+        explanation: question.explanation,
         stem: question.stem,
         choices: rotateChoices(question.choices, examIndex + index)
       };
