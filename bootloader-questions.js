@@ -669,7 +669,7 @@
       bloom: 1,
       topic: "bản đồ Flash STM32F103C8",
       coverage: "bluepill-map",
-      stem: "Ánh xạ nào đúng cho ví dụ Blue Pill 64 KB trong chuyên đề bộ nạp khởi động?",
+      stem: "Blue Pill có 64 KB Flash, dành 8 KB cho Bootloader và 1 KB cho metadata. Ánh xạ địa chỉ nào đúng cho ba vùng chính?",
       options: [
         "Bộ nạp 0x08000000-0x08001FFF; metadata bắt đầu 0x08002000; ứng dụng bắt đầu 0x08002400.",
         "Ứng dụng bắt đầu 0x08000000; bộ nạp bắt đầu 0x08002400; metadata nằm trong RAM.",
@@ -726,7 +726,7 @@
       bloom: 2,
       topic: "các vùng nhớ đặc biệt STM32F103",
       coverage: "special-memory-map",
-      stem: "Ghép địa chỉ và chức năng nào đúng trên STM32F103 theo bản đồ trong chuyên đề?",
+      stem: "Ghép địa chỉ và chức năng nào đúng đối với các vùng nhớ đặc biệt của STM32F103?",
       options: [
         "0x1FFFF000: bộ nhớ hệ thống chứa bộ nạp ROM; 0x1FFFF800: Option Bytes; 0x40022000: vùng thanh ghi điều khiển Flash.",
         "0x1FFFF000: RAM ứng dụng; 0x1FFFF800: vùng ảnh A; 0x40022000: bảng vectơ ngắt.",
