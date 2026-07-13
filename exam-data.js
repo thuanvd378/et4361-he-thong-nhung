@@ -702,22 +702,30 @@
     };
   };
 
-  const globalQuestionKeys = new Set();
-
   const pick = (chapter, examIndex, count, used) => {
     const questions = chapter?.questions || [];
     const result = [];
     if (!questions.length) return result;
-    let cursor = (examIndex * 13 + chapter.id.length) % questions.length;
+    const stride = 37;
+    const scheduledCount = (index) => {
+      const base = BLUEPRINT.recipe.find(([chapterId]) => chapterId === chapter.id)?.[1] || count;
+      if (index < 13 && chapter.id === "tong-quan-he-thong-nhung") return base - 1;
+      if (index < 13 && chapter.id === "signal-integrity-emc") return base + 1;
+      return base;
+    };
+    const pickedCount = (index) => scheduledCount(index) - (chapter.id === CALCULATION_CHAPTER_ID ? 1 : 0);
+    let cursor = Array.from({ length: examIndex }, (_, index) => pickedCount(index))
+      .reduce((sum, value) => sum + value, 0);
     let guard = 0;
-    while (result.length < count && guard < questions.length * 3) {
-      const q = questions[cursor % questions.length];
+    while (result.length < count && guard < questions.length * 2) {
+      const index = (chapter.id.length + cursor * stride) % questions.length;
+      const q = questions[index];
       const key = q.id;
       if (!used.has(key)) {
         used.add(key);
         result.push(q);
       }
-      cursor += 17;
+      cursor += 1;
       guard += 1;
     }
     return result;
@@ -740,7 +748,12 @@
   const buildExam = (examIndex) => {
     const used = new Set();
     const picked = [];
-    for (const [chapterId, count] of BLUEPRINT.recipe) {
+    const recipe = BLUEPRINT.recipe.map(([chapterId, count]) => {
+      if (examIndex < 13 && chapterId === "tong-quan-he-thong-nhung") return [chapterId, count - 1];
+      if (examIndex < 13 && chapterId === "signal-integrity-emc") return [chapterId, count + 1];
+      return [chapterId, count];
+    });
+    for (const [chapterId, count] of recipe) {
       const chapter = byChapter.get(chapterId);
       if (chapterId === CALCULATION_CHAPTER_ID) {
         const calculation = pickCalculation(chapter, examIndex, used);
@@ -753,6 +766,7 @@
     const questions = picked.map((question, index) => {
       const baseExamQuestion = {
         id: `de-${String(examIndex + 1).padStart(2, "0")}-q${String(index + 1).padStart(2, "0")}`,
+        sourceQuestionId: question.id,
         type: question.type,
         source: question.source,
         topic: question.topic,
@@ -762,12 +776,7 @@
         stem: question.stem,
         choices: rotateChoices(question.choices, examIndex + index)
       };
-      let examQuestion = baseExamQuestion;
-      for (let attempt = 0; globalQuestionKeys.has(examQuestionKey(examQuestion)) && attempt < 12; attempt += 1) {
-        examQuestion = contextualizedExamQuestion(baseExamQuestion, examIndex + index + attempt);
-      }
-      globalQuestionKeys.add(examQuestionKey(examQuestion));
-      return examQuestion;
+      return baseExamQuestion;
     });
     return {
       id: `de-${String(examIndex + 1).padStart(2, "0")}`,
